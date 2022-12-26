@@ -36,7 +36,7 @@ Route::get('home-videos', [HomeController::class, 'index']);
 Route::get('home-videos/{id}', [HomeController::class, 'show']);
 // Route::resource('home-videos', HomeController::class);
 Route::get('services', [ServiceController::class, 'showAll']);
-Route::get('services/{id}', [ServiceController::class, 'index']);
+Route::get('services/{id}', [ServiceController::class, 'show']);
 
 Route::prefix('admin')->name('admin.')->group(
     function () {
