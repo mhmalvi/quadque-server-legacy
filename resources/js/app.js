@@ -55,7 +55,7 @@ Vue.component(
     require("./components/admin/blog.vue").default
 );
 
-Vue.component("service-component", require("./components/admin/service.vue").default);
+Vue.component("service-component", require("./components/admin/ServiceComponent.vue").default);
 Vue.component(
     "dashboard-component",
     require("./components/admin/dashboard.vue").default
