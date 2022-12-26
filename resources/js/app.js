@@ -8,7 +8,7 @@ import axios from "axios";
 require("./bootstrap");
 
 window.Vue = require("vue").default;
-// Vue.component("service-component",service)
+// 
 import MarqueeText from "vue-marquee-text-component";
 import DynamicMarquee from "vue-dynamic-marquee";
 
@@ -30,6 +30,7 @@ import Vue from "vue";
 /* add icons to the library */
 library.add(faTwitter, faFacebookF, faYoutube, faInstagram);
 
+// Vue.component("service-component", service);
 Vue.component("marquee-text", MarqueeText);
 Vue.component("dynamic-marquee", DynamicMarquee);
 

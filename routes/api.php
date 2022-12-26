@@ -35,7 +35,7 @@ Route::get('manage-blogs/{id}', [BlogApiController::class, 'show']);
 Route::get('home-videos', [HomeController::class, 'index']);
 Route::get('home-videos/{id}', [HomeController::class, 'show']);
 // Route::resource('home-videos', HomeController::class);
-Route::get('services', [ServiceController::class, 'index']);
+Route::get('services', [ServiceController::class, 'showAll']);
 Route::get('services/{id}', [ServiceController::class, 'index']);
 
 Route::prefix('admin')->name('admin.')->group(

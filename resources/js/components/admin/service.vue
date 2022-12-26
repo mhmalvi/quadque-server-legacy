@@ -129,7 +129,7 @@
 <script>
 import axios from "axios";
 export default {
-  name:"service",
+  name:"service-component",
   data() {
     return {
       lists: [],
