@@ -65,6 +65,13 @@ Vue.component(
     require("./components/admin/dashboard.vue").default
 );
 
+if (location.hostname == "127.0.0.1") {
+    Vue.prototype.$base = "http://127.0.0.1:8000/#";
+    Vue.prototype.$assetbase = "http://127.0.0.1:8000/";
+} else if (location.hostname !== "localhost") {
+} else {
+}
+
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application

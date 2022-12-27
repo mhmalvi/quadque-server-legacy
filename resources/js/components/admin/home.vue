@@ -46,10 +46,8 @@
                     height="150"
                   /> -->
                   <video class="video-js" width="400" height="200" controls>
-                  <source
-                    :src="this.temp_video_url"
-                  />
-                </video>
+                    <source :src="this.temp_video_url" />
+                  </video>
                 </p>
               </div>
               <!-- <div class="form-group">
@@ -119,9 +117,10 @@
                   width="100"
                   height="100"
                 /> -->
-                <video class="video-js" width="100" height="50" controls>
+                <!-- {{ $assetbase }} -->
+                <video class="video-js" width="200" height="100" controls>
                   <source
-                    :src="`http://127.0.0.1:8000/assets/home_video/${list.file}`"
+                    :src="$assetbase + `assets/home_video/${list.file}`"
                   />
                 </video>
               </td>
@@ -171,12 +170,13 @@ export default {
       temporary_id: "",
       is_editing: false,
       temp_video_url: "",
+
       // blog_no: 1,
     };
   },
   methods: {
     fetchAll() {
-      console.log("fetch");
+      // console.log($assetbase);
       axios
         .get("/admin/home/get")
         .then((response) => {
@@ -238,9 +238,12 @@ export default {
       axios
         .get(`/admin/home/edit/${this.temporary_id}`)
         .then((response) => {
-          console.log(response);
+          // console.log(response);
           this.video_name = response.data.name;
-          this.temp_video_url = `http://127.0.0.1:8000/assets/home_video/${response.data.file}`;
+          // console.log(this.$assetbase)
+          this.temp_video_url =
+            this.$assetbase + `assets/home_video/${response.data.file}`;
+          // console.log()
         })
         .catch((error) => {});
     },

@@ -6214,7 +6214,7 @@ __webpack_require__.r(__webpack_exports__);
     fetchAll: function fetchAll() {
       var _this = this;
 
-      console.log("fetch");
+      // console.log($assetbase);
       axios__WEBPACK_IMPORTED_MODULE_0___default().get("/admin/home/get").then(function (response) {
         console.log(response.data[0].file);
         _this.lists = response.data;
@@ -6272,9 +6272,10 @@ __webpack_require__.r(__webpack_exports__);
       this.is_editing = true;
       this.temporary_id = list_id;
       axios__WEBPACK_IMPORTED_MODULE_0___default().get("/admin/home/edit/".concat(this.temporary_id)).then(function (response) {
-        console.log(response);
-        _this3.video_name = response.data.name;
-        _this3.temp_video_url = "http://127.0.0.1:8000/assets/home_video/".concat(response.data.file);
+        // console.log(response);
+        _this3.video_name = response.data.name; // console.log(this.$assetbase)
+
+        _this3.temp_video_url = _this3.$assetbase + "assets/home_video/".concat(response.data.file); // console.log()
       })["catch"](function (error) {});
     },
     destroyList: function destroyList(list_id) {
@@ -7063,13 +7064,13 @@ var render = function render() {
     }, [_c("video", {
       staticClass: "video-js",
       attrs: {
-        width: "100",
-        height: "50",
+        width: "200",
+        height: "100",
         controls: ""
       }
     }, [_c("source", {
       attrs: {
-        src: "http://127.0.0.1:8000/assets/home_video/".concat(list.file)
+        src: _vm.$assetbase + "assets/home_video/".concat(list.file)
       }
     })])]), _vm._v(" "), _c("td", {
       staticStyle: {
@@ -7690,11 +7691,17 @@ vue__WEBPACK_IMPORTED_MODULE_6__["default"].component("casestudy-component", (__
 vue__WEBPACK_IMPORTED_MODULE_6__["default"].component("adminblog-component", (__webpack_require__(/*! ./components/admin/blog.vue */ "./resources/js/components/admin/blog.vue")["default"]));
 vue__WEBPACK_IMPORTED_MODULE_6__["default"].component("service-component", (__webpack_require__(/*! ./components/admin/service.vue */ "./resources/js/components/admin/service.vue")["default"]));
 vue__WEBPACK_IMPORTED_MODULE_6__["default"].component("dashboard-component", (__webpack_require__(/*! ./components/admin/dashboard.vue */ "./resources/js/components/admin/dashboard.vue")["default"]));
+
+if (location.hostname == "127.0.0.1") {
+  vue__WEBPACK_IMPORTED_MODULE_6__["default"].prototype.$base = "http://127.0.0.1:8000/#";
+  vue__WEBPACK_IMPORTED_MODULE_6__["default"].prototype.$assetbase = "http://127.0.0.1:8000/";
+} else if (location.hostname !== "localhost") {} else {}
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
+
 
 var app = new vue__WEBPACK_IMPORTED_MODULE_6__["default"]({
   el: "#app"
