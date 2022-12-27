@@ -6192,15 +6192,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
- // import VueDPlayer from 'vue-dplayer'
-// import 'vue-dplayer/dist/vue-dplayer.css'
-// import VideoPlayer from "./VideoPlayer.vue";
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
-  // name:"service-component",
-  components: {// 'd-player': VueDPlayer,
-    // VideoPlayer,
-  },
   data: function data() {
     return {
       lists: [],
@@ -7025,7 +7018,18 @@ var render = function render() {
     staticClass: "text-danger"
   }, [_vm._v("\n                " + _vm._s(this.thumbnailError) + "\n              ")]) : _vm._e(), _vm._v(" "), this.temp_video_url ? _c("p", {
     staticClass: "my-2 text-center"
-  }) : _vm._e()]), _vm._v(" "), _c("div", [_c("button", {
+  }, [_c("video", {
+    staticClass: "video-js",
+    attrs: {
+      width: "400",
+      height: "200",
+      controls: ""
+    }
+  }, [_c("source", {
+    attrs: {
+      src: this.temp_video_url
+    }
+  })])]) : _vm._e()]), _vm._v(" "), _c("div", [_c("button", {
     staticClass: "btn btn-block btn-info text-white",
     attrs: {
       type: "button"

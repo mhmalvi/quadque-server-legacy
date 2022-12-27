@@ -45,6 +45,11 @@
                     width="150"
                     height="150"
                   /> -->
+                  <video class="video-js" width="400" height="200" controls>
+                  <source
+                    :src="this.temp_video_url"
+                  />
+                </video>
                 </p>
               </div>
               <!-- <div class="form-group">
@@ -114,14 +119,10 @@
                   width="100"
                   height="100"
                 /> -->
-                <video
-                  
-                  class="video-js"
-                  width="100"
-                  height="50"
-                  controls
-                >
-                  <source :src="`http://127.0.0.1:8000/assets/home_video/${ list.file }`" />
+                <video class="video-js" width="100" height="50" controls>
+                  <source
+                    :src="`http://127.0.0.1:8000/assets/home_video/${list.file}`"
+                  />
                 </video>
               </td>
 
@@ -156,15 +157,7 @@
 </template>
 <script>
 import axios from "axios";
-// import VueDPlayer from 'vue-dplayer'
-// import 'vue-dplayer/dist/vue-dplayer.css'
-// import VideoPlayer from "./VideoPlayer.vue";
 export default {
-  // name:"service-component",
-  components: {
-    // 'd-player': VueDPlayer,
-    // VideoPlayer,
-  },
   data() {
     return {
       lists: [],
