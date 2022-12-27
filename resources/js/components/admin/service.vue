@@ -6,8 +6,8 @@
           {{ this.success }}
         </div>
         <div class="card">
-          <div class="card-header bg-success">
-            <h4 class="card-title text-white text-center">
+          <div class="card-header bg-success text-center" style="height: 47px;">
+            <h4 class="card-title text-white text-center" style="    margin-top: 1%;">
               {{ this.is_editing ? "Update Service" : "Create Service" }}
             </h4>
           </div>

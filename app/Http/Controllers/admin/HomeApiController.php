@@ -6,13 +6,17 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\HomeVideo;
 
-class HomeController extends Controller
+class HomeApiController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
+    public function view_home()
+    {
+        return view('admin.home');
+    }
     public function index()
     {
         return HomeVideo::all();
@@ -76,7 +80,7 @@ class HomeController extends Controller
      */
     public function edit($id)
     {
-        //
+        return HomeVideo::find($id);
     }
 
     /**
@@ -86,14 +90,16 @@ class HomeController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
+        // dd($request->id);
         $request->validate([
             'name' => 'required',
             'file' => 'required'
         ]);
 
-        $home_video = HomeVideo::find($id);
+        $home_video = HomeVideo::find($request->id);
+        // dd($home_video);
         $home_video->name = $request->name;
 
         if ($request->file) {

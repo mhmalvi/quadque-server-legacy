@@ -3,8 +3,13 @@
     <div class="row d-flex justify-content-center">
       <div class="col-md-6 mt-4">
         <div class="card">
-          <div class="card-header bg-success">
-            <h4 class="card-title text-white text-center">{{ this.is_editing ? 'Update Case Study' : 'Create Case Study' }}</h4>
+          <div class="card-header bg-success" style="height: 47px;">
+            <h4
+              style="margin-top: 1%"
+              class="card-title text-white text-center"
+            >
+              {{ this.is_editing ? "Update Case Study" : "Create Case Study" }}
+            </h4>
           </div>
           <div class="card-body">
             <div class="alert alert-success" v-if="this.success">

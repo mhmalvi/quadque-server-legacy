@@ -6,29 +6,30 @@
           {{ this.success }}
         </div>
         <div class="card">
-          <div class="card-header bg-success" style="height: 47px;">
+          <div class="card-header bg-success text-center" style="height: 47px">
             <h4
-              style="margin-top: 1%"
               class="card-title text-white text-center"
+              style="margin-top: 1%"
             >
-              {{ this.is_editing ? "Update Blog" : "Create Blog" }}
+              {{ this.is_editing ? "Update Video" : "Create Video" }}
             </h4>
           </div>
           <div class="card-body">
             <form>
               <div class="form-group">
-                <label for="title">Blog Title</label>
-                <textarea
-                  v-model="title"
+                <label for="title">Video Name</label>
+                <input
+                  type="text"
                   class="form-control"
-                  rows="4"
-                ></textarea>
+                  v-model="video_name"
+                  placeholder="Enter video name"
+                />
                 <div class="text-danger" v-if="this.titleError">
                   {{ this.titleError }}
                 </div>
               </div>
               <div class="form-group">
-                <label for="thumbnail">Blog Thumbnail</label>
+                <label for="thumbnail">Video File</label>
                 <input
                   type="file"
                   class="form-control"
@@ -38,16 +39,16 @@
                 <div class="text-danger" v-if="this.thumbnailError">
                   {{ this.thumbnailError }}
                 </div>
-                <p class="my-2 text-center" v-if="this.temp_thumbnail_url">
-                  <img
-                    :src="this.temp_thumbnail_url"
+                <p class="my-2 text-center" v-if="this.temp_video_url">
+                  <!-- <img
+                    :src="this.temp_video_url"
                     width="150"
                     height="150"
-                  />
+                  /> -->
                 </p>
               </div>
-              <div class="form-group">
-                <label for="text">Blog Text</label>
+              <!-- <div class="form-group">
+                <label for="text">Service description</label>
                 <textarea
                   v-model="text"
                   id="summernote"
@@ -57,7 +58,19 @@
                 <div class="text-danger" v-if="this.textError">
                   {{ this.textError }}
                 </div>
-              </div>
+              </div>  -->
+              <!-- <div class="form-group">
+                <label for="title">Service Description</label><br />
+                <textarea
+                  v-model="description"
+                  id="summernote"
+                  class="form-control"
+                  rows="4"
+                ></textarea>
+                <div class="text-danger" v-if="this.titleError">
+                  {{ this.titleError }}
+                </div>
+              </div> -->
               <div>
                 <button
                   type="button"
@@ -74,13 +87,13 @@
     </div>
     <div class="row mt-5 d-flex justify-content-center">
       <div class="col-md-12">
-        <h4>Blog Lists</h4>
+        <h4>Video Lists</h4>
         <table class="table table-striped text-center">
           <thead>
             <tr>
-              <td>No.</td>
-              <th>Title</th>
-              <th>Thumbnail</th>
+              <th>No.</th>
+              <th>Name</th>
+              <th>Video</th>
 
               <th>Action</th>
             </tr>
@@ -90,19 +103,29 @@
               <td style="vertical-align: middle; font-weight: 500">
                 {{ list.id }}.
               </td>
-              <td style="width: 70%; vertical-align: middle; font-weight: 500">
-                {{ list.title }}
+              <td style="vertical-align: middle; font-weight: 500">
+                {{ list.name }}
               </td>
-
-              <td>
-                <img
-                  :src="`http://127.0.0.1:8000/assets/img/blogs/${list.thumbnail}`"
+              <td style="vertical-align: middle">
+                <!-- {{ list.file }} -->
+                <!-- <video-player :options="videoOptions" /> -->
+                <!-- <img
+                  :src="`http://127.0.0.1:8000/assets/services/${list.file}`"
                   width="100"
                   height="100"
-                />
+                /> -->
+                <video
+                  
+                  class="video-js"
+                  width="100"
+                  height="50"
+                  controls
+                >
+                  <source :src="`http://127.0.0.1:8000/assets/home_video/${ list.file }`" />
+                </video>
               </td>
 
-              <td style="vertical-align: middle">
+              <td style="vertical-align: middle; width: 15%">
                 <button
                   type="button"
                   class="btn btn-warning"
@@ -122,7 +145,7 @@
           <tbody v-else>
             <tr>
               <td colspan="3">
-                <h3 class="text-center">There have no blogs...!</h3>
+                <h3 class="text-center">There have no videos...!</h3>
               </td>
             </tr>
           </tbody>
@@ -133,83 +156,84 @@
 </template>
 <script>
 import axios from "axios";
+// import VueDPlayer from 'vue-dplayer'
+// import 'vue-dplayer/dist/vue-dplayer.css'
+// import VideoPlayer from "./VideoPlayer.vue";
 export default {
+  // name:"service-component",
+  components: {
+    // 'd-player': VueDPlayer,
+    // VideoPlayer,
+  },
   data() {
     return {
       lists: [],
-      title: "",
-      thumbnail: "",
-      text: "",
+      video_name: "",
+      file: "",
+      description: "",
       titleError: "",
       textError: "",
       thumbnailError: "",
       success: "",
       temporary_id: "",
       is_editing: false,
-      temp_thumbnail_url: "",
-      blog_no: 1,
+      temp_video_url: "",
+      // blog_no: 1,
     };
   },
   methods: {
     fetchAll() {
+      console.log("fetch");
       axios
-        .get("/admin/blog/get")
+        .get("/admin/home/get")
         .then((response) => {
-          console.log(response);
+          console.log(response.data[0].file);
           this.lists = response.data;
         })
         .catch((error) => {});
     },
     uploadfile(e) {
-      this.thumbnail = e.target.files[0];
+      this.file = e.target.files[0];
     },
 
     save() {
       let url;
       if (this.is_editing) {
-        url = `/admin/blog/update/`;
+        url = `/admin/home/update/`;
       } else {
-        url = `/admin/blog/store`;
+        url = `/admin/home/store`;
       }
 
-      this.text = $("#summernote").summernote("code");
       let fd = new FormData();
-      fd.append("title", this.title);
-      fd.append("text", this.text);
-      fd.append("thumbnail", this.thumbnail);
+      console.log(this.video_name);
+      fd.append("name", this.video_name);
+      fd.append("file", this.file);
       fd.append("id", this.temporary_id);
       axios
         .post(url, fd)
         .then((response) => {
           this.success = response.data.success;
-          this.title = "";
-          this.text = "";
-          $("#summernote").summernote("code", this.text);
-          document.getElementById("thumbnail").value = "";
-          this.temporary_id = "";
-          this.temp_thumbnail_url = "";
-          this.is_editing = false;
           this.fetchAll();
+          // console.log(this.success)
+          this.name = "";
+
+          this.temporary_id = "";
+          this.temp_video_url = "";
+          this.is_editing = false;
           setTimeout(function () {
             this.success = "";
           }, 5000);
         })
         .catch((error) => {
-          if (error.response.data.errors.title) {
-            this.titleError = error.response.data.errors.title[0];
+          if (error.response.data.errors.name) {
+            this.nameError = error.response.data.errors.name[0];
           } else {
-            this.titleError = "";
+            this.nameError = "";
           }
-
-          if (error.response.data.errors.text) {
-            this.textError = error.response.data.errors.text[0];
+          if (error.response.data.errors.file) {
+            this.fileError = error.response.data.errors.file[0];
           } else {
-            this.textError = "";
-          }
-          if (error.response.data.errors.thumbnail) {
-            this.thumbnailError = error.response.data.errors.thumbnail[0];
-          } else {
-            this.thumbnailError = "";
+            this.fileError = "";
           }
         });
     },
@@ -219,17 +243,16 @@ export default {
       this.temporary_id = list_id;
 
       axios
-        .get(`/admin/blog/edit/${this.temporary_id}`)
+        .get(`/admin/home/edit/${this.temporary_id}`)
         .then((response) => {
-          this.title = response.data.title;
-          this.text = response.data.text;
-          $("#summernote").summernote("code", this.text);
-          this.temp_thumbnail_url = `http://127.0.0.1:8000/assets/img/blogs/${response.data.thumbnail}`;
+          console.log(response);
+          this.video_name = response.data.name;
+          this.temp_video_url = `http://127.0.0.1:8000/assets/home_video/${response.data.file}`;
         })
         .catch((error) => {});
     },
     destroyList(list_id) {
-      axios.get(`/admin/blog/delete/${list_id}`).then((response) => {
+      axios.get(`/admin/home/delete/${list_id}`).then((response) => {
         this.success = response.data.success;
         this.fetchAll();
       });

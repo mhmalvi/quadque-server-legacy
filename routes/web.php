@@ -1,6 +1,8 @@
 <?php
 
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\admin\HomeApiController;
 use App\Http\Controllers\BlogController;
 use App\Http\Controllers\CaseStudyController;
 use App\Http\Controllers\UserPageController;
@@ -50,7 +52,13 @@ Route::prefix('admin')->name('admin.')->group(function () {
     Route::middleware(['auth:admin', 'preventBackHistory'])->group(function () {
 
         Route::get('/dashboard', [AdminController::class, 'dashboard'])->name('dashboard');
-
+        //home routes
+        Route::get('/home', [HomeApiController::class, 'view_home'])->name('home');
+        Route::get('/home/get', [HomeApiController::class, 'index']);
+        Route::post('/home/store', [HomeApiController::class, 'store'])->name('home.store');
+        Route::get('/home/edit/{id}', [HomeApiController::class, 'edit']);
+        Route::post('/home/update/', [HomeApiController::class, 'update']);
+        Route::get('/home/delete/{id}', [HomeApiController::class, 'destroy']);
         // case study route
         Route::get('/case-study', [CaseStudyController::class, 'show'])->name('casestudy');
         Route::get('/case-study/get', [CaseStudyController::class, 'index']);

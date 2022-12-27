@@ -47,6 +47,10 @@ Vue.component(
     require("./components/admin/signup.vue").default
 );
 Vue.component(
+    "home-component",
+    require("./components/admin/home.vue").default
+);
+Vue.component(
     "casestudy-component",
     require("./components/admin/casestudy.vue").default
 );
