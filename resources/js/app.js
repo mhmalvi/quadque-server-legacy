@@ -37,7 +37,7 @@ Vue.component("dynamic-marquee", DynamicMarquee);
 /* add font awesome icon component */
 Vue.component("font-awesome-icon", FontAwesomeIcon);
 
-Vue.component("home-component", require("./components/user/Home.vue").default);
+// Vue.component("home-component", require("./components/user/Home.vue").default);
 Vue.component(
     "login-component",
     require("./components/admin/login.vue").default
@@ -55,7 +55,7 @@ Vue.component(
     require("./components/admin/blog.vue").default
 );
 
-Vue.component("service-component", require("./components/admin/ServiceComponent.vue").default);
+Vue.component("service-component", require("./components/admin/service.vue").default);
 Vue.component(
     "dashboard-component",
     require("./components/admin/dashboard.vue").default

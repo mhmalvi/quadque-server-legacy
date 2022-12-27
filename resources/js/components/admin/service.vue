@@ -7,23 +7,26 @@
         </div>
         <div class="card">
           <div class="card-header bg-success">
-            <h4 class="card-title text-white text-center">{{ this.is_editing ? "Update Blog" : "Create Blog" }}</h4>
+            <h4 class="card-title text-white text-center">
+              {{ this.is_editing ? "Update Service" : "Create Service" }}
+            </h4>
           </div>
           <div class="card-body">
             <form>
               <div class="form-group">
-                <label for="title">Blog Title</label>
-                <textarea
-                  v-model="title"
+                <label for="title">Service Name</label>
+                <input
+                  type="text"
                   class="form-control"
-                  rows="4"
-                ></textarea>
+                  v-model="service_name"
+                  placeholder="Enter service name"
+                />
                 <div class="text-danger" v-if="this.titleError">
                   {{ this.titleError }}
                 </div>
               </div>
               <div class="form-group">
-                <label for="thumbnail">Blog Thumbnail</label>
+                <label for="thumbnail">Service File</label>
                 <input
                   type="file"
                   class="form-control"
@@ -41,8 +44,8 @@
                   />
                 </p>
               </div>
-              <div class="form-group">
-                <label for="text">Blog Text</label>
+              <!-- <div class="form-group">
+                <label for="text">Service description</label>
                 <textarea
                   v-model="text"
                   id="summernote"
@@ -51,6 +54,18 @@
                 ></textarea>
                 <div class="text-danger" v-if="this.textError">
                   {{ this.textError }}
+                </div>
+              </div>  -->
+              <div class="form-group">
+                <label for="title">Service Description</label><br />
+                <textarea
+                  v-model="description"
+                  id="summernote"
+                  class="form-control"
+                  rows="4"
+                ></textarea>
+                <div class="text-danger" v-if="this.titleError">
+                  {{ this.titleError }}
                 </div>
               </div>
               <div>
@@ -69,12 +84,13 @@
     </div>
     <div class="row mt-5 d-flex justify-content-center">
       <div class="col-md-12">
-        <h4>Blog Lists</h4>
+        <h4>Services Lists</h4>
         <table class="table table-striped text-center">
           <thead>
             <tr>
-              <td>No.</td>
-              <th>Title</th>
+              <th>No.</th>
+              <th>Name</th>
+              <th style="width: 36%">Description</th>
               <th>Thumbnail</th>
 
               <th>Action</th>
@@ -85,19 +101,23 @@
               <td style="vertical-align: middle; font-weight: 500">
                 {{ list.id }}.
               </td>
-              <td style="width: 70%; vertical-align: middle; font-weight: 500">
-                {{ list.title }}
+              <td style="vertical-align: middle; font-weight: 500">
+                {{ list.service_name }}
               </td>
 
-              <td>
+              <td style="vertical-align: middle" v-html="list.description">
+                <!-- {{  }} -->
+              </td>
+
+              <td style="vertical-align: middle">
                 <img
-                  :src="`http://127.0.0.1:8000/assets/img/blogs/${list.thumbnail}`"
+                  :src="`http://127.0.0.1:8000/assets/services/${list.file}`"
                   width="100"
                   height="100"
                 />
               </td>
 
-              <td style="vertical-align: middle">
+              <td style="vertical-align: middle; width: 15%">
                 <button
                   type="button"
                   class="btn btn-warning"
@@ -129,12 +149,13 @@
 <script>
 import axios from "axios";
 export default {
+  // name:"service-component",
   data() {
     return {
       lists: [],
-      title: "",
-      thumbnail: "",
-      text: "",
+      service_name: "",
+      file: "",
+      description: "",
       titleError: "",
       textError: "",
       thumbnailError: "",
@@ -142,70 +163,71 @@ export default {
       temporary_id: "",
       is_editing: false,
       temp_thumbnail_url: "",
-      blog_no: 1,
+      // blog_no: 1,
     };
   },
   methods: {
     fetchAll() {
+      console.log("fetch");
       axios
-        .get("/admin/blog/get")
+        .get("/admin/service/get")
         .then((response) => {
-          console.log(response)
+          // console.log(response);
           this.lists = response.data;
         })
         .catch((error) => {});
     },
     uploadfile(e) {
-      this.thumbnail = e.target.files[0];
+      this.file = e.target.files[0];
     },
 
     save() {
       let url;
       if (this.is_editing) {
-        url = `/admin/blog/update/`;
+        url = `/admin/service/update/`;
       } else {
-        url = `/admin/blog/store`;
+        url = `/admin/service/store`;
       }
 
-      this.text = $("#summernote").summernote("code");
+      this.description = $("#summernote").summernote("code");
       let fd = new FormData();
-      fd.append("title", this.title);
-      fd.append("text", this.text);
-      fd.append("thumbnail", this.thumbnail);
+      fd.append("service_name", this.service_name);
+      fd.append("description", this.description);
+      fd.append("file", this.file);
       fd.append("id", this.temporary_id);
       axios
         .post(url, fd)
         .then((response) => {
-          this.success = response.data.success;          
-          this.title = "";
-          this.text = "";
-          $("#summernote").summernote("code", this.text);
-          document.getElementById("thumbnail").value = "";
+          this.success = response.data.success;
+          this.fetchAll()
+          // console.log(this.success)
+          this.service_name = "";
+          this.description = "";
+          $("#summernote").summernote("code", this.description);
+          document.getElementById("file").value = "";
           this.temporary_id = "";
           this.temp_thumbnail_url = "";
           this.is_editing = false;
-          this.fetchAll();
           setTimeout(function () {
             this.success = "";
           }, 5000);
-          
         })
         .catch((error) => {
-          if (error.response.data.errors.title) {
-            this.titleError = error.response.data.errors.title[0];
+          if (error.response.data.errors.service_name) {
+            this.service_nameError = error.response.data.errors.service_name[0];
           } else {
-            this.titleError = "";
+            this.service_nameError = "";
           }
 
-          if (error.response.data.errors.text) {
-            this.textError = error.response.data.errors.text[0];
+          if (error.response.data.errors.description) {
+            this.descriptionError = error.response.data.errors.description[0];
           } else {
-            this.textError = "";
+            this.descriptionError = "";
           }
-          if (error.response.data.errors.thumbnail) {
-            this.thumbnailError = error.response.data.errors.thumbnail[0];
+          if (error.response.data.errors.file) {
+            this.fileError = error.response.data.errors.file[0];
           } else {
-            this.thumbnailError = "";
+            this.fileError = "";
           }
         });
     },
@@ -215,17 +237,18 @@ export default {
       this.temporary_id = list_id;
 
       axios
-        .get(`/admin/blog/edit/${this.temporary_id}`)
+        .get(`/admin/service/edit/${this.temporary_id}`)
         .then((response) => {
-          this.title = response.data.title;
-          this.text = response.data.text;
-          $("#summernote").summernote("code", this.text);
-          this.temp_thumbnail_url = `http://127.0.0.1:8000/assets/img/blogs/${response.data.thumbnail}`;
+          console.log(response);
+          this.service_name = response.data.service_name;
+          this.description = response.data.description;
+          $("#summernote").summernote("code", this.description);
+          this.temp_thumbnail_url = `http://127.0.0.1:8000/assets/services/${response.data.file}`;
         })
         .catch((error) => {});
     },
     destroyList(list_id) {
-      axios.get(`/admin/blog/delete/${list_id}`).then((response) => {
+      axios.get(`/admin/service/delete/${list_id}`).then((response) => {
         this.success = response.data.success;
         this.fetchAll();
       });

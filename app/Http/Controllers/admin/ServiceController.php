@@ -18,7 +18,8 @@ class ServiceController extends Controller
         return view('admin.service');
     }
 
-    public function showAll(){
+    public function showAll()
+    {
         return Service::all();
     }
 
@@ -84,7 +85,7 @@ class ServiceController extends Controller
      */
     public function edit($id)
     {
-        //
+        return Service::find($id);
     }
 
     /**
@@ -94,14 +95,17 @@ class ServiceController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
-        // $request->validate([
-        //     'name' => 'required',
-        //     'file' => 'required'
-        // ]);
+        // dd("hello");
+        $request->validate([
+            'service_name' => 'required',
+            'description' => 'required',
+            // 'file' => 'required'
+        ]);
 
-        $service = Service::find($id);
+        $service = Service::find($request->id);
+        // dd("hello");
         $service->service_name = $request->service_name;
         $service->description = $request->description;
 
@@ -112,28 +116,28 @@ class ServiceController extends Controller
         //     $service->file = $fileName;
         // }
 
-        if ($request->hasFile('file')) {
-            $image = $request->file('file');
-            $store_path = "assets/services";
-            $name = md5(uniqid(rand(), true)) . str_replace(' ', '-', $image->getClientOriginalName());
-            $image->move(public_path('/' . $store_path), $name);
-            $exist_image = $service['file'];
-            $update['file'] = $store_path . '/' . $name;
+        if ($request->file) {
+
+            $fileName = time() . '.' . $request->file->getClientOriginalExtension();
+            $request->file->move(public_path('assets/services'), $fileName);
+            $service->file = $fileName;
         }
+        // dd("hello");
 
+        $update = $service->save();
+        // $service->update([
+        //     'service_name' => $request->service_name,
+        //     'description' => $request->description,
+        //     'file' => $name
+        // ]);
 
-        $service->update([
-            'service_name' => $request->service_name,
-            'description' => $request->description,
-            'file' => $name
-        ]);
+        // if (isset($exist_image) && file_exists($exist_image)) {
+        //     unlink($exist_image);
+        // }
 
-        if (isset($exist_image) && file_exists($exist_image)) {
-            unlink($exist_image);
+        if ($update) {
+            return response()->json(['success' => 'You have successfully updated.']);
         }
-
-
-        return response()->json(['success' => 'You have successfully updated file.']);
     }
 
     /**

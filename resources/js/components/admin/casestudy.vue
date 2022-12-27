@@ -4,7 +4,7 @@
       <div class="col-md-6 mt-4">
         <div class="card">
           <div class="card-header bg-success">
-            <h4 class="card-title text-white text-center">Create Case Study</h4>
+            <h4 class="card-title text-white text-center">{{ this.is_editing ? 'Update Case Study' : 'Create Case Study' }}</h4>
           </div>
           <div class="card-body">
             <div class="alert alert-success" v-if="this.success">
@@ -44,7 +44,7 @@
                   class="btn btn-block btn-info text-white"
                   @click="save"
                 >
-                  {{ this.is_edititng ? "Update" : "Save" }}
+                  {{ this.is_editing ? "Update" : "Save" }}
                 </button>
               </div>
             </form>
@@ -112,7 +112,7 @@ export default {
       imageError: "",
       success: "",
       temporary_id: "",
-      is_edititng: false,
+      is_editing: false,
       temp_image_url: "",
     };
   },
@@ -130,7 +130,7 @@ export default {
     },
     save() {
       let url;
-      if (this.is_edititng) {
+      if (this.is_editing) {
         url = `/admin/case-study/update/`;
       } else {
         url = `/admin/case-study/store`;
@@ -147,7 +147,7 @@ export default {
           document.getElementById("company_image").value = "";
           this.temp_image_url = "";
           this.temporary_id = "";
-          this.is_edititng = false;
+          this.is_editing = false;
           this.fetchAll();
           setTimeout(function () {
             this.success = "";
@@ -169,7 +169,7 @@ export default {
     },
 
     editList(list_id) {
-      this.is_edititng = true;
+      this.is_editing = true;
       this.temporary_id = list_id;
 
       axios
