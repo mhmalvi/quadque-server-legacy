@@ -115,6 +115,7 @@ class CaseStudyController extends Controller
     public function store(Request $request)
     {
         //validate the input
+        $path = 
         $request->validate([
             'name' => 'required',
             'image' => 'required|image'
@@ -127,6 +128,7 @@ class CaseStudyController extends Controller
 
             $fileName = time() . '.' . $request->image->getClientOriginalExtension();
             $request->image->move(public_path('assets/img/case_study'), $fileName);
+
             $case_study->com_image = $fileName;
         }
 

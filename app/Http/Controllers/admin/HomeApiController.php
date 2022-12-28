@@ -19,7 +19,9 @@ class HomeApiController extends Controller
     }
     public function index()
     {
-        return HomeVideo::all();
+        return $videos = HomeVideo::all();
+        dd($videos);
+        return view('user.components.desktop', ['video' => $videos]);
     }
 
     /**
@@ -43,16 +45,19 @@ class HomeApiController extends Controller
             'name' => 'required',
             'file' => 'required'
         ]);
-
+        $app_url = env('APP_URL');
+        // dd($app_url);
         $home_video = new HomeVideo();
         $home_video->name = $request->name;
 
         if ($request->file) {
             $fileName = time() . '.' . $request->file->getClientOriginalExtension();
             $request->file->move(public_path('assets/home_video'), $fileName);
-            $home_video->file = $fileName;
+            
+            $file_path = $app_url . ":8000/assets/home_video/" . $fileName;
+            $home_video->file = $file_path;
         }
-
+        
 
         $save = $home_video->save();
 
