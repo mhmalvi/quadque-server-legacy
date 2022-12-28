@@ -20,7 +20,7 @@ class HomeApiController extends Controller
     public function index()
     {
         return $videos = HomeVideo::all();
-        dd($videos);
+        // dd($videos);
         return view('user.components.desktop', ['video' => $videos]);
     }
 
