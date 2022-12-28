@@ -124,7 +124,7 @@ class BlogController extends Controller
         $save = Blog::create([
             'title' => $request->title,
             'text' => $request->text,
-            'thumbnail' => $fileName
+            'thumbnail' => $file_path
         ]);
 
         if ($save) {

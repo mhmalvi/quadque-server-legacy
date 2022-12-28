@@ -102,8 +102,9 @@
               </td>
 
               <td>
+                <!-- {{ list.thumbnail }} -->
                 <img
-                  :src="`http://127.0.0.1:8000/assets/img/blogs/${list.thumbnail}`"
+                  :src="list.thumbnail"
                   width="100"
                   height="100"
                 />
@@ -257,7 +258,7 @@ export default {
           this.title = response.data.title;
           this.text = response.data.text;
           $("#summernote").summernote("code", this.text);
-          this.temp_thumbnail_url = `http://127.0.0.1:8000/assets/img/blogs/${response.data.thumbnail}`;
+          this.temp_thumbnail_url = response.data.thumbnail;
         })
         .catch((error) => {});
     },
