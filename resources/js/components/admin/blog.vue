@@ -9,9 +9,9 @@
         <button class="btn btn-primary">Create Blog</button>
       </div>
       <div class="col-md-6 mt-4">
-        <div class="alert alert-success" v-if="this.success">
+        <!-- <div class="alert alert-success" v-if="this.success">
           {{ this.success }}
-        </div>
+        </div> -->
         <div class="card">
           <div class="card-header bg-success" style="height: 47px;">
             <h4
@@ -205,6 +205,23 @@ export default {
           this.temporary_id = "";
           this.temp_thumbnail_url = "";
           this.is_editing = false;
+          if (this.success == "created") {
+            this.$swal.fire({
+              // position: "top-end",
+              icon: "success",
+              title: "Blog Saved",
+              showConfirmButton: true,
+              // timer: 1500,
+            });
+          } else if (this.success == "updated") {
+            this.$swal.fire({
+              // position: "top-end",
+              icon: "success",
+              title: "Blog Updated",
+              showConfirmButton: true,
+              // timer: 1500,
+            });
+          }
           this.fetchAll();
           setTimeout(function () {
             this.success = "";
@@ -246,7 +263,11 @@ export default {
     },
     destroyList(list_id) {
       axios.get(`/admin/blog/delete/${list_id}`).then((response) => {
-        this.success = response.data.success;
+        // this.success = response.data.success;
+        this.$swal.fire({
+            icon: "error",
+            text: "Deleted",
+          });
         this.fetchAll();
       });
     },

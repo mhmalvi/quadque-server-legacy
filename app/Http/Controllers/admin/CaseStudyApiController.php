@@ -41,16 +41,18 @@ class CaseStudyApiController extends Controller
             'image' => 'required|image'
         ]);
 
+        $app_url = env('APP_URL');
         if ($request->image) {
 
             $fileName = time() . '.' . $request->image->getClientOriginalExtension();
             $request->image->move(public_path('assets/img/case_study'), $fileName);
             // $case_study->com_image = $fileName;
+            $file_path = $app_url . ":8000/assets/img/case_study/" . $fileName;
         }
 
         CaseStudy::create([
             'com_name' => $request->name,
-            'com_image' => $fileName
+            'com_image' => $file_path
         ]);
         return response()->json([
             'name' => $request->name,
@@ -103,13 +105,15 @@ class CaseStudyApiController extends Controller
         // ]);
 
         $case_study = CaseStudy::find($id);
+        $app_url = env('APP_URL');
         $case_study->com_name = $request->name;
 
         if ($request->image) {
 
             $fileName = time() . '.' . $request->image->getClientOriginalExtension();
             $request->image->move(public_path('assets/img/case_study'), $fileName);
-            $case_study->com_image = $fileName;
+            $file_path = $app_url . ":8000/assets/img/case_study/" . $fileName;
+            $case_study->com_image = $file_path;
         }
 
 

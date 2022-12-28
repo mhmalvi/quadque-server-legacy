@@ -8,7 +8,8 @@ import axios from "axios";
 require("./bootstrap");
 
 window.Vue = require("vue").default;
-// 
+
+;
 import MarqueeText from "vue-marquee-text-component";
 import DynamicMarquee from "vue-dynamic-marquee";
 
@@ -26,11 +27,13 @@ import {
     faInstagram,
 } from "@fortawesome/free-brands-svg-icons";
 import Vue from "vue";
-
+import VueSweetalert2 from "vue-sweetalert2";
+import "sweetalert2/dist/sweetalert2.min.css";
 /* add icons to the library */
 library.add(faTwitter, faFacebookF, faYoutube, faInstagram);
 
 // Vue.component("service-component", service);
+Vue.use(VueSweetalert2);
 Vue.component("marquee-text", MarqueeText);
 Vue.component("dynamic-marquee", DynamicMarquee);
 

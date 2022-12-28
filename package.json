@@ -31,6 +31,7 @@
         "@fortawesome/free-regular-svg-icons": "^6.2.0",
         "@fortawesome/free-solid-svg-icons": "^6.2.0",
         "@fortawesome/vue-fontawesome": "^2.0.8",
+        "sweetalert2": "^11.6.16",
         "vue-axios": "^3.4.1",
         "vue-dplayer": "^0.0.10",
         "vue-dynamic-marquee": "^0.1.7",
@@ -38,6 +39,7 @@
         "vue-marquee-text-component": "^1.2.0",
         "vue-owl-carousel": "^2.0.3",
         "vue-slick-carousel": "^1.0.6",
+        "vue-sweetalert2": "^5.0.5",
         "vue-typical": "^2.1.0",
         "wow.js": "^1.2.2"
     }

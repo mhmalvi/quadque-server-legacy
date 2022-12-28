@@ -62,7 +62,7 @@ class HomeApiController extends Controller
         $save = $home_video->save();
 
         if ($save) {
-            return response()->json(['success' => 'You have successfully uploaded file.']);
+            return response()->json(['success' => 'created']);
         }
     }
 
@@ -117,7 +117,7 @@ class HomeApiController extends Controller
         $save = $home_video->save();
 
         if ($save) {
-            return response()->json(['success' => 'You have successfully uploaded file.']);
+            return response()->json(['success' => 'updated']);
         }
     }
 
