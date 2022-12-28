@@ -46,7 +46,7 @@ class ServiceController extends Controller
             // 'file' => 'required',
             'description' => 'required'
         ]);
-
+        $app_url = env('APP_URL');
         $service = new Service();
         $service->service_name = $request->service_name;
         $service->description = $request->description;
@@ -55,14 +55,15 @@ class ServiceController extends Controller
 
             $fileName = time() . '.' . $request->file->getClientOriginalExtension();
             $request->file->move(public_path('assets/services'), $fileName);
-            $service->file = $fileName;
+            $file_path = $app_url . ":8000/assets/services/" . $fileName;
+            $service->file = $file_path;
         }
 
 
         $save = $service->save();
 
         if ($save) {
-            return response()->json(['success' => 'You have successfully created services.']);
+            return response()->json(['success' => 'created']);
         }
     }
 
@@ -103,7 +104,7 @@ class ServiceController extends Controller
             'description' => 'required',
             // 'file' => 'required'
         ]);
-
+        $app_url = env('APP_URL');
         $service = Service::find($request->id);
         // dd("hello");
         $service->service_name = $request->service_name;
@@ -120,7 +121,8 @@ class ServiceController extends Controller
 
             $fileName = time() . '.' . $request->file->getClientOriginalExtension();
             $request->file->move(public_path('assets/services'), $fileName);
-            $service->file = $fileName;
+            $file_path = $app_url . ":8000/assets/services/" . $fileName;
+            $service->file = $file_path;
         }
         // dd("hello");
 
@@ -136,7 +138,7 @@ class ServiceController extends Controller
         // }
 
         if ($update) {
-            return response()->json(['success' => 'You have successfully updated.']);
+            return response()->json(['success' => 'updated']);
         }
     }
 

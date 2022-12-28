@@ -121,7 +121,7 @@
 
               <td style="vertical-align: middle">
                 <img
-                  :src="`http://127.0.0.1:8000/assets/services/${list.file}`"
+                  :src="list.file"
                   width="100"
                   height="100"
                 />
@@ -270,7 +270,7 @@ export default {
           this.service_name = response.data.service_name;
           this.description = response.data.description;
           $("#summernote").summernote("code", this.description);
-          this.temp_thumbnail_url = `http://127.0.0.1:8000/assets/services/${response.data.file}`;
+          this.temp_thumbnail_url = response.data.file;
         })
         .catch((error) => {});
     },

@@ -6078,7 +6078,7 @@ __webpack_require__.r(__webpack_exports__);
         _this3.title = response.data.title;
         _this3.text = response.data.text;
         $("#summernote").summernote("code", _this3.text);
-        _this3.temp_thumbnail_url = "http://127.0.0.1:8000/assets/img/blogs/".concat(response.data.thumbnail);
+        _this3.temp_thumbnail_url = response.data.thumbnail;
       })["catch"](function (error) {});
     },
     destroyList: function destroyList(list_id) {
@@ -6571,7 +6571,7 @@ __webpack_require__.r(__webpack_exports__);
         _this3.service_name = response.data.service_name;
         _this3.description = response.data.description;
         $("#summernote").summernote("code", _this3.description);
-        _this3.temp_thumbnail_url = "http://127.0.0.1:8000/assets/services/".concat(response.data.file);
+        _this3.temp_thumbnail_url = response.data.file;
       })["catch"](function (error) {});
     },
     destroyList: function destroyList(list_id) {
@@ -6818,7 +6818,7 @@ var render = function render() {
       }
     }, [_vm._v("\n              " + _vm._s(list.title) + "\n            ")]), _vm._v(" "), _c("td", [_c("img", {
       attrs: {
-        src: "http://127.0.0.1:8000/assets/img/blogs/".concat(list.thumbnail),
+        src: list.thumbnail,
         width: "100",
         height: "100"
       }
@@ -7552,7 +7552,7 @@ var render = function render() {
       }
     }, [_c("img", {
       attrs: {
-        src: "http://127.0.0.1:8000/assets/services/".concat(list.file),
+        src: list.file,
         width: "100",
         height: "100"
       }
