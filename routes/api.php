@@ -3,7 +3,7 @@
 use App\Http\Controllers\admin\CaseStudyApiController;
 use App\Http\Controllers\admin\BlogApiController;
 use App\Http\Controllers\admin\ServiceController;
-use App\Http\Controllers\admin\HomeController;
+use App\Http\Controllers\admin\HomeApiController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -32,8 +32,8 @@ Route::get('case-studies/{id}', [CaseStudyApiController::class, 'show']);
 Route::get('manage-blogs', [BlogApiController::class, 'index']);
 Route::get('manage-blogs/{id}', [BlogApiController::class, 'show']);
 
-Route::get('home-videos', [HomeController::class, 'index']);
-Route::get('home-videos/{id}', [HomeController::class, 'show']);
+Route::get('home-videos', [HomeApiController::class, 'index']);
+Route::get('home-videos/{id}', [HomeApiController::class, 'show']);
 // Route::resource('home-videos', HomeController::class);
 Route::get('services', [ServiceController::class, 'showAll']);
 Route::get('services/{id}', [ServiceController::class, 'show']);
