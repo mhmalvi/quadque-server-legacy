@@ -129,7 +129,7 @@ class CaseStudyController extends Controller
 
             $fileName = time() . '.' . $request->image->getClientOriginalExtension();
             $request->image->move(public_path('assets/img/case_study'), $fileName);
-            $file_path = $app_url . ":8000/assets/home_video/" . $fileName;
+            $file_path = $app_url . ":8000/assets/img/case_study/" . $fileName;
             $case_study->com_image = $file_path;
         }
 
@@ -174,7 +174,7 @@ class CaseStudyController extends Controller
 
             $fileName = time() . '.' . $request->image->getClientOriginalExtension();
             $request->image->move(public_path('assets/img/case_study'), $fileName);
-            $file_path = $app_url . ":8000/assets/home_video/" . $fileName;
+            $file_path = $app_url . ":8000/assets/img/case_study/" . $fileName;
             $case_study->com_image = $file_path;
         }
 
