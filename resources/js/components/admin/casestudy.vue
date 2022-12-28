@@ -1,6 +1,13 @@
 <template>
   <div>
     <div class="row d-flex justify-content-center">
+      <div
+        v-if="this.is_editing == true"
+        @click="disable_button()"
+        class="mt-3"
+      >
+        <button class="btn btn-primary">Create Case Study</button>
+      </div>
       <div class="col-md-6 mt-4">
         <div class="card">
           <div class="card-header bg-success" style="height: 47px;">
@@ -122,6 +129,12 @@ export default {
     };
   },
   methods: {
+    disable_button() {
+      this.is_editing = false;
+      this.name = ""
+      this.image = ""
+      this.temp_image_url=""
+    },
     fetchAll() {
       axios
         .get("/admin/case-study/get")
@@ -132,6 +145,7 @@ export default {
     },
     uploadfile(e) {
       this.image = e.target.files[0];
+      this.temp_image_url=""
     },
     save() {
       let url;

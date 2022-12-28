@@ -1,6 +1,13 @@
 <template>
   <div>
     <div class="row d-flex justify-content-center">
+      <div
+        v-if="this.is_editing == true"
+        @click="disable_button()"
+        class="mt-3"
+      >
+        <button class="btn btn-primary">Create Blog</button>
+      </div>
       <div class="col-md-6 mt-4">
         <div class="alert alert-success" v-if="this.success">
           {{ this.success }}
@@ -151,6 +158,14 @@ export default {
     };
   },
   methods: {
+    disable_button() {
+      this.is_editing = false;
+      this.title = ""
+      this.text = ""
+      this.thumbnail = ""
+      this.temp_thumbnail_url = ""
+      $("#summernote").summernote("code", "");
+    },
     fetchAll() {
       axios
         .get("/admin/blog/get")
@@ -162,6 +177,7 @@ export default {
     },
     uploadfile(e) {
       this.thumbnail = e.target.files[0];
+      this.temp_thumbnail_url=""
     },
 
     save() {

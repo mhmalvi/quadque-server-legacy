@@ -1,6 +1,13 @@
 <template>
   <div>
     <div class="row d-flex justify-content-center">
+      <div
+        v-if="this.is_editing == true"
+        @click="disable_button()"
+        class="mt-3"
+      >
+        <button class="btn btn-primary">Create Video</button>
+      </div>
       <div class="col-md-6 mt-4">
         <div class="alert alert-success" v-if="this.success">
           {{ this.success }}
@@ -175,6 +182,13 @@ export default {
     };
   },
   methods: {
+    disable_button(e) {
+      this.is_editing = false;
+      this.video_name = "";
+      this.temp_video_url = "";
+      this.file = "";
+      e.target.files[0]=""
+    },
     fetchAll() {
       // console.log($assetbase);
       axios
@@ -187,6 +201,7 @@ export default {
     },
     uploadfile(e) {
       this.file = e.target.files[0];
+      this.temp_video_url=""
     },
 
     save() {
@@ -211,6 +226,7 @@ export default {
           this.name = "";
 
           this.temporary_id = "";
+          this.file = "";
           this.temp_video_url = "";
           this.is_editing = false;
           setTimeout(function () {

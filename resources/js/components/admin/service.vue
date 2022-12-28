@@ -1,13 +1,23 @@
 <template>
   <div>
     <div class="row d-flex justify-content-center">
+      <div
+        v-if="this.is_editing == true"
+        @click="disable_button()"
+        class="mt-3"
+      >
+        <button class="btn btn-primary">Create Services</button>
+      </div>
       <div class="col-md-6 mt-4">
         <div class="alert alert-success" v-if="this.success">
           {{ this.success }}
         </div>
         <div class="card">
-          <div class="card-header bg-success text-center" style="height: 47px;">
-            <h4 class="card-title text-white text-center" style="    margin-top: 1%;">
+          <div class="card-header bg-success text-center" style="height: 47px">
+            <h4
+              class="card-title text-white text-center"
+              style="margin-top: 1%"
+            >
               {{ this.is_editing ? "Update Service" : "Create Service" }}
             </h4>
           </div>
@@ -167,6 +177,14 @@ export default {
     };
   },
   methods: {
+    disable_button() {
+      this.is_editing = false;
+      this.service_name = "";
+      this.description = "";
+      this.file = "";
+      $("#summernote").summernote("code", "");
+      this.temp_thumbnail_url = "";
+    },
     fetchAll() {
       console.log("fetch");
       axios
@@ -179,6 +197,7 @@ export default {
     },
     uploadfile(e) {
       this.file = e.target.files[0];
+      this.temp_thumbnail_url = "";
     },
 
     save() {
@@ -199,7 +218,7 @@ export default {
         .post(url, fd)
         .then((response) => {
           this.success = response.data.success;
-          this.fetchAll()
+          this.fetchAll();
           // console.log(this.success)
           this.service_name = "";
           this.description = "";
@@ -207,6 +226,7 @@ export default {
           document.getElementById("file").value = "";
           this.temporary_id = "";
           this.temp_thumbnail_url = "";
+          this.file = "";
           this.is_editing = false;
           setTimeout(function () {
             this.success = "";

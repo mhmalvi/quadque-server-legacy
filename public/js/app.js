@@ -5979,6 +5979,14 @@ __webpack_require__.r(__webpack_exports__);
     };
   },
   methods: {
+    disable_button: function disable_button() {
+      this.is_editing = false;
+      this.title = "";
+      this.text = "";
+      this.thumbnail = "";
+      this.temp_thumbnail_url = "";
+      $("#summernote").summernote("code", "");
+    },
     fetchAll: function fetchAll() {
       var _this = this;
 
@@ -5989,6 +5997,7 @@ __webpack_require__.r(__webpack_exports__);
     },
     uploadfile: function uploadfile(e) {
       this.thumbnail = e.target.files[0];
+      this.temp_thumbnail_url = "";
     },
     save: function save() {
       var _this2 = this;
@@ -6100,6 +6109,12 @@ __webpack_require__.r(__webpack_exports__);
     };
   },
   methods: {
+    disable_button: function disable_button() {
+      this.is_editing = false;
+      this.name = "";
+      this.image = "";
+      this.temp_image_url = "";
+    },
     fetchAll: function fetchAll() {
       var _this = this;
 
@@ -6109,6 +6124,7 @@ __webpack_require__.r(__webpack_exports__);
     },
     uploadfile: function uploadfile(e) {
       this.image = e.target.files[0];
+      this.temp_image_url = "";
     },
     save: function save() {
       var _this2 = this;
@@ -6211,6 +6227,13 @@ __webpack_require__.r(__webpack_exports__);
     };
   },
   methods: {
+    disable_button: function disable_button(e) {
+      this.is_editing = false;
+      this.video_name = "";
+      this.temp_video_url = "";
+      this.file = "";
+      e.target.files[0] = "";
+    },
     fetchAll: function fetchAll() {
       var _this = this;
 
@@ -6222,6 +6245,7 @@ __webpack_require__.r(__webpack_exports__);
     },
     uploadfile: function uploadfile(e) {
       this.file = e.target.files[0];
+      this.temp_video_url = "";
     },
     save: function save() {
       var _this2 = this;
@@ -6247,6 +6271,7 @@ __webpack_require__.r(__webpack_exports__);
 
         _this2.name = "";
         _this2.temporary_id = "";
+        _this2.file = "";
         _this2.temp_video_url = "";
         _this2.is_editing = false;
         setTimeout(function () {
@@ -6386,6 +6411,14 @@ __webpack_require__.r(__webpack_exports__);
     };
   },
   methods: {
+    disable_button: function disable_button() {
+      this.is_editing = false;
+      this.service_name = "";
+      this.description = "";
+      this.file = "";
+      $("#summernote").summernote("code", "");
+      this.temp_thumbnail_url = "";
+    },
     fetchAll: function fetchAll() {
       var _this = this;
 
@@ -6397,6 +6430,7 @@ __webpack_require__.r(__webpack_exports__);
     },
     uploadfile: function uploadfile(e) {
       this.file = e.target.files[0];
+      this.temp_thumbnail_url = "";
     },
     save: function save() {
       var _this2 = this;
@@ -6427,6 +6461,7 @@ __webpack_require__.r(__webpack_exports__);
         document.getElementById("file").value = "";
         _this2.temporary_id = "";
         _this2.temp_thumbnail_url = "";
+        _this2.file = "";
         _this2.is_editing = false;
         setTimeout(function () {
           this.success = "";
@@ -6567,7 +6602,16 @@ var render = function render() {
 
   return _c("div", [_c("div", {
     staticClass: "row d-flex justify-content-center"
-  }, [_c("div", {
+  }, [this.is_editing == true ? _c("div", {
+    staticClass: "mt-3",
+    on: {
+      click: function click($event) {
+        return _vm.disable_button();
+      }
+    }
+  }, [_c("button", {
+    staticClass: "btn btn-primary"
+  }, [_vm._v("Create Blog")])]) : _vm._e(), _vm._v(" "), _c("div", {
     staticClass: "col-md-6 mt-4"
   }, [this.success ? _c("div", {
     staticClass: "alert alert-success"
@@ -6769,7 +6813,16 @@ var render = function render() {
 
   return _c("div", [_c("div", {
     staticClass: "row d-flex justify-content-center"
-  }, [_c("div", {
+  }, [this.is_editing == true ? _c("div", {
+    staticClass: "mt-3",
+    on: {
+      click: function click($event) {
+        return _vm.disable_button();
+      }
+    }
+  }, [_c("button", {
+    staticClass: "btn btn-primary"
+  }, [_vm._v("Create Case Study")])]) : _vm._e(), _vm._v(" "), _c("div", {
     staticClass: "col-md-6 mt-4"
   }, [_c("div", {
     staticClass: "card"
@@ -6953,7 +7006,16 @@ var render = function render() {
 
   return _c("div", [_c("div", {
     staticClass: "row d-flex justify-content-center"
-  }, [_c("div", {
+  }, [this.is_editing == true ? _c("div", {
+    staticClass: "mt-3",
+    on: {
+      click: function click($event) {
+        return _vm.disable_button();
+      }
+    }
+  }, [_c("button", {
+    staticClass: "btn btn-primary"
+  }, [_vm._v("Create Video")])]) : _vm._e(), _vm._v(" "), _c("div", {
     staticClass: "col-md-6 mt-4"
   }, [this.success ? _c("div", {
     staticClass: "alert alert-success"
@@ -7267,7 +7329,16 @@ var render = function render() {
 
   return _c("div", [_c("div", {
     staticClass: "row d-flex justify-content-center"
-  }, [_c("div", {
+  }, [this.is_editing == true ? _c("div", {
+    staticClass: "mt-3",
+    on: {
+      click: function click($event) {
+        return _vm.disable_button();
+      }
+    }
+  }, [_c("button", {
+    staticClass: "btn btn-primary"
+  }, [_vm._v("Create Services")])]) : _vm._e(), _vm._v(" "), _c("div", {
     staticClass: "col-md-6 mt-4"
   }, [this.success ? _c("div", {
     staticClass: "alert alert-success"
