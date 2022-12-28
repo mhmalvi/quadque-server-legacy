@@ -217,8 +217,15 @@ export default {
       axios
         .post(url, fd)
         .then((response) => {
-          this.success = response.data.success;
+          // this.success = response.data.success;
           this.fetchAll();
+          this.$swal.fire({
+            // position: "top-end",
+            icon: "success",
+            title: "Service Saved",
+            showConfirmButton: true,
+            // timer: 1500,
+          });
           // console.log(this.success)
           this.service_name = "";
           this.description = "";
@@ -269,8 +276,12 @@ export default {
     },
     destroyList(list_id) {
       axios.get(`/admin/service/delete/${list_id}`).then((response) => {
-        this.success = response.data.success;
+        // this.success = response.data.success;
         this.fetchAll();
+        this.$swal.fire({
+            icon: "error",
+            text: "Deleted",
+          });
       });
     },
   },

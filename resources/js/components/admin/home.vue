@@ -9,9 +9,9 @@
         <button class="btn btn-primary">Create Video</button>
       </div>
       <div class="col-md-6 mt-4">
-        <div class="alert alert-success" v-if="this.success">
+        <!-- <div class="alert alert-success" v-if="this.success">
           {{ this.success }}
-        </div>
+        </div> -->
         <div class="card">
           <div class="card-header bg-success text-center" style="height: 47px">
             <h4
@@ -126,9 +126,7 @@
                 /> -->
                 <!-- {{ $assetbase }} -->
                 <video class="video-js" width="200" height="100" controls>
-                  <source
-                    :src="$assetbase + `assets/home_video/${list.file}`"
-                  />
+                  <source :src="list.file" />
                 </video>
               </td>
 
@@ -163,6 +161,7 @@
 </template>
 <script>
 import axios from "axios";
+// import VueSweetalert2 from "vue-sweetalert2";
 export default {
   data() {
     return {
@@ -187,21 +186,21 @@ export default {
       this.video_name = "";
       this.temp_video_url = "";
       this.file = "";
-      e.target.files[0]=""
+      e.target.files[0] = "";
     },
     fetchAll() {
-      // console.log($assetbase);
+      console.log("hello");
       axios
         .get("/admin/home/get")
         .then((response) => {
-          console.log(response.data[0].file);
+          // console.log(response.data[0].file);
           this.lists = response.data;
         })
         .catch((error) => {});
     },
     uploadfile(e) {
       this.file = e.target.files[0];
-      this.temp_video_url=""
+      this.temp_video_url = "";
     },
 
     save() {
@@ -221,9 +220,28 @@ export default {
         .post(url, fd)
         .then((response) => {
           this.success = response.data.success;
+          // console.log(this.$swal);
+          if (this.success == "created") {
+            this.$swal.fire({
+              // position: "top-end",
+              icon: "success",
+              title: "Video Saved",
+              showConfirmButton: true,
+              // timer: 1500,
+            });
+          } else if (this.success == "updated") {
+            this.$swal.fire({
+              // position: "top-end",
+              icon: "success",
+              title: "Video Updated",
+              showConfirmButton: true,
+              // timer: 1500,
+            });
+          }
+
           this.fetchAll();
           // console.log(this.success)
-          this.name = "";
+          this.video_name = "";
 
           this.temporary_id = "";
           this.file = "";
@@ -234,8 +252,8 @@ export default {
           }, 5000);
         })
         .catch((error) => {
-          if (error.response.data.errors.name) {
-            this.nameError = error.response.data.errors.name[0];
+          if (error.response.data.errors.video_name) {
+            this.nameError = error.response.data.errors.video_name[0];
           } else {
             this.nameError = "";
           }
@@ -257,16 +275,20 @@ export default {
           // console.log(response);
           this.video_name = response.data.name;
           // console.log(this.$assetbase)
-          this.temp_video_url =
-            this.$assetbase + `assets/home_video/${response.data.file}`;
+          this.temp_video_url = response.data.file;
           // console.log()
         })
         .catch((error) => {});
     },
     destroyList(list_id) {
+      // try {
       axios.get(`/admin/home/delete/${list_id}`).then((response) => {
-        this.success = response.data.success;
+        // this.success = response.data.success;
         this.fetchAll();
+        this.$swal.fire({
+          icon: "error",
+          text: "Deleted",
+        });
       });
     },
   },

@@ -115,7 +115,7 @@ class CaseStudyController extends Controller
     public function store(Request $request)
     {
         //validate the input
-        $path = 
+        // $path = 
         $request->validate([
             'name' => 'required',
             'image' => 'required|image'
@@ -123,20 +123,21 @@ class CaseStudyController extends Controller
 
         $case_study = new CaseStudy();
         $case_study->com_name = $request->name;
+        $app_url = env('APP_URL');
 
         if ($request->image) {
 
             $fileName = time() . '.' . $request->image->getClientOriginalExtension();
             $request->image->move(public_path('assets/img/case_study'), $fileName);
-
-            $case_study->com_image = $fileName;
+            $file_path = $app_url . ":8000/assets/home_video/" . $fileName;
+            $case_study->com_image = $file_path;
         }
 
 
         $save = $case_study->save();
 
         if ($save) {
-            return response()->json(['success' => 'You have successfully create Case Study.']);
+            return response()->json(['success' => 'created']);
         }
     }
 
@@ -168,19 +169,20 @@ class CaseStudyController extends Controller
 
         $case_study = CaseStudy::find($request->id);
         $case_study->com_name = $request->name;
-
+        $app_url = env('APP_URL');
         if ($request->image) {
 
             $fileName = time() . '.' . $request->image->getClientOriginalExtension();
             $request->image->move(public_path('assets/img/case_study'), $fileName);
-            $case_study->com_image = $fileName;
+            $file_path = $app_url . ":8000/assets/home_video/" . $fileName;
+            $case_study->com_image = $file_path;
         }
 
 
         $update = $case_study->save();
 
         if ($update) {
-            return response()->json(['success' => 'You have successfully update Case Study.']);
+            return response()->json(['success' => 'updated']);
         }
     }
 

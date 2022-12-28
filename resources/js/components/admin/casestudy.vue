@@ -10,7 +10,7 @@
       </div>
       <div class="col-md-6 mt-4">
         <div class="card">
-          <div class="card-header bg-success" style="height: 47px;">
+          <div class="card-header bg-success" style="height: 47px">
             <h4
               style="margin-top: 1%"
               class="card-title text-white text-center"
@@ -19,9 +19,9 @@
             </h4>
           </div>
           <div class="card-body">
-            <div class="alert alert-success" v-if="this.success">
+            <!-- <div class="alert alert-success" v-if="this.success">
               {{ this.success }}
-            </div>
+            </div> -->
             <form>
               <div class="form-group">
                 <label for="company_name">Company Name</label>
@@ -131,9 +131,9 @@ export default {
   methods: {
     disable_button() {
       this.is_editing = false;
-      this.name = ""
-      this.image = ""
-      this.temp_image_url=""
+      this.name = "";
+      this.image = "";
+      this.temp_image_url = "";
     },
     fetchAll() {
       axios
@@ -145,7 +145,7 @@ export default {
     },
     uploadfile(e) {
       this.image = e.target.files[0];
-      this.temp_image_url=""
+      this.temp_image_url = "";
     },
     save() {
       let url;
@@ -161,7 +161,25 @@ export default {
       axios
         .post(url, fd)
         .then((response) => {
-          this.success = response.data.success;
+          // this.success = response.data.success;
+          if (response.data.success == "created") {
+            this.$swal.fire({
+              // position: "top-end",
+              icon: "success",
+              title: "Service Saved",
+              showConfirmButton: true,
+              // timer: 1500,
+            });
+          } else if (response.data.success == "updated") {
+            this.$swal.fire({
+              // position: "top-end",
+              icon: "success",
+              title: "Service Updated",
+              showConfirmButton: true,
+              // timer: 1500,
+            });
+          }
+
           this.name = "";
           document.getElementById("company_image").value = "";
           this.temp_image_url = "";
@@ -201,8 +219,12 @@ export default {
     },
     destroyList(list_id) {
       axios.get(`/admin/case-study/delete/${list_id}`).then((response) => {
-        this.success = response.data.success;
+        // this.success = response.data.success;
         this.fetchAll();
+        this.$swal.fire({
+          icon: "error",
+          text: "Deleted",
+        });
       });
     },
   },

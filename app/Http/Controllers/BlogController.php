@@ -129,7 +129,7 @@ class BlogController extends Controller
         if ($save) {
             return response()->json([
 
-                'success' => 'Blog has been created successfully'
+                'success' => 'created'
 
             ]);
         }
@@ -192,7 +192,7 @@ class BlogController extends Controller
         if ($save) {
             return response()->json([
 
-                'success' => 'Blog has been updated successfully'
+                'success' => 'updated'
 
             ]);
         }
