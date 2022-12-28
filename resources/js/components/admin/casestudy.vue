@@ -80,7 +80,7 @@
               <td>{{ list.com_name }}</td>
               <td>
                 <img
-                  :src="`http://127.0.0.1:8000/assets/img/case_study/${list.com_image}`"
+                  :src="list.com_image"
                   width="100"
                   height="100"
                 />

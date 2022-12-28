@@ -112,11 +112,12 @@ class BlogController extends Controller
             'thumbnail' => 'required|image'
         ]);
 
-
+        $app_url = env('APP_URL');
         if ($request->thumbnail) {
 
             $fileName = time() . '.' . $request->thumbnail->getClientOriginalExtension();
             $request->thumbnail->move(public_path('assets/img/blogs'), $fileName);
+            $file_path = $app_url . ":8000/assets/img/blogs/" . $fileName;
         }
 
 
@@ -179,12 +180,13 @@ class BlogController extends Controller
 
         $blog->title = $request->title;
         $blog->text = $request->text;
-
+        $app_url = env('APP_URL');
         if ($request->thumbnail) {
 
             $fileName = time() . '.' . $request->thumbnail->getClientOriginalExtension();
             $request->thumbnail->move(public_path('assets/img/blogs'), $fileName);
-            $blog->thumbnail = $fileName;
+            $file_path = $app_url . ":8000/assets/img/blogs/" . $fileName;
+            $blog->thumbnail = $file_path;
         }
 
         $save = $blog->save();

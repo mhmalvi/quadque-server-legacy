@@ -6988,7 +6988,7 @@ var render = function render() {
       key: list.id
     }, [_c("td", [_vm._v(_vm._s(list.com_name))]), _vm._v(" "), _c("td", [_c("img", {
       attrs: {
-        src: "http://127.0.0.1:8000/assets/img/case_study/".concat(list.com_image),
+        src: list.com_image,
         width: "100",
         height: "100"
       }
