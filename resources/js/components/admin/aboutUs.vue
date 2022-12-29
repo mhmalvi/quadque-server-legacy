@@ -29,68 +29,89 @@
               style="margin-top: 1%"
             >
               {{
-                this.is_editing ? "Update Client Speak" : "Create Client Speak"
+                this.is_editing ? "Update About Us" : "Create About Us"
               }}
             </h4>
           </div>
           <div class="card-body">
             <form>
+              <!-- {{ description }} -->
               <div class="form-group">
-                <label for="title">Client Name</label>
-                <input
-                  type="text"
-                  class="form-control"
-                  v-model="name"
-                  placeholder="Enter service name"
-                />
-                <div class="text-danger" v-if="this.nameError">
-                  {{ this.nameError }}
-                </div>
-              </div>
-              <!-- {{ designation }} -->
-              <div class="form-group">
-                <label for="title">Client Designation</label>
-                <input
-                  type="text"
-                  class="form-control"
-                  v-model="designation"
-                  placeholder="Enter service name"
-                />
-                <div class="text-danger" v-if="this.designationError">
-                  {{ this.designationError }}
-                </div>
-              </div>
-              <div class="form-group">
-                <label for="thumbnail">Client Image</label>
-                <input
-                  type="file"
-                  class="form-control"
-                  id="thumbnail"
-                  @change="uploadfile"
-                />
-                <div class="text-danger" v-if="this.fileError">
-                  {{ this.fileError }}
-                </div>
-                <p class="my-2 text-center" v-if="this.temp_thumbnail_url">
-                  <img
-                    :src="this.temp_thumbnail_url"
-                    width="150"
-                    height="150"
-                  />
-                </p>
-              </div>
-              {{ description }}
-              <div class="form-group">
-                <label for="title">Client Opinion</label><br />
+                <label for="title">Our Vision</label><br />
                 <textarea
-                  v-model="description"
+                  v-model="our_vision"
                   id="summernote"
                   class="form-control"
                   rows="4"
                   required
                 ></textarea>
-                <div class="text-danger" v-if="this.descriptionError">
-                  {{ this.descriptionError }}
+                <div class="text-danger" v-if="this.our_visionError">
+                  {{ this.our_visionError }}
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="title">Our Mission</label><br />
+                <textarea
+                  v-model="our_mission"
+                  id="summernote"
+                  class="form-control"
+                  rows="4"
+                  required
+                ></textarea>
+                <div class="text-danger" v-if="this.our_visionError">
+                  {{ this.our_visionError }}
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="title">Our Goal</label><br />
+                <textarea
+                  v-model="our_goal"
+                  id="summernote"
+                  class="form-control"
+                  rows="4"
+                  required
+                ></textarea>
+                <div class="text-danger" v-if="this.our_visionError">
+                  {{ this.our_visionError }}
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="title">Our Objective</label><br />
+                <textarea
+                  v-model="our_objective"
+                  id="summernote"
+                  class="form-control"
+                  rows="4"
+                  required
+                ></textarea>
+                <div class="text-danger" v-if="this.our_objectiveError">
+                  {{ this.our_objectiveError }}
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="title">Who we are</label><br />
+                <textarea
+                  v-model="who_we_are"
+                  id="summernote"
+                  class="form-control"
+                  rows="4"
+                  required
+                ></textarea>
+                <div class="text-danger" v-if="this.who_we_areError">
+                  {{ this.who_we_areError }}
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="title">Why choose us</label><br />
+                <textarea
+                  v-model="why_choose_us"
+                  id="summernote"
+                  class="form-control"
+                  rows="4"
+                  required
+                ></textarea>
+                <div class="text-danger" v-if="this.why_choose_usError">
+                  {{ this.why_choose_usError }}
                 </div>
               </div>
               <div>
@@ -268,7 +289,6 @@ export default {
 
           // console.log(this.success)
 
-          
           setTimeout(function () {
             this.success = "";
           }, 5000);

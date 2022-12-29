@@ -7359,7 +7359,7 @@ var render = function render() {
     }
   }), _vm._v(" "), this.nameError ? _c("div", {
     staticClass: "text-danger"
-  }, [_vm._v("\n                " + _vm._s(this.nameError) + "\n              ")]) : _vm._e()]), _vm._v("\n            " + _vm._s(_vm.designation) + "\n            "), _c("div", {
+  }, [_vm._v("\n                " + _vm._s(this.nameError) + "\n              ")]) : _vm._e()]), _vm._v(" "), _c("div", {
     staticClass: "form-group"
   }, [_c("label", {
     attrs: {
