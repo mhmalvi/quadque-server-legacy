@@ -48,6 +48,10 @@ return [
             'driver' => 'session',
             'provider' => 'admins'
         ],
+        'superAdmin'=>[
+            'driver' => 'session',
+            'provider' => 'admins'
+        ]
     ],
 
     /*

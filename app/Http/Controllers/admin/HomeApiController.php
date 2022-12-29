@@ -102,7 +102,7 @@ class HomeApiController extends Controller
             'name' => 'required',
             'file' => 'required'
         ]);
-
+        $app_url = env('APP_URL');
         $home_video = HomeVideo::find($request->id);
         // dd($home_video);
         $home_video->name = $request->name;
@@ -110,7 +110,8 @@ class HomeApiController extends Controller
         if ($request->file) {
             $fileName = time() . '.' . $request->file->getClientOriginalExtension();
             $request->file->move(public_path('assets/home_video'), $fileName);
-            $home_video->file = $fileName;
+            $file_path = $app_url . ":8000/assets/home_video/" . $fileName;
+            $home_video->file = $file_path;
         }
 
 
