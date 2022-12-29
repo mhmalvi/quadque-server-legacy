@@ -6827,7 +6827,7 @@ var render = function render() {
   }), _vm._v(" "), this.textError ? _c("div", {
     staticClass: "text-danger"
   }, [_vm._v("\n                " + _vm._s(this.textError) + "\n              ")]) : _vm._e()]), _vm._v(" "), _c("div", [_c("button", {
-    staticClass: "btn btn-block btn-info text-white",
+    staticClass: "btn btn-block btn-save text-white",
     attrs: {
       type: "button"
     },
@@ -7010,7 +7010,7 @@ var render = function render() {
       height: "150"
     }
   })]) : _vm._e()]), _vm._v(" "), _c("div", [_c("button", {
-    staticClass: "btn btn-block btn-info text-white",
+    staticClass: "btn btn-block btn-save text-white",
     attrs: {
       type: "button"
     },
@@ -7060,7 +7060,7 @@ var staticRenderFns = [function () {
   var _vm = this,
       _c = _vm._self._c;
 
-  return _c("thead", [_c("tr", [_c("th", [_vm._v("Comapny Name")]), _vm._v(" "), _c("th", [_vm._v("Comapny Icon")]), _vm._v(" "), _c("th", [_vm._v("Action")])])]);
+  return _c("thead", [_c("tr", [_c("th", [_vm._v("Comapany Name")]), _vm._v(" "), _c("th", [_vm._v("Comapany Icon")]), _vm._v(" "), _c("th", [_vm._v("Action")])])]);
 }, function () {
   var _vm = this,
       _c = _vm._self._c;
@@ -7217,7 +7217,7 @@ var render = function render() {
       src: this.temp_video_url
     }
   })])]) : _vm._e()]), _vm._v(" "), _c("div", [_c("button", {
-    staticClass: "btn btn-block btn-info text-white",
+    staticClass: "btn btn-block btn-save text-white",
     attrs: {
       type: "button"
     },
@@ -7565,7 +7565,7 @@ var render = function render() {
   }), _vm._v(" "), this.titleError ? _c("div", {
     staticClass: "text-danger"
   }, [_vm._v("\n                " + _vm._s(this.titleError) + "\n              ")]) : _vm._e()]), _vm._v(" "), _c("div", [_c("button", {
-    staticClass: "btn btn-block btn-info text-white",
+    staticClass: "btn btn-block btn-save text-white",
     attrs: {
       type: "button"
     },
@@ -13234,7 +13234,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_laravel_mix_node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.btn-edit[data-v-2e97d426] {\r\n  background: #0093e9;\r\n  border:none;\n}\n.btn-edit[data-v-2e97d426]:hover{\r\n  color:black\n}\n.card-header[data-v-2e97d426] {\r\n  background-image: linear-gradient(\r\n    to right,\r\n    rgb(242, 112, 156),\r\n    rgb(255, 148, 114)\r\n  );\n}\nthead[data-v-2e97d426] {\r\n  /* background: #84a4ff; */\r\n  background-image: linear-gradient(to right, #0093e9, #80d0c7);\r\n  color: white;\r\n  border: none;\n}\n.table-striped > tbody > tr:nth-of-type(odd) > *[data-v-2e97d426] {\r\n  --bs-table-accent-bg: rgb(229 231 255);\r\n  color: var(--bs-table-striped-color);\r\n  border: none;\n}\r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.btn-edit[data-v-2e97d426] {\r\n  background: #0093e9;\r\n  border:none;\n}\n.btn-edit[data-v-2e97d426]:hover{\r\n  color:black\n}\n.card-header[data-v-2e97d426] {\r\n  background-image: linear-gradient(\r\n    to right,\r\n    rgb(242, 112, 156),\r\n    rgb(255, 148, 114)\r\n  );\n}\nthead[data-v-2e97d426] {\r\n  /* background: #84a4ff; */\r\n  background-image: linear-gradient(to right, #0093e9, #80d0c7);\r\n  color: white;\r\n  border: none;\n}\n.btn-save[data-v-2e97d426]{\r\n  background:#5a67ff;\n}\n.btn-save[data-v-2e97d426]:hover{\r\n  background: #0093e9;\r\n  transition: 2s ease;\n}\n.table-striped > tbody > tr:nth-of-type(odd) > *[data-v-2e97d426] {\r\n  --bs-table-accent-bg: rgb(229 231 255);\r\n  color: var(--bs-table-striped-color);\r\n  border: none;\n}\r\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -13258,7 +13258,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_laravel_mix_node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.btn-edit[data-v-0298f1de] {\r\n  background: #0093e9;\n}\n.card-header[data-v-0298f1de] {\r\n  background-image: linear-gradient(\r\n    to right,\r\n    rgb(242, 112, 156),\r\n    rgb(255, 148, 114)\r\n  );\n}\ntable tbody tr[data-v-0298f1de] {\r\n  line-height: 100px;\r\n  text-align: center;\n}\nthead th[data-v-0298f1de]{\r\n  text-align: center;\n}\nthead[data-v-0298f1de] {\r\n  /* background: #84a4ff; */\r\n  background-image: linear-gradient(to right, #0093e9, #80d0c7);\r\n  color: white;\r\n  border: none;\n}\n.table-striped > tbody > tr:nth-of-type(odd) > *[data-v-0298f1de] {\r\n  --bs-table-accent-bg: rgb(229 231 255);\r\n  color: var(--bs-table-striped-color);\r\n  border: none;\n}\r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.btn-edit[data-v-0298f1de] {\r\n  background: #0093e9;\n}\n.card-header[data-v-0298f1de] {\r\n  background-image: linear-gradient(\r\n    to right,\r\n    rgb(242, 112, 156),\r\n    rgb(255, 148, 114)\r\n  );\n}\ntable tbody tr[data-v-0298f1de] {\r\n  line-height: 100px;\r\n  text-align: center;\n}\nthead th[data-v-0298f1de]{\r\n  text-align: center;\n}\nthead[data-v-0298f1de] {\r\n  /* background: #84a4ff; */\r\n  background-image: linear-gradient(to right, #0093e9, #80d0c7);\r\n  color: white;\r\n  border: none;\n}\n.btn-save[data-v-0298f1de]{\r\n  background:#5a67ff;\n}\n.btn-save[data-v-0298f1de]:hover{\r\n  background: #0093e9;\r\n  transition: 2s ease;\n}\n.table-striped > tbody > tr:nth-of-type(odd) > *[data-v-0298f1de] {\r\n  --bs-table-accent-bg: rgb(229 231 255);\r\n  color: var(--bs-table-striped-color);\r\n  border: none;\n}\r\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -13282,7 +13282,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_laravel_mix_node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.card-header[data-v-19b016ac]{\r\n  background-image: linear-gradient(to right, rgb(242, 112, 156), rgb(255, 148, 114));\n}\nthead[data-v-19b016ac] {\r\n  /* background: #84a4ff; */\r\n  background-image: linear-gradient(to right, #0093e9, #80d0c7);\r\n  color: white;\r\n  border: none;\n}\n.table-striped > tbody > tr:nth-of-type(odd) > *[data-v-19b016ac] {\r\n  --bs-table-accent-bg: rgb(229 231 255);\r\n  color: var(--bs-table-striped-color);\r\n  border: none;\n}\n.btn-edit[data-v-19b016ac] {\r\n  background: #0093e9;\n}\r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.card-header[data-v-19b016ac]{\r\n  background-image: linear-gradient(to right, rgb(242, 112, 156), rgb(255, 148, 114));\n}\nthead[data-v-19b016ac] {\r\n  /* background: #84a4ff; */\r\n  background-image: linear-gradient(to right, #0093e9, #80d0c7);\r\n  color: white;\r\n  border: none;\n}\n.table-striped > tbody > tr:nth-of-type(odd) > *[data-v-19b016ac] {\r\n  --bs-table-accent-bg: rgb(229 231 255);\r\n  color: var(--bs-table-striped-color);\r\n  border: none;\n}\n.btn-edit[data-v-19b016ac] {\r\n  background: #0093e9;\n}\n.btn-save[data-v-19b016ac]{\r\n  background:#5a67ff;\n}\n.btn-save[data-v-19b016ac]:hover{\r\n  background: #0093e9;\r\n  transition: 2s ease;\n}\r\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -13306,7 +13306,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_laravel_mix_node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.btn-edit[data-v-0c9b213a] {\r\n  background: #0093e9;\n}\n.card-header[data-v-0c9b213a] {\r\n  background-image: linear-gradient(\r\n    to right,\r\n    rgb(242, 112, 156),\r\n    rgb(255, 148, 114)\r\n  );\n}\nthead[data-v-0c9b213a] {\r\n  /* background: #84a4ff; */\r\n  background-image: linear-gradient(to right, #0093e9, #80d0c7);\r\n  color: white;\r\n  border: none;\n}\n.table-striped > tbody > tr:nth-of-type(odd) > *[data-v-0c9b213a] {\r\n  --bs-table-accent-bg: rgb(229 231 255);\r\n  color: var(--bs-table-striped-color);\r\n  border: none;\n}\r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.btn-edit[data-v-0c9b213a] {\r\n  background: #0093e9;\n}\n.card-header[data-v-0c9b213a] {\r\n  background-image: linear-gradient(\r\n    to right,\r\n    rgb(242, 112, 156),\r\n    rgb(255, 148, 114)\r\n  );\n}\nthead[data-v-0c9b213a] {\r\n  /* background: #84a4ff; */\r\n  background-image: linear-gradient(to right, #0093e9, #80d0c7);\r\n  color: white;\r\n  border: none;\n}\n.btn-save[data-v-0c9b213a]{\r\n  background:#5a67ff;\n}\n.btn-save[data-v-0c9b213a]:hover{\r\n  background: #0093e9;\r\n  transition: 2s ease;\n}\n.table-striped > tbody > tr:nth-of-type(odd) > *[data-v-0c9b213a] {\r\n  --bs-table-accent-bg: rgb(229 231 255);\r\n  color: var(--bs-table-striped-color);\r\n  border: none;\n}\r\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
