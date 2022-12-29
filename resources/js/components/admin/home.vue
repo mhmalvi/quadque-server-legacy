@@ -94,7 +94,7 @@
               <div>
                 <button
                   type="button"
-                  class="btn btn-block btn-info text-white"
+                  class="btn btn-block btn-save text-white"
                   @click="save"
                 >
                   {{ this.is_editing ? "Update" : "Save" }}
@@ -324,5 +324,12 @@ thead {
 }
 .btn-edit {
   background: #0093e9;
+}
+.btn-save{
+  background:#5a67ff;
+}
+.btn-save:hover{
+  background: #0093e9;
+  transition: 2s ease;
 }
 </style>

@@ -78,7 +78,7 @@
               <div>
                 <button
                   type="button"
-                  class="btn btn-block btn-info text-white"
+                  class="btn btn-block btn-save text-white"
                   @click="save"
                 >
                   {{ this.is_editing ? "Update" : "Save" }}
@@ -304,6 +304,13 @@ thead {
   background-image: linear-gradient(to right, #0093e9, #80d0c7);
   color: white;
   border: none;
+}
+.btn-save{
+  background:#5a67ff;
+}
+.btn-save:hover{
+  background: #0093e9;
+  transition: 2s ease;
 }
 .table-striped > tbody > tr:nth-of-type(odd) > * {
   --bs-table-accent-bg: rgb(229 231 255);

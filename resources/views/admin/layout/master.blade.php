@@ -24,13 +24,19 @@
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarNavDropdown">
-                <ul class="navbar-nav text-white">
+                <ul class="navbar-nav text-white" id="nav">
                     <li class="nav-item active">
+                        <a class="nav-link text-white" href="{{ route('admin.dashboard') }}">Dashboard</a>
+
+
+                    </li>
+
+                    <li class="nav-item">
                         <a class="nav-link text-white" href="{{ route('admin.home') }}">Home</a>
 
                     </li>
 
-                    <li class="nav-item active">
+                    <li class="nav-item">
                         <a class="nav-link text-white" href="{{ route('admin.casestudy') }}">Case Study</a>
 
                     </li>
@@ -68,7 +74,14 @@
         </div>
     </div>
 
+    <style>
+        .active,
+        .btn:hover {
+            background-color: #666;
+            color: white;
+        }
 
+    </style>
 
     <script src="{{ mix('js/app.js') }}" type="text/javascript"></script>
     <script src="https://cdn.jsdelivr.net/npm/vue-typical@latest/dist/vue-typical.umd.js"></script>
@@ -84,6 +97,13 @@
                 height: 250,
 
 
+            });
+        });
+
+        $(document).ready(function() {
+            $('ul li a').click(function() {
+                $('li a').removeClass("active");
+                $(this).addClass("active");
             });
         });
 
