@@ -129,8 +129,10 @@ class ClientSpeakController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request)
     {
-        //
+        $client_speak=ClientSpeak::find($request->id);
+        $client_speak->delete();
+
     }
 }

@@ -6408,7 +6408,7 @@ __webpack_require__.r(__webpack_exports__);
     destroyList: function destroyList(list_id) {
       var _this4 = this;
 
-      axios__WEBPACK_IMPORTED_MODULE_0___default().get("/admin/service/delete/".concat(list_id)).then(function (response) {
+      axios__WEBPACK_IMPORTED_MODULE_0___default().get("/admin/client-speak/delete/".concat(list_id)).then(function (response) {
         // this.success = response.data.success;
         _this4.fetchAll();
 

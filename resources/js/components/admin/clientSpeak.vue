@@ -321,7 +321,7 @@ export default {
         .catch((error) => {});
     },
     destroyList(list_id) {
-      axios.get(`/admin/service/delete/${list_id}`).then((response) => {
+      axios.get(`/admin/client-speak/delete/${list_id}`).then((response) => {
         // this.success = response.data.success;
         this.fetchAll();
         this.$swal.fire({
