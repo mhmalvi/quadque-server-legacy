@@ -10,7 +10,17 @@
       </div>
       <div class="col-md-6 mt-4">
         <div class="card">
-          <div class="card-header bg-success" style="height: 47px">
+          <div
+            class="card-header"
+            style="
+              height: 47px;
+              background-image: linear-gradient(
+                to right,
+                rgb(242, 112, 156),
+                rgb(255, 148, 114)
+              );
+            "
+          >
             <h4
               style="margin-top: 1%"
               class="card-title text-white text-center"
@@ -79,16 +89,12 @@
             <tr v-for="list in lists" :key="list.id">
               <td>{{ list.com_name }}</td>
               <td>
-                <img
-                  :src="list.com_image"
-                  width="100"
-                  height="100"
-                />
+                <img :src="list.com_image" width="100" height="100" />
               </td>
               <td>
                 <button
                   type="button"
-                  class="btn btn-warning"
+                  class="btn btn-primary text-white"
                   @click="editList(list.id)"
                 >
                   Edit</button
@@ -234,8 +240,32 @@ export default {
 };
 </script>
 <style scoped>
+.btn-edit {
+  background: #0093e9;
+}
+.card-header {
+  background-image: linear-gradient(
+    to right,
+    rgb(242, 112, 156),
+    rgb(255, 148, 114)
+  );
+}
 table tbody tr {
   line-height: 100px;
   text-align: center;
+}
+thead th{
+  text-align: center;
+}
+thead {
+  /* background: #84a4ff; */
+  background-image: linear-gradient(to right, #0093e9, #80d0c7);
+  color: white;
+  border: none;
+}
+.table-striped > tbody > tr:nth-of-type(odd) > * {
+  --bs-table-accent-bg: rgb(229 231 255);
+  color: var(--bs-table-striped-color);
+  border: none;
 }
 </style>

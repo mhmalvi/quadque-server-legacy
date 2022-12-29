@@ -13,7 +13,17 @@
           {{ this.success }}
         </div> -->
         <div class="card">
-          <div class="card-header bg-success" style="height: 47px;">
+          <div
+            class="card-header"
+            style="
+              height: 47px;
+              background-image: linear-gradient(
+                to right,
+                rgb(242, 112, 156),
+                rgb(255, 148, 114)
+              );
+            "
+          >
             <h4
               style="margin-top: 1%"
               class="card-title text-white text-center"
@@ -103,17 +113,13 @@
 
               <td>
                 <!-- {{ list.thumbnail }} -->
-                <img
-                  :src="list.thumbnail"
-                  width="100"
-                  height="100"
-                />
+                <img :src="list.thumbnail" width="100" height="100" />
               </td>
 
-              <td style="vertical-align: middle">
+              <td style="vertical-align: middle; color: white">
                 <button
                   type="button"
-                  class="btn btn-warning"
+                  class="btn btn-primary text-white"
                   @click="editList(list.id)"
                 >
                   Edit</button
@@ -161,10 +167,10 @@ export default {
   methods: {
     disable_button() {
       this.is_editing = false;
-      this.title = ""
-      this.text = ""
-      this.thumbnail = ""
-      this.temp_thumbnail_url = ""
+      this.title = "";
+      this.text = "";
+      this.thumbnail = "";
+      this.temp_thumbnail_url = "";
       $("#summernote").summernote("code", "");
     },
     fetchAll() {
@@ -178,7 +184,7 @@ export default {
     },
     uploadfile(e) {
       this.thumbnail = e.target.files[0];
-      this.temp_thumbnail_url=""
+      this.temp_thumbnail_url = "";
     },
 
     save() {
@@ -266,9 +272,9 @@ export default {
       axios.get(`/admin/blog/delete/${list_id}`).then((response) => {
         // this.success = response.data.success;
         this.$swal.fire({
-            icon: "error",
-            text: "Deleted",
-          });
+          icon: "error",
+          text: "Deleted",
+        });
         this.fetchAll();
       });
     },
@@ -279,4 +285,29 @@ export default {
 };
 </script>
 <style scoped>
+.btn-edit {
+  background: #0093e9;
+  border:none;
+}
+.btn-edit:hover{
+  color:black
+}
+.card-header {
+  background-image: linear-gradient(
+    to right,
+    rgb(242, 112, 156),
+    rgb(255, 148, 114)
+  );
+}
+thead {
+  /* background: #84a4ff; */
+  background-image: linear-gradient(to right, #0093e9, #80d0c7);
+  color: white;
+  border: none;
+}
+.table-striped > tbody > tr:nth-of-type(odd) > * {
+  --bs-table-accent-bg: rgb(229 231 255);
+  color: var(--bs-table-striped-color);
+  border: none;
+}
 </style>
