@@ -82,6 +82,8 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::post('/service/update/', [ServiceController::class, 'update']);
         Route::get('/service/delete/{id}', [ServiceController::class, 'destroy']);
 
+        Route::get('/current', [AdminController::class, 'logged_admin']);
+
         Route::post('/logout', [AdminController::class, 'logout'])->name('logout');
     });
 });

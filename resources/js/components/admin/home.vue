@@ -13,7 +13,17 @@
           {{ this.success }}
         </div> -->
         <div class="card">
-          <div class="card-header bg-success text-center" style="height: 47px">
+          <div
+            class="card-header text-center"
+            style="
+              height: 47px;
+              background-image: linear-gradient(
+                to right,
+                rgb(242, 112, 156),
+                rgb(255, 148, 114)
+              );
+            "
+          >
             <h4
               class="card-title text-white text-center"
               style="margin-top: 1%"
@@ -133,7 +143,7 @@
               <td style="vertical-align: middle; width: 15%">
                 <button
                   type="button"
-                  class="btn btn-warning"
+                  class="btn btn-primary text-white"
                   @click="editList(list.id)"
                 >
                   Edit</button
@@ -298,4 +308,21 @@ export default {
 };
 </script>
 <style scoped>
+.card-header{
+  background-image: linear-gradient(to right, rgb(242, 112, 156), rgb(255, 148, 114));
+}
+thead {
+  /* background: #84a4ff; */
+  background-image: linear-gradient(to right, #0093e9, #80d0c7);
+  color: white;
+  border: none;
+}
+.table-striped > tbody > tr:nth-of-type(odd) > * {
+  --bs-table-accent-bg: rgb(229 231 255);
+  color: var(--bs-table-striped-color);
+  border: none;
+}
+.btn-edit {
+  background: #0093e9;
+}
 </style>

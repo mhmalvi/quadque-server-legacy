@@ -29,6 +29,12 @@ class AdminController extends Controller
         return view('admin.signup');
     }
 
+    public function logged_admin(){
+        $admin = Auth::user();
+        // dd($admin);
+        return $admin;
+    }
+
     /**
      * Store a newly created resource in storage.
      *

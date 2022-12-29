@@ -12,7 +12,7 @@
     <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
     <link href="{{ mix('css/app.css') }}" type="text/css" rel="stylesheet" />
-   
+
 </head>
 
 <body>
@@ -20,34 +20,34 @@
         <nav style="padding-inline: 2%;" class="navbar navbar-expand-lg navbar-light bg-dark text-white">
 
             <a class="navbar-brand pl-2 text-white" href="{{ route('admin.dashboard') }}">QuadQue Technology Limited</a>
-             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
-                 <span class="navbar-toggler-icon"></span>
-             </button>
-             <div class="collapse navbar-collapse" id="navbarNavDropdown">
-                 <ul class="navbar-nav text-white">
-                 <li class="nav-item active">
-                     <a class="nav-link text-white" href="{{ route('admin.home') }}">Home</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNavDropdown">
+                <ul class="navbar-nav text-white">
+                    <li class="nav-item active">
+                        <a class="nav-link text-white" href="{{ route('admin.home') }}">Home</a>
 
-                 </li>
+                    </li>
 
-                     <li class="nav-item active">
-                         <a class="nav-link text-white" href="{{ route('admin.casestudy') }}">Case Study</a>
+                    <li class="nav-item active">
+                        <a class="nav-link text-white" href="{{ route('admin.casestudy') }}">Case Study</a>
 
-                     </li>
-                     <li class="nav-item ">
-                         <a class="nav-link text-white" href="{{ route('admin.blog') }}">Blog</a>
-
-
-                     </li>
-                     <li class="nav-item ">
-                         <a class="nav-link text-white" href="{{ route('admin.service') }}">Service</a>
+                    </li>
+                    <li class="nav-item ">
+                        <a class="nav-link text-white" href="{{ route('admin.blog') }}">Blog</a>
 
 
-                     </li>
+                    </li>
+                    <li class="nav-item ">
+                        <a class="nav-link text-white" href="{{ route('admin.service') }}">Service</a>
 
-                     
-                 </ul>
-             </div>
+
+                    </li>
+
+
+                </ul>
+            </div>
             <div class="ml-auto mr-4">
                 <span class="mr-2">{{ Auth::guard('admin')->user()->name  }}</span>
                 <a href="javasscript:void(0)" class="text-danger " style="text-decoration:none" onclick="event.preventDefault(); document.getElementById('logoutForm').submit();">Logout</a>
@@ -62,7 +62,7 @@
 
     <div class="container">
         <div id="app">
-           
+
             @yield('content')
 
         </div>
@@ -80,15 +80,14 @@
 
     <script>
         $(document).ready(function() {
-        $('#summernote').summernote({
-             height: 250,
-          
+            $('#summernote').summernote({
+                height: 250,
 
-        });
+
+            });
         });
 
     </script>
 
 </body>
 </html>
-

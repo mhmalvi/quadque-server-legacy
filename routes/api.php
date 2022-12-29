@@ -4,6 +4,7 @@ use App\Http\Controllers\admin\CaseStudyApiController;
 use App\Http\Controllers\admin\BlogApiController;
 use App\Http\Controllers\admin\ServiceController;
 use App\Http\Controllers\admin\HomeApiController;
+use App\Http\Controllers\AdminController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -40,11 +41,15 @@ Route::get('services/{id}', [ServiceController::class, 'show']);
 
 Route::prefix('admin')->name('admin.')->group(
     function () {
-        // Route::middleware(['auth:admin', 'preventBackHistory'])->group(function () {
-        // Route::middleware(('auth:sanctum'))->post('services', [ServiceController::class, 'store']);
-        // Route::post('/register', [AdminManageController::class, 'register']);
-        // Route::post('/login', [AdminManageController::class, 'login'])->name('login');
+        Route::middleware(['auth:admin', 'preventBackHistory'])->group(
+            function () {
+                
+                // Route::middleware(['auth:admin', 'preventBackHistory'])->group(function () {
+                // Route::middleware(('auth:sanctum'))->post('services', [ServiceController::class, 'store']);
+                // Route::post('/register', [AdminManageController::class, 'register']);
+                // Route::post('/login', [AdminManageController::class, 'login'])->name('login');
 
-        // });
+            }
+        );
     }
 );
