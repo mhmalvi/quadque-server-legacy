@@ -6,7 +6,7 @@
         @click="disable_button()"
         class="mt-3"
       >
-        <button class="btn btn-primary">Create Services</button>
+        <button class="btn btn-primary">Add speak of clients</button>
       </div>
       <div class="col-md-6 mt-4">
         <!-- <div class="alert alert-success" v-if="this.success">
@@ -28,66 +28,90 @@
               class="card-title text-white text-center"
               style="margin-top: 1%"
             >
-              {{ this.is_editing ? "Update Service" : "Create Service" }}
+              {{
+                this.is_editing ? "Update About Us" : "Create About Us"
+              }}
             </h4>
           </div>
           <div class="card-body">
             <form>
+              <!-- {{ description }} -->
               <div class="form-group">
-                <label for="title">Service Name</label>
-                <input
-                  type="text"
-                  class="form-control"
-                  v-model="service_name"
-                  placeholder="Enter service name"
-                />
-                <div class="text-danger" v-if="this.service_nameError">
-                  {{ this.service_nameError }}
-                </div>
-              </div>
-              <div class="form-group">
-                <label for="thumbnail">Service File</label>
-                <input
-                  type="file"
-                  class="form-control"
-                  id="thumbnail"
-                  @change="uploadfile"
-                  required
-                />
-                <div class="text-danger" v-if="this.fileError">
-                  {{ this.fileError }}
-                </div>
-                <p class="my-2 text-center" v-if="this.temp_thumbnail_url">
-                  <img
-                    :src="this.temp_thumbnail_url"
-                    width="150"
-                    height="150"
-                  />
-                </p>
-              </div>
-              <!-- <div class="form-group">
-                <label for="text">Service description</label>
+                <label for="title">Our Vision</label><br />
                 <textarea
-                  v-model="text"
-                  id="summernote"
-                  class="form-control"
-                  rows="10"
-                ></textarea>
-                <div class="text-danger" v-if="this.textError">
-                  {{ this.textError }}
-                </div>
-              </div>  -->
-              <div class="form-group">
-                <label for="title">Service Description</label><br />
-                <textarea
-                  v-model="description"
+                  v-model="our_vision"
                   id="summernote"
                   class="form-control"
                   rows="4"
                   required
                 ></textarea>
-                <div class="text-danger" v-if="this.descriptionError">
-                  {{ this.descriptionError }}
+                <div class="text-danger" v-if="this.our_visionError">
+                  {{ this.our_visionError }}
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="title">Our Mission</label><br />
+                <textarea
+                  v-model="our_mission"
+                  id="summernote"
+                  class="form-control"
+                  rows="4"
+                  required
+                ></textarea>
+                <div class="text-danger" v-if="this.our_visionError">
+                  {{ this.our_visionError }}
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="title">Our Goal</label><br />
+                <textarea
+                  v-model="our_goal"
+                  id="summernote"
+                  class="form-control"
+                  rows="4"
+                  required
+                ></textarea>
+                <div class="text-danger" v-if="this.our_visionError">
+                  {{ this.our_visionError }}
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="title">Our Objective</label><br />
+                <textarea
+                  v-model="our_objective"
+                  id="summernote"
+                  class="form-control"
+                  rows="4"
+                  required
+                ></textarea>
+                <div class="text-danger" v-if="this.our_objectiveError">
+                  {{ this.our_objectiveError }}
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="title">Who we are</label><br />
+                <textarea
+                  v-model="who_we_are"
+                  id="summernote"
+                  class="form-control"
+                  rows="4"
+                  required
+                ></textarea>
+                <div class="text-danger" v-if="this.who_we_areError">
+                  {{ this.who_we_areError }}
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="title">Why choose us</label><br />
+                <textarea
+                  v-model="why_choose_us"
+                  id="summernote"
+                  class="form-control"
+                  rows="4"
+                  required
+                ></textarea>
+                <div class="text-danger" v-if="this.why_choose_usError">
+                  {{ this.why_choose_usError }}
                 </div>
               </div>
               <div>
@@ -106,12 +130,13 @@
     </div>
     <div class="row mt-5 d-flex justify-content-center">
       <div class="col-md-12">
-        <h4>Services Lists</h4>
+        <h4>Client Opinion Lists</h4>
         <table class="table table-striped text-center">
           <thead>
             <tr>
               <th>No.</th>
               <th>Name</th>
+              <th>Designation</th>
               <th style="width: 36%">Description</th>
               <th>Thumbnail</th>
 
@@ -124,7 +149,10 @@
                 {{ list.id }}.
               </td>
               <td style="vertical-align: middle; font-weight: 500">
-                {{ list.service_name }}
+                {{ list.name }}
+              </td>
+              <td style="vertical-align: middle; font-weight: 500">
+                {{ list.designation }}
               </td>
 
               <td style="vertical-align: middle" v-html="list.description">
@@ -132,7 +160,7 @@
               </td>
 
               <td style="vertical-align: middle">
-                <img :src="list.file" width="100" height="100" />
+                <img :src="list.image" width="100" height="100" />
               </td>
 
               <td style="vertical-align: middle; width: 15%; color: white">
@@ -171,11 +199,13 @@ export default {
   data() {
     return {
       lists: [],
-      service_name: "",
-      file: "",
+      name: "",
+      image: "",
       description: "",
-      service_nameError: "",
+      designation: "",
+      nameError: "",
       descriptionError: "",
+      designationError: "",
       fileError: "",
       success: "",
       temporary_id: "",
@@ -187,7 +217,8 @@ export default {
   methods: {
     disable_button() {
       this.is_editing = false;
-      this.service_name = "";
+      this.name = "";
+      this.designation = "";
       this.description = "";
       this.file = "";
       $("#summernote").summernote("code", "");
@@ -196,7 +227,7 @@ export default {
     fetchAll() {
       console.log("fetch");
       axios
-        .get("/admin/service/get")
+        .get("/admin/client-speak/get")
         .then((response) => {
           // console.log(response);
           this.lists = response.data;
@@ -204,23 +235,24 @@ export default {
         .catch((error) => {});
     },
     uploadfile(e) {
-      this.file = e.target.files[0];
+      this.image = e.target.files[0];
       this.temp_thumbnail_url = "";
     },
 
     save() {
       let url;
       if (this.is_editing) {
-        url = `/admin/service/update/`;
+        url = `/admin/client-speak/update/`;
       } else {
-        url = `/admin/service/store`;
+        url = `/admin/client-speak/store`;
       }
 
       this.description = $("#summernote").summernote("code");
       let fd = new FormData();
-      fd.append("service_name", this.service_name);
+      fd.append("name", this.name);
+      fd.append("designation", this.designation);
       fd.append("description", this.description);
-      fd.append("file", this.file);
+      fd.append("image", this.image);
       fd.append("id", this.temporary_id);
       axios
         .post(url, fd)
@@ -235,6 +267,15 @@ export default {
               showConfirmButton: true,
               // timer: 1500,
             });
+            this.is_editing = false;
+            this.name = "";
+            this.description = "";
+            this.designation = "";
+            $("#summernote").summernote("code", this.description);
+            document.getElementById("image").value = "";
+            this.temporary_id = "";
+            this.temp_thumbnail_url = "";
+            this.image = "";
           } else if (this.success == "updated") {
             this.$swal.fire({
               // position: "top-end",
@@ -243,29 +284,23 @@ export default {
               showConfirmButton: true,
               // timer: 1500,
             });
+            this.is_editing = true;
           }
 
           // console.log(this.success)
-          this.service_name = "";
-          this.description = "";
-          $("#summernote").summernote("code", this.description);
-          document.getElementById("file").value = "";
-          this.temporary_id = "";
-          this.temp_thumbnail_url = "";
-          this.file = "";
-          this.is_editing = false;
+
           setTimeout(function () {
             this.success = "";
           }, 5000);
         })
         .catch((error) => {
           console.log(error.response);
-          if (error.response.data.errors.service_name) {
+          if (error.response.data.errors.name) {
             console.log("here");
-            console.log(error.response.data.errors.service_name);
-            this.service_nameError = error.response.data.errors.service_name[0];
+            console.log(error.response.data.errors.name);
+            this.nameError = error.response.data.errors.name[0];
           } else {
-            this.service_nameError = "";
+            this.nameError = "";
           }
 
           if (error.response.data.errors.description) {
@@ -273,8 +308,14 @@ export default {
           } else {
             this.descriptionError = "";
           }
-          if (error.response.data.errors.file) {
-            this.fileError = error.response.data.errors.file[0];
+
+          if (error.response.data.errors.designation) {
+            this.designationError = error.response.data.errors.designation[0];
+          } else {
+            this.designationError = "";
+          }
+          if (error.response.data.errors.image) {
+            this.fileError = error.response.data.errors.image[0];
           } else {
             this.fileError = "";
           }
@@ -283,15 +324,16 @@ export default {
 
     editList(list_id) {
       this.is_editing = true;
-      this.service_nameError = "";
+      this.nameError = "";
       this.fileError = "";
       this.temporary_id = list_id;
 
       axios
-        .get(`/admin/service/edit/${this.temporary_id}`)
+        .get(`/admin/client-speak/edit/${this.temporary_id}`)
         .then((response) => {
           console.log(response);
-          this.service_name = response.data.service_name;
+          this.name = response.data.name;
+          this.designation = response.data.designation;
           this.description = response.data.description;
           $("#summernote").summernote("code", this.description);
           this.temp_thumbnail_url = response.data.file;
@@ -299,7 +341,7 @@ export default {
         .catch((error) => {});
     },
     destroyList(list_id) {
-      axios.get(`/admin/service/delete/${list_id}`).then((response) => {
+      axios.get(`/admin/client-speak/delete/${list_id}`).then((response) => {
         // this.success = response.data.success;
         this.fetchAll();
         this.$swal.fire({
@@ -335,10 +377,10 @@ thead {
   color: white;
   border: none;
 }
-.card{
-      border-top: none;
+.card {
+  border-top: none;
 }
-.card-header{
+.card-header {
   border: none;
 }
 .btn-save {

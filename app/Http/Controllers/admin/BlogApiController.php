@@ -52,7 +52,7 @@ class BlogApiController extends Controller
 
         $save = Blog::create([
             'title' => $request->title,
-            'text' => htmlspecialchars($request->text),
+            'text' => $request->text,
             'thumbnail' => $fileName
         ]);
 

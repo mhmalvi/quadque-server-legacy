@@ -4,6 +4,7 @@ use App\Http\Controllers\admin\CaseStudyApiController;
 use App\Http\Controllers\admin\BlogApiController;
 use App\Http\Controllers\admin\ServiceController;
 use App\Http\Controllers\admin\HomeApiController;
+use App\Http\Controllers\ClientSpeakController;
 use App\Http\Controllers\AdminController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -38,6 +39,9 @@ Route::get('home-videos/{id}', [HomeApiController::class, 'show']);
 // Route::resource('home-videos', HomeController::class);
 Route::get('services', [ServiceController::class, 'showAll']);
 Route::get('services/{id}', [ServiceController::class, 'show']);
+
+Route::get('client-speaks', [ClientSpeakController::class, 'showAll']);
+Route::get('client-speaks/{id}', [ClientSpeakController::class, 'show']);
 
 Route::prefix('admin')->name('admin.')->group(
     function () {
