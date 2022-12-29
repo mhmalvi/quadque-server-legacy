@@ -80,8 +80,8 @@
         <table class="table table-striped">
           <thead>
             <tr>
-              <th>Comapany Name</th>
-              <th>Comapany Icon</th>
+              <th>Company Name</th>
+              <th>Company Icon</th>
               <th>Action</th>
             </tr>
           </thead>
@@ -213,6 +213,8 @@ export default {
 
     editList(list_id) {
       this.is_editing = true;
+      this.nameError = "";
+      this.imageError = "";
       this.temporary_id = list_id;
 
       axios
@@ -240,10 +242,18 @@ export default {
 };
 </script>
 <style scoped>
+div {
+  letter-spacing: 1px;
+  font-family: sans-serif;
+}
 .btn-edit {
   background: #0093e9;
 }
+.card{
+      border-top: none;
+}
 .card-header {
+  border: none;
   background-image: linear-gradient(
     to right,
     rgb(242, 112, 156),
@@ -254,7 +264,7 @@ table tbody tr {
   line-height: 100px;
   text-align: center;
 }
-thead th{
+thead th {
   text-align: center;
 }
 thead {
@@ -263,10 +273,10 @@ thead {
   color: white;
   border: none;
 }
-.btn-save{
-  background:#5a67ff;
+.btn-save {
+  background: #5a67ff;
 }
-.btn-save:hover{
+.btn-save:hover {
   background: #0093e9;
   transition: 2s ease;
 }

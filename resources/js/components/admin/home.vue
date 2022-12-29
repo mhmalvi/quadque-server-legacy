@@ -41,8 +41,8 @@
                   v-model="video_name"
                   placeholder="Enter video name"
                 />
-                <div class="text-danger" v-if="this.titleError">
-                  {{ this.titleError }}
+                <div class="text-danger" v-if="this.video_nameError">
+                  {{ this.video_nameError }}
                 </div>
               </div>
               <div class="form-group">
@@ -53,8 +53,8 @@
                   id="thumbnail"
                   @change="uploadfile"
                 />
-                <div class="text-danger" v-if="this.thumbnailError">
-                  {{ this.thumbnailError }}
+                <div class="text-danger" v-if="this.fileError">
+                  {{ this.fileError }}
                 </div>
                 <p class="my-2 text-center" v-if="this.temp_video_url">
                   <!-- <img
@@ -178,10 +178,8 @@ export default {
       lists: [],
       video_name: "",
       file: "",
-      description: "",
-      titleError: "",
-      textError: "",
-      thumbnailError: "",
+      video_nameError: "",
+      fileError: "",
       success: "",
       temporary_id: "",
       is_editing: false,
@@ -222,17 +220,18 @@ export default {
       }
 
       let fd = new FormData();
-      console.log(this.video_name);
+      // console.log(this.video_name);
       fd.append("name", this.video_name);
       fd.append("file", this.file);
       fd.append("id", this.temporary_id);
       axios
         .post(url, fd)
         .then((response) => {
+          // console.log(response)
           this.fetchAll();
           this.success = response.data.success;
           // console.log(this.$swal);
-          
+
           if (this.success == "created") {
             this.$swal.fire({
               // position: "top-end",
@@ -251,7 +250,6 @@ export default {
             });
           }
 
-          
           // console.log(this.success)
           this.video_name = "";
 
@@ -264,10 +262,11 @@ export default {
           }, 5000);
         })
         .catch((error) => {
-          if (error.response.data.errors.video_name) {
-            this.nameError = error.response.data.errors.video_name[0];
+          // console.log(error.response)
+          if (error.response.data.errors.name) {
+            this.video_nameError = error.response.data.errors.name[0];
           } else {
-            this.nameError = "";
+            this.video_nameError = "";
           }
           if (error.response.data.errors.file) {
             this.fileError = error.response.data.errors.file[0];
@@ -279,6 +278,8 @@ export default {
 
     editList(list_id) {
       this.is_editing = true;
+      this.video_nameError = "";
+      this.fileError = "";
       this.temporary_id = list_id;
 
       axios
@@ -310,13 +311,27 @@ export default {
 };
 </script>
 <style scoped>
-.card-header{
-  background-image: linear-gradient(to right, rgb(242, 112, 156), rgb(255, 148, 114));
+div {
+  letter-spacing: 1px;
+  font-family: sans-serif;
+}
+.card-header {
+  background-image: linear-gradient(
+    to right,
+    rgb(242, 112, 156),
+    rgb(255, 148, 114)
+  );
 }
 thead {
   /* background: #84a4ff; */
   background-image: linear-gradient(to right, #0093e9, #80d0c7);
   color: white;
+  border: none;
+}
+.card{
+      border-top: none;
+}
+.card-header{
   border: none;
 }
 .table-striped > tbody > tr:nth-of-type(odd) > * {
@@ -327,10 +342,10 @@ thead {
 .btn-edit {
   background: #0093e9;
 }
-.btn-save{
-  background:#5a67ff;
+.btn-save {
+  background: #5a67ff;
 }
-.btn-save:hover{
+.btn-save:hover {
   background: #0093e9;
   transition: 2s ease;
 }

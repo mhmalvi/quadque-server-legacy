@@ -61,6 +61,10 @@ Vue.component(
     "adminblog-component",
     require("./components/admin/blog.vue").default
 );
+Vue.component(
+    "client-speak-component",
+    require("./components/admin/clientSpeak.vue").default
+);
 
 Vue.component("service-component", require("./components/admin/service.vue").default);
 Vue.component(

@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\ClientSpeakController;
 use App\Http\Controllers\admin\HomeApiController;
 use App\Http\Controllers\BlogController;
 use App\Http\Controllers\CaseStudyController;
@@ -81,6 +82,13 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::get('/service/edit/{id}', [ServiceController::class, 'edit']);
         Route::post('/service/update/', [ServiceController::class, 'update']);
         Route::get('/service/delete/{id}', [ServiceController::class, 'destroy']);
+
+        Route::get('/client-speak', [ClientSpeakController::class, 'index'])->name('client-speak');
+        Route::get('/client-speak/get', [ClientSpeakController::class, 'showAll'])->name('client-speak.get');
+        Route::post('/client-speak/store', [ClientSpeakController::class, 'store'])->name('client-speak.store');
+        Route::get('/client-speak/edit/{id}', [ClientSpeakController::class, 'edit']);
+        Route::post('/client-speak/update/', [ClientSpeakController::class, 'update']);
+        Route::get('/client-speak/delete/{id}', [ClientSpeakController::class, 'destroy']);
 
         Route::get('/current', [AdminController::class, 'logged_admin']);
 

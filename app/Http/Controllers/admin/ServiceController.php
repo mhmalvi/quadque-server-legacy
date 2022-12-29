@@ -43,7 +43,7 @@ class ServiceController extends Controller
     {
         $request->validate([
             'service_name' => 'required',
-            // 'file' => 'required',
+            'file' => 'required',
             'description' => 'required'
         ]);
         $app_url = env('APP_URL');

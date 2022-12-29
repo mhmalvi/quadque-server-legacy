@@ -41,8 +41,8 @@
                   v-model="service_name"
                   placeholder="Enter service name"
                 />
-                <div class="text-danger" v-if="this.titleError">
-                  {{ this.titleError }}
+                <div class="text-danger" v-if="this.service_nameError">
+                  {{ this.service_nameError }}
                 </div>
               </div>
               <div class="form-group">
@@ -52,9 +52,10 @@
                   class="form-control"
                   id="thumbnail"
                   @change="uploadfile"
+                  required
                 />
-                <div class="text-danger" v-if="this.thumbnailError">
-                  {{ this.thumbnailError }}
+                <div class="text-danger" v-if="this.fileError">
+                  {{ this.fileError }}
                 </div>
                 <p class="my-2 text-center" v-if="this.temp_thumbnail_url">
                   <img
@@ -83,9 +84,10 @@
                   id="summernote"
                   class="form-control"
                   rows="4"
+                  required
                 ></textarea>
-                <div class="text-danger" v-if="this.titleError">
-                  {{ this.titleError }}
+                <div class="text-danger" v-if="this.descriptionError">
+                  {{ this.descriptionError }}
                 </div>
               </div>
               <div>
@@ -172,9 +174,9 @@ export default {
       service_name: "",
       file: "",
       description: "",
-      titleError: "",
-      textError: "",
-      thumbnailError: "",
+      service_nameError: "",
+      descriptionError: "",
+      fileError: "",
       success: "",
       temporary_id: "",
       is_editing: false,
@@ -257,7 +259,10 @@ export default {
           }, 5000);
         })
         .catch((error) => {
+          console.log(error.response);
           if (error.response.data.errors.service_name) {
+            console.log("here");
+            console.log(error.response.data.errors.service_name);
             this.service_nameError = error.response.data.errors.service_name[0];
           } else {
             this.service_nameError = "";
@@ -278,6 +283,8 @@ export default {
 
     editList(list_id) {
       this.is_editing = true;
+      this.service_nameError = "";
+      this.fileError = "";
       this.temporary_id = list_id;
 
       axios
@@ -308,6 +315,10 @@ export default {
 };
 </script>
 <style scoped>
+div {
+  letter-spacing: 1px;
+  font-family: sans-serif;
+}
 .btn-edit {
   background: #0093e9;
 }
@@ -322,6 +333,12 @@ thead {
   /* background: #84a4ff; */
   background-image: linear-gradient(to right, #0093e9, #80d0c7);
   color: white;
+  border: none;
+}
+.card{
+      border-top: none;
+}
+.card-header{
   border: none;
 }
 .btn-save {
