@@ -6215,7 +6215,7 @@ __webpack_require__.r(__webpack_exports__);
       this.temporary_id = list_id;
       axios__WEBPACK_IMPORTED_MODULE_0___default().get("/admin/case-study/edit/".concat(this.temporary_id)).then(function (response) {
         _this3.name = response.data.com_name;
-        _this3.temp_image_url = "http://127.0.0.1:8000/assets/img/case_study/".concat(response.data.com_image);
+        _this3.temp_image_url = response.data.com_image;
       })["catch"](function (error) {});
     },
     destroyList: function destroyList(list_id) {
@@ -6256,7 +6256,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
     return {
-      name: ""
+      name: "",
+      role: ""
     };
   },
   methods: {
@@ -6265,6 +6266,7 @@ __webpack_require__.r(__webpack_exports__);
 
       axios__WEBPACK_IMPORTED_MODULE_0___default().get("/admin/current").then(function (res) {
         console.log(res);
+        _this.role = res.data.role;
         _this.name = res.data.name;
       });
     }
@@ -6346,6 +6348,8 @@ __webpack_require__.r(__webpack_exports__);
       fd.append("file", this.file);
       fd.append("id", this.temporary_id);
       axios__WEBPACK_IMPORTED_MODULE_0___default().post(url, fd).then(function (response) {
+        _this2.fetchAll();
+
         _this2.success = response.data.success; // console.log(this.$swal);
 
         if (_this2.success == "created") {
@@ -6364,9 +6368,7 @@ __webpack_require__.r(__webpack_exports__);
             showConfirmButton: true // timer: 1500,
 
           });
-        }
-
-        _this2.fetchAll(); // console.log(this.success)
+        } // console.log(this.success)
 
 
         _this2.video_name = "";
@@ -6555,16 +6557,27 @@ __webpack_require__.r(__webpack_exports__);
       fd.append("file", this.file);
       fd.append("id", this.temporary_id);
       axios__WEBPACK_IMPORTED_MODULE_0___default().post(url, fd).then(function (response) {
-        // this.success = response.data.success;
+        _this2.success = response.data.success;
+
         _this2.fetchAll();
 
-        _this2.$swal.fire({
-          // position: "top-end",
-          icon: "success",
-          title: "Service Saved",
-          showConfirmButton: true // timer: 1500,
+        if (_this2.success == "created") {
+          _this2.$swal.fire({
+            // position: "top-end",
+            icon: "success",
+            title: "Service Saved",
+            showConfirmButton: true // timer: 1500,
 
-        }); // console.log(this.success)
+          });
+        } else if (_this2.success == "updated") {
+          _this2.$swal.fire({
+            // position: "top-end",
+            icon: "success",
+            title: "Service Updated",
+            showConfirmButton: true // timer: 1500,
+
+          });
+        } // console.log(this.success)
 
 
         _this2.service_name = "";
@@ -7099,7 +7112,7 @@ var render = function render() {
     staticStyle: {
       "font-weight": "600"
     }
-  }, [_vm._v("Dashbaord")]), _vm._v(" "), _c("div", {
+  }, [_vm._v(" Dashbaord")]), _vm._v(" "), _c("div", {
     staticClass: "mt-3",
     staticStyle: {
       "margin-left": "20%"
@@ -7464,9 +7477,7 @@ var render = function render() {
     staticClass: "btn btn-primary"
   }, [_vm._v("Create Services")])]) : _vm._e(), _vm._v(" "), _c("div", {
     staticClass: "col-md-6 mt-4"
-  }, [this.success ? _c("div", {
-    staticClass: "alert alert-success"
-  }, [_vm._v("\n        " + _vm._s(this.success) + "\n      ")]) : _vm._e(), _vm._v(" "), _c("div", {
+  }, [_c("div", {
     staticClass: "card"
   }, [_c("div", {
     staticClass: "card-header text-center",
@@ -13306,7 +13317,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_laravel_mix_node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.btn-edit[data-v-0c9b213a] {\r\n  background: #0093e9;\n}\n.card-header[data-v-0c9b213a] {\r\n  background-image: linear-gradient(\r\n    to right,\r\n    rgb(242, 112, 156),\r\n    rgb(255, 148, 114)\r\n  );\n}\nthead[data-v-0c9b213a] {\r\n  /* background: #84a4ff; */\r\n  background-image: linear-gradient(to right, #0093e9, #80d0c7);\r\n  color: white;\r\n  border: none;\n}\n.btn-save[data-v-0c9b213a]{\r\n  background:#5a67ff;\n}\n.btn-save[data-v-0c9b213a]:hover{\r\n  background: #0093e9;\r\n  transition: 2s ease;\n}\n.table-striped > tbody > tr:nth-of-type(odd) > *[data-v-0c9b213a] {\r\n  --bs-table-accent-bg: rgb(229 231 255);\r\n  color: var(--bs-table-striped-color);\r\n  border: none;\n}\r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.btn-edit[data-v-0c9b213a] {\r\n  background: #0093e9;\n}\n.card-header[data-v-0c9b213a] {\r\n  background-image: linear-gradient(\r\n    to right,\r\n    rgb(242, 112, 156),\r\n    rgb(255, 148, 114)\r\n  );\n}\nthead[data-v-0c9b213a] {\r\n  /* background: #84a4ff; */\r\n  background-image: linear-gradient(to right, #0093e9, #80d0c7);\r\n  color: white;\r\n  border: none;\n}\n.btn-save[data-v-0c9b213a] {\r\n  background: #5a67ff;\n}\n.btn-save[data-v-0c9b213a]:hover {\r\n  background: #0093e9;\r\n  transition: 2s ease;\n}\n.table-striped > tbody > tr:nth-of-type(odd) > *[data-v-0c9b213a] {\r\n  --bs-table-accent-bg: rgb(229 231 255);\r\n  color: var(--bs-table-striped-color);\r\n  border: none;\n}\r\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 

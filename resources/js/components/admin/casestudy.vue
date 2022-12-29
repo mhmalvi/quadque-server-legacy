@@ -219,7 +219,7 @@ export default {
         .get(`/admin/case-study/edit/${this.temporary_id}`)
         .then((response) => {
           this.name = response.data.com_name;
-          this.temp_image_url = `http://127.0.0.1:8000/assets/img/case_study/${response.data.com_image}`;
+          this.temp_image_url = response.data.com_image;
         })
         .catch((error) => {});
     },

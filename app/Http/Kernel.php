@@ -56,7 +56,9 @@ class Kernel extends HttpKernel
     protected $routeMiddleware = [
         'screenWidthCheck' => \App\Http\Middleware\TerminatingMiddleware::class,
         'auth' => \App\Http\Middleware\Authenticate::class,
-        // 'admin' => \App\Http\Middleware\Admin::class,
+        'admin' => \App\Http\Middleware\Admin::class,
+        'superAdmin'
+        => \App\Http\Middleware\Admin::class,
         'preventBackHistory' => \App\Http\Middleware\PreventBackHistory::class,
         'auth.basic' => \Illuminate\Auth\Middleware\AuthenticateWithBasicAuth::class,
         'cache.headers' => \Illuminate\Http\Middleware\SetCacheHeaders::class,

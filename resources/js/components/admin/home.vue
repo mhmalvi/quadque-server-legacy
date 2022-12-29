@@ -229,8 +229,10 @@ export default {
       axios
         .post(url, fd)
         .then((response) => {
+          this.fetchAll();
           this.success = response.data.success;
           // console.log(this.$swal);
+          
           if (this.success == "created") {
             this.$swal.fire({
               // position: "top-end",
@@ -249,7 +251,7 @@ export default {
             });
           }
 
-          this.fetchAll();
+          
           // console.log(this.success)
           this.video_name = "";
 

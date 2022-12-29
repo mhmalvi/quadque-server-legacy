@@ -29,6 +29,10 @@ class AdminController extends Controller
         return view('admin.signup');
     }
 
+    // public function super_admin(){
+        
+    // }
+
     public function logged_admin(){
         $admin = Auth::user();
         // dd($admin);

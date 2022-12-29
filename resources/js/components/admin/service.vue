@@ -9,9 +9,9 @@
         <button class="btn btn-primary">Create Services</button>
       </div>
       <div class="col-md-6 mt-4">
-        <div class="alert alert-success" v-if="this.success">
+        <!-- <div class="alert alert-success" v-if="this.success">
           {{ this.success }}
-        </div>
+        </div> -->
         <div class="card">
           <div
             class="card-header text-center"
@@ -133,7 +133,7 @@
                 <img :src="list.file" width="100" height="100" />
               </td>
 
-              <td style="vertical-align: middle; width: 15%; color: white;">
+              <td style="vertical-align: middle; width: 15%; color: white">
                 <button
                   type="button"
                   class="btn btn-primary text-white"
@@ -223,15 +223,26 @@ export default {
       axios
         .post(url, fd)
         .then((response) => {
-          // this.success = response.data.success;
+          this.success = response.data.success;
           this.fetchAll();
-          this.$swal.fire({
-            // position: "top-end",
-            icon: "success",
-            title: "Service Saved",
-            showConfirmButton: true,
-            // timer: 1500,
-          });
+          if (this.success == "created") {
+            this.$swal.fire({
+              // position: "top-end",
+              icon: "success",
+              title: "Service Saved",
+              showConfirmButton: true,
+              // timer: 1500,
+            });
+          } else if (this.success == "updated") {
+            this.$swal.fire({
+              // position: "top-end",
+              icon: "success",
+              title: "Service Updated",
+              showConfirmButton: true,
+              // timer: 1500,
+            });
+          }
+
           // console.log(this.success)
           this.service_name = "";
           this.description = "";
@@ -313,10 +324,10 @@ thead {
   color: white;
   border: none;
 }
-.btn-save{
-  background:#5a67ff;
+.btn-save {
+  background: #5a67ff;
 }
-.btn-save:hover{
+.btn-save:hover {
   background: #0093e9;
   transition: 2s ease;
 }
