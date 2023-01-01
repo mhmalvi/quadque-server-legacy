@@ -9,7 +9,6 @@ require("./bootstrap");
 
 window.Vue = require("vue").default;
 
-;
 import MarqueeText from "vue-marquee-text-component";
 import DynamicMarquee from "vue-dynamic-marquee";
 
@@ -49,10 +48,7 @@ Vue.component(
     "signup-component",
     require("./components/admin/signup.vue").default
 );
-Vue.component(
-    "home-component",
-    require("./components/admin/home.vue").default
-);
+Vue.component("home-component", require("./components/admin/home.vue").default);
 Vue.component(
     "casestudy-component",
     require("./components/admin/casestudy.vue").default
@@ -66,10 +62,17 @@ Vue.component(
     require("./components/admin/clientSpeak.vue").default
 );
 
-Vue.component("service-component", require("./components/admin/service.vue").default);
+Vue.component(
+    "service-component",
+    require("./components/admin/service.vue").default
+);
 Vue.component(
     "dashboard-component",
     require("./components/admin/dashboard.vue").default
+);
+Vue.component(
+    "about-component",
+    require("./components/admin/aboutUs.vue").default
 );
 
 if (location.hostname == "127.0.0.1") {

@@ -6,7 +6,7 @@
         @click="disable_button()"
         class="mt-3"
       >
-        <button class="btn btn-primary">Add speak of clients</button>
+        <button class="btn btn-primary">Add about us</button>
       </div>
       <div class="col-md-6 mt-4">
         <!-- <div class="alert alert-success" v-if="this.success">
@@ -28,9 +28,7 @@
               class="card-title text-white text-center"
               style="margin-top: 1%"
             >
-              {{
-                this.is_editing ? "Update About Us" : "Create About Us"
-              }}
+              {{ this.is_editing ? "Update About Us" : "Create About Us" }}
             </h4>
           </div>
           <div class="card-body">
@@ -40,7 +38,7 @@
                 <label for="title">Our Vision</label><br />
                 <textarea
                   v-model="our_vision"
-                  id="summernote"
+                  
                   class="form-control"
                   rows="4"
                   required
@@ -53,33 +51,30 @@
                 <label for="title">Our Mission</label><br />
                 <textarea
                   v-model="our_mission"
-                  id="summernote"
                   class="form-control"
                   rows="4"
                   required
                 ></textarea>
-                <div class="text-danger" v-if="this.our_visionError">
-                  {{ this.our_visionError }}
+                <div class="text-danger" v-if="this.our_missionError">
+                  {{ this.our_missionError }}
                 </div>
               </div>
               <div class="form-group">
                 <label for="title">Our Goal</label><br />
                 <textarea
                   v-model="our_goal"
-                  id="summernote"
                   class="form-control"
                   rows="4"
                   required
                 ></textarea>
-                <div class="text-danger" v-if="this.our_visionError">
-                  {{ this.our_visionError }}
+                <div class="text-danger" v-if="this.our_goalError">
+                  {{ this.our_goalError }}
                 </div>
               </div>
               <div class="form-group">
                 <label for="title">Our Objective</label><br />
                 <textarea
                   v-model="our_objective"
-                  id="summernote"
                   class="form-control"
                   rows="4"
                   required
@@ -92,7 +87,6 @@
                 <label for="title">Who we are</label><br />
                 <textarea
                   v-model="who_we_are"
-                  id="summernote"
                   class="form-control"
                   rows="4"
                   required
@@ -105,7 +99,6 @@
                 <label for="title">Why choose us</label><br />
                 <textarea
                   v-model="why_choose_us"
-                  id="summernote"
                   class="form-control"
                   rows="4"
                   required
@@ -130,16 +123,17 @@
     </div>
     <div class="row mt-5 d-flex justify-content-center">
       <div class="col-md-12">
-        <h4>Client Opinion Lists</h4>
+        <h4>About Us Lists</h4>
         <table class="table table-striped text-center">
           <thead>
             <tr>
               <th>No.</th>
-              <th>Name</th>
-              <th>Designation</th>
-              <th style="width: 36%">Description</th>
-              <th>Thumbnail</th>
-
+              <th>Our Vision</th>
+              <th>Our Mission</th>
+              <th style="width: 36%">Our Goal</th>
+              <th>Our Objective</th>
+              <th>Who we are</th>
+              <th>Why choose us</th>
               <th>Action</th>
             </tr>
           </thead>
@@ -148,19 +142,30 @@
               <td style="vertical-align: middle; font-weight: 500">
                 {{ list.id }}.
               </td>
-              <td style="vertical-align: middle; font-weight: 500">
-                {{ list.name }}
+              <td
+                style="vertical-align: middle; font-weight: 500"
+                v-html="list.our_vision"
+              >
+                <!-- {{ list.our_vision }} -->
               </td>
               <td style="vertical-align: middle; font-weight: 500">
-                {{ list.designation }}
-              </td>
-
-              <td style="vertical-align: middle" v-html="list.description">
-                <!-- {{  }} -->
+                {{ list.our_mission }}
               </td>
 
               <td style="vertical-align: middle">
-                <img :src="list.image" width="100" height="100" />
+                {{ list.our_goal }}
+              </td>
+
+              <td style="vertical-align: middle">
+                {{ list.our_objective }}
+              </td>
+
+              <td style="vertical-align: middle">
+                <!-- {{  }} -->{{ list.who_we_are }}
+              </td>
+
+              <td style="vertical-align: middle">
+                {{ list.why_choose_us }}
               </td>
 
               <td style="vertical-align: middle; width: 15%; color: white">
@@ -183,7 +188,7 @@
           <tbody v-else>
             <tr>
               <td colspan="3">
-                <h3 class="text-center">There have no blogs...!</h3>
+                <h3 class="text-center">There have nothing about us...!</h3>
               </td>
             </tr>
           </tbody>
@@ -199,14 +204,18 @@ export default {
   data() {
     return {
       lists: [],
-      name: "",
-      image: "",
-      description: "",
-      designation: "",
-      nameError: "",
-      descriptionError: "",
-      designationError: "",
-      fileError: "",
+      our_vision: "",
+      our_mission: "",
+      our_goal: "",
+      our_objective: "",
+      who_we_are: "",
+      why_choose_us: "",
+      our_visionError: "",
+      our_missionError: "",
+      our_goalError: "",
+      our_objectiveError: "",
+      who_we_areError: "",
+      why_choose_usError: "",
       success: "",
       temporary_id: "",
       is_editing: false,
@@ -217,45 +226,62 @@ export default {
   methods: {
     disable_button() {
       this.is_editing = false;
-      this.name = "";
-      this.designation = "";
-      this.description = "";
-      this.file = "";
-      $("#summernote").summernote("code", "");
-      this.temp_thumbnail_url = "";
+      this.our_vision = "";
+      this.our_mission = "";
+      
+      this.our_objective = "";
+      this.who_we_are = "";
+      this.why_choose_us = "";
+      // $("#summernote1").summernote1("code1", "");
+      // $("#summernote2").summernote2("code2", "");
+      // $("#summernote3").summernote3("code3", "");
+      // $("#summernote4").summernote4("code4", "");
+      // $("#summernote5").summernote5("code5", "");
+      // $("#summernote6").summernote6("code6", "");
+      // this.temp_thumbnail_url = "";
     },
     fetchAll() {
       console.log("fetch");
       axios
-        .get("/admin/client-speak/get")
+        .get("/admin/about-us/get")
         .then((response) => {
-          // console.log(response);
+          console.log(response);
           this.lists = response.data;
         })
         .catch((error) => {});
     },
-    uploadfile(e) {
-      this.image = e.target.files[0];
-      this.temp_thumbnail_url = "";
-    },
+    // uploadfile(e) {
+    //   this.image = e.target.files[0];
+    //   this.temp_thumbnail_url = "";
+    // },
 
     save() {
       let url;
       if (this.is_editing) {
-        url = `/admin/client-speak/update/`;
+        url = `/admin/about-us/update/`;
       } else {
-        url = `/admin/client-speak/store`;
+        url = `/admin/about-us/store`;
       }
 
-      this.description = $("#summernote").summernote("code");
-      let fd = new FormData();
-      fd.append("name", this.name);
-      fd.append("designation", this.designation);
-      fd.append("description", this.description);
-      fd.append("image", this.image);
-      fd.append("id", this.temporary_id);
+      // this.description = $("#summernote").summernote("code");
+      // let fd = new FormData();
+      // fd
+      // fd.append("our_vision", this.our_vision);
+      // fd.append("our_mission", this.our_mission);
+      // fd.append("our_goal", this.our_goal);
+      // fd.append("our_objective", this.our_objective);
+      // fd.append("who_we_are", this.who_we_are);
+      // fd.append("why_choose_us", this.why_choose_us);
       axios
-        .post(url, fd)
+        .post(url, {
+          "our_vision": this.our_vision,
+          "our_mission": this.our_mission,
+          "our_goal": this.our_goal,
+          "our_objective": this.our_objective,
+          "who_we_are": this.who_we_are,
+          "why_choose_us": this.why_choose_us,
+          "id":this.temporary_id
+        })
         .then((response) => {
           this.success = response.data.success;
           this.fetchAll();
@@ -263,24 +289,23 @@ export default {
             this.$swal.fire({
               // position: "top-end",
               icon: "success",
-              title: "Service Saved",
+              title: "About us Saved",
               showConfirmButton: true,
               // timer: 1500,
             });
             this.is_editing = false;
-            this.name = "";
-            this.description = "";
-            this.designation = "";
-            $("#summernote").summernote("code", this.description);
-            document.getElementById("image").value = "";
+            this.our_vision = "";
+            this.our_mission = "";
+            this.our_goal = "";
+            this.our_objective = "";
+            this.who_we_are = "";
+            this.why_choose_us = "";
             this.temporary_id = "";
-            this.temp_thumbnail_url = "";
-            this.image = "";
           } else if (this.success == "updated") {
             this.$swal.fire({
               // position: "top-end",
               icon: "success",
-              title: "Service Updated",
+              title: "About us Updated",
               showConfirmButton: true,
               // timer: 1500,
             });
@@ -294,54 +319,71 @@ export default {
           }, 5000);
         })
         .catch((error) => {
-          console.log(error.response);
-          if (error.response.data.errors.name) {
+          // console.log(error.response);
+          if (error.response.data.errors.our_vision) {
             console.log("here");
-            console.log(error.response.data.errors.name);
-            this.nameError = error.response.data.errors.name[0];
+            console.log(error.response.data.errors.our_vision);
+            this.our_visionError = error.response.data.errors.our_vision[0];
           } else {
-            this.nameError = "";
+            this.our_visionError = "";
           }
 
-          if (error.response.data.errors.description) {
-            this.descriptionError = error.response.data.errors.description[0];
+          if (error.response.data.errors.our_mission) {
+            this.our_missionError = error.response.data.errors.our_mission[0];
           } else {
-            this.descriptionError = "";
+            this.our_missionError = "";
           }
 
-          if (error.response.data.errors.designation) {
-            this.designationError = error.response.data.errors.designation[0];
+          if (error.response.data.errors.our_goal) {
+            this.our_goalError = error.response.data.errors.our_goal[0];
           } else {
-            this.designationError = "";
+            this.our_goalError = "";
           }
-          if (error.response.data.errors.image) {
-            this.fileError = error.response.data.errors.image[0];
+          if (error.response.data.errors.our_objective) {
+            this.our_objectiveError =
+              error.response.data.errors.our_objective[0];
           } else {
-            this.fileError = "";
+            this.our_objectiveError = "";
+          }
+          if (error.response.data.errors.who_we_are) {
+            this.who_we_areError = error.response.data.errors.who_we_are[0];
+          } else {
+            this.who_we_areError = "";
+          }
+          if (error.response.data.errors.why_choose_us) {
+            this.why_choose_usError =
+              error.response.data.errors.why_choose_us[0];
+          } else {
+            this.why_choose_usError = "";
           }
         });
     },
 
     editList(list_id) {
       this.is_editing = true;
-      this.nameError = "";
-      this.fileError = "";
+      this.our_vision = "";
+      this.our_mission = "";
+      this.our_goal = "";
+      this.our_objective = "";
+      this.who_we_are = "";
+      this.why_choose_us = "";
       this.temporary_id = list_id;
 
       axios
-        .get(`/admin/client-speak/edit/${this.temporary_id}`)
+        .get(`/admin/about-us/edit/${this.temporary_id}`)
         .then((response) => {
           console.log(response);
-          this.name = response.data.name;
-          this.designation = response.data.designation;
-          this.description = response.data.description;
-          $("#summernote").summernote("code", this.description);
-          this.temp_thumbnail_url = response.data.file;
+          this.our_vision = response.data.our_vision;
+          this.our_mission = response.data.our_mission;
+          this.our_goal = response.data.our_goal;
+          this.our_objective = response.data.our_objective;
+          this.who_we_are = response.data.who_we_are;
+          this.why_choose_us = response.data.why_choose_us;
         })
         .catch((error) => {});
     },
     destroyList(list_id) {
-      axios.get(`/admin/client-speak/delete/${list_id}`).then((response) => {
+      axios.get(`/admin/about-us/delete/${list_id}`).then((response) => {
         // this.success = response.data.success;
         this.fetchAll();
         this.$swal.fire({
