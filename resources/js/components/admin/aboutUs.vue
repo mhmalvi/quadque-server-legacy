@@ -130,7 +130,7 @@
               <th>No.</th>
               <th>Our Vision</th>
               <th>Our Mission</th>
-              <th style="width: 36%">Our Goal</th>
+              <th>Our Goal</th>
               <th>Our Objective</th>
               <th>Who we are</th>
               <th>Why choose us</th>
@@ -228,7 +228,7 @@ export default {
       this.is_editing = false;
       this.our_vision = "";
       this.our_mission = "";
-      
+      this.our_goal = "";
       this.our_objective = "";
       this.who_we_are = "";
       this.why_choose_us = "";

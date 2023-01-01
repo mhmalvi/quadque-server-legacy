@@ -5990,6 +5990,7 @@ __webpack_require__.r(__webpack_exports__);
       this.is_editing = false;
       this.our_vision = "";
       this.our_mission = "";
+      this.our_goal = "";
       this.our_objective = "";
       this.who_we_are = "";
       this.why_choose_us = ""; // $("#summernote1").summernote1("code1", "");
@@ -7426,11 +7427,7 @@ var staticRenderFns = [function () {
   var _vm = this,
       _c = _vm._self._c;
 
-  return _c("thead", [_c("tr", [_c("th", [_vm._v("No.")]), _vm._v(" "), _c("th", [_vm._v("Our Vision")]), _vm._v(" "), _c("th", [_vm._v("Our Mission")]), _vm._v(" "), _c("th", {
-    staticStyle: {
-      width: "36%"
-    }
-  }, [_vm._v("Our Goal")]), _vm._v(" "), _c("th", [_vm._v("Our Objective")]), _vm._v(" "), _c("th", [_vm._v("Who we are")]), _vm._v(" "), _c("th", [_vm._v("Why choose us")]), _vm._v(" "), _c("th", [_vm._v("Action")])])]);
+  return _c("thead", [_c("tr", [_c("th", [_vm._v("No.")]), _vm._v(" "), _c("th", [_vm._v("Our Vision")]), _vm._v(" "), _c("th", [_vm._v("Our Mission")]), _vm._v(" "), _c("th", [_vm._v("Our Goal")]), _vm._v(" "), _c("th", [_vm._v("Our Objective")]), _vm._v(" "), _c("th", [_vm._v("Who we are")]), _vm._v(" "), _c("th", [_vm._v("Why choose us")]), _vm._v(" "), _c("th", [_vm._v("Action")])])]);
 }, function () {
   var _vm = this,
       _c = _vm._self._c;
