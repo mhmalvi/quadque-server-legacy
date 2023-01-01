@@ -54,10 +54,24 @@
                   @change="uploadfile"
                   required
                 />
+                <textarea
+                  v-model="description"
+                  id="summernote"
+                  class="form-control"
+                  rows="4"
+                  required
+                ></textarea>
                 <div class="text-danger" v-if="this.fileError">
                   {{ this.fileError }}
                 </div>
                 <p class="my-2 text-center" v-if="this.temp_thumbnail_url">
+                  <!-- <textarea
+                  v-model="description"
+                  id="summernote2"
+                  class="form-control"
+                  rows="4"
+                  required
+                ></textarea> -->
                   <img
                     :src="this.temp_thumbnail_url"
                     width="150"
@@ -65,18 +79,6 @@
                   />
                 </p>
               </div>
-              <!-- <div class="form-group">
-                <label for="text">Service description</label>
-                <textarea
-                  v-model="text"
-                  id="summernote"
-                  class="form-control"
-                  rows="10"
-                ></textarea>
-                <div class="text-danger" v-if="this.textError">
-                  {{ this.textError }}
-                </div>
-              </div>  -->
               <div class="form-group">
                 <label for="title">Service Description</label><br />
                 <textarea
@@ -191,6 +193,8 @@ export default {
       this.description = "";
       this.file = "";
       $("#summernote").summernote("code", "");
+      $("#summernote1").summernote("code", "");
+      $("#summernote2").summernote("code", "");
       this.temp_thumbnail_url = "";
     },
     fetchAll() {

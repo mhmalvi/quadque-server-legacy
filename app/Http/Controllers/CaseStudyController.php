@@ -120,9 +120,10 @@ class CaseStudyController extends Controller
             'name' => 'required',
             'image' => 'required|image'
         ]);
-
+        // dd($request->description);
         $case_study = new CaseStudy();
         $case_study->com_name = $request->name;
+        $case_study->description = $request->description;
         $app_url = env('APP_URL');
 
         if ($request->image) {
@@ -164,11 +165,13 @@ class CaseStudyController extends Controller
     {
         $request->validate([
             'name' => 'required',
-            'image' => 'required|image'
+            'image' => 'required|image',
+            'description'=>'required'
         ]);
-
+        
         $case_study = CaseStudy::find($request->id);
         $case_study->com_name = $request->name;
+        $case_study->description = $request->description;
         $app_url = env('APP_URL');
         if ($request->image) {
 

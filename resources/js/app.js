@@ -28,11 +28,15 @@ import {
 import Vue from "vue";
 import VueSweetalert2 from "vue-sweetalert2";
 import "sweetalert2/dist/sweetalert2.min.css";
-/* add icons to the library */
+import mavonEditor from "mavon-editor";
+import "mavon-editor/dist/css/index.css";
+// use
+Vue.use(mavonEditor);
 library.add(faTwitter, faFacebookF, faYoutube, faInstagram);
 
 // Vue.component("service-component", service);
 Vue.use(VueSweetalert2);
+// Vue.use(CKEditor);
 Vue.component("marquee-text", MarqueeText);
 Vue.component("dynamic-marquee", DynamicMarquee);
 

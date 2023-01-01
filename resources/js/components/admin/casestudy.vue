@@ -46,6 +46,31 @@
                 </div>
               </div>
               <div class="form-group">
+                <mavon-editor v-model="description"/>
+                <!-- <vue-editor
+                  @focus="onEditorFocus"
+                  @blur="onEditorBlur"
+                  @selection-change="onSelectionChange"
+                  v-model="description"
+                >
+                </vue-editor> -->
+                <div class="text-danger" v-if="this.descriptionError">
+                  {{ this.descriptionError }}
+                </div>
+              </div>
+              <!-- <div class="form-group">
+                <label for="company_name">Company Name</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="company_name"
+                  v-model="name"
+                />
+                <div class="text-danger" v-if="this.nameError">
+                  {{ this.nameError }}
+                </div>
+              </div> -->
+              <div class="form-group">
                 <label for="company_image">Company Icon</label>
                 <input
                   type="file"
@@ -61,6 +86,7 @@
                 </p>
               </div>
               <div>
+                <!-- <ckeditor :editor="editor" v-model="editorData" :config="editorConfig"></ckeditor> -->
                 <button
                   type="button"
                   class="btn btn-block btn-save text-white"
@@ -81,6 +107,7 @@
           <thead>
             <tr>
               <th>Company Name</th>
+              <th>Company Description</th>
               <th>Company Icon</th>
               <th>Action</th>
             </tr>
@@ -88,6 +115,7 @@
           <tbody v-if="lists.length > 0">
             <tr v-for="list in lists" :key="list.id">
               <td>{{ list.com_name }}</td>
+              <td v-html="list.description"></td>
               <td>
                 <img :src="list.com_image" width="100" height="100" />
               </td>
@@ -120,6 +148,8 @@
 </template>
 <script>
 import axios from "axios";
+// import { VueEditor } from "vue2-editor";
+// import { VueEditor } from "vue2-editor/dist/vue2-editor.core.js";
 export default {
   data() {
     return {
@@ -128,16 +158,37 @@ export default {
       image: "",
       nameError: "",
       imageError: "",
+      description: "",
+      descriptionError: "",
       success: "",
       temporary_id: "",
       is_editing: false,
       temp_image_url: "",
+      // return { value: '' }
+      // value:''
     };
   },
+  components: {
+    // Use the <ckeditor> component in this view.
+    // ckeditor: CKEditor.component
+    // VueEditor,
+  },
   methods: {
+    // onEditorBlur(quill) {
+    //   console.log("editor blur!", quill);
+    // },
+
+    // onEditorFocus(quill) {
+    //   console.log("editor focus!", quill);
+    // },
+
+    // onSelectionChange(range) {
+    //   console.log("selection change!", range);
+    // },
     disable_button() {
       this.is_editing = false;
       this.name = "";
+      this.description = "";
       this.image = "";
       this.temp_image_url = "";
     },
@@ -162,6 +213,7 @@ export default {
       }
       let fd = new FormData();
       fd.append("name", this.name);
+      fd.append("description", this.description);
       fd.append("image", this.image);
       fd.append("id", this.temporary_id);
       axios
@@ -190,7 +242,7 @@ export default {
           document.getElementById("company_image").value = "";
           this.temp_image_url = "";
           this.temporary_id = "";
-          this.is_editing = false;
+          (this.description = ""), (this.is_editing = false);
           this.fetchAll();
           setTimeout(function () {
             this.success = "";
@@ -222,6 +274,7 @@ export default {
         .then((response) => {
           this.name = response.data.com_name;
           this.temp_image_url = response.data.com_image;
+          this.description = response.data.description;
         })
         .catch((error) => {});
     },
@@ -249,8 +302,8 @@ div {
 .btn-edit {
   background: #0093e9;
 }
-.card{
-      border-top: none;
+.card {
+  border-top: none;
 }
 .card-header {
   border: none;
