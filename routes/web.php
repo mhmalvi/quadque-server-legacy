@@ -8,6 +8,7 @@ use App\Http\Controllers\BlogController;
 use App\Http\Controllers\CaseStudyController;
 use App\Http\Controllers\UserPageController;
 use App\Http\Controllers\admin\ServiceController;
+use App\Http\Controllers\AboutUsController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -89,6 +90,13 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::get('/client-speak/edit/{id}', [ClientSpeakController::class, 'edit']);
         Route::post('/client-speak/update/', [ClientSpeakController::class, 'update']);
         Route::get('/client-speak/delete/{id}', [ClientSpeakController::class, 'destroy']);
+
+        Route::get('/about-us', [AboutUsController::class, 'index'])->name('about-us');
+        Route::get('/about-us/get', [AboutUsController::class, 'showAll'])->name('about-us.get');
+        Route::post('/about-us/store', [AboutUsController::class, 'store'])->name('about-us.store');
+        Route::get('/about-us/edit/{id}', [AboutUsController::class, 'edit']);
+        Route::post('/about-us/update/', [AboutUsController::class, 'update']);
+        Route::get('/about-us/delete/{id}', [AboutUsController::class, 'destroy']);
 
         Route::get('/current', [AdminController::class, 'logged_admin']);
 

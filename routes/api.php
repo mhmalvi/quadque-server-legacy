@@ -5,6 +5,7 @@ use App\Http\Controllers\admin\BlogApiController;
 use App\Http\Controllers\admin\ServiceController;
 use App\Http\Controllers\admin\HomeApiController;
 use App\Http\Controllers\ClientSpeakController;
+use App\Http\Controllers\AboutUsController;
 use App\Http\Controllers\AdminController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -42,6 +43,9 @@ Route::get('services/{id}', [ServiceController::class, 'show']);
 
 Route::get('client-speaks', [ClientSpeakController::class, 'showAll']);
 Route::get('client-speaks/{id}', [ClientSpeakController::class, 'show']);
+
+Route::get('about-us', [AboutUsController::class, 'showAll']);
+Route::get('about-us/{id}', [AboutUsController::class, 'show']);
 
 Route::prefix('admin')->name('admin.')->group(
     function () {
