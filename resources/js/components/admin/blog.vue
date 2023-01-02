@@ -63,14 +63,15 @@
                   />
                 </p>
               </div>
-              <div class="form-group">
+              <div class="form-group" style="width:32rem;">
                 <label for="text">Blog Text</label>
-                <textarea
+                <!-- <textarea
                   v-model="text"
                   id="summernote"
                   class="form-control"
                   rows="10"
-                ></textarea>
+                ></textarea> -->
+                <el-tiptap v-model="text" :extensions="extensions" />
                 <div class="text-danger" v-if="this.textError">
                   {{ this.textError }}
                 </div>
@@ -98,7 +99,7 @@
               <td>No.</td>
               <th>Title</th>
               <th>Thumbnail</th>
-
+              <th>Description</th>
               <th>Action</th>
             </tr>
           </thead>
@@ -115,6 +116,7 @@
                 <!-- {{ list.thumbnail }} -->
                 <img :src="list.thumbnail" width="100" height="100" />
               </td>
+              <td v-html="list.text"></td>
 
               <td style="vertical-align: middle; color: white">
                 <button
@@ -147,7 +149,27 @@
 </template>
 <script>
 import axios from "axios";
+// import { ElementTiptap } from 'element-tiptap';
+
+import {
+  // necessary extensions
+  Doc,
+  Text,
+  Paragraph,
+  Heading,
+  Bold,
+  Underline,
+  Italic,
+  Strike,
+  ListItem,
+  BulletList,
+  OrderedList,
+  Image,Iframe,CodeBlock,Blockquote,TodoItem,TodoList,TextAlign,Indent,LineHeight,HorizontalRule,Table ,TableHeader,TableCell,TableRow,FormatClear,TextColor,TextHighlight,Preview,Print,Fullscreen,SelectAll,FontType,FontSize,CodeView 
+} from 'element-tiptap';
 export default {
+  // components: {
+  //   'el-tiptap': ElementTiptap,
+  // },
   data() {
     return {
       lists: [],
@@ -162,6 +184,21 @@ export default {
       is_editing: false,
       temp_thumbnail_url: "",
       blog_no: 1,
+
+      extensions: [
+        new Doc(),
+        new Text(),
+        new Paragraph(),
+        new Heading({ level: 5 }),
+        new Bold({ bubble: true }), // render command-button in bubble menu.
+        new Underline({ bubble: true, menubar: false }), // render command-button in bubble menu but not in menubar.
+        new Italic(),
+        new Strike(),
+        new ListItem(),
+        new BulletList(),
+        new OrderedList(),
+        new Image(), new Iframe(), new CodeBlock(), new Blockquote(),new TodoItem(),new TodoList (),new TextAlign(),new Indent(),new LineHeight(),new HorizontalRule(),new Table(),new TableHeader(),new TableCell(),new TableRow(),new FormatClear(),new TextColor(),new TextHighlight(),new Preview(),new Print(),new Fullscreen(),new SelectAll(),new FontType(),new FontSize(),new CodeView()
+      ],
     };
   },
   methods: {
@@ -328,4 +365,17 @@ thead {
   color: var(--bs-table-striped-color);
   border: none;
 }
+/* .note-editor.note-airframe.fullscreen, .note-editor.note-frame.fullscreen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 32rem !important;
+    z-index: 1050;
+}
+.note-editor.note-airframe .note-editing-area .note-editable, .note-editor.note-frame .note-editing-area .note-editable {
+    padding: 10px;
+    overflow: auto;
+    word-wrap: break-word;
+    width: 32rem !important;
+} */
 </style>

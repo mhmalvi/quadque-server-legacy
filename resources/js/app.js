@@ -33,7 +33,19 @@ import "mavon-editor/dist/css/index.css";
 // use
 Vue.use(mavonEditor);
 library.add(faTwitter, faFacebookF, faYoutube, faInstagram);
+import ElementUI from "element-ui";
+import { ElementTiptapPlugin } from "element-tiptap";
+// import ElementUI's styles
+import "element-ui/lib/theme-chalk/index.css";
+// import this package's styles
+import "element-tiptap/lib/index.css";
 
+// use ElementUI's plugin
+Vue.use(ElementUI);
+// use this package's plugin
+Vue.use(ElementTiptapPlugin, {
+    /* plugin options */
+});
 // Vue.component("service-component", service);
 Vue.use(VueSweetalert2);
 // Vue.use(CKEditor);
