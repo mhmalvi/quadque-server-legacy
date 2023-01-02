@@ -73,20 +73,54 @@
                   {{ this.nameError }}
                 </div> -->
               </div>
-              <!-- <div class="form-group">
+              <div class="form-group">
                 <label for="company_image">Group Images</label>
                 <input
                   type="file"
                   class="form-control"
-                  ref="group_images"
                   id="company_image"
-                  multiple
-                  @change="group_images"
+                  @change="group_img_1"
+                />
+                <input
+                  type="file"
+                  class="form-control"
+                  id="company_image"
+                  @change="group_img_2"
+                />
+                <input
+                  type="file"
+                  class="form-control"
+                  id="company_image"
+                  @change="group_img_3"
+                />
+                <input
+                  type="file"
+                  class="form-control"
+                  id="company_image"
+                  @change="group_img_4"
+                />
+                <input
+                  type="file"
+                  class="form-control"
+                  id="company_image"
+                  @change="group_img_5"
+                />
+                <input
+                  type="file"
+                  class="form-control"
+                  id="company_image"
+                  @change="group_img_6"
+                />
+                <input
+                  type="file"
+                  class="form-control"
+                  id="company_image"
+                  @change="group_img_7"
                 />
                 <p class="my-2 text-center" v-if="this.temp_image_url">
                   <img :src="this.temp_image_url" width="150" height="150" />
                 </p>
-              </div> -->
+              </div>
               <div class="form-group">
                 <label for="company_name">Second Summary</label>
                 <textarea
@@ -248,7 +282,7 @@
                   {{ this.nameError }}
                 </div> -->
               </div>
-              <!-- <div class="form-group">
+              <div class="form-group">
                 <label for="company_image">Agency Multi Images</label>
                 <input
                   type="file"
@@ -261,7 +295,7 @@
                 <p class="my-2 text-center" v-if="this.temp_image_url">
                   <img :src="this.temp_image_url" width="150" height="150" />
                 </p>
-              </div> -->
+              </div>
               <div>
                 <!-- <ckeditor :editor="editor" v-model="editorData" :config="editorConfig"></ckeditor> -->
                 <button
@@ -335,6 +369,13 @@ export default {
       image: "",
       summary1: "",
       summary2: "",
+      group_images_1:"",
+      group_images_2:"",
+      group_images_3:"",
+      group_images_4:"",
+      group_images_5:"",
+      group_images_6:"",
+      group_images_7:"",
       first_content: "",
       case_con_1_img: "",
       case_con_1_img_tmp: "",
@@ -368,17 +409,27 @@ export default {
     // VueEditor,
   },
   methods: {
-    // onEditorBlur(quill) {
-    //   console.log("editor blur!", quill);
-    // },
-
-    // onEditorFocus(quill) {
-    //   console.log("editor focus!", quill);
-    // },
-
-    // onSelectionChange(range) {
-    //   console.log("selection change!", range);
-    // },
+    group_img_1(e){
+      this.group_images_1=e.target.files[0]
+    },
+    group_img_2(e){
+      this.group_images_2=e.target.files[0]
+    },
+    group_img_3(e){
+      this.group_images_3=e.target.files[0]
+    },
+    group_img_4(e){
+      this.group_images_4=e.target.files[0]
+    },
+    group_img_5(e){
+      this.group_images_5=e.target.files[0]
+    },
+    group_img_6(e){
+      this.group_images_6=e.target.files[0]
+    },
+    group_img_7(e){
+      this.group_images_7=e.target.files[0]
+    },
     disable_button() {
       this.is_editing = false;
       this.name = "";
@@ -462,11 +513,13 @@ export default {
       axios
         .post(url, fd)
         .then((response) => {
+          this.fetchAll()
           // this.success = response.data.success;
           $("#summernote").summernote("code", this.first_content);
           // document.getElementById("thumbnail").value = "";
           if (response.data.success == "created") {
             this.is_editing = false;
+            
             this.$swal.fire({
               // position: "top-end",
               icon: "success",
@@ -507,9 +560,6 @@ export default {
             });
             
           }
-
-          
-          this.fetchAll();
           setTimeout(function () {
             this.success = "";
           }, 5000);
