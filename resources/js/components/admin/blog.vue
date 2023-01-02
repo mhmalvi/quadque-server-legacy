@@ -208,7 +208,7 @@ export default {
       this.text = "";
       this.thumbnail = "";
       this.temp_thumbnail_url = "";
-      $("#summernote").summernote("code", "");
+      // $("#summernote").summernote("code", "");
     },
     fetchAll() {
       axios
@@ -216,6 +216,7 @@ export default {
         .then((response) => {
           console.log(response);
           this.lists = response.data;
+          
         })
         .catch((error) => {});
     },
@@ -232,9 +233,12 @@ export default {
         url = `/admin/blog/store`;
       }
 
-      this.text = $("#summernote").summernote("code");
+      // this.text = $("#summernote").summernote("code");
       let fd = new FormData();
       fd.append("title", this.title);
+      // const json = JSON.stringify(this.text);
+      // console.log(json)
+      // this.text = JSON.parse(json);
       fd.append("text", this.text);
       fd.append("thumbnail", this.thumbnail);
       fd.append("id", this.temporary_id);
@@ -244,8 +248,8 @@ export default {
           this.success = response.data.success;
           this.title = "";
           this.text = "";
-          $("#summernote").summernote("code", this.text);
-          document.getElementById("thumbnail").value = "";
+          // $("#summernote").summernote("code", this.text);
+          // document.getElementById("thumbnail").value = "";
           this.temporary_id = "";
           this.temp_thumbnail_url = "";
           this.is_editing = false;
