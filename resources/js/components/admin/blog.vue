@@ -164,7 +164,7 @@ import {
   ListItem,
   BulletList,
   OrderedList,
-  Image,Iframe,CodeBlock,Blockquote,TodoItem,TodoList,TextAlign,Indent,LineHeight,HorizontalRule,Table ,TableHeader,TableCell,TableRow,FormatClear,TextColor,TextHighlight,Preview,Print,Fullscreen,SelectAll,FontType,FontSize,CodeView 
+  Image,Iframe,CodeBlock,Blockquote,TodoItem,TodoList,TextAlign,Indent,LineHeight,HorizontalRule,HardBreak,TrailingNode,History,Table ,TableHeader,TableCell,TableRow,FormatClear,TextColor,TextHighlight,Preview,Print,Fullscreen,SelectAll,FontType,FontSize,CodeView 
 } from 'element-tiptap';
 export default {
   // components: {
@@ -197,7 +197,7 @@ export default {
         new ListItem(),
         new BulletList(),
         new OrderedList(),
-        new Image(), new Iframe(), new CodeBlock(), new Blockquote(),new TodoItem(),new TodoList (),new TextAlign(),new Indent(),new LineHeight(),new HorizontalRule(),new Table(),new TableHeader(),new TableCell(),new TableRow(),new FormatClear(),new TextColor(),new TextHighlight(),new Preview(),new Print(),new Fullscreen(),new SelectAll(),new FontType(),new FontSize(),new CodeView()
+        new Image(), new Iframe(), new CodeBlock(), new Blockquote(),new TodoItem(),new TodoList (),new TextAlign(),new Indent(),new LineHeight(),new HorizontalRule(),new HardBreak(),new TrailingNode(),new History(),new Table(),new TableHeader(),new TableCell(),new TableRow(),new FormatClear(),new TextColor(),new TextHighlight(),new Preview(),new Print(),new Fullscreen(),new SelectAll(),new FontType(),new FontSize(),new CodeView()
       ],
     };
   },
