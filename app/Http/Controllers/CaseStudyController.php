@@ -216,7 +216,7 @@ class CaseStudyController extends Controller
             'name' => 'required',
             // 'image' => 'required|image'
         ]);
-        dd($request->all());
+        // dd($request->all());
         $case_study = CaseStudy::find($request->id);
         $case_study->com_name = $request->name;
         $case_study->summary1 = $request->summary1;

@@ -466,6 +466,7 @@ export default {
           $("#summernote").summernote("code", this.first_content);
           // document.getElementById("thumbnail").value = "";
           if (response.data.success == "created") {
+            this.is_editing = false;
             this.$swal.fire({
               // position: "top-end",
               icon: "success",
@@ -496,6 +497,7 @@ export default {
             this.temp_image_url = "";
             this.temporary_id = "";
           } else if (response.data.success == "updated") {
+            this.is_editing = true;
             this.$swal.fire({
               // position: "top-end",
               icon: "success",
@@ -503,9 +505,10 @@ export default {
               showConfirmButton: true,
               // timer: 1500,
             });
+            
           }
 
-          this.is_editing = false;
+          
           this.fetchAll();
           setTimeout(function () {
             this.success = "";
