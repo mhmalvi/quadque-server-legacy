@@ -65,13 +65,13 @@
               </div>
               <div class="form-group" style="width:32rem;">
                 <label for="text">Blog Text</label>
-                <!-- <textarea
+                <textarea
                   v-model="text"
                   id="summernote"
                   class="form-control"
                   rows="10"
-                ></textarea> -->
-                <el-tiptap v-model="text" :extensions="extensions" />
+                ></textarea>
+                <!-- <el-tiptap v-model="text" :extensions="extensions" output="html" /> -->
                 <div class="text-danger" v-if="this.textError">
                   {{ this.textError }}
                 </div>
@@ -208,7 +208,7 @@ export default {
       this.text = "";
       this.thumbnail = "";
       this.temp_thumbnail_url = "";
-      // $("#summernote").summernote("code", "");
+      $("#summernote").summernote("code", "");
     },
     fetchAll() {
       axios
@@ -233,7 +233,7 @@ export default {
         url = `/admin/blog/store`;
       }
 
-      // this.text = $("#summernote").summernote("code");
+      this.text = $("#summernote").summernote("code");
       let fd = new FormData();
       fd.append("title", this.title);
       // const json = JSON.stringify(this.text);
@@ -248,8 +248,8 @@ export default {
           this.success = response.data.success;
           this.title = "";
           this.text = "";
-          // $("#summernote").summernote("code", this.text);
-          // document.getElementById("thumbnail").value = "";
+          $("#summernote").summernote("code", this.text);
+          document.getElementById("thumbnail").value = "";
           this.temporary_id = "";
           this.temp_thumbnail_url = "";
           this.is_editing = false;
