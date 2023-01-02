@@ -48,8 +48,8 @@ Route::prefix('admin')->name('admin.')->group(function () {
     Route::middleware(['guest:admin', 'preventBackHistory'])->group(function () {
         Route::get('/login', [AdminController::class, 'login'])->name('login');
         Route::post('/login/check', [AdminController::class, 'check']);
-        // Route::get('/signup', [AdminController::class, 'signup'])->name('signup');
-        // Route::post('/signup/store', [AdminController::class, 'store'])->name('signup.store');
+        Route::get('/signup', [AdminController::class, 'signup'])->name('signup');
+        Route::post('/signup/store', [AdminController::class, 'store'])->name('signup.store');
     });
     Route::middleware(['auth:admin', 'preventBackHistory'])->group(function () {
 
