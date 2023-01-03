@@ -40,9 +40,11 @@
         "vue-marquee-text-component": "^1.2.0",
         "vue-owl-carousel": "^2.0.3",
         "vue-slick-carousel": "^1.0.6",
+        "vue-spinner": "^1.0.4",
         "vue-sweetalert2": "^5.0.5",
         "vue-typical": "^2.1.0",
         "vue-upload-multiple-image": "^1.1.6",
-        "wow.js": "^1.2.2"
+        "wow.js": "^1.2.2",
+        "vue-loading-overlay": "^3.4.2"
     }
 }

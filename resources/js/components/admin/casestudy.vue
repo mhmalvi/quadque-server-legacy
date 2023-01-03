@@ -1,5 +1,6 @@
 <template>
   <div>
+    <loading :active="isLoading" :is-full-page="fullPage"  :background-color="background" :loader="loader" :opacity="opacity" />
     <div class="row d-flex justify-content-center">
       <div
         v-if="this.is_editing == true"
@@ -417,11 +418,14 @@
 <script>
 import axios from "axios";
 import VueUploadMultipleImage from "vue-upload-multiple-image";
-// import { VueEditor } from "vue2-editor";
-// import { VueEditor } from "vue2-editor/dist/vue2-editor.core.js";
+import Loading from "vue-loading-overlay";
+
 export default {
   data() {
     return {
+      isLoading: false,
+      fullPage: true,
+      loader: "bars",
       lists: [],
       name: "",
       agency_images: [],
@@ -465,12 +469,16 @@ export default {
       temporary_id: "",
       is_editing: false,
       temp_image_url: "",
+      // loading: false,
       // return { value: '' }
       // value:''
+      background: "#fff",
+      opacity:0.5
     };
   },
   components: {
     VueUploadMultipleImage,
+    Loading,
   },
   methods: {
     group_img_1(e) {
@@ -568,6 +576,7 @@ export default {
       // this.uploadImageSuccess()
       // console.log("data", formData, index, fileList);
       let url;
+      this.isLoading = true;
       if (this.is_editing) {
         url = `/admin/case-study/update/`;
       } else {
@@ -603,11 +612,12 @@ export default {
       fd.append("con_2_img_3", this.con_2_img_3);
       fd.append("image", this.image);
       fd.append("id", this.temporary_id);
-      console.log(fd)
+      console.log(fd);
       axios
         .post(url, fd)
         .then((response) => {
           this.fetchAll();
+          this.isLoading = false;
           // this.success = response.data.success;
           $("#summernote").summernote("code", this.first_content);
           // document.getElementById("thumbnail").value = "";
@@ -650,8 +660,11 @@ export default {
             document.getElementById("con_2_img_3").value = "";
             this.temp_image_url = "";
             this.temporary_id = "";
+            this.isLoading = false;
           } else if (response.data.success == "updated") {
             this.is_editing = true;
+            this.isLoading = false;
+            // this.isLoading = false;
             this.$swal.fire({
               // position: "top-end",
               icon: "success",
