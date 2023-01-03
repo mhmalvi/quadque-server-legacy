@@ -81,44 +81,90 @@
                   id="company_image"
                   @change="group_img_1"
                 />
+                <p class="my-2 text-center" v-if="this.group_images_1_tmp">
+                  <img
+                    :src="this.group_images_1_tmp"
+                    width="150"
+                    height="150"
+                  />
+                </p>
                 <input
                   type="file"
                   class="form-control"
                   id="company_image"
                   @change="group_img_2"
                 />
+                <p class="my-2 text-center" v-if="this.group_images_2_tmp">
+                  <img
+                    :src="this.group_images_2_tmp"
+                    width="150"
+                    height="150"
+                  />
+                </p>
                 <input
                   type="file"
                   class="form-control"
                   id="company_image"
                   @change="group_img_3"
                 />
+                <p class="my-2 text-center" v-if="this.group_images_3_tmp">
+                  <img
+                    :src="this.group_images_3_tmp"
+                    width="150"
+                    height="150"
+                  />
+                </p>
                 <input
                   type="file"
                   class="form-control"
                   id="company_image"
                   @change="group_img_4"
                 />
+                <p class="my-2 text-center" v-if="this.group_images_4_tmp">
+                  <img
+                    :src="this.group_images_4_tmp"
+                    width="150"
+                    height="150"
+                  />
+                </p>
                 <input
                   type="file"
                   class="form-control"
                   id="company_image"
                   @change="group_img_5"
                 />
+                <p class="my-2 text-center" v-if="this.group_images_5_tmp">
+                  <img
+                    :src="this.group_images_5_tmp"
+                    width="150"
+                    height="150"
+                  />
+                </p>
                 <input
                   type="file"
                   class="form-control"
                   id="company_image"
                   @change="group_img_6"
                 />
+                <p class="my-2 text-center" v-if="this.group_images_6_tmp">
+                  <img
+                    :src="this.group_images_6_tmp"
+                    width="150"
+                    height="150"
+                  />
+                </p>
                 <input
                   type="file"
                   class="form-control"
                   id="company_image"
                   @change="group_img_7"
                 />
-                <p class="my-2 text-center" v-if="this.temp_image_url">
-                  <img :src="this.temp_image_url" width="150" height="150" />
+                <p class="my-2 text-center" v-if="this.group_images_7_tmp">
+                  <img
+                    :src="this.group_images_7_tmp"
+                    width="150"
+                    height="150"
+                  />
                 </p>
               </div>
               <div class="form-group">
@@ -282,16 +328,27 @@
                   {{ this.nameError }}
                 </div> -->
               </div>
-              <div class="form-group">
+              <div
+                class="form-group"
+                id="my-strictly-unique-vue-upload-multiple-image"
+              >
                 <label for="company_image">Agency Multi Images</label>
                 <input
                   type="file"
                   class="form-control"
-                  ref="agency"
                   id="company_image"
                   @change="agency"
                   multiple
                 />
+                <!-- <vue-upload-multiple-image
+                  @upload-success="save"
+                  @before-remove="beforeRemove"
+                  @edit-image="editImage"
+                  :data-images="images"
+                  dragText=""
+                  primaryText=""
+                  browseText="Select Image"
+                ></vue-upload-multiple-image> -->
                 <p class="my-2 text-center" v-if="this.temp_image_url">
                   <img :src="this.temp_image_url" width="150" height="150" />
                 </p>
@@ -359,6 +416,7 @@
 </template>
 <script>
 import axios from "axios";
+import VueUploadMultipleImage from "vue-upload-multiple-image";
 // import { VueEditor } from "vue2-editor";
 // import { VueEditor } from "vue2-editor/dist/vue2-editor.core.js";
 export default {
@@ -366,16 +424,17 @@ export default {
     return {
       lists: [],
       name: "",
+      agency_images: [],
       image: "",
       summary1: "",
       summary2: "",
-      group_images_1:"",
-      group_images_2:"",
-      group_images_3:"",
-      group_images_4:"",
-      group_images_5:"",
-      group_images_6:"",
-      group_images_7:"",
+      group_images_1: "",
+      group_images_2: "",
+      group_images_3: "",
+      group_images_4: "",
+      group_images_5: "",
+      group_images_6: "",
+      group_images_7: "",
       first_content: "",
       case_con_1_img: "",
       case_con_1_img_tmp: "",
@@ -391,6 +450,13 @@ export default {
       con_2_img_1_tmp: "",
       con_2_img_2_tmp: "",
       con_2_img_3_tmp: "",
+      group_images_1_tmp: "",
+      group_images_2_tmp: "",
+      group_images_3_tmp: "",
+      group_images_4_tmp: "",
+      group_images_5_tmp: "",
+      group_images_6_tmp: "",
+      group_images_7_tmp: "",
       nameError: "",
       imageError: "",
       description: "",
@@ -404,31 +470,29 @@ export default {
     };
   },
   components: {
-    // Use the <ckeditor> component in this view.
-    // ckeditor: CKEditor.component
-    // VueEditor,
+    VueUploadMultipleImage,
   },
   methods: {
-    group_img_1(e){
-      this.group_images_1=e.target.files[0]
+    group_img_1(e) {
+      this.group_images_1 = e.target.files[0];
     },
-    group_img_2(e){
-      this.group_images_2=e.target.files[0]
+    group_img_2(e) {
+      this.group_images_2 = e.target.files[0];
     },
-    group_img_3(e){
-      this.group_images_3=e.target.files[0]
+    group_img_3(e) {
+      this.group_images_3 = e.target.files[0];
     },
-    group_img_4(e){
-      this.group_images_4=e.target.files[0]
+    group_img_4(e) {
+      this.group_images_4 = e.target.files[0];
     },
-    group_img_5(e){
-      this.group_images_5=e.target.files[0]
+    group_img_5(e) {
+      this.group_images_5 = e.target.files[0];
     },
-    group_img_6(e){
-      this.group_images_6=e.target.files[0]
+    group_img_6(e) {
+      this.group_images_6 = e.target.files[0];
     },
-    group_img_7(e){
-      this.group_images_7=e.target.files[0]
+    group_img_7(e) {
+      this.group_images_7 = e.target.files[0];
     },
     disable_button() {
       this.is_editing = false;
@@ -448,9 +512,24 @@ export default {
       this.con_2_img_2 = "";
       this.con_2_img_1_tmp = "";
       this.con_2_img_2_tmp = "";
-      (this.con_2_img_3_tmp = ""), (this.temp_image_url = "");
+      this.con_2_img_3_tmp = "";
+      this.temp_image_url = "";
       this.con_2_img_3 = "";
-      $("#summernote").summernote("code", "");
+      (this.group_images_1 = ""),
+        (this.group_images_2 = ""),
+        (this.group_images_3 = ""),
+        (this.group_images_4 = ""),
+        (this.group_images_5 = ""),
+        (this.group_images_6 = ""),
+        (this.group_images_7 = ""),
+        (this.group_images_1_tmp = ""),
+        (this.group_images_2_tmp = ""),
+        (this.group_images_3_tmp = ""),
+        (this.group_images_4_tmp = ""),
+        (this.group_images_5_tmp = ""),
+        (this.group_images_6_tmp = ""),
+        (this.group_images_7_tmp = ""),
+        $("#summernote").summernote("code", "");
     },
     fetchAll() {
       axios
@@ -477,14 +556,17 @@ export default {
     case_con_2_img_3(e) {
       this.con_2_img_3 = e.target.files[0];
     },
-    group_images() {
-      this.gr_images = this.$refs.group_images.files[0];
-    },
-    agency() {
-      this.agency = this.$refs.agency.files[0];
+    // group_images() {
+    //   this.gr_images = this.$refs.group_images.files[0];
+    // },
+    agency(e) {
+      this.agency_images = e.target.files;
+      console.log(this.agency_images);
     },
 
     save() {
+      // this.uploadImageSuccess()
+      // console.log("data", formData, index, fileList);
       let url;
       if (this.is_editing) {
         url = `/admin/case-study/update/`;
@@ -496,6 +578,9 @@ export default {
       fd.append("name", this.name);
       fd.append("summary1", this.summary1);
       fd.append("summary2", this.summary2);
+      for (let i = 0; i < this.agency_images.length; i++) {
+        fd.append("agency_images[]", this.agency_images[i]);
+      }
       // fd.append("group_images", this.gr_images);
       fd.append("first_content", this.first_content);
       fd.append("img1", this.case_con_1_img);
@@ -505,21 +590,30 @@ export default {
       fd.append("case_con_2_des_2", this.case_con_2_des_2);
       fd.append("case_con_2_title_3", this.case_con_2_title_3);
       fd.append("case_con_2_des_3", this.case_con_2_des_3);
+      fd.append("group_images_1", this.group_images_1);
+      fd.append("group_images_2", this.group_images_2);
+      fd.append("group_images_3", this.group_images_3);
+      fd.append("group_images_4", this.group_images_4);
+      fd.append("group_images_5", this.group_images_5);
+      fd.append("group_images_6", this.group_images_6);
+      fd.append("group_images_7", this.group_images_7);
+
       fd.append("con_2_img_1", this.con_2_img_1);
       fd.append("con_2_img_2", this.con_2_img_2);
       fd.append("con_2_img_3", this.con_2_img_3);
       fd.append("image", this.image);
       fd.append("id", this.temporary_id);
+      console.log(fd)
       axios
         .post(url, fd)
         .then((response) => {
-          this.fetchAll()
+          this.fetchAll();
           // this.success = response.data.success;
           $("#summernote").summernote("code", this.first_content);
           // document.getElementById("thumbnail").value = "";
           if (response.data.success == "created") {
             this.is_editing = false;
-            
+
             this.$swal.fire({
               // position: "top-end",
               icon: "success",
@@ -539,6 +633,13 @@ export default {
             this.case_con_2_des_2 = "";
             this.case_con_2_title_3 = "";
             this.case_con_2_des_3 = "";
+            this.group_images_1 = "";
+            this.group_images_2 = "";
+            this.group_images_3 = "";
+            this.group_images_4 = "";
+            this.group_images_5 = "";
+            this.group_images_6 = "";
+            this.group_images_7 = "";
             this.con_2_img_1 = "";
             this.con_2_img_2 = "";
             this.con_2_img_3 = "";
@@ -558,7 +659,6 @@ export default {
               showConfirmButton: true,
               // timer: 1500,
             });
-            
           }
           setTimeout(function () {
             this.success = "";
@@ -601,6 +701,13 @@ export default {
           this.case_con_2_des_2 = response.data.case_con_2_des_2;
           this.case_con_2_title_3 = response.data.case_con_2_title_3;
           this.case_con_2_des_3 = response.data.case_con_2_des_3;
+          this.group_images_1_tmp = response.data.group_images_1;
+          this.group_images_2_tmp = response.data.group_images_2;
+          this.group_images_3_tmp = response.data.group_images_3;
+          this.group_images_4_tmp = response.data.group_images_4;
+          this.group_images_5_tmp = response.data.group_images_5;
+          this.group_images_6_tmp = response.data.group_images_6;
+          this.group_images_7_tmp = response.data.group_images_7;
           this.con_2_img_1_tmp = response.data.case_con_2_img_1;
           this.con_2_img_2_tmp = response.data.case_con_2_img_2;
           this.con_2_img_3_tmp = response.data.case_con_2_img_3;
@@ -624,6 +731,14 @@ export default {
 };
 </script>
 <style scoped>
+#my-strictly-unique-vue-upload-multiple-image {
+  font-family: "Avenir", Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-align: center;
+  color: #2c3e50;
+  margin-top: 60px;
+}
 div {
   letter-spacing: 1px;
   font-family: sans-serif;

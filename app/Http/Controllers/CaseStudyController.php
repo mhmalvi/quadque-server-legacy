@@ -120,7 +120,7 @@ class CaseStudyController extends Controller
             'name' => 'required',
             // 'image' => 'required|image'
         ]);
-        dd($request->all());
+        // dd($request->all());
         $case_study = new CaseStudy();
         $case_study->com_name = $request->name;
         $case_study->summary1 = $request->summary1;
@@ -238,9 +238,22 @@ class CaseStudyController extends Controller
             $file_path = $app_url . ":8000/assets/img/case_study/third_content_img_3/" . $con_2_img_3;
             $case_study->case_con_2_img_3 = $file_path;
         }
-
+        $file_path=array();
+        if ($request->hasFile('agency_images')) {
+            foreach ($request->file('agency_images') as $image) {
+                $imageName = time() . '.' . $image->getClientOriginalExtension();
+                $image->move(public_path('assets/img/case_study/agency_images'), $imageName);
+                $file_path[] = $app_url . ":8000/assets/img/case_study/agency_images/" . $imageName;
+                // $case_study->agency = $file_path;
+            }
+            $agency_files= implode('|', $file_path);
+            $case_study->agency = $agency_files;
+        }   
 
         $save = $case_study->save();
+        // $file_path=[];        
+
+        
 
         if ($save) {
             return response()->json(['success' => 'created']);
