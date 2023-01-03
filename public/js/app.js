@@ -7082,7 +7082,11 @@ __webpack_require__.r(__webpack_exports__);
       best_service_img: "",
       why_choose_us_img: "",
       our_latest_work_img: "",
-      about_us_img: ""
+      about_us_img: "",
+      best_service_img_tmp: "",
+      why_choose_us_img_tmp: "",
+      our_latest_work_img_tmp: "",
+      about_us_img_tmp: ""
 
       // blog_no: 1,
     };
@@ -7095,8 +7099,6 @@ __webpack_require__.r(__webpack_exports__);
       this.description = "";
       this.file = "";
       $("#summernote").summernote("code", "");
-      $("#summernote1").summernote("code", "");
-      $("#summernote2").summernote("code", "");
       this.temp_thumbnail_url = "";
     },
     fetchAll: function fetchAll() {
@@ -7263,6 +7265,13 @@ __webpack_require__.r(__webpack_exports__);
         _this3.service_deliver_title = response.data.service_deliver_title;
         _this3.service_deliver_des = response.data.service_deliver_des;
         _this3.our_latest_work_title = response.data.our_latest_work_title;
+        _this3.about_us_title = response.data.about_us_title;
+        _this3.about_us_name = response.data.about_us_name;
+        _this3.about_us_des = response.data.about_us_des;
+        _this3.best_service_img_tmp = response.data.best_service_img;
+        _this3.why_choose_us_img_tmp = response.data.why_choose_us_img;
+        _this3.our_latest_work_img_tmp = response.data.our_latest_work_img;
+        _this3.about_us_img_tmp = response.data.about_us_img;
         $("#summernote").summernote("code", _this3.description);
         _this3.temp_thumbnail_url = response.data.file;
       })["catch"](function (error) {});

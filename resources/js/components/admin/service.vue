@@ -563,6 +563,11 @@ export default {
       our_latest_work_img: "",
       about_us_img: "",
 
+      best_service_img_tmp: "",
+      why_choose_us_img_tmp: "",
+      our_latest_work_img_tmp: "",
+      about_us_img_tmp: "",
+
       // blog_no: 1,
     };
   },
@@ -573,8 +578,6 @@ export default {
       this.description = "";
       this.file = "";
       $("#summernote").summernote("code", "");
-      $("#summernote1").summernote("code", "");
-      $("#summernote2").summernote("code", "");
       this.temp_thumbnail_url = "";
     },
     fetchAll() {
@@ -778,21 +781,38 @@ export default {
           this.why_choose_us_title = response.data.why_choose_us_title;
           this.why_choose_us_des = response.data.why_choose_us_des;
 
-          this.services_capabilities_title = response.data.services_capabilities_title;
-          this.services_capabilities_des = response.data.services_capabilities_des;
-          this.services_capabilities_menus_1 = response.data.services_capabilities_menus_1;
-          this.services_capabilities_menus_2 = response.data.services_capabilities_menus_2;
-          this.services_capabilities_menus_3 = response.data.services_capabilities_menus_3;
-          this.services_capabilities_menus_4 = response.data.services_capabilities_menus_4;
-          this.services_capabilities_menus_5 = response.data.services_capabilities_menus_5;
-          this.services_capabilities_menus_6 = response.data.services_capabilities_menus_6;
-          this.services_capabilities_menus_7 = response.data.services_capabilities_menus_7;
+          this.services_capabilities_title =
+            response.data.services_capabilities_title;
+          this.services_capabilities_des =
+            response.data.services_capabilities_des;
+          this.services_capabilities_menus_1 =
+            response.data.services_capabilities_menus_1;
+          this.services_capabilities_menus_2 =
+            response.data.services_capabilities_menus_2;
+          this.services_capabilities_menus_3 =
+            response.data.services_capabilities_menus_3;
+          this.services_capabilities_menus_4 =
+            response.data.services_capabilities_menus_4;
+          this.services_capabilities_menus_5 =
+            response.data.services_capabilities_menus_5;
+          this.services_capabilities_menus_6 =
+            response.data.services_capabilities_menus_6;
+          this.services_capabilities_menus_7 =
+            response.data.services_capabilities_menus_7;
 
           this.service_deliver_title = response.data.service_deliver_title;
           this.service_deliver_des = response.data.service_deliver_des;
 
-
           this.our_latest_work_title = response.data.our_latest_work_title;
+
+          this.about_us_title = response.data.about_us_title;
+          this.about_us_name = response.data.about_us_name;
+          this.about_us_des = response.data.about_us_des;
+
+          this.best_service_img_tmp = response.data.best_service_img;
+          this.why_choose_us_img_tmp = response.data.why_choose_us_img;
+          this.our_latest_work_img_tmp = response.data.our_latest_work_img;
+          this.about_us_img_tmp = response.data.about_us_img;
 
           $("#summernote").summernote("code", this.description);
           this.temp_thumbnail_url = response.data.file;
