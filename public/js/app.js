@@ -7037,17 +7037,53 @@ __webpack_require__.r(__webpack_exports__);
   // name:"service-component",
   data: function data() {
     return {
+      hello: "<h3>There have no blogs...!</h3>",
       lists: [],
       service_name: "",
       file: "",
       description: "",
+      identity_design_title: "",
+      identity_design_des: "",
+      identity_design_menus_1: "",
+      identity_design_menus_2: "",
+      identity_design_menus_3: "",
+      identity_design_menus_4: "",
+      identity_design_menus_5: "",
+      identity_design_menus_6: "",
+      project_count: "",
+      happy_clients: "",
+      best_service_title: "",
+      best_service_header: "",
+      best_service_des: "",
+      why_choose_us_title: "",
+      why_choose_us_des: "",
+      services_capabilities_title: "",
+      services_capabilities_des: "",
+      services_capabilities_menus_1: "",
+      services_capabilities_menus_2: "",
+      services_capabilities_menus_3: "",
+      services_capabilities_menus_4: "",
+      services_capabilities_menus_5: "",
+      services_capabilities_menus_6: "",
+      services_capabilities_menus_7: "",
+      service_deliver_title: "",
+      service_deliver_des: "",
+      our_latest_work_title: "",
+      about_us_title: "",
+      about_us_name: "",
+      about_us_des: "",
       service_nameError: "",
       descriptionError: "",
       fileError: "",
       success: "",
       temporary_id: "",
       is_editing: false,
-      temp_thumbnail_url: ""
+      temp_thumbnail_url: "",
+      best_service_img: "",
+      why_choose_us_img: "",
+      our_latest_work_img: "",
+      about_us_img: ""
+
       // blog_no: 1,
     };
   },
@@ -7065,15 +7101,27 @@ __webpack_require__.r(__webpack_exports__);
     },
     fetchAll: function fetchAll() {
       var _this = this;
-      console.log("fetch");
+      // console.log("fetch");
       axios__WEBPACK_IMPORTED_MODULE_0___default().get("/admin/service/get").then(function (response) {
-        // console.log(response);
+        console.log(response);
         _this.lists = response.data;
       })["catch"](function (error) {});
     },
     uploadfile: function uploadfile(e) {
       this.file = e.target.files[0];
       this.temp_thumbnail_url = "";
+    },
+    image_best_service: function image_best_service(e) {
+      this.best_service_img = e.target.files[0];
+    },
+    image_why_choose_us: function image_why_choose_us(e) {
+      this.why_choose_us_img = e.target.files[0];
+    },
+    image_our_work: function image_our_work(e) {
+      this.our_latest_work_img = e.target.files[0];
+    },
+    image_about_us: function image_about_us(e) {
+      this.about_us_img = e.target.files[0];
     },
     save: function save() {
       var _this2 = this;
@@ -7088,7 +7136,42 @@ __webpack_require__.r(__webpack_exports__);
       fd.append("service_name", this.service_name);
       fd.append("description", this.description);
       fd.append("file", this.file);
+      fd.append("identity_design_title", this.identity_design_title);
+      fd.append("identity_design_des", this.identity_design_des);
+      fd.append("identity_design_menus_1", this.identity_design_menus_1);
+      fd.append("identity_design_menus_2", this.identity_design_menus_2);
+      fd.append("identity_design_menus_3", this.identity_design_menus_3);
+      fd.append("identity_design_menus_4", this.identity_design_menus_4);
+      fd.append("identity_design_menus_5", this.identity_design_menus_5);
+      fd.append("identity_design_menus_6", this.identity_design_menus_6);
+      fd.append("project_count", this.project_count);
+      fd.append("happy_clients", this.happy_clients);
+      fd.append("best_service_title", this.best_service_title);
+      fd.append("best_service_header", this.best_service_header);
+      fd.append("best_service_des", this.best_service_des);
+      fd.append("why_choose_us_title", this.why_choose_us_title);
+      fd.append("why_choose_us_des", this.why_choose_us_des);
+      fd.append("services_capabilities_title", this.services_capabilities_title);
+      fd.append("services_capabilities_des", this.services_capabilities_des);
+      fd.append("services_capabilities_menus_1", this.services_capabilities_menus_1);
+      fd.append("services_capabilities_menus_2", this.services_capabilities_menus_2);
+      fd.append("services_capabilities_menus_3", this.services_capabilities_menus_3);
+      fd.append("services_capabilities_menus_4", this.services_capabilities_menus_4);
+      fd.append("services_capabilities_menus_5", this.services_capabilities_menus_5);
+      fd.append("services_capabilities_menus_6", this.services_capabilities_menus_6);
+      fd.append("services_capabilities_menus_7", this.services_capabilities_menus_7);
+      fd.append("service_deliver_title", this.service_deliver_title);
+      fd.append("service_deliver_des", this.service_deliver_des);
+      fd.append("our_latest_work_title", this.our_latest_work_title);
+      fd.append("about_us_title", this.about_us_title);
+      fd.append("about_us_name", this.about_us_name);
+      fd.append("about_us_des", this.about_us_des);
+      fd.append("best_service_img", this.best_service_img);
+      fd.append("why_choose_us_img", this.why_choose_us_img);
+      fd.append("our_latest_work_img", this.our_latest_work_img);
+      fd.append("about_us_img", this.about_us_img);
       fd.append("id", this.temporary_id);
+      console.log(fd);
       axios__WEBPACK_IMPORTED_MODULE_0___default().post(url, fd).then(function (response) {
         _this2.success = response.data.success;
         _this2.fetchAll();
@@ -7153,6 +7236,33 @@ __webpack_require__.r(__webpack_exports__);
         console.log(response);
         _this3.service_name = response.data.service_name;
         _this3.description = response.data.description;
+        _this3.identity_design_title = response.data.identity_design_title;
+        _this3.identity_design_des = response.data.identity_design_des;
+        _this3.identity_design_menus_1 = response.data.identity_design_menus_1;
+        _this3.identity_design_menus_2 = response.data.identity_design_menus_2;
+        _this3.identity_design_menus_3 = response.data.identity_design_menus_3;
+        _this3.identity_design_menus_4 = response.data.identity_design_menus_4;
+        _this3.identity_design_menus_5 = response.data.identity_design_menus_5;
+        _this3.identity_design_menus_6 = response.data.identity_design_menus_6;
+        _this3.project_count = response.data.project_count;
+        _this3.happy_clients = response.data.happy_clients;
+        _this3.best_service_title = response.data.best_service_title;
+        _this3.best_service_header = response.data.best_service_header;
+        _this3.best_service_des = response.data.best_service_des;
+        _this3.why_choose_us_title = response.data.why_choose_us_title;
+        _this3.why_choose_us_des = response.data.why_choose_us_des;
+        _this3.services_capabilities_title = response.data.services_capabilities_title;
+        _this3.services_capabilities_des = response.data.services_capabilities_des;
+        _this3.services_capabilities_menus_1 = response.data.services_capabilities_menus_1;
+        _this3.services_capabilities_menus_2 = response.data.services_capabilities_menus_2;
+        _this3.services_capabilities_menus_3 = response.data.services_capabilities_menus_3;
+        _this3.services_capabilities_menus_4 = response.data.services_capabilities_menus_4;
+        _this3.services_capabilities_menus_5 = response.data.services_capabilities_menus_5;
+        _this3.services_capabilities_menus_6 = response.data.services_capabilities_menus_6;
+        _this3.services_capabilities_menus_7 = response.data.services_capabilities_menus_7;
+        _this3.service_deliver_title = response.data.service_deliver_title;
+        _this3.service_deliver_des = response.data.service_deliver_des;
+        _this3.our_latest_work_title = response.data.our_latest_work_title;
         $("#summernote").summernote("code", _this3.description);
         _this3.temp_thumbnail_url = response.data.file;
       })["catch"](function (error) {});
@@ -7654,10 +7764,7 @@ var render = function render() {
       height: "150"
     }
   })]) : _vm._e()]), _vm._v(" "), _c("div", {
-    staticClass: "form-group",
-    staticStyle: {
-      width: "32rem"
-    }
+    staticClass: "form-group"
   }, [_c("label", {
     attrs: {
       "for": "text"
@@ -9121,28 +9228,6 @@ var render = function render() {
     on: {
       change: _vm.uploadfile
     }
-  }), _vm._v(" "), _c("textarea", {
-    directives: [{
-      name: "model",
-      rawName: "v-model",
-      value: _vm.description,
-      expression: "description"
-    }],
-    staticClass: "form-control",
-    attrs: {
-      id: "summernote",
-      rows: "4",
-      required: ""
-    },
-    domProps: {
-      value: _vm.description
-    },
-    on: {
-      input: function input($event) {
-        if ($event.target.composing) return;
-        _vm.description = $event.target.value;
-      }
-    }
   }), _vm._v(" "), this.fileError ? _c("div", {
     staticClass: "text-danger"
   }, [_vm._v("\n                " + _vm._s(this.fileError) + "\n              ")]) : _vm._e(), _vm._v(" "), this.temp_thumbnail_url ? _c("p", {
@@ -9183,6 +9268,853 @@ var render = function render() {
     }
   }), _vm._v(" "), this.descriptionError ? _c("div", {
     staticClass: "text-danger"
+  }, [_vm._v("\n                " + _vm._s(this.descriptionError) + "\n              ")]) : _vm._e()]), _vm._v(" "), _c("h1", [_vm._v("Identity Design")]), _vm._v(" "), _c("div", {
+    staticClass: "form-group"
+  }, [_c("label", {
+    attrs: {
+      "for": "title"
+    }
+  }, [_vm._v("Title")]), _vm._v(" "), _c("input", {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: _vm.identity_design_title,
+      expression: "identity_design_title"
+    }],
+    staticClass: "form-control",
+    attrs: {
+      type: "text",
+      placeholder: "Enter service name"
+    },
+    domProps: {
+      value: _vm.identity_design_title
+    },
+    on: {
+      input: function input($event) {
+        if ($event.target.composing) return;
+        _vm.identity_design_title = $event.target.value;
+      }
+    }
+  }), _vm._v(" "), this.service_nameError ? _c("div", {
+    staticClass: "text-danger"
+  }, [_vm._v("\n                " + _vm._s(this.service_nameError) + "\n              ")]) : _vm._e()]), _vm._v(" "), _c("div", {
+    staticClass: "form-group"
+  }, [_c("label", {
+    attrs: {
+      "for": "title"
+    }
+  }, [_vm._v("Description")]), _c("br"), _vm._v(" "), _c("textarea", {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: _vm.identity_design_des,
+      expression: "identity_design_des"
+    }],
+    staticClass: "form-control",
+    attrs: {
+      rows: "4",
+      required: ""
+    },
+    domProps: {
+      value: _vm.identity_design_des
+    },
+    on: {
+      input: function input($event) {
+        if ($event.target.composing) return;
+        _vm.identity_design_des = $event.target.value;
+      }
+    }
+  }), _vm._v(" "), this.descriptionError ? _c("div", {
+    staticClass: "text-danger"
+  }, [_vm._v("\n                " + _vm._s(this.descriptionError) + "\n              ")]) : _vm._e()]), _vm._v(" "), _c("div", {
+    staticClass: "form-group"
+  }, [_c("label", {
+    attrs: {
+      "for": "title"
+    }
+  }, [_vm._v("Menus")]), _vm._v(" "), _c("input", {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: _vm.identity_design_menus_1,
+      expression: "identity_design_menus_1"
+    }],
+    staticClass: "form-control",
+    attrs: {
+      type: "text",
+      placeholder: "Enter menus"
+    },
+    domProps: {
+      value: _vm.identity_design_menus_1
+    },
+    on: {
+      input: function input($event) {
+        if ($event.target.composing) return;
+        _vm.identity_design_menus_1 = $event.target.value;
+      }
+    }
+  }), _vm._v(" "), _c("input", {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: _vm.identity_design_menus_2,
+      expression: "identity_design_menus_2"
+    }],
+    staticClass: "form-control",
+    attrs: {
+      type: "text",
+      placeholder: "Enter menus"
+    },
+    domProps: {
+      value: _vm.identity_design_menus_2
+    },
+    on: {
+      input: function input($event) {
+        if ($event.target.composing) return;
+        _vm.identity_design_menus_2 = $event.target.value;
+      }
+    }
+  }), _vm._v(" "), _c("input", {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: _vm.identity_design_menus_3,
+      expression: "identity_design_menus_3"
+    }],
+    staticClass: "form-control",
+    attrs: {
+      type: "text",
+      placeholder: "Enter menus"
+    },
+    domProps: {
+      value: _vm.identity_design_menus_3
+    },
+    on: {
+      input: function input($event) {
+        if ($event.target.composing) return;
+        _vm.identity_design_menus_3 = $event.target.value;
+      }
+    }
+  }), _vm._v(" "), _c("input", {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: _vm.identity_design_menus_4,
+      expression: "identity_design_menus_4"
+    }],
+    staticClass: "form-control",
+    attrs: {
+      type: "text",
+      placeholder: "Enter menus"
+    },
+    domProps: {
+      value: _vm.identity_design_menus_4
+    },
+    on: {
+      input: function input($event) {
+        if ($event.target.composing) return;
+        _vm.identity_design_menus_4 = $event.target.value;
+      }
+    }
+  }), _vm._v(" "), _c("input", {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: _vm.identity_design_menus_5,
+      expression: "identity_design_menus_5"
+    }],
+    staticClass: "form-control",
+    attrs: {
+      type: "text",
+      placeholder: "Enter menus"
+    },
+    domProps: {
+      value: _vm.identity_design_menus_5
+    },
+    on: {
+      input: function input($event) {
+        if ($event.target.composing) return;
+        _vm.identity_design_menus_5 = $event.target.value;
+      }
+    }
+  }), _vm._v(" "), _c("input", {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: _vm.identity_design_menus_6,
+      expression: "identity_design_menus_6"
+    }],
+    staticClass: "form-control",
+    attrs: {
+      type: "text",
+      placeholder: "Enter menus"
+    },
+    domProps: {
+      value: _vm.identity_design_menus_6
+    },
+    on: {
+      input: function input($event) {
+        if ($event.target.composing) return;
+        _vm.identity_design_menus_6 = $event.target.value;
+      }
+    }
+  }), _vm._v(" "), this.service_nameError ? _c("div", {
+    staticClass: "text-danger"
+  }, [_vm._v("\n                " + _vm._s(this.service_nameError) + "\n              ")]) : _vm._e()]), _vm._v(" "), _c("div", {
+    staticClass: "form-group"
+  }, [_c("label", {
+    attrs: {
+      "for": "title"
+    }
+  }, [_vm._v("Project Count")]), _vm._v(" "), _c("input", {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: _vm.project_count,
+      expression: "project_count"
+    }],
+    staticClass: "form-control",
+    attrs: {
+      type: "number",
+      placeholder: "Enter project count"
+    },
+    domProps: {
+      value: _vm.project_count
+    },
+    on: {
+      input: function input($event) {
+        if ($event.target.composing) return;
+        _vm.project_count = $event.target.value;
+      }
+    }
+  }), _vm._v(" "), this.service_nameError ? _c("div", {
+    staticClass: "text-danger"
+  }, [_vm._v("\n                " + _vm._s(this.service_nameError) + "\n              ")]) : _vm._e()]), _vm._v(" "), _c("div", {
+    staticClass: "form-group"
+  }, [_c("label", {
+    attrs: {
+      "for": "title"
+    }
+  }, [_vm._v("Happy Clients Count")]), _vm._v(" "), _c("input", {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: _vm.happy_clients,
+      expression: "happy_clients"
+    }],
+    staticClass: "form-control",
+    attrs: {
+      type: "number",
+      placeholder: "Enter count"
+    },
+    domProps: {
+      value: _vm.happy_clients
+    },
+    on: {
+      input: function input($event) {
+        if ($event.target.composing) return;
+        _vm.happy_clients = $event.target.value;
+      }
+    }
+  }), _vm._v(" "), this.service_nameError ? _c("div", {
+    staticClass: "text-danger"
+  }, [_vm._v("\n                " + _vm._s(this.service_nameError) + "\n              ")]) : _vm._e()]), _vm._v(" "), _c("div", {
+    staticClass: "form-group"
+  }, [_c("label", {
+    attrs: {
+      "for": "title"
+    }
+  }, [_vm._v("Best Service title")]), _vm._v(" "), _c("input", {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: _vm.best_service_title,
+      expression: "best_service_title"
+    }],
+    staticClass: "form-control",
+    attrs: {
+      type: "text",
+      placeholder: "Enter title"
+    },
+    domProps: {
+      value: _vm.best_service_title
+    },
+    on: {
+      input: function input($event) {
+        if ($event.target.composing) return;
+        _vm.best_service_title = $event.target.value;
+      }
+    }
+  }), _vm._v(" "), this.service_nameError ? _c("div", {
+    staticClass: "text-danger"
+  }, [_vm._v("\n                " + _vm._s(this.service_nameError) + "\n              ")]) : _vm._e()]), _vm._v(" "), _c("div", {
+    staticClass: "form-group"
+  }, [_c("label", {
+    attrs: {
+      "for": "title"
+    }
+  }, [_vm._v("Best Service Header")]), _vm._v(" "), _c("input", {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: _vm.best_service_header,
+      expression: "best_service_header"
+    }],
+    staticClass: "form-control",
+    attrs: {
+      type: "text",
+      placeholder: "Enter header"
+    },
+    domProps: {
+      value: _vm.best_service_header
+    },
+    on: {
+      input: function input($event) {
+        if ($event.target.composing) return;
+        _vm.best_service_header = $event.target.value;
+      }
+    }
+  }), _vm._v(" "), this.service_nameError ? _c("div", {
+    staticClass: "text-danger"
+  }, [_vm._v("\n                " + _vm._s(this.service_nameError) + "\n              ")]) : _vm._e()]), _vm._v(" "), _c("div", {
+    staticClass: "form-group"
+  }, [_c("label", {
+    attrs: {
+      "for": "title"
+    }
+  }, [_vm._v("Best Service image")]), _vm._v(" "), _c("input", {
+    staticClass: "form-control",
+    attrs: {
+      type: "file"
+    },
+    on: {
+      change: _vm.image_best_service
+    }
+  }), _vm._v(" "), this.service_nameError ? _c("div", {
+    staticClass: "text-danger"
+  }, [_vm._v("\n                " + _vm._s(this.service_nameError) + "\n              ")]) : _vm._e()]), _vm._v(" "), _c("div", {
+    staticClass: "form-group"
+  }, [_c("label", {
+    attrs: {
+      "for": "title"
+    }
+  }, [_vm._v("Best Service description")]), _c("br"), _vm._v(" "), _c("textarea", {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: _vm.best_service_des,
+      expression: "best_service_des"
+    }],
+    staticClass: "form-control",
+    attrs: {
+      rows: "4",
+      required: ""
+    },
+    domProps: {
+      value: _vm.best_service_des
+    },
+    on: {
+      input: function input($event) {
+        if ($event.target.composing) return;
+        _vm.best_service_des = $event.target.value;
+      }
+    }
+  }), _vm._v(" "), this.descriptionError ? _c("div", {
+    staticClass: "text-danger"
+  }, [_vm._v("\n                " + _vm._s(this.descriptionError) + "\n              ")]) : _vm._e()]), _vm._v(" "), _c("h1", [_vm._v("Why Choose Us")]), _vm._v(" "), _c("div", {
+    staticClass: "form-group"
+  }, [_c("label", {
+    attrs: {
+      "for": "title"
+    }
+  }, [_vm._v("Why choose us title")]), _vm._v(" "), _c("input", {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: _vm.why_choose_us_title,
+      expression: "why_choose_us_title"
+    }],
+    staticClass: "form-control",
+    attrs: {
+      type: "text",
+      placeholder: "why choose us"
+    },
+    domProps: {
+      value: _vm.why_choose_us_title
+    },
+    on: {
+      input: function input($event) {
+        if ($event.target.composing) return;
+        _vm.why_choose_us_title = $event.target.value;
+      }
+    }
+  }), _vm._v(" "), this.service_nameError ? _c("div", {
+    staticClass: "text-danger"
+  }, [_vm._v("\n                " + _vm._s(this.service_nameError) + "\n              ")]) : _vm._e()]), _vm._v(" "), _c("div", {
+    staticClass: "form-group"
+  }, [_c("label", {
+    attrs: {
+      "for": "title"
+    }
+  }, [_vm._v("Why choose us image")]), _vm._v(" "), _c("input", {
+    staticClass: "form-control",
+    attrs: {
+      type: "file"
+    },
+    on: {
+      change: _vm.image_why_choose_us
+    }
+  }), _vm._v(" "), this.service_nameError ? _c("div", {
+    staticClass: "text-danger"
+  }, [_vm._v("\n                " + _vm._s(this.service_nameError) + "\n              ")]) : _vm._e()]), _vm._v(" "), _c("div", {
+    staticClass: "form-group"
+  }, [_c("label", {
+    attrs: {
+      "for": "title"
+    }
+  }, [_vm._v("Why choose us description")]), _c("br"), _vm._v(" "), _c("textarea", {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: _vm.why_choose_us_des,
+      expression: "why_choose_us_des"
+    }],
+    staticClass: "form-control",
+    attrs: {
+      rows: "4",
+      required: ""
+    },
+    domProps: {
+      value: _vm.why_choose_us_des
+    },
+    on: {
+      input: function input($event) {
+        if ($event.target.composing) return;
+        _vm.why_choose_us_des = $event.target.value;
+      }
+    }
+  }), _vm._v(" "), this.descriptionError ? _c("div", {
+    staticClass: "text-danger"
+  }, [_vm._v("\n                " + _vm._s(this.descriptionError) + "\n              ")]) : _vm._e()]), _vm._v(" "), _c("h1", [_vm._v("Services Capabilities")]), _vm._v(" "), _c("div", {
+    staticClass: "form-group"
+  }, [_c("label", {
+    attrs: {
+      "for": "title"
+    }
+  }, [_vm._v("Services Capabilities Title")]), _vm._v(" "), _c("input", {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: _vm.services_capabilities_title,
+      expression: "services_capabilities_title"
+    }],
+    staticClass: "form-control",
+    attrs: {
+      type: "text",
+      placeholder: "Title"
+    },
+    domProps: {
+      value: _vm.services_capabilities_title
+    },
+    on: {
+      input: function input($event) {
+        if ($event.target.composing) return;
+        _vm.services_capabilities_title = $event.target.value;
+      }
+    }
+  }), _vm._v(" "), this.service_nameError ? _c("div", {
+    staticClass: "text-danger"
+  }, [_vm._v("\n                " + _vm._s(this.service_nameError) + "\n              ")]) : _vm._e()]), _vm._v(" "), _c("div", {
+    staticClass: "form-group"
+  }, [_c("label", {
+    attrs: {
+      "for": "title"
+    }
+  }, [_vm._v("Services Capabilities Description")]), _c("br"), _vm._v(" "), _c("textarea", {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: _vm.services_capabilities_des,
+      expression: "services_capabilities_des"
+    }],
+    staticClass: "form-control",
+    attrs: {
+      rows: "4",
+      required: ""
+    },
+    domProps: {
+      value: _vm.services_capabilities_des
+    },
+    on: {
+      input: function input($event) {
+        if ($event.target.composing) return;
+        _vm.services_capabilities_des = $event.target.value;
+      }
+    }
+  }), _vm._v(" "), this.descriptionError ? _c("div", {
+    staticClass: "text-danger"
+  }, [_vm._v("\n                " + _vm._s(this.descriptionError) + "\n              ")]) : _vm._e()]), _vm._v(" "), _c("div", {
+    staticClass: "form-group"
+  }, [_c("label", {
+    attrs: {
+      "for": "title"
+    }
+  }, [_vm._v("Services Capabilities Menu")]), _vm._v(" "), _c("input", {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: _vm.services_capabilities_menus_1,
+      expression: "services_capabilities_menus_1"
+    }],
+    staticClass: "form-control",
+    attrs: {
+      type: "text",
+      placeholder: "Enter menu name"
+    },
+    domProps: {
+      value: _vm.services_capabilities_menus_1
+    },
+    on: {
+      input: function input($event) {
+        if ($event.target.composing) return;
+        _vm.services_capabilities_menus_1 = $event.target.value;
+      }
+    }
+  }), _vm._v(" "), _c("input", {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: _vm.services_capabilities_menus_2,
+      expression: "services_capabilities_menus_2"
+    }],
+    staticClass: "form-control",
+    attrs: {
+      type: "text",
+      placeholder: "Enter menu name"
+    },
+    domProps: {
+      value: _vm.services_capabilities_menus_2
+    },
+    on: {
+      input: function input($event) {
+        if ($event.target.composing) return;
+        _vm.services_capabilities_menus_2 = $event.target.value;
+      }
+    }
+  }), _vm._v(" "), _c("input", {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: _vm.services_capabilities_menus_3,
+      expression: "services_capabilities_menus_3"
+    }],
+    staticClass: "form-control",
+    attrs: {
+      type: "text",
+      placeholder: "Enter menu name"
+    },
+    domProps: {
+      value: _vm.services_capabilities_menus_3
+    },
+    on: {
+      input: function input($event) {
+        if ($event.target.composing) return;
+        _vm.services_capabilities_menus_3 = $event.target.value;
+      }
+    }
+  }), _vm._v(" "), _c("input", {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: _vm.services_capabilities_menus_4,
+      expression: "services_capabilities_menus_4"
+    }],
+    staticClass: "form-control",
+    attrs: {
+      type: "text",
+      placeholder: "Enter menu name"
+    },
+    domProps: {
+      value: _vm.services_capabilities_menus_4
+    },
+    on: {
+      input: function input($event) {
+        if ($event.target.composing) return;
+        _vm.services_capabilities_menus_4 = $event.target.value;
+      }
+    }
+  }), _vm._v(" "), _c("input", {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: _vm.services_capabilities_menus_5,
+      expression: "services_capabilities_menus_5"
+    }],
+    staticClass: "form-control",
+    attrs: {
+      type: "text",
+      placeholder: "Enter menu name"
+    },
+    domProps: {
+      value: _vm.services_capabilities_menus_5
+    },
+    on: {
+      input: function input($event) {
+        if ($event.target.composing) return;
+        _vm.services_capabilities_menus_5 = $event.target.value;
+      }
+    }
+  }), _vm._v(" "), _c("input", {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: _vm.services_capabilities_menus_6,
+      expression: "services_capabilities_menus_6"
+    }],
+    staticClass: "form-control",
+    attrs: {
+      type: "text",
+      placeholder: "Enter menu name"
+    },
+    domProps: {
+      value: _vm.services_capabilities_menus_6
+    },
+    on: {
+      input: function input($event) {
+        if ($event.target.composing) return;
+        _vm.services_capabilities_menus_6 = $event.target.value;
+      }
+    }
+  }), _vm._v(" "), _c("input", {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: _vm.services_capabilities_menus_7,
+      expression: "services_capabilities_menus_7"
+    }],
+    staticClass: "form-control",
+    attrs: {
+      type: "text",
+      placeholder: "Enter menu name"
+    },
+    domProps: {
+      value: _vm.services_capabilities_menus_7
+    },
+    on: {
+      input: function input($event) {
+        if ($event.target.composing) return;
+        _vm.services_capabilities_menus_7 = $event.target.value;
+      }
+    }
+  }), _vm._v(" "), this.service_nameError ? _c("div", {
+    staticClass: "text-danger"
+  }, [_vm._v("\n                " + _vm._s(this.service_nameError) + "\n              ")]) : _vm._e()]), _vm._v(" "), _c("h1", [_vm._v("Services Deliver")]), _vm._v(" "), _c("div", {
+    staticClass: "form-group"
+  }, [_c("label", {
+    attrs: {
+      "for": "title"
+    }
+  }, [_vm._v("Services Deliver Title")]), _vm._v(" "), _c("input", {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: _vm.service_deliver_title,
+      expression: "service_deliver_title"
+    }],
+    staticClass: "form-control",
+    attrs: {
+      type: "text",
+      placeholder: "Title"
+    },
+    domProps: {
+      value: _vm.service_deliver_title
+    },
+    on: {
+      input: function input($event) {
+        if ($event.target.composing) return;
+        _vm.service_deliver_title = $event.target.value;
+      }
+    }
+  }), _vm._v(" "), this.service_nameError ? _c("div", {
+    staticClass: "text-danger"
+  }, [_vm._v("\n                " + _vm._s(this.service_nameError) + "\n              ")]) : _vm._e()]), _vm._v(" "), _c("div", {
+    staticClass: "form-group"
+  }, [_c("label", {
+    attrs: {
+      "for": "title"
+    }
+  }, [_vm._v("Services Deliver Description")]), _c("br"), _vm._v(" "), _c("textarea", {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: _vm.service_deliver_des,
+      expression: "service_deliver_des"
+    }],
+    staticClass: "form-control",
+    attrs: {
+      rows: "4",
+      required: ""
+    },
+    domProps: {
+      value: _vm.service_deliver_des
+    },
+    on: {
+      input: function input($event) {
+        if ($event.target.composing) return;
+        _vm.service_deliver_des = $event.target.value;
+      }
+    }
+  }), _vm._v(" "), this.descriptionError ? _c("div", {
+    staticClass: "text-danger"
+  }, [_vm._v("\n                " + _vm._s(this.descriptionError) + "\n              ")]) : _vm._e()]), _vm._v(" "), _c("h1", [_vm._v("Our lates Work")]), _vm._v(" "), _c("div", {
+    staticClass: "form-group"
+  }, [_c("label", {
+    attrs: {
+      "for": "title"
+    }
+  }, [_vm._v("Our latest work title")]), _vm._v(" "), _c("input", {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: _vm.our_latest_work_title,
+      expression: "our_latest_work_title"
+    }],
+    staticClass: "form-control",
+    attrs: {
+      type: "text",
+      placeholder: "Title"
+    },
+    domProps: {
+      value: _vm.our_latest_work_title
+    },
+    on: {
+      input: function input($event) {
+        if ($event.target.composing) return;
+        _vm.our_latest_work_title = $event.target.value;
+      }
+    }
+  }), _vm._v(" "), this.service_nameError ? _c("div", {
+    staticClass: "text-danger"
+  }, [_vm._v("\n                " + _vm._s(this.service_nameError) + "\n              ")]) : _vm._e()]), _vm._v(" "), _c("div", {
+    staticClass: "form-group"
+  }, [_c("label", {
+    attrs: {
+      "for": "title"
+    }
+  }, [_vm._v("Our latest work images")]), _c("br"), _vm._v(" "), _c("input", {
+    staticClass: "form-control",
+    attrs: {
+      type: "file",
+      placeholder: "why choose us"
+    },
+    on: {
+      change: _vm.image_our_work
+    }
+  }), _vm._v(" "), this.descriptionError ? _c("div", {
+    staticClass: "text-danger"
+  }, [_vm._v("\n                " + _vm._s(this.descriptionError) + "\n              ")]) : _vm._e()]), _vm._v(" "), _c("h1", [_vm._v("About Us")]), _vm._v(" "), _c("div", {
+    staticClass: "form-group"
+  }, [_c("label", {
+    attrs: {
+      "for": "title"
+    }
+  }, [_vm._v("About Us Title")]), _vm._v(" "), _c("input", {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: _vm.about_us_title,
+      expression: "about_us_title"
+    }],
+    staticClass: "form-control",
+    attrs: {
+      type: "text",
+      placeholder: "Enter title"
+    },
+    domProps: {
+      value: _vm.about_us_title
+    },
+    on: {
+      input: function input($event) {
+        if ($event.target.composing) return;
+        _vm.about_us_title = $event.target.value;
+      }
+    }
+  }), _vm._v(" "), this.service_nameError ? _c("div", {
+    staticClass: "text-danger"
+  }, [_vm._v("\n                " + _vm._s(this.service_nameError) + "\n              ")]) : _vm._e()]), _vm._v(" "), _c("div", {
+    staticClass: "form-group"
+  }, [_c("label", {
+    attrs: {
+      "for": "title"
+    }
+  }, [_vm._v("About Us Name")]), _vm._v(" "), _c("input", {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: _vm.about_us_name,
+      expression: "about_us_name"
+    }],
+    staticClass: "form-control",
+    attrs: {
+      type: "text",
+      placeholder: "Enter name"
+    },
+    domProps: {
+      value: _vm.about_us_name
+    },
+    on: {
+      input: function input($event) {
+        if ($event.target.composing) return;
+        _vm.about_us_name = $event.target.value;
+      }
+    }
+  }), _vm._v(" "), this.service_nameError ? _c("div", {
+    staticClass: "text-danger"
+  }, [_vm._v("\n                " + _vm._s(this.service_nameError) + "\n              ")]) : _vm._e()]), _vm._v(" "), _c("div", {
+    staticClass: "form-group"
+  }, [_c("label", {
+    attrs: {
+      "for": "title"
+    }
+  }, [_vm._v("About Us Description")]), _c("br"), _vm._v(" "), _c("textarea", {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: _vm.about_us_des,
+      expression: "about_us_des"
+    }],
+    staticClass: "form-control",
+    attrs: {
+      rows: "4",
+      required: ""
+    },
+    domProps: {
+      value: _vm.about_us_des
+    },
+    on: {
+      input: function input($event) {
+        if ($event.target.composing) return;
+        _vm.about_us_des = $event.target.value;
+      }
+    }
+  }), _vm._v(" "), this.descriptionError ? _c("div", {
+    staticClass: "text-danger"
+  }, [_vm._v("\n                " + _vm._s(this.descriptionError) + "\n              ")]) : _vm._e()]), _vm._v(" "), _c("div", {
+    staticClass: "form-group"
+  }, [_c("label", {
+    attrs: {
+      "for": "title"
+    }
+  }, [_vm._v("About Us Image")]), _c("br"), _vm._v(" "), _c("input", {
+    staticClass: "form-control",
+    attrs: {
+      type: "file"
+    },
+    on: {
+      change: _vm.image_about_us
+    }
+  }), _vm._v(" "), this.descriptionError ? _c("div", {
+    staticClass: "text-danger"
   }, [_vm._v("\n                " + _vm._s(this.descriptionError) + "\n              ")]) : _vm._e()]), _vm._v(" "), _c("div", [_c("button", {
     staticClass: "btn btn-block btn-save text-white",
     attrs: {
@@ -9195,7 +10127,11 @@ var render = function render() {
     staticClass: "row mt-5 d-flex justify-content-center"
   }, [_c("div", {
     staticClass: "col-md-12"
-  }, [_c("h4", [_vm._v("Services Lists")]), _vm._v(" "), _c("table", {
+  }, [_c("h4", [_vm._v("Services Lists")]), _vm._v(" "), _c("div", {
+    domProps: {
+      innerHTML: _vm._s(_vm.hello)
+    }
+  }), _vm._v(" "), _c("table", {
     staticClass: "table table-striped text-center"
   }, [_vm._m(0), _vm._v(" "), _vm.lists.length > 0 ? _c("tbody", _vm._l(_vm.lists, function (list) {
     return _c("tr", {
@@ -9273,7 +10209,7 @@ var staticRenderFns = [function () {
     }
   }, [_c("h3", {
     staticClass: "text-center"
-  }, [_vm._v("There have no blogs...!")])])]);
+  }, [_vm._v("There have no services...!")])])]);
 }];
 render._withStripped = true;
 
@@ -15085,7 +16021,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_laravel_mix_node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\ndiv[data-v-0c9b213a] {\r\n  letter-spacing: 1px;\r\n  font-family: sans-serif;\n}\n.btn-edit[data-v-0c9b213a] {\r\n  background: #0093e9;\n}\n.card-header[data-v-0c9b213a] {\r\n  background-image: linear-gradient(\r\n    to right,\r\n    rgb(242, 112, 156),\r\n    rgb(255, 148, 114)\r\n  );\n}\nthead[data-v-0c9b213a] {\r\n  /* background: #84a4ff; */\r\n  background-image: linear-gradient(to right, #0093e9, #80d0c7);\r\n  color: white;\r\n  border: none;\n}\n.card[data-v-0c9b213a]{\r\n      border-top: none;\n}\n.card-header[data-v-0c9b213a]{\r\n  border: none;\n}\n.btn-save[data-v-0c9b213a] {\r\n  background: #5a67ff;\n}\n.btn-save[data-v-0c9b213a]:hover {\r\n  background: #0093e9;\r\n  transition: 2s ease;\n}\n.table-striped > tbody > tr:nth-of-type(odd) > *[data-v-0c9b213a] {\r\n  --bs-table-accent-bg: rgb(229 231 255);\r\n  color: var(--bs-table-striped-color);\r\n  border: none;\n}\r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\ndiv[data-v-0c9b213a] {\r\n  letter-spacing: 1px;\r\n  font-family: sans-serif;\n}\n.btn-edit[data-v-0c9b213a] {\r\n  background: #0093e9;\n}\n.card-header[data-v-0c9b213a] {\r\n  background-image: linear-gradient(\r\n    to right,\r\n    rgb(242, 112, 156),\r\n    rgb(255, 148, 114)\r\n  );\n}\nthead[data-v-0c9b213a] {\r\n  /* background: #84a4ff; */\r\n  background-image: linear-gradient(to right, #0093e9, #80d0c7);\r\n  color: white;\r\n  border: none;\n}\n.card[data-v-0c9b213a] {\r\n  border-top: none;\n}\n.card-header[data-v-0c9b213a] {\r\n  border: none;\n}\n.btn-save[data-v-0c9b213a] {\r\n  background: #5a67ff;\n}\n.btn-save[data-v-0c9b213a]:hover {\r\n  background: #0093e9;\r\n  transition: 2s ease;\n}\n.table-striped > tbody > tr:nth-of-type(odd) > *[data-v-0c9b213a] {\r\n  --bs-table-accent-bg: rgb(229 231 255);\r\n  color: var(--bs-table-striped-color);\r\n  border: none;\n}\r\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 

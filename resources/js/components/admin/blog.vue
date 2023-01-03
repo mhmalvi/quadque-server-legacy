@@ -63,7 +63,7 @@
                   />
                 </p>
               </div>
-              <div class="form-group" style="width:32rem;">
+              <div class="form-group" style="">
                 <label for="text">Blog Text</label>
                 <textarea
                   v-model="text"
@@ -116,7 +116,7 @@
                 <!-- {{ list.thumbnail }} -->
                 <img :src="list.thumbnail" width="100" height="100" />
               </td>
-              <td v-html="list.text"></td>
+              <td v-html="(list.text)"></td>
 
               <td style="vertical-align: middle; color: white">
                 <button
