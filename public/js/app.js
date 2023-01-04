@@ -6369,6 +6369,14 @@ __webpack_require__.r(__webpack_exports__);
     Loading: (vue_loading_overlay__WEBPACK_IMPORTED_MODULE_2___default())
   },
   methods: {
+    addField: function addField(value, fieldType) {
+      fieldType.push({
+        value: ""
+      });
+    },
+    removeField: function removeField(index, fieldType) {
+      fieldType.splice(index, 1);
+    },
     group_img_1: function group_img_1(e) {
       this.group_images_1 = e.target.files[0];
     },
@@ -8240,6 +8248,10 @@ var render = function render() {
       value: _vm.first_content,
       expression: "first_content"
     }],
+    staticClass: "summernote",
+    staticStyle: {
+      background: "#3e3d3d !important"
+    },
     attrs: {
       id: "summernote",
       cols: "30",
@@ -16046,11 +16058,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _node_modules_laravel_mix_node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../../node_modules/laravel-mix/node_modules/css-loader/dist/runtime/api.js */ "./node_modules/laravel-mix/node_modules/css-loader/dist/runtime/api.js");
 /* harmony import */ var _node_modules_laravel_mix_node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_laravel_mix_node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _node_modules_laravel_mix_node_modules_css_loader_dist_cjs_js_clonedRuleSet_9_use_1_css_summernote_css__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! -!../../../../node_modules/laravel-mix/node_modules/css-loader/dist/cjs.js??clonedRuleSet-9.use[1]!../../../css/summernote.css */ "./node_modules/laravel-mix/node_modules/css-loader/dist/cjs.js??clonedRuleSet-9.use[1]!./resources/css/summernote.css");
 // Imports
 
+
 var ___CSS_LOADER_EXPORT___ = _node_modules_laravel_mix_node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
+___CSS_LOADER_EXPORT___.i(_node_modules_laravel_mix_node_modules_css_loader_dist_cjs_js_clonedRuleSet_9_use_1_css_summernote_css__WEBPACK_IMPORTED_MODULE_1__["default"]);
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n#my-strictly-unique-vue-upload-multiple-image[data-v-0298f1de] {\r\n  font-family: \"Avenir\", Helvetica, Arial, sans-serif;\r\n  -webkit-font-smoothing: antialiased;\r\n  -moz-osx-font-smoothing: grayscale;\r\n  text-align: center;\r\n  color: #2c3e50;\r\n  margin-top: 60px;\n}\ndiv[data-v-0298f1de] {\r\n  letter-spacing: 1px;\r\n  font-family: sans-serif;\n}\n.btn-edit[data-v-0298f1de] {\r\n  background: #0093e9;\n}\n.card[data-v-0298f1de] {\r\n  border-top: none;\n}\n.card-header[data-v-0298f1de] {\r\n  border: none;\r\n  background-image: linear-gradient(\r\n    to right,\r\n    rgb(242, 112, 156),\r\n    rgb(255, 148, 114)\r\n  );\n}\ntable tbody tr[data-v-0298f1de] {\r\n  line-height: 100px;\r\n  text-align: center;\n}\nthead th[data-v-0298f1de] {\r\n  text-align: center;\n}\nthead[data-v-0298f1de] {\r\n  /* background: #84a4ff; */\r\n  background-image: linear-gradient(to right, #0093e9, #80d0c7);\r\n  color: white;\r\n  border: none;\n}\n.btn-save[data-v-0298f1de] {\r\n  background: #5a67ff;\n}\n.btn-save[data-v-0298f1de]:hover {\r\n  background: #0093e9;\r\n  transition: 2s ease;\n}\n.table-striped > tbody > tr:nth-of-type(odd) > *[data-v-0298f1de] {\r\n  --bs-table-accent-bg: rgb(229 231 255);\r\n  color: var(--bs-table-striped-color);\r\n  border: none;\n}\r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n#my-strictly-unique-vue-upload-multiple-image[data-v-0298f1de] {\r\n  font-family: \"Avenir\", Helvetica, Arial, sans-serif;\r\n  -webkit-font-smoothing: antialiased;\r\n  -moz-osx-font-smoothing: grayscale;\r\n  text-align: center;\r\n  color: #2c3e50;\r\n  margin-top: 60px;\n}\ndiv[data-v-0298f1de] {\r\n  letter-spacing: 1px;\r\n  font-family: sans-serif;\n}\n.btn-edit[data-v-0298f1de] {\r\n  background: #0093e9;\n}\n.card[data-v-0298f1de] {\r\n  border-top: none;\n}\n.card-header[data-v-0298f1de] {\r\n  border: none;\r\n  background-image: linear-gradient(\r\n    to right,\r\n    rgb(242, 112, 156),\r\n    rgb(255, 148, 114)\r\n  );\n}\ntable tbody tr[data-v-0298f1de] {\r\n  line-height: 100px;\r\n  text-align: center;\n}\nthead th[data-v-0298f1de] {\r\n  text-align: center;\n}\nthead[data-v-0298f1de] {\r\n  /* background: #84a4ff; */\r\n  background-image: linear-gradient(to right, #0093e9, #80d0c7);\r\n  color: white;\r\n  border: none;\n}\n.btn-save[data-v-0298f1de] {\r\n  background: #5a67ff;\n}\n.btn-save[data-v-0298f1de]:hover {\r\n  background: #0093e9;\r\n  transition: 2s ease;\n}\n.table-striped > tbody > tr:nth-of-type(odd) > *[data-v-0298f1de] {\r\n  --bs-table-accent-bg: rgb(229 231 255);\r\n  color: var(--bs-table-striped-color);\r\n  border: none;\n}\n.note-editor.note-airframe .note-editing-area .note-editable[data-v-0298f1de], .note-editor.note-frame .note-editing-area .note-editable[data-v-0298f1de] {\r\n    padding: 10px;\r\n    overflow: auto;\r\n    word-wrap: break-word;\r\n    background: aliceblue;\n}\n#summernote[data-v-0298f1de]{\r\n  background: aliceblue;\n}\r\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -16123,6 +16138,30 @@ __webpack_require__.r(__webpack_exports__);
 var ___CSS_LOADER_EXPORT___ = _node_modules_laravel_mix_node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
 ___CSS_LOADER_EXPORT___.push([module.id, "\ndiv[data-v-0c9b213a] {\r\n  letter-spacing: 1px;\r\n  font-family: sans-serif;\n}\n.btn-edit[data-v-0c9b213a] {\r\n  background: #0093e9;\n}\n.card-header[data-v-0c9b213a] {\r\n  background-image: linear-gradient(\r\n    to right,\r\n    rgb(242, 112, 156),\r\n    rgb(255, 148, 114)\r\n  );\n}\nthead[data-v-0c9b213a] {\r\n  /* background: #84a4ff; */\r\n  background-image: linear-gradient(to right, #0093e9, #80d0c7);\r\n  color: white;\r\n  border: none;\n}\n.card[data-v-0c9b213a] {\r\n  border-top: none;\n}\n.card-header[data-v-0c9b213a] {\r\n  border: none;\n}\n.btn-save[data-v-0c9b213a] {\r\n  background: #5a67ff;\n}\n.btn-save[data-v-0c9b213a]:hover {\r\n  background: #0093e9;\r\n  transition: 2s ease;\n}\n.table-striped > tbody > tr:nth-of-type(odd) > *[data-v-0c9b213a] {\r\n  --bs-table-accent-bg: rgb(229 231 255);\r\n  color: var(--bs-table-striped-color);\r\n  border: none;\n}\r\n", ""]);
+// Exports
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
+
+
+/***/ }),
+
+/***/ "./node_modules/laravel-mix/node_modules/css-loader/dist/cjs.js??clonedRuleSet-9.use[1]!./resources/css/summernote.css":
+/*!*****************************************************************************************************************************!*\
+  !*** ./node_modules/laravel-mix/node_modules/css-loader/dist/cjs.js??clonedRuleSet-9.use[1]!./resources/css/summernote.css ***!
+  \*****************************************************************************************************************************/
+/***/ ((module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _node_modules_laravel_mix_node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../node_modules/laravel-mix/node_modules/css-loader/dist/runtime/api.js */ "./node_modules/laravel-mix/node_modules/css-loader/dist/runtime/api.js");
+/* harmony import */ var _node_modules_laravel_mix_node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_laravel_mix_node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0__);
+// Imports
+
+var ___CSS_LOADER_EXPORT___ = _node_modules_laravel_mix_node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
+// Module
+___CSS_LOADER_EXPORT___.push([module.id, ".summernote{\r\n    background-color: black;\r\n}", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
