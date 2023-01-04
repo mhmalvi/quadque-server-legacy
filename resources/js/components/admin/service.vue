@@ -1,11 +1,7 @@
-ib<template>
+<template>
   <div>
     <div class="row d-flex justify-content-center">
-      <div
-        v-if="this.is_editing == true"
-        @click="disable_button()"
-        class="mt-3"
-      >
+      <div v-if="this.is_editing == true" @click="disable_button()" class="mt-3">
         <button class="btn btn-primary">Create Services</button>
       </div>
       <div class="col-md-6 mt-4">
@@ -13,21 +9,15 @@ ib<template>
           {{ this.success }}
         </div> -->
         <div class="card">
-          <div
-            class="card-header text-center"
-            style="
+          <div class="card-header text-center" style="
               height: 47px;
               background-image: linear-gradient(
                 to right,
                 rgb(242, 112, 156),
                 rgb(255, 148, 114)
               );
-            "
-          >
-            <h4
-              class="card-title text-white text-center"
-              style="margin-top: 1%"
-            >
+            ">
+            <h4 class="card-title text-white text-center" style="margin-top: 1%">
               {{ this.is_editing ? "Update Service" : "Create Service" }}
             </h4>
           </div>
@@ -35,33 +25,19 @@ ib<template>
             <form>
               <div class="form-group">
                 <label for="title">Service Name</label>
-                <input
-                  type="text"
-                  class="form-control"
-                  v-model="service_name"
-                  placeholder="Enter service name"
-                />
+                <input type="text" class="form-control" v-model="service_name" placeholder="Enter service name" required/>
                 <div class="text-danger" v-if="this.service_nameError">
                   {{ this.service_nameError }}
                 </div>
               </div>
               <div class="form-group">
                 <label for="thumbnail">Service File</label>
-                <input
-                  type="file"
-                  class="form-control"
-                  id="thumbnail"
-                  @change="uploadfile"
-                />
+                <input type="file" class="form-control" id="thumbnail" required @change="uploadfile" />
                 <div class="text-danger" v-if="this.fileError">
                   {{ this.fileError }}
                 </div>
                 <p class="my-2 text-center" v-if="this.temp_thumbnail_url">
-                  <img
-                    :src="this.temp_thumbnail_url"
-                    width="150"
-                    height="150"
-                  />
+                  <img :src="this.temp_thumbnail_url" width="150" height="150" />
                 </p>
               </div>
               <div class="form-group">
@@ -74,134 +50,97 @@ ib<template>
 
                   required
                 ></textarea> -->
-                <textarea
-                  v-model="description"
-                  class="form-control"
-                  rows="4"
-                ></textarea>
+                <textarea v-model="description" class="form-control" rows="4" required></textarea>
 
                 <div class="text-danger" v-if="this.descriptionError">
                   {{ this.descriptionError }}
                 </div>
               </div>
-              <h4>Menus</h4>
-              <div class="form-group" v-for="(input, k) in inputs" :key="k">
-                <!-- <label for="title">Menus</label> -->
-                <input
-                  type="text"
-                  id="identity_design_menus"
-                  class="form-control"
-                  v-model="input.identity_design_menus"
-                  placeholder="Enter menus"
-                />
-                <!-- <div class="text-danger" v-if="this.service_nameError">
-                  {{ this.service_nameError }}
-                </div> -->
-                <span>
-                  <i
-                    class="fa-sharp fa-solid fa-square-minus"
-                    @click="remove(k)"
-                    v-show="k || (!k && inputs.length > 1)"
-                  ></i>
-                  <i
-                    class="fa-solid fa-square-plus"
-                    @click="add(k)"
-                    v-show="k == inputs.length - 1"
-                  ></i>
-                </span>
+              <h4>Identity Menus</h4>
+              <div class="form-group">
+                <!-- <div v-for="(data, index) in identity_menus" :key="index"> -->
+                <label for=""> Menus <span style="color:red;">(use comma (,) separated names)</span> </label>
+                <textarea type="string" @keydown.space.prevent id="identity_design_menus" class="form-control" v-model="identity_design_menus"
+                  placeholder="Enter menus" required></textarea>
+                <!-- <a style="height: 40px;cursor:pointer;color:red;" @click="removeIdentityMenu(index)">Remove (-)</a> -->
+                <!-- </div> -->
+                <div class="text-danger" v-if="this.identity_design_menusError">
+                  {{ this.identity_design_menusError }}
+                </div>
               </div>
               <div class="form-group">
+                <label for="title">Identity Design Title</label>
+                <input type="text" class="form-control" v-model="identity_design_title" placeholder="Enter title" required />
+                <div class="text-danger" v-if="this.identity_design_titleError">
+                  {{ this.identity_design_titleError }}
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="title">Identity Design Description </label>
+                <textarea v-model="identity_design_des" class="form-control" required></textarea>
+                <div class="text-danger" v-if="this.identity_design_desError">
+                  {{ this.identity_design_desError }}
+                </div>
+              </div>
+              <!-- <a class="btn btn-primary" style="height: 40px;" @click="addIdentityMenu">Add (+)</a> -->
+              <div class="form-group mt-4">
                 <label for="title">Project Count</label>
-                <input
-                  type="number"
-                  class="form-control"
-                  v-model="project_count"
-                  placeholder="Enter project count"
-                />
-                <div class="text-danger" v-if="this.service_nameError">
-                  {{ this.service_nameError }}
+                <input type="number" class="form-control" v-model="project_count" placeholder="Enter project count" required/>
+                <div class="text-danger" v-if="this.project_countError">
+                  {{ this.project_countError }}
                 </div>
               </div>
               <div class="form-group">
                 <label for="title">Happy Clients Count</label>
-                <input
-                  type="number"
-                  class="form-control"
-                  v-model="happy_clients"
-                  placeholder="Enter count"
-                />
-                <div class="text-danger" v-if="this.service_nameError">
-                  {{ this.service_nameError }}
+                <input type="number" class="form-control" v-model="happy_clients" placeholder="Enter count" required/>
+                <div class="text-danger" v-if="this.happy_clientsError">
+                  {{ this.happy_clientsError }}
                 </div>
               </div>
-              <div class="form-group"></div>
+
               <!-- <h1>Why Choose Us</h1> -->
               <div class="form-group">
                 <label for="title">Content </label>
-                <textarea
-                  v-model="content"
-                  class="form-control"
-                  id="summernote"
-                  required
-                ></textarea>
-                <!-- <vue-editor v-model="why_choose_us"></vue-editor> -->
+                <textarea v-model="content" class="form-control" id="summernote" required></textarea>
+                <div class="text-danger" v-if="this.contentError">
+                  {{ this.contentError }}
+                </div>
               </div>
 
               <!-- <h1>Design Service Capabilities</h1> -->
-              <h5>Service capabilities Menus</h5>
-              <div class="form-group" v-for="(field, i) in fields" :key="i">
-                <!-- <label for="title"> </label> -->
-                <input
-                  type="text"
-                  class="form-control"
-                  v-model="field.services_capabilities_menus"
-                  placeholder="Enter menu name"
-                />
-                <span>
-                  <i
-                    class="fa-sharp fa-solid fa-square-minus"
-                    @click="remove_cap(i)"
-                    v-show="i || (!i && fields.length > 1)"
-                  ></i>
-                  <i
-                    class="fa-solid fa-square-plus"
-                    @click="add_cap(i)"
-                    v-show="i == fields.length - 1"
-                  ></i>
-                </span>
-                <!-- <div class="text-danger" v-if="this.service_nameError">
-                  {{ this.service_nameError }}
-                </div> -->
-              </div>
-
+              <!-- <h4>Service capabilities Menus</h4> -->
               <div class="form-group">
+
+                <!-- <div v-for="(data, index) in service_capability_menus" :key="index"> -->
+                <label for="title">Service capabilities Menus <span style="color:red;">(use comma (,) separated names)</span></label>
+                <textarea @keydown.space.prevent type="text" class="form-control" v-model="service_capability_menu"
+                  placeholder="Enter menu name" required></textarea>
+                <!-- <a style="cursor:pointer;height: 40px;color:red;" @click="removeServiceCapabilityMenu(index)">Remove
+                    menu</a> -->
+                <!-- </div> -->
+                <div class="text-danger" v-if="this.service_capability_menuError">
+                  {{ this.service_capability_menuError }}
+                </div>
+              </div>
+              <!-- <a class="btn btn-primary" style="height: 40px;" @click="addServiceCapabilityMenu">Add menu</a> -->
+              <div class="form-group mt-4">
                 <label for="title">Service Deliver Title </label>
-                <input
-                  type="text"
-                  class="form-control"
-                  v-model="service_deliver_title"
-                  placeholder="Enter title"
-                />
-                <div class="text-danger" v-if="this.service_nameError">
-                  {{ this.service_nameError }}
+                <input type="text" class="form-control" v-model="service_deliver_title" placeholder="Enter title" required/>
+                <div class="text-danger" v-if="this.service_deliver_titleError">
+                  {{ this.service_deliver_titleError }}
                 </div>
               </div>
 
               <div class="form-group">
                 <label for="title">Service Deliver Description</label>
-                <textarea
-                  v-model="service_deliver_description"
-                  class="form-control"
-                  rows="4"
-                ></textarea>
+                <textarea v-model="service_deliver_description" class="form-control" rows="4" required></textarea>
+                <div class="text-danger" v-if="this.service_deliver_descriptionError">
+                  {{ this.service_deliver_descriptionError }}
+                </div>
               </div>
 
               <div>
-                <button
-                  type="button"
-                  class="btn btn-block btn-save text-white"
-                  @click="save"
-                >
+                <button type="button" class="btn btn-block btn-save text-white" @click="save">
                   {{ this.is_editing ? "Update" : "Save" }}
                 </button>
               </div>
@@ -240,17 +179,8 @@ ib<template>
               </td>
 
               <td style="vertical-align: middle; width: 15%; color: white">
-                <button
-                  type="button"
-                  class="btn btn-primary text-white"
-                  @click="editList(list.id)"
-                >
-                  Edit</button
-                ><button
-                  type="button"
-                  class="btn btn-danger ml-1"
-                  @click="destroyList(list.id)"
-                >
+                <button type="button" class="btn btn-primary text-white" @click="editList(list.id)">
+                  Edit</button><button type="button" class="btn btn-danger ml-1" @click="destroyList(list.id)">
                   Delete
                 </button>
               </td>
@@ -278,29 +208,19 @@ export default {
   },
   data() {
     return {
-      hello: "<h3>There have no blogs...!</h3>",
       lists: [],
       service_name: "",
       file: "",
       description: "",
-      inputs: [
-        {
-          identity_design_menus: "",
-        },
-      ],
-
       identity_design_title: "",
       identity_design_des: "",
-      // identity_design_menus: "",
+      identity_design_menus: "",
       project_count: "",
       happy_clients: "",
       content: "",
-      fields: [
-        {
-          services_capabilities_menus: "",
-        },
-      ],
-
+      service_capability_menu: "",
+      service_capability_menus: [],
+      identity_menus: [],
       service_deliver_title: "",
       service_deliver_description: "",
 
@@ -309,6 +229,16 @@ export default {
       service_nameError: "",
       descriptionError: "",
       fileError: "",
+      descriptionError:"",
+      identity_design_titleError:"",
+      identity_design_desError:"",
+      identity_design_menusError:"",
+      project_countError:"",
+      happy_clientsError:"",
+      contentError:"",
+      service_capability_menuError:"",
+      service_deliver_titleError:"",
+      service_deliver_descriptionError:"",
       success: "",
       temporary_id: "",
       is_editing: false,
@@ -318,25 +248,23 @@ export default {
     };
   },
   methods: {
-    add() {
-      this.inputs.push({
-        identity_design_menus: "",
-      });
-      console.log(this.inputs);
-    },
+    // addIdentityMenu: function () {
+    //   this.identity_menus.push({
+    //     identity_design_menus: '',
+    //   });
+    // },
+    // removeIdentityMenu: function (index) {
+    //   this.identity_menus.splice(index, 1);
+    // },
 
-    remove(index) {
-      this.inputs.splice(index, 1);
-    },
-    add_cap() {
-      this.fields.push({
-        services_capabilities_menus: "",
-      });
-    },
-    remove_cap(index) {
-      this.fields.splice(index, 1);
-    },
-
+    // addServiceCapabilityMenu: function () {
+    //   this.service_capability_menus.push({
+    //     service_capability_menu: '',
+    //   });
+    // },
+    // removeServiceCapabilityMenu: function (index) {
+    //   this.service_capability_menus.splice(index, 1);
+    // },
     disable_button() {
       this.is_editing = false;
       this.service_name = "";
@@ -350,9 +278,9 @@ export default {
         (this.project_count = ""),
         (this.happy_clients = ""),
         (this.content = ""),
-        (this.services_capabilities_menus = ""),
+        (this.service_capability_menu = ""),
         (this.service_deliver_title = ""),
-        (this.service_deliver_des = ""),
+        (this.service_deliver_description = ""),
         (this.temp_thumbnail_url = "");
     },
     fetchAll() {
@@ -363,7 +291,7 @@ export default {
           console.log(response);
           this.lists = response.data;
         })
-        .catch((error) => {});
+        .catch((error) => { });
     },
     uploadfile(e) {
       this.file = e.target.files[0];
@@ -371,8 +299,7 @@ export default {
     },
 
     save() {
-      console.log(this.inputs);
-      console.log(this.fields);
+
       let url;
       if (this.is_editing) {
         url = `/admin/service/update/`;
@@ -381,6 +308,10 @@ export default {
       }
 
       this.content = $("#summernote").summernote("code");
+      // var menuList = {
+      //   'identity_menu_list': this.identity_menus,
+      //   'services_capabilities_menu_list':this.service_capability_menus
+      // }
       let fd = new FormData();
       fd.append("service_name", this.service_name);
       fd.append("description", this.description);
@@ -388,17 +319,19 @@ export default {
 
       fd.append("identity_design_title", this.identity_design_title);
       fd.append("identity_design_des", this.identity_design_des);
-      for (let n = 0; n < this.inputs.length; n++) {
-        fd.append("identity_design_menus[]", this.inputs[n]);
-      }
+      fd.append("identity_design_menus", this.identity_design_menus);
 
       fd.append("project_count", this.project_count);
       fd.append("happy_clients", this.happy_clients);
 
+      // fd.append('identity_menus[]', menuList)
+
+      // fd.append('menus',menuList);
       fd.append("content", this.content);
-      for (let m = 0; m < this.fields.length; m++) {
-        fd.append("services_capabilities_menus[]", this.fields[m]);
-      }
+      // for (let m = 0; m < this.service_capability_menus.length; m++) {
+      //   var cap_menus = JSON.stringify(this.service_capability_menus[m])
+      fd.append("service_capability_menus", this.service_capability_menu);
+      // }
       fd.append("service_deliver_title", this.service_deliver_title);
       fd.append(
         "service_deliver_description",
@@ -463,6 +396,16 @@ export default {
           } else {
             this.fileError = "";
           }
+          if (error.response.data.errors.identity_design_titleError) {
+            this.fileError = error.response.data.errors.file[0];
+          } else {
+            this.fileError = "";
+          }
+          if (error.response.data.errors.identity_design_desError) {
+            this.fileError = error.response.data.errors.file[0];
+          } else {
+            this.fileError = "";
+          }
         });
     },
 
@@ -491,16 +434,16 @@ export default {
             response.data.services_capabilities_title;
           this.services_capabilities_des =
             response.data.services_capabilities_des;
-          this.services_capabilities_menus =
-            response.data.services_capabilities_menus;
+          this.service_capability_menu =
+            response.data.services_capabilities_menu;
 
           this.service_deliver_title = response.data.service_deliver_title;
-          this.service_deliver_des = response.data.service_deliver_des;
+          this.service_deliver_description = response.data.service_deliver_des;
 
           $("#summernote").summernote("code", this.content);
           this.temp_thumbnail_url = response.data.file;
         })
-        .catch((error) => {});
+        .catch((error) => { });
     },
     destroyList(list_id) {
       axios.get(`/admin/service/delete/${list_id}`).then((response) => {
@@ -512,44 +455,13 @@ export default {
         });
         (this.identity_design_title = ""),
           (this.identity_design_des = ""),
-          (this.identity_design_menus_1 = ""),
-          (this.identity_design_menus_2 = ""),
-          (this.identity_design_menus_3 = ""),
-          (this.identity_design_menus_4 = ""),
-          (this.identity_design_menus_5 = ""),
-          (this.identity_design_menus_6 = ""),
+          (this.identity_design_menus = ""),
           (this.project_count = ""),
           (this.happy_clients = ""),
-          (this.best_service_title = ""),
-          (this.best_service_header = ""),
-          (this.best_service_des = ""),
-          (this.why_choose_us_title = ""),
-          (this.why_choose_us_des = ""),
-          (this.services_capabilities_title = ""),
-          (this.services_capabilities_des = ""),
-          (this.services_capabilities_menus_1 = ""),
-          (this.services_capabilities_menus_2 = ""),
-          (this.services_capabilities_menus_3 = ""),
-          (this.services_capabilities_menus_4 = ""),
-          (this.services_capabilities_menus_5 = ""),
-          (this.services_capabilities_menus_6 = ""),
-          (this.services_capabilities_menus_7 = ""),
+          (this.services_capabilities_menus = ""),
           (this.service_deliver_title = ""),
-          (this.service_deliver_des = ""),
-          (this.our_latest_work_title = ""),
-          (this.about_us_title = ""),
-          (this.about_us_name = ""),
-          (this.about_us_des = ""),
+          (this.service_deliver_description = ""),
           (this.temp_thumbnail_url = "");
-        this.best_service_img = "";
-        this.why_choose_us_img = "";
-        this.our_latest_work_img = "";
-        this.about_us_img = "";
-
-        this.best_service_img_tmp = "";
-        this.why_choose_us_img_tmp = "";
-        this.our_latest_work_img_tmp = "";
-        this.about_us_img_tmp = "";
       });
     },
   },
@@ -563,22 +475,24 @@ div {
   letter-spacing: 1px;
   font-family: sans-serif;
 }
+
 .btn-edit {
   background: #0093e9;
 }
+
 .card-header {
-  background-image: linear-gradient(
-    to right,
-    rgb(242, 112, 156),
-    rgb(255, 148, 114)
-  );
+  background-image: linear-gradient(to right,
+      rgb(242, 112, 156),
+      rgb(255, 148, 114));
 }
+
 thead {
   /* background: #84a4ff; */
   background-image: linear-gradient(to right, #0093e9, #80d0c7);
   color: white;
   border: none;
 }
+
 .card {
   border-top: none;
 }
@@ -588,17 +502,21 @@ thead {
   font-size: 2rem;
   padding: 10px;
 }
+
 .card-header {
   border: none;
 }
+
 .btn-save {
   background: #5a67ff;
 }
+
 .btn-save:hover {
   background: #0093e9;
   transition: 2s ease;
 }
-.table-striped > tbody > tr:nth-of-type(odd) > * {
+
+.table-striped>tbody>tr:nth-of-type(odd)>* {
   --bs-table-accent-bg: rgb(229 231 255);
   color: var(--bs-table-striped-color);
   border: none;

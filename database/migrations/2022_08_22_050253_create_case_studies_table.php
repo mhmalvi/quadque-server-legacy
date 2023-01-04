@@ -17,6 +17,7 @@ class CreateCaseStudiesTable extends Migration
             $table->id();
             $table->string('com_name');
             $table->string('com_image');
+            $table->string('description');
             $table->text('summary1');
             $table->string('group_images_1');
             $table->string('group_images_2');
@@ -29,7 +30,7 @@ class CreateCaseStudiesTable extends Migration
             $table->text('summary2');
             //////////content 1
             $table->string('content');
-            $table->foreignId('services_id')->constrained('services');
+            $table->foreignId('service_id')->constrained('services');
             ///////////agency
             $table->string('agency');
             $table->timestamps();
