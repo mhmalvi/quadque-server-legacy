@@ -6479,7 +6479,21 @@ __webpack_require__.r(__webpack_exports__);
       this.con_2_img_3_tmp = "";
       this.temp_image_url = "";
       this.con_2_img_3 = "";
-      this.group_images_1 = "", this.group_images_2 = "", this.group_images_3 = "", this.group_images_4 = "", this.group_images_5 = "", this.group_images_6 = "", this.group_images_7 = "", this.group_images_1_tmp = "", this.group_images_2_tmp = "", this.group_images_3_tmp = "", this.group_images_4_tmp = "", this.group_images_5_tmp = "", this.group_images_6_tmp = "", this.group_images_7_tmp = "", $("#summernote").summernote("code", "");
+      this.group_images_1 = "";
+      this.group_images_2 = "";
+      this.group_images_3 = "";
+      this.group_images_4 = "";
+      this.group_images_5 = "";
+      this.group_images_6 = "";
+      this.group_images_7 = "";
+      this.group_images_1_tmp = "";
+      this.group_images_2_tmp = "";
+      this.group_images_3_tmp = "";
+      this.group_images_4_tmp = "";
+      this.group_images_5_tmp = "";
+      this.group_images_6_tmp = "";
+      this.group_images_7_tmp = "";
+      $("#summernote").summernote("code", "");
     },
     fetchAll: function fetchAll() {
       var _this = this;
@@ -6680,6 +6694,35 @@ __webpack_require__.r(__webpack_exports__);
           icon: "error",
           text: "Deleted"
         });
+        _this4.name = "";
+        _this4.image = "";
+        _this4.summary1 = "";
+        _this4.summary2 = "";
+        _this4.first_content = "";
+        _this4.case_con_1_img = "";
+        _this4.case_con_2_title_1 = "";
+        _this4.case_con_2_des_1 = "";
+        _this4.case_con_2_title_2 = "";
+        _this4.case_con_2_des_2 = "";
+        _this4.case_con_2_title_3 = "";
+        _this4.case_con_2_des_3 = "";
+        _this4.group_images_1 = "";
+        _this4.group_images_2 = "";
+        _this4.group_images_3 = "";
+        _this4.group_images_4 = "";
+        _this4.group_images_5 = "";
+        _this4.group_images_6 = "";
+        _this4.group_images_7 = "";
+        _this4.con_2_img_1 = "";
+        _this4.con_2_img_2 = "";
+        _this4.con_2_img_3 = "";
+        document.getElementById("image").value = "";
+        document.getElementById("case_con_1_img").value = "";
+        document.getElementById("con_2_img_1").value = "";
+        document.getElementById("con_2_img_2").value = "";
+        document.getElementById("con_2_img_3").value = "";
+        _this4.temp_image_url = "";
+        _this4.temporary_id = "";
       });
     }
   },
@@ -7182,7 +7225,11 @@ __webpack_require__.r(__webpack_exports__);
       best_service_img: "",
       why_choose_us_img: "",
       our_latest_work_img: "",
-      about_us_img: "" // blog_no: 1,
+      about_us_img: "",
+      best_service_img_tmp: "",
+      why_choose_us_img_tmp: "",
+      our_latest_work_img_tmp: "",
+      about_us_img_tmp: ""
 
     };
   },
@@ -7193,9 +7240,15 @@ __webpack_require__.r(__webpack_exports__);
       this.description = "";
       this.file = "";
       $("#summernote").summernote("code", "");
-      $("#summernote1").summernote("code", "");
-      $("#summernote2").summernote("code", "");
-      this.temp_thumbnail_url = "";
+      this.identity_design_title = "", this.identity_design_des = "", this.identity_design_menus_1 = "", this.identity_design_menus_2 = "", this.identity_design_menus_3 = "", this.identity_design_menus_4 = "", this.identity_design_menus_5 = "", this.identity_design_menus_6 = "", this.project_count = "", this.happy_clients = "", this.best_service_title = "", this.best_service_header = "", this.best_service_des = "", this.why_choose_us_title = "", this.why_choose_us_des = "", this.services_capabilities_title = "", this.services_capabilities_des = "", this.services_capabilities_menus_1 = "", this.services_capabilities_menus_2 = "", this.services_capabilities_menus_3 = "", this.services_capabilities_menus_4 = "", this.services_capabilities_menus_5 = "", this.services_capabilities_menus_6 = "", this.services_capabilities_menus_7 = "", this.service_deliver_title = "", this.service_deliver_des = "", this.our_latest_work_title = "", this.about_us_title = "", this.about_us_name = "", this.about_us_des = "", this.temp_thumbnail_url = "";
+      this.best_service_img = "";
+      this.why_choose_us_img = "";
+      this.our_latest_work_img = "";
+      this.about_us_img = "";
+      this.best_service_img_tmp = "";
+      this.why_choose_us_img_tmp = "";
+      this.our_latest_work_img_tmp = "";
+      this.about_us_img_tmp = "";
     },
     fetchAll: function fetchAll() {
       var _this = this;
@@ -7371,6 +7424,13 @@ __webpack_require__.r(__webpack_exports__);
         _this3.service_deliver_title = response.data.service_deliver_title;
         _this3.service_deliver_des = response.data.service_deliver_des;
         _this3.our_latest_work_title = response.data.our_latest_work_title;
+        _this3.about_us_title = response.data.about_us_title;
+        _this3.about_us_name = response.data.about_us_name;
+        _this3.about_us_des = response.data.about_us_des;
+        _this3.best_service_img_tmp = response.data.best_service_img;
+        _this3.why_choose_us_img_tmp = response.data.why_choose_us_img;
+        _this3.our_latest_work_img_tmp = response.data.our_latest_work_img;
+        _this3.about_us_img_tmp = response.data.about_us_img;
         $("#summernote").summernote("code", _this3.description);
         _this3.temp_thumbnail_url = response.data.file;
       })["catch"](function (error) {});
@@ -7386,6 +7446,15 @@ __webpack_require__.r(__webpack_exports__);
           icon: "error",
           text: "Deleted"
         });
+        _this4.identity_design_title = "", _this4.identity_design_des = "", _this4.identity_design_menus_1 = "", _this4.identity_design_menus_2 = "", _this4.identity_design_menus_3 = "", _this4.identity_design_menus_4 = "", _this4.identity_design_menus_5 = "", _this4.identity_design_menus_6 = "", _this4.project_count = "", _this4.happy_clients = "", _this4.best_service_title = "", _this4.best_service_header = "", _this4.best_service_des = "", _this4.why_choose_us_title = "", _this4.why_choose_us_des = "", _this4.services_capabilities_title = "", _this4.services_capabilities_des = "", _this4.services_capabilities_menus_1 = "", _this4.services_capabilities_menus_2 = "", _this4.services_capabilities_menus_3 = "", _this4.services_capabilities_menus_4 = "", _this4.services_capabilities_menus_5 = "", _this4.services_capabilities_menus_6 = "", _this4.services_capabilities_menus_7 = "", _this4.service_deliver_title = "", _this4.service_deliver_des = "", _this4.our_latest_work_title = "", _this4.about_us_title = "", _this4.about_us_name = "", _this4.about_us_des = "", _this4.temp_thumbnail_url = "";
+        _this4.best_service_img = "";
+        _this4.why_choose_us_img = "";
+        _this4.our_latest_work_img = "";
+        _this4.about_us_img = "";
+        _this4.best_service_img_tmp = "";
+        _this4.why_choose_us_img_tmp = "";
+        _this4.our_latest_work_img_tmp = "";
+        _this4.about_us_img_tmp = "";
       });
     }
   },
@@ -9732,7 +9801,15 @@ var render = function render() {
     on: {
       change: _vm.image_best_service
     }
-  }), _vm._v(" "), this.service_nameError ? _c("div", {
+  }), _vm._v(" "), this.best_service_img_tmp ? _c("p", {
+    staticClass: "my-2 text-center"
+  }, [_c("img", {
+    attrs: {
+      src: this.best_service_img_tmp,
+      width: "150",
+      height: "150"
+    }
+  })]) : _vm._e(), _vm._v(" "), this.service_nameError ? _c("div", {
     staticClass: "text-danger"
   }, [_vm._v("\n                " + _vm._s(this.service_nameError) + "\n              ")]) : _vm._e()]), _vm._v(" "), _c("div", {
     staticClass: "form-group"
@@ -9808,7 +9885,15 @@ var render = function render() {
     }
   }), _vm._v(" "), this.service_nameError ? _c("div", {
     staticClass: "text-danger"
-  }, [_vm._v("\n                " + _vm._s(this.service_nameError) + "\n              ")]) : _vm._e()]), _vm._v(" "), _c("div", {
+  }, [_vm._v("\n                " + _vm._s(this.service_nameError) + "\n              ")]) : _vm._e(), _vm._v(" "), this.why_choose_us_img_tmp ? _c("p", {
+    staticClass: "my-2 text-center"
+  }, [_c("img", {
+    attrs: {
+      src: this.why_choose_us_img_tmp,
+      width: "150",
+      height: "150"
+    }
+  })]) : _vm._e()]), _vm._v(" "), _c("div", {
     staticClass: "form-group"
   }, [_c("label", {
     attrs: {
@@ -10152,7 +10237,15 @@ var render = function render() {
     on: {
       change: _vm.image_our_work
     }
-  }), _vm._v(" "), this.descriptionError ? _c("div", {
+  }), _vm._v(" "), this.our_latest_work_img_tmp ? _c("p", {
+    staticClass: "my-2 text-center"
+  }, [_c("img", {
+    attrs: {
+      src: this.our_latest_work_img_tmp,
+      width: "150",
+      height: "150"
+    }
+  })]) : _vm._e(), _vm._v(" "), this.descriptionError ? _c("div", {
     staticClass: "text-danger"
   }, [_vm._v("\n                " + _vm._s(this.descriptionError) + "\n              ")]) : _vm._e()]), _vm._v(" "), _c("h1", [_vm._v("About Us")]), _vm._v(" "), _c("div", {
     staticClass: "form-group"
@@ -10255,7 +10348,15 @@ var render = function render() {
     on: {
       change: _vm.image_about_us
     }
-  }), _vm._v(" "), this.descriptionError ? _c("div", {
+  }), _vm._v(" "), this.about_us_img_tmp ? _c("p", {
+    staticClass: "my-2 text-center"
+  }, [_c("img", {
+    attrs: {
+      src: this.about_us_img_tmp,
+      width: "150",
+      height: "150"
+    }
+  })]) : _vm._e(), _vm._v(" "), this.descriptionError ? _c("div", {
     staticClass: "text-danger"
   }, [_vm._v("\n                " + _vm._s(this.descriptionError) + "\n              ")]) : _vm._e()]), _vm._v(" "), _c("div", [_c("button", {
     staticClass: "btn btn-block btn-save text-white",

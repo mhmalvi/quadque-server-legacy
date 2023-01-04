@@ -1,6 +1,12 @@
 <template>
   <div>
-    <loading :active="isLoading" :is-full-page="fullPage"  :background-color="background" :loader="loader" :opacity="opacity" />
+    <loading
+      :active="isLoading"
+      :is-full-page="fullPage"
+      :background-color="background"
+      :loader="loader"
+      :opacity="opacity"
+    />
     <div class="row d-flex justify-content-center">
       <div
         v-if="this.is_editing == true"
@@ -473,7 +479,7 @@ export default {
       // return { value: '' }
       // value:''
       background: "#fff",
-      opacity:0.5
+      opacity: 0.5,
     };
   },
   components: {
@@ -523,21 +529,21 @@ export default {
       this.con_2_img_3_tmp = "";
       this.temp_image_url = "";
       this.con_2_img_3 = "";
-      (this.group_images_1 = ""),
-        (this.group_images_2 = ""),
-        (this.group_images_3 = ""),
-        (this.group_images_4 = ""),
-        (this.group_images_5 = ""),
-        (this.group_images_6 = ""),
-        (this.group_images_7 = ""),
-        (this.group_images_1_tmp = ""),
-        (this.group_images_2_tmp = ""),
-        (this.group_images_3_tmp = ""),
-        (this.group_images_4_tmp = ""),
-        (this.group_images_5_tmp = ""),
-        (this.group_images_6_tmp = ""),
-        (this.group_images_7_tmp = ""),
-        $("#summernote").summernote("code", "");
+      this.group_images_1 = "";
+      this.group_images_2 = "";
+      this.group_images_3 = "";
+      this.group_images_4 = "";
+      this.group_images_5 = "";
+      this.group_images_6 = "";
+      this.group_images_7 = "";
+      this.group_images_1_tmp = "";
+      this.group_images_2_tmp = "";
+      this.group_images_3_tmp = "";
+      this.group_images_4_tmp = "";
+      this.group_images_5_tmp = "";
+      this.group_images_6_tmp = "";
+      this.group_images_7_tmp = "";
+      $("#summernote").summernote("code", "");
     },
     fetchAll() {
       axios
@@ -735,6 +741,35 @@ export default {
           icon: "error",
           text: "Deleted",
         });
+        this.name = "";
+        this.image = "";
+        this.summary1 = "";
+        this.summary2 = "";
+        this.first_content = "";
+        this.case_con_1_img = "";
+        this.case_con_2_title_1 = "";
+        this.case_con_2_des_1 = "";
+        this.case_con_2_title_2 = "";
+        this.case_con_2_des_2 = "";
+        this.case_con_2_title_3 = "";
+        this.case_con_2_des_3 = "";
+        this.group_images_1 = "";
+        this.group_images_2 = "";
+        this.group_images_3 = "";
+        this.group_images_4 = "";
+        this.group_images_5 = "";
+        this.group_images_6 = "";
+        this.group_images_7 = "";
+        this.con_2_img_1 = "";
+        this.con_2_img_2 = "";
+        this.con_2_img_3 = "";
+        document.getElementById("image").value = "";
+        document.getElementById("case_con_1_img").value = "";
+        document.getElementById("con_2_img_1").value = "";
+        document.getElementById("con_2_img_2").value = "";
+        document.getElementById("con_2_img_3").value = "";
+        this.temp_image_url = "";
+        this.temporary_id = "";
       });
     },
   },
