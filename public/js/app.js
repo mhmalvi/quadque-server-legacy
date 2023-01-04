@@ -6411,7 +6411,21 @@ __webpack_require__.r(__webpack_exports__);
       this.con_2_img_3_tmp = "";
       this.temp_image_url = "";
       this.con_2_img_3 = "";
-      this.group_images_1 = "", this.group_images_2 = "", this.group_images_3 = "", this.group_images_4 = "", this.group_images_5 = "", this.group_images_6 = "", this.group_images_7 = "", this.group_images_1_tmp = "", this.group_images_2_tmp = "", this.group_images_3_tmp = "", this.group_images_4_tmp = "", this.group_images_5_tmp = "", this.group_images_6_tmp = "", this.group_images_7_tmp = "", $("#summernote").summernote("code", "");
+      this.group_images_1 = "";
+      this.group_images_2 = "";
+      this.group_images_3 = "";
+      this.group_images_4 = "";
+      this.group_images_5 = "";
+      this.group_images_6 = "";
+      this.group_images_7 = "";
+      this.group_images_1_tmp = "";
+      this.group_images_2_tmp = "";
+      this.group_images_3_tmp = "";
+      this.group_images_4_tmp = "";
+      this.group_images_5_tmp = "";
+      this.group_images_6_tmp = "";
+      this.group_images_7_tmp = "";
+      $("#summernote").summernote("code", "");
     },
     fetchAll: function fetchAll() {
       var _this = this;
@@ -6600,6 +6614,35 @@ __webpack_require__.r(__webpack_exports__);
           icon: "error",
           text: "Deleted"
         });
+        _this4.name = "";
+        _this4.image = "";
+        _this4.summary1 = "";
+        _this4.summary2 = "";
+        _this4.first_content = "";
+        _this4.case_con_1_img = "";
+        _this4.case_con_2_title_1 = "";
+        _this4.case_con_2_des_1 = "";
+        _this4.case_con_2_title_2 = "";
+        _this4.case_con_2_des_2 = "";
+        _this4.case_con_2_title_3 = "";
+        _this4.case_con_2_des_3 = "";
+        _this4.group_images_1 = "";
+        _this4.group_images_2 = "";
+        _this4.group_images_3 = "";
+        _this4.group_images_4 = "";
+        _this4.group_images_5 = "";
+        _this4.group_images_6 = "";
+        _this4.group_images_7 = "";
+        _this4.con_2_img_1 = "";
+        _this4.con_2_img_2 = "";
+        _this4.con_2_img_3 = "";
+        document.getElementById("image").value = "";
+        document.getElementById("case_con_1_img").value = "";
+        document.getElementById("con_2_img_1").value = "";
+        document.getElementById("con_2_img_2").value = "";
+        document.getElementById("con_2_img_3").value = "";
+        _this4.temp_image_url = "";
+        _this4.temporary_id = "";
       });
     }
   },
