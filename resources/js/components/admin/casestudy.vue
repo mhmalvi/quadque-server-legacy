@@ -192,8 +192,10 @@
                 <textarea
                   v-model="first_content"
                   id="summernote"
+                  class="summernote"
                   cols="30"
                   rows="10"
+                  style="background: #3e3d3d !important"
                 ></textarea>
               </div>
               <div class="form-group">
@@ -290,6 +292,7 @@
                   class="form-control"
                   id="case_con_1_des_2"
                   v-model="case_con_2_des_2"
+                  
                 ></textarea>
                 <!-- <div class="text-danger" v-if="this.nameError">
                   {{ this.nameError }}
@@ -487,6 +490,12 @@ export default {
     Loading,
   },
   methods: {
+    addField(value, fieldType) {
+      fieldType.push({ value: "" });
+    },
+    removeField(index, fieldType) {
+      fieldType.splice(index, 1);
+    },
     group_img_1(e) {
       this.group_images_1 = e.target.files[0];
     },
@@ -779,6 +788,7 @@ export default {
 };
 </script>
 <style scoped>
+@import '../../../css/summernote.css';
 #my-strictly-unique-vue-upload-multiple-image {
   font-family: "Avenir", Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -829,5 +839,14 @@ thead {
   --bs-table-accent-bg: rgb(229 231 255);
   color: var(--bs-table-striped-color);
   border: none;
+}
+.note-editor.note-airframe .note-editing-area .note-editable, .note-editor.note-frame .note-editing-area .note-editable {
+    padding: 10px;
+    overflow: auto;
+    word-wrap: break-word;
+    background: aliceblue;
+}
+#summernote{
+  background: aliceblue;
 }
 </style>
