@@ -28,17 +28,8 @@ class CreateCaseStudiesTable extends Migration
             $table->string('img1');
             $table->text('summary2');
             //////////content 1
-            $table->text('first_content');
-            ////////////content 2
-            $table->text('case_con_2_title_1');
-            $table->text('case_con_2_des_1');
-            $table->text('case_con_2_title_2');          
-            $table->text('case_con_2_des_2');
-            $table->text('case_con_2_title_3');
-            $table->text('case_con_2_des_3');
-            $table->string('case_con_2_img_1');
-            $table->string('case_con_2_img_2');
-            $table->string('case_con_2_img_3');
+            $table->string('content');
+            $table->foreignId('services_id')->constrained('services');
             ///////////agency
             $table->string('agency');
             $table->timestamps();
