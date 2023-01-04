@@ -63,15 +63,15 @@
                   />
                 </p>
               </div>
-              <div class="form-group" style="width:32rem;">
+              <div class="form-group" style="">
                 <label for="text">Blog Text</label>
-                <!-- <textarea
+                <textarea
                   v-model="text"
                   id="summernote"
                   class="form-control"
                   rows="10"
-                ></textarea> -->
-                <el-tiptap v-model="text" :extensions="extensions" />
+                ></textarea>
+                <!-- <el-tiptap v-model="text" :extensions="extensions" output="html" /> -->
                 <div class="text-danger" v-if="this.textError">
                   {{ this.textError }}
                 </div>
@@ -116,7 +116,7 @@
                 <!-- {{ list.thumbnail }} -->
                 <img :src="list.thumbnail" width="100" height="100" />
               </td>
-              <td v-html="list.text"></td>
+              <td v-html="(list.text)"></td>
 
               <td style="vertical-align: middle; color: white">
                 <button
@@ -151,21 +151,21 @@
 import axios from "axios";
 // import { ElementTiptap } from 'element-tiptap';
 
-import {
-  // necessary extensions
-  Doc,
-  Text,
-  Paragraph,
-  Heading,
-  Bold,
-  Underline,
-  Italic,
-  Strike,
-  ListItem,
-  BulletList,
-  OrderedList,
-  Image,Iframe,CodeBlock,Blockquote,TodoItem,TodoList,TextAlign,Indent,LineHeight,HorizontalRule,HardBreak,TrailingNode,History,Table ,TableHeader,TableCell,TableRow,FormatClear,TextColor,TextHighlight,Preview,Print,Fullscreen,SelectAll,FontType,FontSize,CodeView 
-} from 'element-tiptap';
+// import {
+//   // necessary extensions
+//   Doc,
+//   Text,
+//   Paragraph,
+//   Heading,
+//   Bold,
+//   Underline,
+//   Italic,
+//   Strike,
+//   ListItem,
+//   BulletList,
+//   OrderedList,
+//   Image,Iframe,CodeBlock,Blockquote,TodoItem,TodoList,TextAlign,Indent,LineHeight,HorizontalRule,HardBreak,TrailingNode,History,Table ,TableHeader,TableCell,TableRow,FormatClear,TextColor,TextHighlight,Preview,Print,Fullscreen,SelectAll,FontType,FontSize,CodeView 
+// } from 'element-tiptap';
 export default {
   // components: {
   //   'el-tiptap': ElementTiptap,
@@ -185,20 +185,20 @@ export default {
       temp_thumbnail_url: "",
       blog_no: 1,
 
-      extensions: [
-        new Doc(),
-        new Text(),
-        new Paragraph(),
-        new Heading({ level: 5 }),
-        new Bold({ bubble: true }), // render command-button in bubble menu.
-        new Underline({ bubble: true, menubar: false }), // render command-button in bubble menu but not in menubar.
-        new Italic(),
-        new Strike(),
-        new ListItem(),
-        new BulletList(),
-        new OrderedList(),
-        new Image(), new Iframe(), new CodeBlock(), new Blockquote(),new TodoItem(),new TodoList (),new TextAlign(),new Indent(),new LineHeight(),new HorizontalRule(),new HardBreak(),new TrailingNode(),new History(),new Table(),new TableHeader(),new TableCell(),new TableRow(),new FormatClear(),new TextColor(),new TextHighlight(),new Preview(),new Print(),new Fullscreen(),new SelectAll(),new FontType(),new FontSize(),new CodeView()
-      ],
+      // extensions: [
+      //   new Doc(),
+      //   new Text(),
+      //   new Paragraph(),
+      //   new Heading({ level: 5 }),
+      //   new Bold({ bubble: true }), // render command-button in bubble menu.
+      //   new Underline({ bubble: true, menubar: false }), // render command-button in bubble menu but not in menubar.
+      //   new Italic(),
+      //   new Strike(),
+      //   new ListItem(),
+      //   new BulletList(),
+      //   new OrderedList(),
+      //   new Image(), new Iframe(), new CodeBlock(), new Blockquote(),new TodoItem(),new TodoList (),new TextAlign(),new Indent(),new LineHeight(),new HorizontalRule(),new HardBreak(),new TrailingNode(),new History(),new Table(),new TableHeader(),new TableCell(),new TableRow(),new FormatClear(),new TextColor(),new TextHighlight(),new Preview(),new Print(),new Fullscreen(),new SelectAll(),new FontType(),new FontSize(),new CodeView()
+      // ],
     };
   },
   methods: {
@@ -208,7 +208,7 @@ export default {
       this.text = "";
       this.thumbnail = "";
       this.temp_thumbnail_url = "";
-      // $("#summernote").summernote("code", "");
+      $("#summernote").summernote("code", "");
     },
     fetchAll() {
       axios
@@ -233,7 +233,7 @@ export default {
         url = `/admin/blog/store`;
       }
 
-      // this.text = $("#summernote").summernote("code");
+      this.text = $("#summernote").summernote("code");
       let fd = new FormData();
       fd.append("title", this.title);
       // const json = JSON.stringify(this.text);
@@ -248,8 +248,8 @@ export default {
           this.success = response.data.success;
           this.title = "";
           this.text = "";
-          // $("#summernote").summernote("code", this.text);
-          // document.getElementById("thumbnail").value = "";
+          $("#summernote").summernote("code", this.text);
+          document.getElementById("thumbnail").value = "";
           this.temporary_id = "";
           this.temp_thumbnail_url = "";
           this.is_editing = false;
