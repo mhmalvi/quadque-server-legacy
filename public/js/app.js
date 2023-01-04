@@ -7099,7 +7099,15 @@ __webpack_require__.r(__webpack_exports__);
       this.description = "";
       this.file = "";
       $("#summernote").summernote("code", "");
-      this.temp_thumbnail_url = "";
+      this.identity_design_title = "", this.identity_design_des = "", this.identity_design_menus_1 = "", this.identity_design_menus_2 = "", this.identity_design_menus_3 = "", this.identity_design_menus_4 = "", this.identity_design_menus_5 = "", this.identity_design_menus_6 = "", this.project_count = "", this.happy_clients = "", this.best_service_title = "", this.best_service_header = "", this.best_service_des = "", this.why_choose_us_title = "", this.why_choose_us_des = "", this.services_capabilities_title = "", this.services_capabilities_des = "", this.services_capabilities_menus_1 = "", this.services_capabilities_menus_2 = "", this.services_capabilities_menus_3 = "", this.services_capabilities_menus_4 = "", this.services_capabilities_menus_5 = "", this.services_capabilities_menus_6 = "", this.services_capabilities_menus_7 = "", this.service_deliver_title = "", this.service_deliver_des = "", this.our_latest_work_title = "", this.about_us_title = "", this.about_us_name = "", this.about_us_des = "", this.temp_thumbnail_url = "";
+      this.best_service_img = "";
+      this.why_choose_us_img = "";
+      this.our_latest_work_img = "";
+      this.about_us_img = "";
+      this.best_service_img_tmp = "";
+      this.why_choose_us_img_tmp = "";
+      this.our_latest_work_img_tmp = "";
+      this.about_us_img_tmp = "";
     },
     fetchAll: function fetchAll() {
       var _this = this;
@@ -7285,6 +7293,15 @@ __webpack_require__.r(__webpack_exports__);
           icon: "error",
           text: "Deleted"
         });
+        _this4.identity_design_title = "", _this4.identity_design_des = "", _this4.identity_design_menus_1 = "", _this4.identity_design_menus_2 = "", _this4.identity_design_menus_3 = "", _this4.identity_design_menus_4 = "", _this4.identity_design_menus_5 = "", _this4.identity_design_menus_6 = "", _this4.project_count = "", _this4.happy_clients = "", _this4.best_service_title = "", _this4.best_service_header = "", _this4.best_service_des = "", _this4.why_choose_us_title = "", _this4.why_choose_us_des = "", _this4.services_capabilities_title = "", _this4.services_capabilities_des = "", _this4.services_capabilities_menus_1 = "", _this4.services_capabilities_menus_2 = "", _this4.services_capabilities_menus_3 = "", _this4.services_capabilities_menus_4 = "", _this4.services_capabilities_menus_5 = "", _this4.services_capabilities_menus_6 = "", _this4.services_capabilities_menus_7 = "", _this4.service_deliver_title = "", _this4.service_deliver_des = "", _this4.our_latest_work_title = "", _this4.about_us_title = "", _this4.about_us_name = "", _this4.about_us_des = "", _this4.temp_thumbnail_url = "";
+        _this4.best_service_img = "";
+        _this4.why_choose_us_img = "";
+        _this4.our_latest_work_img = "";
+        _this4.about_us_img = "";
+        _this4.best_service_img_tmp = "";
+        _this4.why_choose_us_img_tmp = "";
+        _this4.our_latest_work_img_tmp = "";
+        _this4.about_us_img_tmp = "";
       });
     }
   },
@@ -9599,7 +9616,15 @@ var render = function render() {
     on: {
       change: _vm.image_best_service
     }
-  }), _vm._v(" "), this.service_nameError ? _c("div", {
+  }), _vm._v(" "), this.best_service_img_tmp ? _c("p", {
+    staticClass: "my-2 text-center"
+  }, [_c("img", {
+    attrs: {
+      src: this.best_service_img_tmp,
+      width: "150",
+      height: "150"
+    }
+  })]) : _vm._e(), _vm._v(" "), this.service_nameError ? _c("div", {
     staticClass: "text-danger"
   }, [_vm._v("\n                " + _vm._s(this.service_nameError) + "\n              ")]) : _vm._e()]), _vm._v(" "), _c("div", {
     staticClass: "form-group"
@@ -9675,7 +9700,15 @@ var render = function render() {
     }
   }), _vm._v(" "), this.service_nameError ? _c("div", {
     staticClass: "text-danger"
-  }, [_vm._v("\n                " + _vm._s(this.service_nameError) + "\n              ")]) : _vm._e()]), _vm._v(" "), _c("div", {
+  }, [_vm._v("\n                " + _vm._s(this.service_nameError) + "\n              ")]) : _vm._e(), _vm._v(" "), this.why_choose_us_img_tmp ? _c("p", {
+    staticClass: "my-2 text-center"
+  }, [_c("img", {
+    attrs: {
+      src: this.why_choose_us_img_tmp,
+      width: "150",
+      height: "150"
+    }
+  })]) : _vm._e()]), _vm._v(" "), _c("div", {
     staticClass: "form-group"
   }, [_c("label", {
     attrs: {
@@ -10019,7 +10052,15 @@ var render = function render() {
     on: {
       change: _vm.image_our_work
     }
-  }), _vm._v(" "), this.descriptionError ? _c("div", {
+  }), _vm._v(" "), this.our_latest_work_img_tmp ? _c("p", {
+    staticClass: "my-2 text-center"
+  }, [_c("img", {
+    attrs: {
+      src: this.our_latest_work_img_tmp,
+      width: "150",
+      height: "150"
+    }
+  })]) : _vm._e(), _vm._v(" "), this.descriptionError ? _c("div", {
     staticClass: "text-danger"
   }, [_vm._v("\n                " + _vm._s(this.descriptionError) + "\n              ")]) : _vm._e()]), _vm._v(" "), _c("h1", [_vm._v("About Us")]), _vm._v(" "), _c("div", {
     staticClass: "form-group"
@@ -10122,7 +10163,15 @@ var render = function render() {
     on: {
       change: _vm.image_about_us
     }
-  }), _vm._v(" "), this.descriptionError ? _c("div", {
+  }), _vm._v(" "), this.about_us_img_tmp ? _c("p", {
+    staticClass: "my-2 text-center"
+  }, [_c("img", {
+    attrs: {
+      src: this.about_us_img_tmp,
+      width: "150",
+      height: "150"
+    }
+  })]) : _vm._e(), _vm._v(" "), this.descriptionError ? _c("div", {
     staticClass: "text-danger"
   }, [_vm._v("\n                " + _vm._s(this.descriptionError) + "\n              ")]) : _vm._e()]), _vm._v(" "), _c("div", [_c("button", {
     staticClass: "btn btn-block btn-save text-white",

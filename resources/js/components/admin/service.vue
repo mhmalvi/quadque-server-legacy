@@ -207,6 +207,13 @@
                   class="form-control"
                   @change="image_best_service"
                 />
+                <p class="my-2 text-center" v-if="this.best_service_img_tmp">
+                  <img
+                    :src="this.best_service_img_tmp"
+                    width="150"
+                    height="150"
+                  />
+                </p>
                 <div class="text-danger" v-if="this.service_nameError">
                   {{ this.service_nameError }}
                 </div>
@@ -246,6 +253,13 @@
                 <div class="text-danger" v-if="this.service_nameError">
                   {{ this.service_nameError }}
                 </div>
+                <p class="my-2 text-center" v-if="this.why_choose_us_img_tmp">
+                  <img
+                    :src="this.why_choose_us_img_tmp"
+                    width="150"
+                    height="150"
+                  />
+                </p>
               </div>
               <div class="form-group">
                 <label for="title">Why choose us description</label><br />
@@ -379,6 +393,13 @@
                   placeholder="why choose us"
                   @change="image_our_work"
                 />
+                <p class="my-2 text-center" v-if="this.our_latest_work_img_tmp">
+                  <img
+                    :src="this.our_latest_work_img_tmp"
+                    width="150"
+                    height="150"
+                  />
+                </p>
                 <div class="text-danger" v-if="this.descriptionError">
                   {{ this.descriptionError }}
                 </div>
@@ -427,6 +448,9 @@
                   class="form-control"
                   @change="image_about_us"
                 />
+                <p class="my-2 text-center" v-if="this.about_us_img_tmp">
+                  <img :src="this.about_us_img_tmp" width="150" height="150" />
+                </p>
                 <div class="text-danger" v-if="this.descriptionError">
                   {{ this.descriptionError }}
                 </div>
@@ -578,7 +602,51 @@ export default {
       this.description = "";
       this.file = "";
       $("#summernote").summernote("code", "");
+
+      this.identity_design_title= "",
+      this.identity_design_des= "",
+      this.identity_design_menus_1= "",
+      this.identity_design_menus_2= "",
+      this.identity_design_menus_3= "",
+      this.identity_design_menus_4= "",
+      this.identity_design_menus_5= "",
+      this.identity_design_menus_6= "",
+      this.project_count= "",
+      this.happy_clients= "",
+      this.best_service_title= "",
+      this.best_service_header= "",
+      this.best_service_des= "",
+      this.why_choose_us_title= "",
+      this.why_choose_us_des= "",
+      this.services_capabilities_title= "",
+      this.services_capabilities_des= "",
+      this.services_capabilities_menus_1= "",
+      this.services_capabilities_menus_2= "",
+      this.services_capabilities_menus_3= "",
+      this.services_capabilities_menus_4= "",
+      this.services_capabilities_menus_5= "",
+      this.services_capabilities_menus_6= "",
+      this.services_capabilities_menus_7= "",
+
+      this.service_deliver_title= "",
+      this.service_deliver_des= "",
+
+      this.our_latest_work_title= "",
+
+      this.about_us_title= "",
+      this.about_us_name= "",
+      this.about_us_des= "",
+
       this.temp_thumbnail_url = "";
+      this.best_service_img = "";
+      this.why_choose_us_img = "";
+      this.our_latest_work_img = "";
+      this.about_us_img = "";
+
+      this.best_service_img_tmp = "";
+      this.why_choose_us_img_tmp = "";
+      this.our_latest_work_img_tmp = "";
+      this.about_us_img_tmp = "";
     },
     fetchAll() {
       // console.log("fetch");
@@ -827,6 +895,50 @@ export default {
           icon: "error",
           text: "Deleted",
         });
+        this.identity_design_title= "",
+      this.identity_design_des= "",
+      this.identity_design_menus_1= "",
+      this.identity_design_menus_2= "",
+      this.identity_design_menus_3= "",
+      this.identity_design_menus_4= "",
+      this.identity_design_menus_5= "",
+      this.identity_design_menus_6= "",
+      this.project_count= "",
+      this.happy_clients= "",
+      this.best_service_title= "",
+      this.best_service_header= "",
+      this.best_service_des= "",
+      this.why_choose_us_title= "",
+      this.why_choose_us_des= "",
+      this.services_capabilities_title= "",
+      this.services_capabilities_des= "",
+      this.services_capabilities_menus_1= "",
+      this.services_capabilities_menus_2= "",
+      this.services_capabilities_menus_3= "",
+      this.services_capabilities_menus_4= "",
+      this.services_capabilities_menus_5= "",
+      this.services_capabilities_menus_6= "",
+      this.services_capabilities_menus_7= "",
+
+      this.service_deliver_title= "",
+      this.service_deliver_des= "",
+
+      this.our_latest_work_title= "",
+
+      this.about_us_title= "",
+      this.about_us_name= "",
+      this.about_us_des= "",
+
+      this.temp_thumbnail_url = "";
+      this.best_service_img = "";
+      this.why_choose_us_img = "";
+      this.our_latest_work_img = "";
+      this.about_us_img = "";
+
+      this.best_service_img_tmp = "";
+      this.why_choose_us_img_tmp = "";
+      this.our_latest_work_img_tmp = "";
+      this.about_us_img_tmp = "";
       });
     },
   },
