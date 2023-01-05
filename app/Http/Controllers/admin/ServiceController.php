@@ -59,6 +59,7 @@ class ServiceController extends Controller
 
         // $service->identity_design_title = $request->identity_design_title;
         $service->identity_design_des = $request->identity_design_des;
+        $service->content = $request->content;
 
         $service->project_count = $request->project_count;
         $service->happy_clients = $request->happy_clients;
@@ -126,17 +127,17 @@ class ServiceController extends Controller
         $service->service_name = $request->service_name;
         $service->description = $request->description;
 
-        $service->identity_design_title = $request->identity_design_title;
+        // $service->identity_design_title = $request->identity_design_title;
         $service->identity_design_des = $request->identity_design_des;
-        $service->identity_design_menus = $request->identity_design_menus;
+        $service->content = $request->content;
 
         $service->project_count = $request->project_count;
         $service->happy_clients = $request->happy_clients;
 
-        $service->services_capabilities_menu = $request->services_capabilities_menu;
+        $service->services_capabilities_menu = $request->service_capability_menus;
 
         $service->service_deliver_title = $request->service_deliver_title;
-        $service->service_deliver_des = $request->service_deliver_des;
+        $service->service_deliver_des = $request->service_deliver_description;
 
         if ($request->file) {
 
