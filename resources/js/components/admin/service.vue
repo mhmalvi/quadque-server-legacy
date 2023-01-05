@@ -68,7 +68,7 @@
               </div>
               <div class="form-group">
                 <label for="title">Service Description</label><br />
-                <vue-editor useCustomImageHandler v-model="description" />
+                
                 <!-- <textarea
                   v-model="design"
                   class="form-control summernote"
@@ -76,12 +76,12 @@
 
                   required
                 ></textarea> -->
-                <!-- <textarea
+                <textarea
                   v-model="description"
                   class="form-control"
                   rows="4"
                   required
-                ></textarea> -->
+                ></textarea>
                 <!-- <froala :tag="'textarea'" v-model="description"></froala> -->
 
                 <div class="text-danger" v-if="this.descriptionError">
@@ -89,7 +89,7 @@
                 </div>
               </div>
               <!--  -->
-              <div class="form-group">
+              <!-- <div class="form-group">
                 <label for="title">Identity Design Title</label>
                 <input
                   type="text"
@@ -101,14 +101,15 @@
                 <div class="text-danger" v-if="this.identity_design_titleError">
                   {{ this.identity_design_titleError }}
                 </div>
-              </div>
+              </div> -->
               <div class="form-group">
                 <label for="title">Identity Design Description </label>
-                <textarea
+                <vue-editor useCustomImageHandler v-model="identity_design_des" />
+                <!-- <textarea
                   v-model="identity_design_des"
                   class="form-control"
                   required
-                ></textarea>
+                ></textarea> -->
                 <div class="text-danger" v-if="this.identity_design_desError">
                   {{ this.identity_design_desError }}
                 </div>
@@ -309,7 +310,7 @@ export default {
       service_name: "",
       file: "",
       description: "",
-      identity_design_title: "",
+      // identity_design_title: "",
       identity_design_des: "",
       identity_design_menus: "",
       project_count: "",
@@ -371,7 +372,6 @@ export default {
 
       (this.identity_design_title = ""),
         (this.identity_design_des = ""),
-        (this.identity_design_menus = ""),
         (this.project_count = ""),
         (this.happy_clients = ""),
         (this.content = ""),
@@ -413,9 +413,8 @@ export default {
       fd.append("description", this.description);
       fd.append("file", this.file);
 
-      fd.append("identity_design_title", this.identity_design_title);
+      // fd.append("identity_design_title", this.identity_design_title);
       fd.append("identity_design_des", this.identity_design_des);
-      fd.append("identity_design_menus", this.identity_design_menus);
 
       fd.append("project_count", this.project_count);
       fd.append("happy_clients", this.happy_clients);
