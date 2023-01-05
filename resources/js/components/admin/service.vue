@@ -68,7 +68,7 @@
               </div>
               <div class="form-group">
                 <label for="title">Service Description</label><br />
-                
+
                 <!-- <textarea
                   v-model="design"
                   class="form-control summernote"
@@ -104,12 +104,9 @@
               </div> -->
               <div class="form-group">
                 <label for="title">Identity Design Description </label>
-                <vue-editor useCustomImageHandler v-model="identity_design_des" />
-                <!-- <textarea
+                <vue-editor
                   v-model="identity_design_des"
-                  class="form-control"
-                  required
-                ></textarea> -->
+                />
                 <div class="text-danger" v-if="this.identity_design_desError">
                   {{ this.identity_design_desError }}
                 </div>
@@ -237,10 +234,10 @@
             <tr>
               <th>No.</th>
               <th>Name</th>
-              <th style="width: 36%">Description</th>
-            <th style="width: 36%">Content</th>
-              <th>Identity Description</th>
               <th>Thumbnail</th>
+              <th>Content</th>
+              <th style="width: 36%">Description</th>
+              
 
               <th>Action</th>
             </tr>
@@ -254,15 +251,10 @@
                 {{ list.service_name }}
               </td>
 
-              <td style="vertical-align: middle">{{ list.description }}</td>
-              <td style="vertical-align: middle" v-html="list.content"></td>
-
               <td style="vertical-align: middle">
                 <img :src="list.file" width="100" height="100" />
               </td>
-              <td v-html="list.identity_design_des">
-
-              </td>
+              <td v-html="list.content"></td>
 
               <td style="vertical-align: middle; width: 15%; color: white">
                 <button
@@ -296,7 +288,10 @@
 <script>
 import axios from "axios";
 import { VueEditor } from "vue2-editor";
-import VueFroala from 'vue-froala-wysiwyg';
+
+// import { ImageDrop } from "quill-image-drop-module";
+// import ImageResize from "quill-image-resize-module";
+// import VueFroala from "vue-froala-wysiwyg";
 export default {
   // name:"service-component",
   components: {
@@ -305,13 +300,6 @@ export default {
   },
   data() {
     return {
-      config: {
-          events: {
-            'froalaEditor.initialized': function () {
-              console.log('initialized')
-            }
-          }
-        },
       lists: [],
       service_name: "",
       file: "",
@@ -347,7 +335,21 @@ export default {
       temporary_id: "",
       is_editing: false,
       temp_thumbnail_url: "",
-
+      // editorConfig: {
+			// 		toolbar: [
+			// 			[ 'Source' ],
+			// 			[ 'Styles', 'Format', 'Font', 'FontSize' ],
+			// 			[ 'Bold', 'Italic' ],
+			// 			[ 'Undo', 'Redo' ],
+			// 			[ 'About' ]
+			// 		]
+			// 	}
+      // editorSettings: {
+      //   modules: {
+      //     imageDrop: true,
+      //     imageResize: {}
+      //   }
+      // }
       // blog_no: 1,
     };
   },
