@@ -94,6 +94,7 @@ class CaseStudyController extends Controller
         return response()->json($case_studies);
     }
 
+
     /**
      * Show the form for creating a new resource.
      *
@@ -121,11 +122,18 @@ class CaseStudyController extends Controller
             // 'image' => 'required|image'
         ]);
         // dd($request->all());
+        $service_id=array();
+        foreach($request->selected_services as $services_id){
+            $service_id[] = $services_id;
+        }
+        $ser_id=implode(',',$service_id);
+        // die;
         $case_study = new CaseStudy();
         $case_study->com_name = $request->name;
         $case_study->summary1 = $request->summary1;
         $case_study->summary2 = $request->summary2;
         $case_study->content = $request->content;
+        $case_study->service_id = $ser_id;
         $app_url = env('APP_URL');
 
 

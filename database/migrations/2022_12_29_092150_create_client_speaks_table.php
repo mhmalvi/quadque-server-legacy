@@ -19,7 +19,7 @@ class CreateClientSpeaksTable extends Migration
             $table->text('designation');
             $table->text('description');
             $table->string('image');
-            $table->foreignId('service_id')->constrained('services');
+            $table->string('service_id')->nullable();
             $table->timestamps();
         });
     }

@@ -6315,6 +6315,8 @@ __webpack_require__.r(__webpack_exports__);
       fullPage: true,
       loader: "bars",
       lists: [],
+      service_lists: [],
+      selected_services: [],
       name: "",
       agency_images: [],
       image: "",
@@ -6417,6 +6419,14 @@ __webpack_require__.r(__webpack_exports__);
         console.log(_this.lists);
       })["catch"](function (error) {});
     },
+    fetchAllServices: function fetchAllServices() {
+      var _this2 = this;
+      // console.log("fetch");
+      axios__WEBPACK_IMPORTED_MODULE_0___default().get("/admin/service/get").then(function (response) {
+        _this2.service_lists = response.data;
+        console.log(_this2.service_lists);
+      })["catch"](function (error) {});
+    },
     uploadfile: function uploadfile(e) {
       this.image = e.target.files[0];
       this.temp_image_url = "";
@@ -6438,7 +6448,7 @@ __webpack_require__.r(__webpack_exports__);
       console.log(this.agency_images);
     },
     save: function save() {
-      var _this2 = this;
+      var _this3 = this;
       // this.uploadImageSuccess()
       // console.log("data", formData, index, fileList);
       var url;
@@ -6456,6 +6466,9 @@ __webpack_require__.r(__webpack_exports__);
       for (var i = 0; i < this.agency_images.length; i++) {
         fd.append("agency_images[]", this.agency_images[i]);
       }
+      for (var j = 0; j < this.selected_services.length; j++) {
+        fd.append("selected_services[]", this.selected_services[j]);
+      }
       // fd.append("group_images", this.gr_images);
       fd.append("content", this.content);
       fd.append("group_images_1", this.group_images_1);
@@ -6469,14 +6482,14 @@ __webpack_require__.r(__webpack_exports__);
       fd.append("id", this.temporary_id);
       console.log(fd);
       axios__WEBPACK_IMPORTED_MODULE_0___default().post(url, fd).then(function (response) {
-        _this2.fetchAll();
-        _this2.isLoading = false;
+        _this3.fetchAll();
+        _this3.isLoading = false;
         // this.success = response.data.success;
-        $(".summernote").summernote("code", _this2.content);
+        $(".summernote").summernote("code", _this3.content);
         // document.getElementById("thumbnail").value = "";
         if (response.data.success == "created") {
-          _this2.is_editing = false;
-          _this2.$swal.fire({
+          _this3.is_editing = false;
+          _this3.$swal.fire({
             // position: "top-end",
             icon: "success",
             title: "Service Saved",
@@ -6507,14 +6520,14 @@ __webpack_require__.r(__webpack_exports__);
           document.getElementById("con_2_img_1").value = "";
           document.getElementById("con_2_img_2").value = "";
           document.getElementById("con_2_img_3").value = "";
-          _this2.temp_image_url = "";
-          _this2.temporary_id = "";
-          _this2.isLoading = false;
+          _this3.temp_image_url = "";
+          _this3.temporary_id = "";
+          _this3.isLoading = false;
         } else if (response.data.success == "updated") {
-          _this2.is_editing = true;
-          _this2.isLoading = false;
+          _this3.is_editing = true;
+          _this3.isLoading = false;
           // this.isLoading = false;
-          _this2.$swal.fire({
+          _this3.$swal.fire({
             // position: "top-end",
             icon: "success",
             title: "Service Updated",
@@ -6528,93 +6541,85 @@ __webpack_require__.r(__webpack_exports__);
         }, 5000);
       })["catch"](function (error) {
         if (error.response.data.errors.name) {
-          _this2.nameError = error.response.data.errors.name[0];
+          _this3.nameError = error.response.data.errors.name[0];
         } else {
-          _this2.nameError = "";
+          _this3.nameError = "";
         }
         if (error.response.data.errors.image) {
-          _this2.imageError = error.response.data.errors.image[0];
+          _this3.imageError = error.response.data.errors.image[0];
         } else {
-          _this2.imageError = "";
+          _this3.imageError = "";
         }
       });
     },
     editList: function editList(list_id) {
-      var _this3 = this;
+      var _this4 = this;
       this.is_editing = true;
       this.nameError = "";
       this.imageError = "";
       this.temporary_id = list_id;
       axios__WEBPACK_IMPORTED_MODULE_0___default().get("/admin/case-study/edit/".concat(this.temporary_id)).then(function (response) {
         console.log(response);
-        _this3.name = response.data.com_name;
-        _this3.temp_image_url = response.data.com_image;
-        _this3.summary1 = response.data.summary1;
-        _this3.summary2 = response.data.summary2;
-        _this3.first_content = response.data.first_content;
-        $("summernote").summernote("code", _this3.content);
+        _this4.name = response.data.com_name;
+        _this4.temp_image_url = response.data.com_image;
+        _this4.summary1 = response.data.summary1;
+        _this4.summary2 = response.data.summary2;
+        _this4.content = response.data.content;
+        $("summernote").summernote("code", _this4.content);
         // $(".summernote").summernote("code", this.second_content);
-        _this3.case_con_2_title_1 = response.data.case_con_2_title_1;
-        _this3.case_con_2_des_1 = response.data.case_con_2_des_1;
-        _this3.case_con_2_title_2 = response.data.case_con_2_title_2;
-        _this3.case_con_2_des_2 = response.data.case_con_2_des_2;
-        _this3.case_con_2_title_3 = response.data.case_con_2_title_3;
-        _this3.case_con_2_des_3 = response.data.case_con_2_des_3;
-        _this3.group_images_1_tmp = response.data.group_images_1;
-        _this3.group_images_2_tmp = response.data.group_images_2;
-        _this3.group_images_3_tmp = response.data.group_images_3;
-        _this3.group_images_4_tmp = response.data.group_images_4;
-        _this3.group_images_5_tmp = response.data.group_images_5;
-        _this3.group_images_6_tmp = response.data.group_images_6;
-        _this3.group_images_7_tmp = response.data.group_images_7;
-        _this3.con_2_img_1_tmp = response.data.case_con_2_img_1;
-        _this3.con_2_img_2_tmp = response.data.case_con_2_img_2;
-        _this3.con_2_img_3_tmp = response.data.case_con_2_img_3;
+        _this4.group_images_1_tmp = response.data.group_images_1;
+        _this4.group_images_2_tmp = response.data.group_images_2;
+        _this4.group_images_3_tmp = response.data.group_images_3;
+        _this4.group_images_4_tmp = response.data.group_images_4;
+        _this4.group_images_5_tmp = response.data.group_images_5;
+        _this4.group_images_6_tmp = response.data.group_images_6;
+        _this4.group_images_7_tmp = response.data.group_images_7;
       })["catch"](function (error) {});
     },
     destroyList: function destroyList(list_id) {
-      var _this4 = this;
+      var _this5 = this;
       axios__WEBPACK_IMPORTED_MODULE_0___default().get("/admin/case-study/delete/".concat(list_id)).then(function (response) {
         // this.success = response.data.success;
-        _this4.fetchAll();
-        _this4.$swal.fire({
+        _this5.fetchAll();
+        _this5.$swal.fire({
           icon: "error",
           text: "Deleted"
         });
-        _this4.name = "";
-        _this4.image = "";
-        _this4.summary1 = "";
-        _this4.summary2 = "";
-        _this4.first_content = "";
-        _this4.case_con_1_img = "";
-        _this4.case_con_2_title_1 = "";
-        _this4.case_con_2_des_1 = "";
-        _this4.case_con_2_title_2 = "";
-        _this4.case_con_2_des_2 = "";
-        _this4.case_con_2_title_3 = "";
-        _this4.case_con_2_des_3 = "";
-        _this4.group_images_1 = "";
-        _this4.group_images_2 = "";
-        _this4.group_images_3 = "";
-        _this4.group_images_4 = "";
-        _this4.group_images_5 = "";
-        _this4.group_images_6 = "";
-        _this4.group_images_7 = "";
-        _this4.con_2_img_1 = "";
-        _this4.con_2_img_2 = "";
-        _this4.con_2_img_3 = "";
+        _this5.name = "";
+        _this5.image = "";
+        _this5.summary1 = "";
+        _this5.summary2 = "";
+        _this5.first_content = "";
+        _this5.case_con_1_img = "";
+        _this5.case_con_2_title_1 = "";
+        _this5.case_con_2_des_1 = "";
+        _this5.case_con_2_title_2 = "";
+        _this5.case_con_2_des_2 = "";
+        _this5.case_con_2_title_3 = "";
+        _this5.case_con_2_des_3 = "";
+        _this5.group_images_1 = "";
+        _this5.group_images_2 = "";
+        _this5.group_images_3 = "";
+        _this5.group_images_4 = "";
+        _this5.group_images_5 = "";
+        _this5.group_images_6 = "";
+        _this5.group_images_7 = "";
+        _this5.con_2_img_1 = "";
+        _this5.con_2_img_2 = "";
+        _this5.con_2_img_3 = "";
         document.getElementById("image").value = "";
         document.getElementById("case_con_1_img").value = "";
         document.getElementById("con_2_img_1").value = "";
         document.getElementById("con_2_img_2").value = "";
         document.getElementById("con_2_img_3").value = "";
-        _this4.temp_image_url = "";
-        _this4.temporary_id = "";
+        _this5.temp_image_url = "";
+        _this5.temporary_id = "";
       });
     }
   },
   mounted: function mounted() {
     this.fetchAll();
+    this.fetchAllServices();
   }
 });
 
@@ -8128,7 +8133,48 @@ var render = function render() {
         _vm.summary2 = $event.target.value;
       }
     }
-  })]), _vm._v(" "), _c("h1", [_vm._v("Content")]), _vm._v(" "), _c("div", {
+  })]), _vm._v(" "), _c("h4", [_vm._v("Select service")]), _vm._v(" "), _vm._l(_vm.service_lists, function (service, index) {
+    return _c("div", {
+      key: index,
+      staticClass: "form-group"
+    }, [_c("input", {
+      directives: [{
+        name: "model",
+        rawName: "v-model",
+        value: _vm.selected_services,
+        expression: "selected_services"
+      }],
+      attrs: {
+        type: "checkbox"
+      },
+      domProps: {
+        value: service.id,
+        checked: Array.isArray(_vm.selected_services) ? _vm._i(_vm.selected_services, service.id) > -1 : _vm.selected_services
+      },
+      on: {
+        change: function change($event) {
+          var $$a = _vm.selected_services,
+            $$el = $event.target,
+            $$c = $$el.checked ? true : false;
+          if (Array.isArray($$a)) {
+            var $$v = service.id,
+              $$i = _vm._i($$a, $$v);
+            if ($$el.checked) {
+              $$i < 0 && (_vm.selected_services = $$a.concat([$$v]));
+            } else {
+              $$i > -1 && (_vm.selected_services = $$a.slice(0, $$i).concat($$a.slice($$i + 1)));
+            }
+          } else {
+            _vm.selected_services = $$c;
+          }
+        }
+      }
+    }), _vm._v(" "), _c("label", {
+      attrs: {
+        "for": ""
+      }
+    }, [_vm._v(_vm._s(service.service_name))])]);
+  }), _vm._v(" "), _c("h1", [_vm._v("Content")]), _vm._v(" "), _c("div", {
     staticClass: "form-group"
   }, [_c("textarea", {
     directives: [{
@@ -8186,7 +8232,7 @@ var render = function render() {
     on: {
       click: _vm.save
     }
-  }, [_vm._v("\n                " + _vm._s(this.is_editing ? "Update" : "Save") + "\n              ")])])])])])])]), _vm._v(" "), _c("div", {
+  }, [_vm._v("\n                " + _vm._s(this.is_editing ? "Update" : "Save") + "\n              ")])])], 2)])])])]), _vm._v(" "), _c("div", {
     staticClass: "row mt-5 d-flex justify-content-center"
   }, [_c("div", {
     staticClass: "col-md-8"
@@ -17162,7 +17208,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_laravel_mix_node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\r\n/* @import \"../../../css/summernote.css\"; */\n#my-strictly-unique-vue-upload-multiple-image[data-v-0298f1de] {\r\n  font-family: \"Avenir\", Helvetica, Arial, sans-serif;\r\n  -webkit-font-smoothing: antialiased;\r\n  -moz-osx-font-smoothing: grayscale;\r\n  text-align: center;\r\n  color: #2c3e50;\r\n  margin-top: 60px;\n}\ndiv[data-v-0298f1de] {\r\n  letter-spacing: 1px;\r\n  font-family: sans-serif;\n}\n.btn-edit[data-v-0298f1de] {\r\n  background: #0093e9;\n}\n.card[data-v-0298f1de] {\r\n  border-top: none;\n}\n.card-header[data-v-0298f1de] {\r\n  border: none;\r\n  background-image: linear-gradient(\r\n    to right,\r\n    rgb(242, 112, 156),\r\n    rgb(255, 148, 114)\r\n  );\n}\ntable tbody tr[data-v-0298f1de] {\r\n  line-height: 100px;\r\n  text-align: center;\n}\nthead th[data-v-0298f1de] {\r\n  text-align: center;\n}\nthead[data-v-0298f1de] {\r\n  /* background: #84a4ff; */\r\n  background-image: linear-gradient(to right, #0093e9, #80d0c7);\r\n  color: white;\r\n  border: none;\n}\n.btn-save[data-v-0298f1de] {\r\n  background: #5a67ff;\n}\n.btn-save[data-v-0298f1de]:hover {\r\n  background: #0093e9;\r\n  transition: 2s ease;\n}\n.table-striped > tbody > tr:nth-of-type(odd) > *[data-v-0298f1de] {\r\n  --bs-table-accent-bg: rgb(229 231 255);\r\n  color: var(--bs-table-striped-color);\r\n  border: none;\n}\n.note-editor.note-airframe .note-editing-area .note-editable[data-v-0298f1de],\r\n.note-editor.note-frame .note-editing-area .note-editable[data-v-0298f1de] {\r\n  padding: 10px;\r\n  overflow: auto;\r\n  word-wrap: break-word;\r\n  background: aliceblue;\n}\n#summernote[data-v-0298f1de] {\r\n  background: aliceblue;\n}\r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\r\n/* @import \"../../../css/summernote.css\"; */\n#my-strictly-unique-vue-upload-multiple-image[data-v-0298f1de] {\r\n  font-family: \"Avenir\", Helvetica, Arial, sans-serif;\r\n  -webkit-font-smoothing: antialiased;\r\n  -moz-osx-font-smoothing: grayscale;\r\n  text-align: center;\r\n  color: #2c3e50;\r\n  margin-top: 60px;\n}\ndiv[data-v-0298f1de] {\r\n  letter-spacing: 1px;\r\n  font-family: sans-serif;\n}\n.btn-edit[data-v-0298f1de] {\r\n  background: #0093e9;\n}\n.card[data-v-0298f1de] {\r\n  border-top: none;\n}\n.card-header[data-v-0298f1de] {\r\n  border: none;\r\n  background-image: linear-gradient(to right,\r\n      rgb(242, 112, 156),\r\n      rgb(255, 148, 114));\n}\ntable tbody tr[data-v-0298f1de] {\r\n  line-height: 100px;\r\n  text-align: center;\n}\nthead th[data-v-0298f1de] {\r\n  text-align: center;\n}\nthead[data-v-0298f1de] {\r\n  /* background: #84a4ff; */\r\n  background-image: linear-gradient(to right, #0093e9, #80d0c7);\r\n  color: white;\r\n  border: none;\n}\n.btn-save[data-v-0298f1de] {\r\n  background: #5a67ff;\n}\n.btn-save[data-v-0298f1de]:hover {\r\n  background: #0093e9;\r\n  transition: 2s ease;\n}\n.table-striped>tbody>tr:nth-of-type(odd)>*[data-v-0298f1de] {\r\n  --bs-table-accent-bg: rgb(229 231 255);\r\n  color: var(--bs-table-striped-color);\r\n  border: none;\n}\n.note-editor.note-airframe .note-editing-area .note-editable[data-v-0298f1de],\r\n.note-editor.note-frame .note-editing-area .note-editable[data-v-0298f1de] {\r\n  padding: 10px;\r\n  overflow: auto;\r\n  word-wrap: break-word;\r\n  background: aliceblue;\n}\n#summernote[data-v-0298f1de] {\r\n  background: aliceblue;\n}\r\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
