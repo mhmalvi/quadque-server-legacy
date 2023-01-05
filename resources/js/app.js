@@ -19,7 +19,7 @@ import { library } from "@fortawesome/fontawesome-svg-core";
 /* import font awesome icon component */
 import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
 // import { service } from "./components/admin/service.vue";
-import VueLazyload from "vue-lazyload";
+// import VueLazyload from "vue-lazyload";
 import {
     faTwitter,
     faFacebookF,
@@ -36,10 +36,11 @@ import "sweetalert2/dist/sweetalert2.min.css";
 // // use
 // Vue.use(mavonEditor);
 library.add(faTwitter, faFacebookF, faYoutube, faInstagram);
-import VueFroala from "vue-froala-wysiwyg";
-Vue.use(VueFroala);
+// import CKEditor from "ckeditor4-vue";
+
+// Vue.use(CKEditor);
 Vue.use(VueSweetalert2);
-Vue.use(VueLazyload);
+// Vue.use(VueLazyload);
 Vue.component("marquee-text", MarqueeText);
 Vue.component("dynamic-marquee", DynamicMarquee);
 
