@@ -238,6 +238,8 @@
               <th>No.</th>
               <th>Name</th>
               <th style="width: 36%">Description</th>
+            <th style="width: 36%">Content</th>
+              <th>Identity Description</th>
               <th>Thumbnail</th>
 
               <th>Action</th>
@@ -252,10 +254,14 @@
                 {{ list.service_name }}
               </td>
 
-              <td style="vertical-align: middle" v-html="list.description"></td>
+              <td style="vertical-align: middle">{{ list.description }}</td>
+              <td style="vertical-align: middle" v-html="list.content"></td>
 
               <td style="vertical-align: middle">
                 <img :src="list.file" width="100" height="100" />
+              </td>
+              <td v-html="list.identity_design_des">
+
               </td>
 
               <td style="vertical-align: middle; width: 15%; color: white">
