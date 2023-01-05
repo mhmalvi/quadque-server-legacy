@@ -20,7 +20,6 @@ class CreateServicesTable extends Migration
             $table->text('description');
             $table->text('identity_design_title');
             $table->text('identity_design_des');
-            $table->string('identity_design_menus');
             $table->integer('project_count');
             $table->integer('happy_clients');
 

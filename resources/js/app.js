@@ -36,7 +36,8 @@ import "sweetalert2/dist/sweetalert2.min.css";
 // // use
 // Vue.use(mavonEditor);
 library.add(faTwitter, faFacebookF, faYoutube, faInstagram);
-
+import VueFroala from "vue-froala-wysiwyg";
+Vue.use(VueFroala);
 Vue.use(VueSweetalert2);
 Vue.use(VueLazyload);
 Vue.component("marquee-text", MarqueeText);

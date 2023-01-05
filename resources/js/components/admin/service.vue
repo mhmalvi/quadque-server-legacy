@@ -1,7 +1,11 @@
 <template>
   <div>
     <div class="row d-flex justify-content-center">
-      <div v-if="this.is_editing == true" @click="disable_button()" class="mt-3">
+      <div
+        v-if="this.is_editing == true"
+        @click="disable_button()"
+        class="mt-3"
+      >
         <button class="btn btn-primary">Create Services</button>
       </div>
       <div class="col-md-6 mt-4">
@@ -9,15 +13,21 @@
           {{ this.success }}
         </div> -->
         <div class="card">
-          <div class="card-header text-center" style="
+          <div
+            class="card-header text-center"
+            style="
               height: 47px;
               background-image: linear-gradient(
                 to right,
                 rgb(242, 112, 156),
                 rgb(255, 148, 114)
               );
-            ">
-            <h4 class="card-title text-white text-center" style="margin-top: 1%">
+            "
+          >
+            <h4
+              class="card-title text-white text-center"
+              style="margin-top: 1%"
+            >
               {{ this.is_editing ? "Update Service" : "Create Service" }}
             </h4>
           </div>
@@ -25,24 +35,40 @@
             <form>
               <div class="form-group">
                 <label for="title">Service Name</label>
-                <input type="text" class="form-control" v-model="service_name" placeholder="Enter service name" required/>
+                <input
+                  type="text"
+                  class="form-control"
+                  v-model="service_name"
+                  placeholder="Enter service name"
+                  required
+                />
                 <div class="text-danger" v-if="this.service_nameError">
                   {{ this.service_nameError }}
                 </div>
               </div>
               <div class="form-group">
                 <label for="thumbnail">Service File</label>
-                <input type="file" class="form-control" id="thumbnail" required @change="uploadfile" />
+                <input
+                  type="file"
+                  class="form-control"
+                  id="thumbnail"
+                  required
+                  @change="uploadfile"
+                />
                 <div class="text-danger" v-if="this.fileError">
                   {{ this.fileError }}
                 </div>
                 <p class="my-2 text-center" v-if="this.temp_thumbnail_url">
-                  <img :src="this.temp_thumbnail_url" width="150" height="150" />
+                  <img
+                    :src="this.temp_thumbnail_url"
+                    width="150"
+                    height="150"
+                  />
                 </p>
               </div>
               <div class="form-group">
                 <label for="title">Service Description</label><br />
-                <!-- <vue-editor useCustomImageHandler v-model="content" /> -->
+                <vue-editor useCustomImageHandler v-model="description" />
                 <!-- <textarea
                   v-model="design"
                   class="form-control summernote"
@@ -50,34 +76,39 @@
 
                   required
                 ></textarea> -->
-                <textarea v-model="description" class="form-control" rows="4" required></textarea>
+                <!-- <textarea
+                  v-model="description"
+                  class="form-control"
+                  rows="4"
+                  required
+                ></textarea> -->
+                <!-- <froala :tag="'textarea'" v-model="description"></froala> -->
 
                 <div class="text-danger" v-if="this.descriptionError">
                   {{ this.descriptionError }}
                 </div>
               </div>
-              <h4>Identity Menus</h4>
-              <div class="form-group">
-                <!-- <div v-for="(data, index) in identity_menus" :key="index"> -->
-                <label for=""> Menus <span style="color:red;">(use comma (,) separated names)</span> </label>
-                <textarea type="string" @keydown.space.prevent id="identity_design_menus" class="form-control" v-model="identity_design_menus"
-                  placeholder="Enter menus" required></textarea>
-                <!-- <a style="height: 40px;cursor:pointer;color:red;" @click="removeIdentityMenu(index)">Remove (-)</a> -->
-                <!-- </div> -->
-                <div class="text-danger" v-if="this.identity_design_menusError">
-                  {{ this.identity_design_menusError }}
-                </div>
-              </div>
+              <!--  -->
               <div class="form-group">
                 <label for="title">Identity Design Title</label>
-                <input type="text" class="form-control" v-model="identity_design_title" placeholder="Enter title" required />
+                <input
+                  type="text"
+                  class="form-control"
+                  v-model="identity_design_title"
+                  placeholder="Enter title"
+                  required
+                />
                 <div class="text-danger" v-if="this.identity_design_titleError">
                   {{ this.identity_design_titleError }}
                 </div>
               </div>
               <div class="form-group">
                 <label for="title">Identity Design Description </label>
-                <textarea v-model="identity_design_des" class="form-control" required></textarea>
+                <textarea
+                  v-model="identity_design_des"
+                  class="form-control"
+                  required
+                ></textarea>
                 <div class="text-danger" v-if="this.identity_design_desError">
                   {{ this.identity_design_desError }}
                 </div>
@@ -85,14 +116,26 @@
               <!-- <a class="btn btn-primary" style="height: 40px;" @click="addIdentityMenu">Add (+)</a> -->
               <div class="form-group mt-4">
                 <label for="title">Project Count</label>
-                <input type="number" class="form-control" v-model="project_count" placeholder="Enter project count" required/>
+                <input
+                  type="number"
+                  class="form-control"
+                  v-model="project_count"
+                  placeholder="Enter project count"
+                  required
+                />
                 <div class="text-danger" v-if="this.project_countError">
                   {{ this.project_countError }}
                 </div>
               </div>
               <div class="form-group">
                 <label for="title">Happy Clients Count</label>
-                <input type="number" class="form-control" v-model="happy_clients" placeholder="Enter count" required/>
+                <input
+                  type="number"
+                  class="form-control"
+                  v-model="happy_clients"
+                  placeholder="Enter count"
+                  required
+                />
                 <div class="text-danger" v-if="this.happy_clientsError">
                   {{ this.happy_clientsError }}
                 </div>
@@ -101,7 +144,12 @@
               <!-- <h1>Why Choose Us</h1> -->
               <div class="form-group">
                 <label for="title">Content </label>
-                <textarea v-model="content" class="form-control" id="summernote" required></textarea>
+                <textarea
+                  v-model="content"
+                  class="form-control"
+                  id="summernote"
+                  required
+                ></textarea>
                 <div class="text-danger" v-if="this.contentError">
                   {{ this.contentError }}
                 </div>
@@ -110,22 +158,41 @@
               <!-- <h1>Design Service Capabilities</h1> -->
               <!-- <h4>Service capabilities Menus</h4> -->
               <div class="form-group">
-
                 <!-- <div v-for="(data, index) in service_capability_menus" :key="index"> -->
-                <label for="title">Service capabilities Menus <span style="color:red;">(use comma (,) separated names)</span></label>
-                <textarea @keydown.space.prevent type="text" class="form-control" v-model="service_capability_menu"
-                  placeholder="Enter menu name" required></textarea>
+                <label for="title"
+                  >Service capabilities Menus
+                  <span style="color: red"
+                    >(use comma (,) separated names)</span
+                  ></label
+                >
+                <textarea
+                  @keydown.space.prevent
+                  type="text"
+                  class="form-control"
+                  v-model="service_capability_menu"
+                  placeholder="Enter menu name"
+                  required
+                ></textarea>
                 <!-- <a style="cursor:pointer;height: 40px;color:red;" @click="removeServiceCapabilityMenu(index)">Remove
                     menu</a> -->
                 <!-- </div> -->
-                <div class="text-danger" v-if="this.service_capability_menuError">
+                <div
+                  class="text-danger"
+                  v-if="this.service_capability_menuError"
+                >
                   {{ this.service_capability_menuError }}
                 </div>
               </div>
               <!-- <a class="btn btn-primary" style="height: 40px;" @click="addServiceCapabilityMenu">Add menu</a> -->
               <div class="form-group mt-4">
                 <label for="title">Service Deliver Title </label>
-                <input type="text" class="form-control" v-model="service_deliver_title" placeholder="Enter title" required/>
+                <input
+                  type="text"
+                  class="form-control"
+                  v-model="service_deliver_title"
+                  placeholder="Enter title"
+                  required
+                />
                 <div class="text-danger" v-if="this.service_deliver_titleError">
                   {{ this.service_deliver_titleError }}
                 </div>
@@ -133,14 +200,26 @@
 
               <div class="form-group">
                 <label for="title">Service Deliver Description</label>
-                <textarea v-model="service_deliver_description" class="form-control" rows="4" required></textarea>
-                <div class="text-danger" v-if="this.service_deliver_descriptionError">
+                <textarea
+                  v-model="service_deliver_description"
+                  class="form-control"
+                  rows="4"
+                  required
+                ></textarea>
+                <div
+                  class="text-danger"
+                  v-if="this.service_deliver_descriptionError"
+                >
                   {{ this.service_deliver_descriptionError }}
                 </div>
               </div>
 
               <div>
-                <button type="button" class="btn btn-block btn-save text-white" @click="save">
+                <button
+                  type="button"
+                  class="btn btn-block btn-save text-white"
+                  @click="save"
+                >
                   {{ this.is_editing ? "Update" : "Save" }}
                 </button>
               </div>
@@ -179,8 +258,17 @@
               </td>
 
               <td style="vertical-align: middle; width: 15%; color: white">
-                <button type="button" class="btn btn-primary text-white" @click="editList(list.id)">
-                  Edit</button><button type="button" class="btn btn-danger ml-1" @click="destroyList(list.id)">
+                <button
+                  type="button"
+                  class="btn btn-primary text-white"
+                  @click="editList(list.id)"
+                >
+                  Edit</button
+                ><button
+                  type="button"
+                  class="btn btn-danger ml-1"
+                  @click="destroyList(list.id)"
+                >
                   Delete
                 </button>
               </td>
@@ -201,13 +289,22 @@
 <script>
 import axios from "axios";
 import { VueEditor } from "vue2-editor";
+import VueFroala from 'vue-froala-wysiwyg';
 export default {
   // name:"service-component",
   components: {
     VueEditor,
+    // VueFroala
   },
   data() {
     return {
+      config: {
+          events: {
+            'froalaEditor.initialized': function () {
+              console.log('initialized')
+            }
+          }
+        },
       lists: [],
       service_name: "",
       file: "",
@@ -229,16 +326,16 @@ export default {
       service_nameError: "",
       descriptionError: "",
       fileError: "",
-      descriptionError:"",
-      identity_design_titleError:"",
-      identity_design_desError:"",
-      identity_design_menusError:"",
-      project_countError:"",
-      happy_clientsError:"",
-      contentError:"",
-      service_capability_menuError:"",
-      service_deliver_titleError:"",
-      service_deliver_descriptionError:"",
+      descriptionError: "",
+      identity_design_titleError: "",
+      identity_design_desError: "",
+      identity_design_menusError: "",
+      project_countError: "",
+      happy_clientsError: "",
+      contentError: "",
+      service_capability_menuError: "",
+      service_deliver_titleError: "",
+      service_deliver_descriptionError: "",
       success: "",
       temporary_id: "",
       is_editing: false,
@@ -291,7 +388,7 @@ export default {
           console.log(response);
           this.lists = response.data;
         })
-        .catch((error) => { });
+        .catch((error) => {});
     },
     uploadfile(e) {
       this.file = e.target.files[0];
@@ -299,7 +396,6 @@ export default {
     },
 
     save() {
-
       let url;
       if (this.is_editing) {
         url = `/admin/service/update/`;
@@ -443,7 +539,7 @@ export default {
           $("#summernote").summernote("code", this.content);
           this.temp_thumbnail_url = response.data.file;
         })
-        .catch((error) => { });
+        .catch((error) => {});
     },
     destroyList(list_id) {
       axios.get(`/admin/service/delete/${list_id}`).then((response) => {
@@ -481,9 +577,11 @@ div {
 }
 
 .card-header {
-  background-image: linear-gradient(to right,
-      rgb(242, 112, 156),
-      rgb(255, 148, 114));
+  background-image: linear-gradient(
+    to right,
+    rgb(242, 112, 156),
+    rgb(255, 148, 114)
+  );
 }
 
 thead {
@@ -516,7 +614,7 @@ thead {
   transition: 2s ease;
 }
 
-.table-striped>tbody>tr:nth-of-type(odd)>* {
+.table-striped > tbody > tr:nth-of-type(odd) > * {
   --bs-table-accent-bg: rgb(229 231 255);
   color: var(--bs-table-striped-color);
   border: none;

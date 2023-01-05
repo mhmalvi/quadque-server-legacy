@@ -30,7 +30,6 @@ class CreateCaseStudiesTable extends Migration
             $table->text('summary2');
             //////////content 1
             $table->string('content');
-            $table->string('service_id')->nullable();
             ///////////agency
             $table->string('agency');
             $table->timestamps();
