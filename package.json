@@ -36,7 +36,9 @@
         "vue-axios": "^3.4.1",
         "vue-dplayer": "^0.0.10",
         "vue-dynamic-marquee": "^0.1.7",
+        "vue-froala-wysiwyg": "^4.0.16",
         "vue-fullpage": "^2.0.5",
+        "vue-loading-overlay": "^3.4.2",
         "vue-marquee-text-component": "^1.2.0",
         "vue-owl-carousel": "^2.0.3",
         "vue-slick-carousel": "^1.0.6",
@@ -44,7 +46,7 @@
         "vue-sweetalert2": "^5.0.5",
         "vue-typical": "^2.1.0",
         "vue-upload-multiple-image": "^1.1.6",
-        "wow.js": "^1.2.2",
-        "vue-loading-overlay": "^3.4.2"
+        "vue2-editor": "^2.10.3",
+        "wow.js": "^1.2.2"
     }
 }

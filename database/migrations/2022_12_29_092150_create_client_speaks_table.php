@@ -19,6 +19,7 @@ class CreateClientSpeaksTable extends Migration
             $table->text('designation');
             $table->text('description');
             $table->string('image');
+            $table->string('service_id')->nullable();
             $table->timestamps();
         });
     }

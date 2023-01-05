@@ -40,6 +40,7 @@
                   class="form-control"
                   v-model="service_name"
                   placeholder="Enter service name"
+                  required
                 />
                 <div class="text-danger" v-if="this.service_nameError">
                   {{ this.service_nameError }}
@@ -51,20 +52,13 @@
                   type="file"
                   class="form-control"
                   id="thumbnail"
-                  @change="uploadfile"
                   required
+                  @change="uploadfile"
                 />
                 <div class="text-danger" v-if="this.fileError">
                   {{ this.fileError }}
                 </div>
                 <p class="my-2 text-center" v-if="this.temp_thumbnail_url">
-                  <!-- <textarea
-                  v-model="description"
-                  id="summernote2"
-                  class="form-control"
-                  rows="4"
-                  required
-                ></textarea> -->
                   <img
                     :src="this.temp_thumbnail_url"
                     width="150"
@@ -74,94 +68,63 @@
               </div>
               <div class="form-group">
                 <label for="title">Service Description</label><br />
-                <textarea
+                <vue-editor useCustomImageHandler v-model="description" />
+                <!-- <textarea
+                  v-model="design"
+                  class="form-control summernote"
+                  rows="4"
+
+                  required
+                ></textarea> -->
+                <!-- <textarea
                   v-model="description"
-                  id="summernote"
                   class="form-control"
                   rows="4"
                   required
-                ></textarea>
+                ></textarea> -->
+                <!-- <froala :tag="'textarea'" v-model="description"></froala> -->
+
                 <div class="text-danger" v-if="this.descriptionError">
                   {{ this.descriptionError }}
                 </div>
               </div>
-              <h1>Identity Design</h1>
+              <!--  -->
               <div class="form-group">
-                <label for="title">Title</label>
+                <label for="title">Identity Design Title</label>
                 <input
                   type="text"
                   class="form-control"
                   v-model="identity_design_title"
-                  placeholder="Enter service name"
+                  placeholder="Enter title"
+                  required
                 />
-                <div class="text-danger" v-if="this.service_nameError">
-                  {{ this.service_nameError }}
+                <div class="text-danger" v-if="this.identity_design_titleError">
+                  {{ this.identity_design_titleError }}
                 </div>
               </div>
               <div class="form-group">
-                <label for="title">Description</label><br />
+                <label for="title">Identity Design Description </label>
                 <textarea
                   v-model="identity_design_des"
                   class="form-control"
-                  rows="4"
                   required
                 ></textarea>
-                <div class="text-danger" v-if="this.descriptionError">
-                  {{ this.descriptionError }}
+                <div class="text-danger" v-if="this.identity_design_desError">
+                  {{ this.identity_design_desError }}
                 </div>
               </div>
-              <div class="form-group">
-                <label for="title">Menus</label>
-                <input
-                  type="text"
-                  class="form-control"
-                  v-model="identity_design_menus_1"
-                  placeholder="Enter menus"
-                />
-                <input
-                  type="text"
-                  class="form-control"
-                  v-model="identity_design_menus_2"
-                  placeholder="Enter menus"
-                />
-                <input
-                  type="text"
-                  class="form-control"
-                  v-model="identity_design_menus_3"
-                  placeholder="Enter menus"
-                />
-                <input
-                  type="text"
-                  class="form-control"
-                  v-model="identity_design_menus_4"
-                  placeholder="Enter menus"
-                />
-                <input
-                  type="text"
-                  class="form-control"
-                  v-model="identity_design_menus_5"
-                  placeholder="Enter menus"
-                />
-                <input
-                  type="text"
-                  class="form-control"
-                  v-model="identity_design_menus_6"
-                  placeholder="Enter menus"
-                />
-                <div class="text-danger" v-if="this.service_nameError">
-                  {{ this.service_nameError }}
-                </div>
-              </div>
-              <div class="form-group">
+              <!-- <a class="btn btn-primary" style="height: 40px;" @click="addIdentityMenu">Add (+)</a> -->
+              <div class="form-group mt-4">
                 <label for="title">Project Count</label>
                 <input
                   type="number"
                   class="form-control"
                   v-model="project_count"
                   placeholder="Enter project count"
+                  required
                 />
-                <div class="text-danger" v-if="this.service_nameError">
-                  {{ this.service_nameError }}
+                <div class="text-danger" v-if="this.project_countError">
+                  {{ this.project_countError }}
                 </div>
               </div>
               <div class="form-group">
@@ -171,290 +134,86 @@
                   class="form-control"
                   v-model="happy_clients"
                   placeholder="Enter count"
+                  required
                 />
-                <div class="text-danger" v-if="this.service_nameError">
-                  {{ this.service_nameError }}
+                <div class="text-danger" v-if="this.happy_clientsError">
+                  {{ this.happy_clientsError }}
                 </div>
               </div>
+
+              <!-- <h1>Why Choose Us</h1> -->
               <div class="form-group">
-                <label for="title">Best Service title</label>
-                <input
-                  type="text"
-                  class="form-control"
-                  v-model="best_service_title"
-                  placeholder="Enter title"
-                />
-                <div class="text-danger" v-if="this.service_nameError">
-                  {{ this.service_nameError }}
-                </div>
-              </div>
-              <div class="form-group">
-                <label for="title">Best Service Header</label>
-                <input
-                  type="text"
-                  class="form-control"
-                  v-model="best_service_header"
-                  placeholder="Enter header"
-                />
-                <div class="text-danger" v-if="this.service_nameError">
-                  {{ this.service_nameError }}
-                </div>
-              </div>
-              <div class="form-group">
-                <label for="title">Best Service image</label>
-                <input
-                  type="file"
-                  class="form-control"
-                  @change="image_best_service"
-                />
-                <p class="my-2 text-center" v-if="this.best_service_img_tmp">
-                  <img
-                    :src="this.best_service_img_tmp"
-                    width="150"
-                    height="150"
-                  />
-                </p>
-                <div class="text-danger" v-if="this.service_nameError">
-                  {{ this.service_nameError }}
-                </div>
-              </div>
-              <div class="form-group">
-                <label for="title">Best Service description</label><br />
+                <label for="title">Content </label>
                 <textarea
-                  v-model="best_service_des"
+                  v-model="content"
                   class="form-control"
-                  rows="4"
+                  id="summernote"
                   required
                 ></textarea>
-                <div class="text-danger" v-if="this.descriptionError">
-                  {{ this.descriptionError }}
+                <div class="text-danger" v-if="this.contentError">
+                  {{ this.contentError }}
                 </div>
               </div>
-              <h1>Why Choose Us</h1>
+
+              <!-- <h1>Design Service Capabilities</h1> -->
+              <!-- <h4>Service capabilities Menus</h4> -->
               <div class="form-group">
-                <label for="title">Why choose us title</label>
-                <input
+                <!-- <div v-for="(data, index) in service_capability_menus" :key="index"> -->
+                <label for="title"
+                  >Service capabilities Menus
+                  <span style="color: red"
+                    >(use comma (,) separated names)</span
+                  ></label
+                >
+                <textarea
+                  @keydown.space.prevent
                   type="text"
                   class="form-control"
-                  v-model="why_choose_us_title"
-                  placeholder="why choose us"
-                />
-                <div class="text-danger" v-if="this.service_nameError">
-                  {{ this.service_nameError }}
-                </div>
-              </div>
-              <div class="form-group">
-                <label for="title">Why choose us image</label>
-                <input
-                  type="file"
-                  class="form-control"
-                  @change="image_why_choose_us"
-                />
-                <div class="text-danger" v-if="this.service_nameError">
-                  {{ this.service_nameError }}
-                </div>
-                <p class="my-2 text-center" v-if="this.why_choose_us_img_tmp">
-                  <img
-                    :src="this.why_choose_us_img_tmp"
-                    width="150"
-                    height="150"
-                  />
-                </p>
-              </div>
-              <div class="form-group">
-                <label for="title">Why choose us description</label><br />
-                <textarea
-                  v-model="why_choose_us_des"
-                  class="form-control"
-                  rows="4"
+                  v-model="service_capability_menu"
+                  placeholder="Enter menu name"
                   required
                 ></textarea>
-                <div class="text-danger" v-if="this.descriptionError">
-                  {{ this.descriptionError }}
+                <!-- <a style="cursor:pointer;height: 40px;color:red;" @click="removeServiceCapabilityMenu(index)">Remove
+                    menu</a> -->
+                <!-- </div> -->
+                <div
+                  class="text-danger"
+                  v-if="this.service_capability_menuError"
+                >
+                  {{ this.service_capability_menuError }}
                 </div>
               </div>
-              <h1>Services Capabilities</h1>
-              <div class="form-group">
-                <label for="title">Services Capabilities Title</label>
-                <input
-                  type="text"
-                  class="form-control"
-                  v-model="services_capabilities_title"
-                  placeholder="Title"
-                />
-                <div class="text-danger" v-if="this.service_nameError">
-                  {{ this.service_nameError }}
-                </div>
-              </div>
-              <div class="form-group">
-                <label for="title">Services Capabilities Description</label
-                ><br />
-                <textarea
-                  v-model="services_capabilities_des"
-                  class="form-control"
-                  rows="4"
-                  required
-                ></textarea>
-                <div class="text-danger" v-if="this.descriptionError">
-                  {{ this.descriptionError }}
-                </div>
-              </div>
-              <div class="form-group">
-                <label for="title">Services Capabilities Menu</label>
-                <input
-                  type="text"
-                  class="form-control"
-                  v-model="services_capabilities_menus_1"
-                  placeholder="Enter menu name"
-                />
-                <input
-                  type="text"
-                  class="form-control"
-                  v-model="services_capabilities_menus_2"
-                  placeholder="Enter menu name"
-                />
-                <input
-                  type="text"
-                  class="form-control"
-                  v-model="services_capabilities_menus_3"
-                  placeholder="Enter menu name"
-                />
-                <input
-                  type="text"
-                  class="form-control"
-                  v-model="services_capabilities_menus_4"
-                  placeholder="Enter menu name"
-                />
-                <input
-                  type="text"
-                  class="form-control"
-                  v-model="services_capabilities_menus_5"
-                  placeholder="Enter menu name"
-                />
-                <input
-                  type="text"
-                  class="form-control"
-                  v-model="services_capabilities_menus_6"
-                  placeholder="Enter menu name"
-                />
-                <input
-                  type="text"
-                  class="form-control"
-                  v-model="services_capabilities_menus_7"
-                  placeholder="Enter menu name"
-                />
-                <div class="text-danger" v-if="this.service_nameError">
-                  {{ this.service_nameError }}
-                </div>
-              </div>
-              <h1>Services Deliver</h1>
-              <div class="form-group">
-                <label for="title">Services Deliver Title</label>
+              <!-- <a class="btn btn-primary" style="height: 40px;" @click="addServiceCapabilityMenu">Add menu</a> -->
+              <div class="form-group mt-4">
+                <label for="title">Service Deliver Title </label>
                 <input
                   type="text"
                   class="form-control"
                   v-model="service_deliver_title"
-                  placeholder="Title"
-                />
-                <div class="text-danger" v-if="this.service_nameError">
-                  {{ this.service_nameError }}
-                </div>
-              </div>
-              <div class="form-group">
-                <label for="title">Services Deliver Description</label><br />
-                <textarea
-                  v-model="service_deliver_des"
-                  class="form-control"
-                  rows="4"
-                  required
-                ></textarea>
-                <div class="text-danger" v-if="this.descriptionError">
-                  {{ this.descriptionError }}
-                </div>
-              </div>
-              <h1>Our lates Work</h1>
-              <div class="form-group">
-                <label for="title">Our latest work title</label>
-                <input
-                  type="text"
-                  class="form-control"
-                  v-model="our_latest_work_title"
-                  placeholder="Title"
-                />
-                <div class="text-danger" v-if="this.service_nameError">
-                  {{ this.service_nameError }}
-                </div>
-              </div>
-              <div class="form-group">
-                <label for="title">Our latest work images</label><br />
-                <input
-                  type="file"
-                  class="form-control"
-                  placeholder="why choose us"
-                  @change="image_our_work"
-                />
-                <p class="my-2 text-center" v-if="this.our_latest_work_img_tmp">
-                  <img
-                    :src="this.our_latest_work_img_tmp"
-                    width="150"
-                    height="150"
-                  />
-                </p>
-                <div class="text-danger" v-if="this.descriptionError">
-                  {{ this.descriptionError }}
-                </div>
-              </div>
-              <h1>About Us</h1>
-              <div class="form-group">
-                <label for="title">About Us Title</label>
-                <input
-                  type="text"
-                  class="form-control"
-                  v-model="about_us_title"
                   placeholder="Enter title"
+                  required
                 />
-                <div class="text-danger" v-if="this.service_nameError">
-                  {{ this.service_nameError }}
+                <div class="text-danger" v-if="this.service_deliver_titleError">
+                  {{ this.service_deliver_titleError }}
                 </div>
               </div>
+
               <div class="form-group">
-                <label for="title">About Us Name</label>
-                <input
-                  type="text"
-                  class="form-control"
-                  v-model="about_us_name"
-                  placeholder="Enter name"
-                />
-                <div class="text-danger" v-if="this.service_nameError">
-                  {{ this.service_nameError }}
-                </div>
-              </div>
-              <div class="form-group">
-                <label for="title">About Us Description</label><br />
+                <label for="title">Service Deliver Description</label>
                 <textarea
-                  v-model="about_us_des"
+                  v-model="service_deliver_description"
                   class="form-control"
                   rows="4"
                   required
                 ></textarea>
-                <div class="text-danger" v-if="this.descriptionError">
-                  {{ this.descriptionError }}
+                <div
+                  class="text-danger"
+                  v-if="this.service_deliver_descriptionError"
+                >
+                  {{ this.service_deliver_descriptionError }}
                 </div>
               </div>
-              <div class="form-group">
-                <label for="title">About Us Image</label><br />
-                <input
-                  type="file"
-                  class="form-control"
-                  @change="image_about_us"
-                />
-                <p class="my-2 text-center" v-if="this.about_us_img_tmp">
-                  <img :src="this.about_us_img_tmp" width="150" height="150" />
-                </p>
-                <div class="text-danger" v-if="this.descriptionError">
-                  {{ this.descriptionError }}
-                </div>
-              </div>
+
               <div>
                 <button
                   type="button"
@@ -472,7 +231,6 @@
     <div class="row mt-5 d-flex justify-content-center">
       <div class="col-md-12">
         <h4>Services Lists</h4>
-        <div v-html="hello"></div>
         <table class="table table-striped text-center">
           <thead>
             <tr>
@@ -530,72 +288,80 @@
 </template>
 <script>
 import axios from "axios";
+import { VueEditor } from "vue2-editor";
+import VueFroala from 'vue-froala-wysiwyg';
 export default {
   // name:"service-component",
+  components: {
+    VueEditor,
+    // VueFroala
+  },
   data() {
     return {
-      hello: "<h3>There have no blogs...!</h3>",
+      config: {
+          events: {
+            'froalaEditor.initialized': function () {
+              console.log('initialized')
+            }
+          }
+        },
       lists: [],
       service_name: "",
       file: "",
       description: "",
-
       identity_design_title: "",
       identity_design_des: "",
-      identity_design_menus_1: "",
-      identity_design_menus_2: "",
-      identity_design_menus_3: "",
-      identity_design_menus_4: "",
-      identity_design_menus_5: "",
-      identity_design_menus_6: "",
+      identity_design_menus: "",
       project_count: "",
       happy_clients: "",
-      best_service_title: "",
-      best_service_header: "",
-      best_service_des: "",
-      why_choose_us_title: "",
-      why_choose_us_des: "",
-      services_capabilities_title: "",
-      services_capabilities_des: "",
-      services_capabilities_menus_1: "",
-      services_capabilities_menus_2: "",
-      services_capabilities_menus_3: "",
-      services_capabilities_menus_4: "",
-      services_capabilities_menus_5: "",
-      services_capabilities_menus_6: "",
-      services_capabilities_menus_7: "",
-
+      content: "",
+      service_capability_menu: "",
+      service_capability_menus: [],
+      identity_menus: [],
       service_deliver_title: "",
-      service_deliver_des: "",
+      service_deliver_description: "",
 
-      our_latest_work_title: "",
-
-      about_us_title: "",
-      about_us_name: "",
-      about_us_des: "",
+      // our_latest_work_title: "",
 
       service_nameError: "",
       descriptionError: "",
       fileError: "",
+      descriptionError: "",
+      identity_design_titleError: "",
+      identity_design_desError: "",
+      identity_design_menusError: "",
+      project_countError: "",
+      happy_clientsError: "",
+      contentError: "",
+      service_capability_menuError: "",
+      service_deliver_titleError: "",
+      service_deliver_descriptionError: "",
       success: "",
       temporary_id: "",
       is_editing: false,
       temp_thumbnail_url: "",
 
-      best_service_img: "",
-      why_choose_us_img: "",
-      our_latest_work_img: "",
-      about_us_img: "",
-
-      best_service_img_tmp: "",
-      why_choose_us_img_tmp: "",
-      our_latest_work_img_tmp: "",
-      about_us_img_tmp: "",
-
       // blog_no: 1,
     };
   },
   methods: {
+    // addIdentityMenu: function () {
+    //   this.identity_menus.push({
+    //     identity_design_menus: '',
+    //   });
+    // },
+    // removeIdentityMenu: function (index) {
+    //   this.identity_menus.splice(index, 1);
+    // },
+
+    // addServiceCapabilityMenu: function () {
+    //   this.service_capability_menus.push({
+    //     service_capability_menu: '',
+    //   });
+    // },
+    // removeServiceCapabilityMenu: function (index) {
+    //   this.service_capability_menus.splice(index, 1);
+    // },
     disable_button() {
       this.is_editing = false;
       this.service_name = "";
@@ -603,50 +369,16 @@ export default {
       this.file = "";
       $("#summernote").summernote("code", "");
 
-      this.identity_design_title= "",
-      this.identity_design_des= "",
-      this.identity_design_menus_1= "",
-      this.identity_design_menus_2= "",
-      this.identity_design_menus_3= "",
-      this.identity_design_menus_4= "",
-      this.identity_design_menus_5= "",
-      this.identity_design_menus_6= "",
-      this.project_count= "",
-      this.happy_clients= "",
-      this.best_service_title= "",
-      this.best_service_header= "",
-      this.best_service_des= "",
-      this.why_choose_us_title= "",
-      this.why_choose_us_des= "",
-      this.services_capabilities_title= "",
-      this.services_capabilities_des= "",
-      this.services_capabilities_menus_1= "",
-      this.services_capabilities_menus_2= "",
-      this.services_capabilities_menus_3= "",
-      this.services_capabilities_menus_4= "",
-      this.services_capabilities_menus_5= "",
-      this.services_capabilities_menus_6= "",
-      this.services_capabilities_menus_7= "",
-
-      this.service_deliver_title= "",
-      this.service_deliver_des= "",
-
-      this.our_latest_work_title= "",
-
-      this.about_us_title= "",
-      this.about_us_name= "",
-      this.about_us_des= "",
-
-      this.temp_thumbnail_url = "";
-      this.best_service_img = "";
-      this.why_choose_us_img = "";
-      this.our_latest_work_img = "";
-      this.about_us_img = "";
-
-      this.best_service_img_tmp = "";
-      this.why_choose_us_img_tmp = "";
-      this.our_latest_work_img_tmp = "";
-      this.about_us_img_tmp = "";
+      (this.identity_design_title = ""),
+        (this.identity_design_des = ""),
+        (this.identity_design_menus = ""),
+        (this.project_count = ""),
+        (this.happy_clients = ""),
+        (this.content = ""),
+        (this.service_capability_menu = ""),
+        (this.service_deliver_title = ""),
+        (this.service_deliver_description = ""),
+        (this.temp_thumbnail_url = "");
     },
     fetchAll() {
       // console.log("fetch");
@@ -662,18 +394,6 @@ export default {
       this.file = e.target.files[0];
       this.temp_thumbnail_url = "";
     },
-    image_best_service(e) {
-      this.best_service_img = e.target.files[0];
-    },
-    image_why_choose_us(e) {
-      this.why_choose_us_img = e.target.files[0];
-    },
-    image_our_work(e) {
-      this.our_latest_work_img = e.target.files[0];
-    },
-    image_about_us(e) {
-      this.about_us_img = e.target.files[0];
-    },
 
     save() {
       let url;
@@ -683,7 +403,11 @@ export default {
         url = `/admin/service/store`;
       }
 
-      this.description = $("#summernote").summernote("code");
+      this.content = $("#summernote").summernote("code");
+      // var menuList = {
+      //   'identity_menu_list': this.identity_menus,
+      //   'services_capabilities_menu_list':this.service_capability_menus
+      // }
       let fd = new FormData();
       fd.append("service_name", this.service_name);
       fd.append("description", this.description);
@@ -691,70 +415,24 @@ export default {
 
       fd.append("identity_design_title", this.identity_design_title);
       fd.append("identity_design_des", this.identity_design_des);
-      fd.append("identity_design_menus_1", this.identity_design_menus_1);
-      fd.append("identity_design_menus_2", this.identity_design_menus_2);
-      fd.append("identity_design_menus_3", this.identity_design_menus_3);
-      fd.append("identity_design_menus_4", this.identity_design_menus_4);
-      fd.append("identity_design_menus_5", this.identity_design_menus_5);
-      fd.append("identity_design_menus_6", this.identity_design_menus_6);
+      fd.append("identity_design_menus", this.identity_design_menus);
 
       fd.append("project_count", this.project_count);
       fd.append("happy_clients", this.happy_clients);
 
-      fd.append("best_service_title", this.best_service_title);
-      fd.append("best_service_header", this.best_service_header);
-      fd.append("best_service_des", this.best_service_des);
+      // fd.append('identity_menus[]', menuList)
 
-      fd.append("why_choose_us_title", this.why_choose_us_title);
-      fd.append("why_choose_us_des", this.why_choose_us_des);
-
-      fd.append(
-        "services_capabilities_title",
-        this.services_capabilities_title
-      );
-      fd.append("services_capabilities_des", this.services_capabilities_des);
-      fd.append(
-        "services_capabilities_menus_1",
-        this.services_capabilities_menus_1
-      );
-      fd.append(
-        "services_capabilities_menus_2",
-        this.services_capabilities_menus_2
-      );
-      fd.append(
-        "services_capabilities_menus_3",
-        this.services_capabilities_menus_3
-      );
-      fd.append(
-        "services_capabilities_menus_4",
-        this.services_capabilities_menus_4
-      );
-      fd.append(
-        "services_capabilities_menus_5",
-        this.services_capabilities_menus_5
-      );
-      fd.append(
-        "services_capabilities_menus_6",
-        this.services_capabilities_menus_6
-      );
-      fd.append(
-        "services_capabilities_menus_7",
-        this.services_capabilities_menus_7
-      );
-
+      // fd.append('menus',menuList);
+      fd.append("content", this.content);
+      // for (let m = 0; m < this.service_capability_menus.length; m++) {
+      //   var cap_menus = JSON.stringify(this.service_capability_menus[m])
+      fd.append("service_capability_menus", this.service_capability_menu);
+      // }
       fd.append("service_deliver_title", this.service_deliver_title);
-      fd.append("service_deliver_des", this.service_deliver_des);
-
-      fd.append("our_latest_work_title", this.our_latest_work_title);
-
-      fd.append("about_us_title", this.about_us_title);
-      fd.append("about_us_name", this.about_us_name);
-      fd.append("about_us_des", this.about_us_des);
-
-      fd.append("best_service_img", this.best_service_img);
-      fd.append("why_choose_us_img", this.why_choose_us_img);
-      fd.append("our_latest_work_img", this.our_latest_work_img);
-      fd.append("about_us_img", this.about_us_img);
+      fd.append(
+        "service_deliver_description",
+        this.service_deliver_description
+      );
 
       fd.append("id", this.temporary_id);
       console.log(fd);
@@ -784,7 +462,7 @@ export default {
           // console.log(this.success)
           this.service_name = "";
           this.description = "";
-          $("#summernote").summernote("code", this.description);
+          $("#summernote").summernote("code", this.content);
           document.getElementById("file").value = "";
           this.temporary_id = "";
           this.temp_thumbnail_url = "";
@@ -814,6 +492,16 @@ export default {
           } else {
             this.fileError = "";
           }
+          if (error.response.data.errors.identity_design_titleError) {
+            this.fileError = error.response.data.errors.file[0];
+          } else {
+            this.fileError = "";
+          }
+          if (error.response.data.errors.identity_design_desError) {
+            this.fileError = error.response.data.errors.file[0];
+          } else {
+            this.fileError = "";
+          }
         });
     },
 
@@ -832,57 +520,23 @@ export default {
 
           this.identity_design_title = response.data.identity_design_title;
           this.identity_design_des = response.data.identity_design_des;
-          this.identity_design_menus_1 = response.data.identity_design_menus_1;
-          this.identity_design_menus_2 = response.data.identity_design_menus_2;
-          this.identity_design_menus_3 = response.data.identity_design_menus_3;
-          this.identity_design_menus_4 = response.data.identity_design_menus_4;
-          this.identity_design_menus_5 = response.data.identity_design_menus_5;
-          this.identity_design_menus_6 = response.data.identity_design_menus_6;
+          this.identity_design_menus = response.data.identity_design_menus;
 
           this.project_count = response.data.project_count;
           this.happy_clients = response.data.happy_clients;
-
-          this.best_service_title = response.data.best_service_title;
-          this.best_service_header = response.data.best_service_header;
-          this.best_service_des = response.data.best_service_des;
-
-          this.why_choose_us_title = response.data.why_choose_us_title;
-          this.why_choose_us_des = response.data.why_choose_us_des;
+          this.content = response.data.content;
 
           this.services_capabilities_title =
             response.data.services_capabilities_title;
           this.services_capabilities_des =
             response.data.services_capabilities_des;
-          this.services_capabilities_menus_1 =
-            response.data.services_capabilities_menus_1;
-          this.services_capabilities_menus_2 =
-            response.data.services_capabilities_menus_2;
-          this.services_capabilities_menus_3 =
-            response.data.services_capabilities_menus_3;
-          this.services_capabilities_menus_4 =
-            response.data.services_capabilities_menus_4;
-          this.services_capabilities_menus_5 =
-            response.data.services_capabilities_menus_5;
-          this.services_capabilities_menus_6 =
-            response.data.services_capabilities_menus_6;
-          this.services_capabilities_menus_7 =
-            response.data.services_capabilities_menus_7;
+          this.service_capability_menu =
+            response.data.services_capabilities_menu;
 
           this.service_deliver_title = response.data.service_deliver_title;
-          this.service_deliver_des = response.data.service_deliver_des;
+          this.service_deliver_description = response.data.service_deliver_des;
 
-          this.our_latest_work_title = response.data.our_latest_work_title;
-
-          this.about_us_title = response.data.about_us_title;
-          this.about_us_name = response.data.about_us_name;
-          this.about_us_des = response.data.about_us_des;
-
-          this.best_service_img_tmp = response.data.best_service_img;
-          this.why_choose_us_img_tmp = response.data.why_choose_us_img;
-          this.our_latest_work_img_tmp = response.data.our_latest_work_img;
-          this.about_us_img_tmp = response.data.about_us_img;
-
-          $("#summernote").summernote("code", this.description);
+          $("#summernote").summernote("code", this.content);
           this.temp_thumbnail_url = response.data.file;
         })
         .catch((error) => {});
@@ -895,50 +549,15 @@ export default {
           icon: "error",
           text: "Deleted",
         });
-        this.identity_design_title= "",
-      this.identity_design_des= "",
-      this.identity_design_menus_1= "",
-      this.identity_design_menus_2= "",
-      this.identity_design_menus_3= "",
-      this.identity_design_menus_4= "",
-      this.identity_design_menus_5= "",
-      this.identity_design_menus_6= "",
-      this.project_count= "",
-      this.happy_clients= "",
-      this.best_service_title= "",
-      this.best_service_header= "",
-      this.best_service_des= "",
-      this.why_choose_us_title= "",
-      this.why_choose_us_des= "",
-      this.services_capabilities_title= "",
-      this.services_capabilities_des= "",
-      this.services_capabilities_menus_1= "",
-      this.services_capabilities_menus_2= "",
-      this.services_capabilities_menus_3= "",
-      this.services_capabilities_menus_4= "",
-      this.services_capabilities_menus_5= "",
-      this.services_capabilities_menus_6= "",
-      this.services_capabilities_menus_7= "",
-
-      this.service_deliver_title= "",
-      this.service_deliver_des= "",
-
-      this.our_latest_work_title= "",
-
-      this.about_us_title= "",
-      this.about_us_name= "",
-      this.about_us_des= "",
-
-      this.temp_thumbnail_url = "";
-      this.best_service_img = "";
-      this.why_choose_us_img = "";
-      this.our_latest_work_img = "";
-      this.about_us_img = "";
-
-      this.best_service_img_tmp = "";
-      this.why_choose_us_img_tmp = "";
-      this.our_latest_work_img_tmp = "";
-      this.about_us_img_tmp = "";
+        (this.identity_design_title = ""),
+          (this.identity_design_des = ""),
+          (this.identity_design_menus = ""),
+          (this.project_count = ""),
+          (this.happy_clients = ""),
+          (this.services_capabilities_menus = ""),
+          (this.service_deliver_title = ""),
+          (this.service_deliver_description = ""),
+          (this.temp_thumbnail_url = "");
       });
     },
   },
@@ -952,9 +571,11 @@ div {
   letter-spacing: 1px;
   font-family: sans-serif;
 }
+
 .btn-edit {
   background: #0093e9;
 }
+
 .card-header {
   background-image: linear-gradient(
     to right,
@@ -962,25 +583,37 @@ div {
     rgb(255, 148, 114)
   );
 }
+
 thead {
   /* background: #84a4ff; */
   background-image: linear-gradient(to right, #0093e9, #80d0c7);
   color: white;
   border: none;
 }
+
 .card {
   border-top: none;
 }
+
+.fa-solid,
+.fas {
+  font-size: 2rem;
+  padding: 10px;
+}
+
 .card-header {
   border: none;
 }
+
 .btn-save {
   background: #5a67ff;
 }
+
 .btn-save:hover {
   background: #0093e9;
   transition: 2s ease;
 }
+
 .table-striped > tbody > tr:nth-of-type(odd) > * {
   --bs-table-accent-bg: rgb(229 231 255);
   color: var(--bs-table-striped-color);
