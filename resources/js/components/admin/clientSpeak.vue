@@ -8,7 +8,7 @@
       >
         <button class="btn btn-primary">Add speak of clients</button>
       </div>
-      <div class="col-md-6 mt-4">
+      <div class="col-md-12 mt-4">
         <!-- <div class="alert alert-success" v-if="this.success">
           {{ this.success }}
         </div> -->
@@ -161,8 +161,8 @@
           </tbody>
           <tbody v-else>
             <tr>
-              <td colspan="3">
-                <h3 class="text-center">There have no blogs...!</h3>
+              <td colspan="6">
+                <h3 class="text-center">There have no client speaks...!</h3>
               </td>
             </tr>
           </tbody>

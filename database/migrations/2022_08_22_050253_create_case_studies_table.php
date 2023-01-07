@@ -29,7 +29,7 @@ class CreateCaseStudiesTable extends Migration
             $table->string('img1');
             $table->text('summary2');
             //////////content 1
-            $table->string('content');
+            $table->longText('content');
             ///////////agency
             $table->string('agency');
             $table->timestamps();

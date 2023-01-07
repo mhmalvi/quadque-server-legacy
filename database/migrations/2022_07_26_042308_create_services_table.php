@@ -18,10 +18,10 @@ class CreateServicesTable extends Migration
             $table->text('service_name');
             $table->string('file');
             $table->text('description');
-            $table->string('identity_design_des');
+            $table->longText('identity_design_des');
             $table->integer('project_count');
             $table->integer('happy_clients');
-            $table->string('content');
+            $table->longText('content');
 
             $table->text('services_capabilities_menu');
 

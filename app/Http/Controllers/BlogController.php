@@ -173,7 +173,7 @@ class BlogController extends Controller
         $request->validate([
             'title' => 'required',
             'text' => 'required',
-            'thumbnail' => 'required|image'
+            // 'thumbnail' => 'required|image'
         ]);
 
         $blog = Blog::find($request->id);

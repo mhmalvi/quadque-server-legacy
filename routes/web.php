@@ -9,6 +9,7 @@ use App\Http\Controllers\CaseStudyController;
 use App\Http\Controllers\UserPageController;
 use App\Http\Controllers\admin\ServiceController;
 use App\Http\Controllers\AboutUsController;
+use App\Http\Controllers\Clients;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -97,6 +98,13 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::get('/about-us/edit/{id}', [AboutUsController::class, 'edit']);
         Route::post('/about-us/update/', [AboutUsController::class, 'update']);
         Route::get('/about-us/delete/{id}', [AboutUsController::class, 'destroy']);
+
+        Route::get('/clients', [Clients::class, 'client_page_view'])->name('create-clients');
+        Route::get('/clients/get', [Clients::class, 'index'])->name('clients.get');
+        Route::post('/clients/store', [Clients::class, 'store'])->name('clients.store');
+        Route::get('/clients/edit/{id}', [Clients::class, 'edit']);
+        Route::post('/clients/update/', [Clients::class, 'update']);
+        Route::get('/clients/delete/{id}', [Clients::class, 'destroy']);
 
         Route::get('/current', [AdminController::class, 'logged_admin']);
 

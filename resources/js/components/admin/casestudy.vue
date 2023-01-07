@@ -11,7 +11,7 @@
       <div v-if="this.is_editing == true" @click="disable_button()" class="mt-3">
         <button class="btn btn-primary">Create Case Study</button>
       </div>
-      <div class="col-md-6 mt-4">
+      <div class="col-md-12 mt-4">
         <div class="card">
           <div class="card-header" style="
               height: 47px;
@@ -29,7 +29,7 @@
             <!-- <div class="alert alert-success" v-if="this.success">
               {{ this.success }}
             </div> -->
-            <form>
+            <form @submit.prevent="save">
               <div class="form-group">
                 <label for="company_name">Create Case Study Name</label>
                 <input type="text" class="form-control" id="company_name" v-model="name" />
@@ -93,16 +93,16 @@
                   {{ this.nameError }}
                 </div> -->
               </div>
-              <h4>Select service</h4>
+              <!-- <h4>Select service</h4>
               <div class="form-group" v-for="(service, index) in service_lists" :key="index">
-                <!-- {{service.service_name}} -->
                 <input type="checkbox" :value="service.id" v-model="selected_services"> <label for="">{{ service.service_name }}</label>
-              </div>
-              <h1>Content</h1>
+              </div> -->
+              <!-- <h1>Content</h1> -->
               <div class="form-group">
-                <!-- <label for="company_name">First Title</label> -->
-                <textarea type="string" class="form-control summernote1" v-model="content" id="summernote">
-                </textarea>
+                <label for="company_name">Content</label>
+                <select class="summernote" v-model="content"></select>
+                <!-- <textarea type="string" class="form-control summernote1" v-model="content" id="summernote">
+                </textarea> -->
                 <!-- <vue-editor v-model="content"></vue-editor> -->
               </div>
 
@@ -126,7 +126,7 @@
               </div>
               <div>
                 <!-- <ckeditor :editor="editor" v-model="editorData" :config="editorConfig"></ckeditor> -->
-                <button type="button" class="btn btn-block btn-save text-white" @click="save">
+                <button type="submit" class="btn btn-block btn-save text-white" >
                   {{ this.is_editing ? "Update" : "Save" }}
                 </button>
               </div>
@@ -164,7 +164,7 @@
           </tbody>
           <tbody v-else>
             <tr>
-              <td colspan="3">
+              <td colspan="4">
                 <h3 class="text-center">No Case Study</h3>
               </td>
             </tr>
@@ -181,6 +181,7 @@ import VueUploadMultipleImage from "vue-upload-multiple-image";
 // import Loading from "vue-loading-overlay";
 
 export default {
+  
   data() {
     return {
       isLoading: false,
@@ -239,24 +240,31 @@ export default {
     },
     group_img_1(e) {
       this.group_images_1 = e.target.files[0];
+      this.group_images_1_tmp=""
     },
     group_img_2(e) {
       this.group_images_2 = e.target.files[0];
+      this.group_images_2_tmp=""
     },
     group_img_3(e) {
       this.group_images_3 = e.target.files[0];
+      this.group_images_3_tmp=""
     },
     group_img_4(e) {
       this.group_images_4 = e.target.files[0];
+      this.group_images_4_tmp=""
     },
     group_img_5(e) {
       this.group_images_5 = e.target.files[0];
+      this.group_images_5_tmp=""
     },
     group_img_6(e) {
       this.group_images_6 = e.target.files[0];
+      this.group_images_6_tmp=""
     },
     group_img_7(e) {
       this.group_images_7 = e.target.files[0];
+      this.group_images_7_tmp=""
     },
     disable_button() {
       this.is_editing = false;
@@ -282,7 +290,15 @@ export default {
       this.group_images_5_tmp = "";
       this.group_images_6_tmp = "";
       this.group_images_7_tmp = "";
-      $("#summernote").summernote("code", "");
+      document.getElementById("image").value = "";
+      document.getElementById("group_images_1").value = "";
+      document.getElementById("group_images_2").value = "";
+      document.getElementById("group_images_3").value = "";
+      document.getElementById("group_images_4").value = "";
+      document.getElementById("group_images_5").value = "";
+      document.getElementById("group_images_6").value = "";
+      document.getElementById("group_images_7").value = "";
+      $(".summernote").summernote("code", "");
     },
     fetchAll() {
       axios
@@ -308,15 +324,7 @@ export default {
       this.image = e.target.files[0];
       this.temp_image_url = "";
     },
-    case_con_2_img_1(e) {
-      this.con_2_img_1 = e.target.files[0];
-    },
-    case_con_2_img_2(e) {
-      this.con_2_img_2 = e.target.files[0];
-    },
-    case_con_2_img_3(e) {
-      this.con_2_img_3 = e.target.files[0];
-    },
+    
     // group_images() {
     //   this.gr_images = this.$refs.group_images.files[0];
     // },
@@ -325,7 +333,7 @@ export default {
       console.log(this.agency_images);
     },
 
-    save() {
+    save:function(event) {
       // this.uploadImageSuccess()
       // console.log("data", formData, index, fileList);
       let url;
@@ -335,7 +343,7 @@ export default {
       } else {
         url = `/admin/case-study/store`;
       }
-      this.content = $("#summernote").summernote("code");
+      this.content = $(".summernote").summernote("code");
       let fd = new FormData();
       fd.append("name", this.name);
       fd.append("summary1", this.summary1);
@@ -369,7 +377,31 @@ export default {
           // document.getElementById("thumbnail").value = "";
           if (response.data.success == "created") {
             this.is_editing = false;
+            this.name = "";
+            this.image = "";
+            this.summary1 = "";
+            this.summary2 = "";
+            this.content = "";
+            this.group_images_1 = "";
+            this.group_images_2 = "";
+            this.group_images_3 = "";
+            this.group_images_4 = "";
+            this.group_images_5 = "";
+            this.group_images_6 = "";
+            this.group_images_7 = "";
+            this.group_images_1_tmp = "";
+            this.group_images_2_tmp = "";
+            this.group_images_3_tmp = "";
+            this.group_images_4_tmp = "";
+            this.group_images_5_tmp = "";
+            this.group_images_6_tmp = "";
+            this.group_images_7_tmp = "";
+            
 
+            $(".summernote").summernote("code", "");
+            this.temp_image_url = "";
+            this.temporary_id = "";
+            event.target.reset()
             this.$swal.fire({
               // position: "top-end",
               icon: "success",
@@ -377,32 +409,7 @@ export default {
               showConfirmButton: true,
               // timer: 1500,
             });
-            // this.name = "";
-            // this.image = "";
-            // this.summary1 = "";
-            // this.summary2 = "";
-            // this.first_content = "";
-            // this.case_con_1_img = "";
-            // this.case_con_2_title_1 = "";
-            // this.case_con_2_des_1 = "";
-            // this.case_con_2_title_2 = "";
-            // this.case_con_2_des_2 = "";
-            // this.case_con_2_title_3 = "";
-            // this.case_con_2_des_3 = "";
-            // this.group_images_1 = "";
-            // this.group_images_2 = "";
-            // this.group_images_3 = "";
-            // this.group_images_4 = "";
-            // this.group_images_5 = "";
-            // this.group_images_6 = "";
-            // this.group_images_7 = "";
             document.getElementById("image").value = "";
-            document.getElementById("case_con_1_img").value = "";
-            document.getElementById("con_2_img_1").value = "";
-            document.getElementById("con_2_img_2").value = "";
-            document.getElementById("con_2_img_3").value = "";
-            this.temp_image_url = "";
-            this.temporary_id = "";
             this.isLoading = false;
           } else if (response.data.success == "updated") {
             this.is_editing = true;
@@ -450,7 +457,7 @@ export default {
           this.summary1 = response.data.summary1;
           this.summary2 = response.data.summary2;
           this.content = response.data.content;
-          $("summernote").summernote("code", this.content);
+          $(".summernote").summernote("code", this.content);
           // $(".summernote").summernote("code", this.second_content);
           this.group_images_1_tmp = response.data.group_images_1;
           this.group_images_2_tmp = response.data.group_images_2;
@@ -474,14 +481,7 @@ export default {
         this.image = "";
         this.summary1 = "";
         this.summary2 = "";
-        this.first_content = "";
-        this.case_con_1_img = "";
-        this.case_con_2_title_1 = "";
-        this.case_con_2_des_1 = "";
-        this.case_con_2_title_2 = "";
-        this.case_con_2_des_2 = "";
-        this.case_con_2_title_3 = "";
-        this.case_con_2_des_3 = "";
+        this.content = "";
         this.group_images_1 = "";
         this.group_images_2 = "";
         this.group_images_3 = "";

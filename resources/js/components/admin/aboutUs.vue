@@ -187,7 +187,7 @@
           </tbody>
           <tbody v-else>
             <tr>
-              <td colspan="3">
+              <td colspan="8">
                 <h3 class="text-center">There have nothing about us...!</h3>
               </td>
             </tr>

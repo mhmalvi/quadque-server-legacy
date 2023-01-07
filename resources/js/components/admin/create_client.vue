@@ -18,20 +18,13 @@
               );
             ">
             <h4 style="margin-top: 1%" class="card-title text-white text-center">
-              {{ this.is_editing ? "Update Blog" : "Create Blog" }}
+              {{ this.is_editing ? "Update Client List" : "Create Client List" }}
             </h4>
           </div>
           <div class="card-body">
             <form>
               <div class="form-group">
-                <label for="title">Blog Title</label>
-                <textarea v-model="title" class="form-control" rows="4"></textarea>
-                <div class="text-danger" v-if="this.titleError">
-                  {{ this.titleError }}
-                </div>
-              </div>
-              <div class="form-group">
-                <label for="thumbnail">Blog Thumbnail</label>
+                <label for="thumbnail">Client Thumbnails</label>
                 <input type="file" class="form-control" id="thumbnail" @change="uploadfile" />
                 <div class="text-danger" v-if="this.thumbnailError">
                   {{ this.thumbnailError }}
@@ -40,20 +33,7 @@
                   <img :src="this.temp_thumbnail_url" width="150" height="150" />
                 </p>
               </div>
-              <div class="form-group" style="">
-                <label for="text">Blog Text</label>
-                <select v-model="text" id="" class="summernote"></select>
-                <!-- <textarea
-                  v-model="text"
-                  id="summernote"
-                  class="form-control"
-                  rows="10"
-                ></textarea> -->
-                <!-- <el-tiptap v-model="text" :extensions="extensions" output="html" /> -->
-                <div class="text-danger" v-if="this.textError">
-                  {{ this.textError }}
-                </div>
-              </div>
+
               <div>
                 <button type="button" class="btn btn-block btn-save text-white" @click="save">
                   {{ this.is_editing ? "Update" : "Save" }}
@@ -71,26 +51,20 @@
           <thead>
             <tr>
               <td>No.</td>
-              <th>Title</th>
               <th>Thumbnail</th>
-              <th>Description</th>
               <th>Action</th>
             </tr>
           </thead>
           <tbody v-if="lists.length > 0">
-            <tr v-for="list in lists" :key="list.id">
+            <tr v-for="(list, index) in lists" :key="index">
               <td style="vertical-align: middle; font-weight: 500">
                 {{ list.id }}.
-              </td>
-              <td style="width: 70%; vertical-align: middle; font-weight: 500">
-                {{ list.title }}
               </td>
 
               <td>
                 <!-- {{ list.thumbnail }} -->
-                <img :src="list.thumbnail" width="100" height="100" />
+                <img :src="list.client_images" width="100" height="100" />
               </td>
-              <td v-html="(list.text)"></td>
 
               <td style="vertical-align: middle; color: white">
                 <button type="button" class="btn btn-primary text-white" @click="editList(list.id)">
@@ -103,7 +77,7 @@
           <tbody v-else>
             <tr>
               <td colspan="3">
-                <h3 class="text-center">There have no blogs...!</h3>
+                <h3 class="text-center">There have no client list...!</h3>
               </td>
             </tr>
           </tbody>
@@ -135,11 +109,13 @@ export default {
   // components: {
   //   'el-tiptap': ElementTiptap,
   // },
+  // name:"createClient-component",
   data() {
     return {
       lists: [],
+      images: [],
       title: "",
-      thumbnail: "",
+      thumbnail: '',
       text: "",
       titleError: "",
       textError: "",
@@ -147,7 +123,7 @@ export default {
       success: "",
       temporary_id: "",
       is_editing: false,
-      temp_thumbnail_url: "",
+      temp_thumbnail_url: '',
       blog_no: 1,
 
       // extensions: [
@@ -171,16 +147,17 @@ export default {
       this.is_editing = false;
       this.title = "";
       this.text = "";
-      this.thumbnail = "";
+      this.thumbnail = '';
       this.temp_thumbnail_url = "";
-      $(".summernote").summernote("code", "");
+      // $(".summernote").summernote("code", "");
     },
     fetchAll() {
       axios
-        .get("/admin/blog/get")
+        .get("/admin/clients/get")
         .then((response) => {
-          console.log(response);
+          // console.log(response.data);
           this.lists = response.data;
+          console.log(lists)
 
         })
         .catch((error) => { });
@@ -193,67 +170,55 @@ export default {
     save() {
       let url;
       if (this.is_editing) {
-        url = `/admin/blog/update/`;
+        url = `/admin/clients/update/`;
       } else {
-        url = `/admin/blog/store`;
+        url = `/admin/clients/store`;
       }
 
-      this.text = $(".summernote").summernote("code");
       let fd = new FormData();
-      fd.append("title", this.title);
-      // const json = JSON.stringify(this.text);
-      // console.log(json)
-      // this.text = JSON.parse(json);
-      fd.append("text", this.text);
-      fd.append("thumbnail", this.thumbnail);
+      fd.append("client_images", this.thumbnail);
       fd.append("id", this.temporary_id);
       axios
         .post(url, fd)
         .then((response) => {
-          this.success = response.data.success;
+          console.log(response)
+          this.success = response.data.message;
 
-          
+
           if (this.success == "created") {
-            this.title = "";
-            this.text = "";
-            $(".summernote").summernote("code", this.text);
+            this.fetchAll();
             document.getElementById("thumbnail").value = "";
             this.temporary_id = "";
             this.temp_thumbnail_url = "";
             this.$swal.fire({
               // position: "top-end",
               icon: "success",
-              title: "Blog Saved",
+              title: "Clients Saved",
               showConfirmButton: true,
               // timer: 1500,
             });
           } else if (this.success == "updated") {
             this.is_editing = true;
+            this.fetchAll();
             this.$swal.fire({
               // position: "top-end",
               icon: "success",
-              title: "Blog Updated",
+              title: "Clients Updated",
               showConfirmButton: true,
               // timer: 1500,
             });
           }
-          this.fetchAll();
+          
           setTimeout(function () {
             this.success = "";
           }, 5000);
         })
         .catch((error) => {
           console.log(error.response);
-          if (error.response.data.errors.title) {
-            this.titleError = error.response.data.errors.title[0];
+          if (error.response.data.errors.client_images) {
+            this.thumbnailError = error.response.data.errors.client_images[0];
           } else {
-            this.titleError = "";
-          }
-
-          if (error.response.data.errors.text) {
-            this.textError = error.response.data.errors.text[0];
-          } else {
-            this.textError = "";
+            this.thumbnailError = "";
           }
           // if (error.response.data.errors.thumbnail) {
           //   this.thumbnailError = error.response.data.errors.thumbnail[0];
@@ -270,18 +235,17 @@ export default {
       this.temporary_id = list_id;
 
       axios
-        .get(`/admin/blog/edit/${this.temporary_id}`)
+        .get(`/admin/clients/edit/${this.temporary_id}`)
         .then((response) => {
-          this.title = response.data.title;
-          this.text = response.data.text;
-          // this.thumbnail = response.data.thumbnail;
-          $(".summernote").summernote("code", this.text);
-          this.temp_thumbnail_url = response.data.thumbnail;
+          // console.log(response)
+          this.thumbnail = response.data.client_images
+          this.temp_thumbnail_url = response.data.client_images;
+          console.log(this.temp_thumbnail_url)
         })
         .catch((error) => { });
     },
     destroyList(list_id) {
-      axios.get(`/admin/blog/delete/${list_id}`).then((response) => {
+      axios.get(`/admin/clients/delete/${list_id}`).then((response) => {
         // this.success = response.data.success;
         this.$swal.fire({
           icon: "error",

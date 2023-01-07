@@ -64,6 +64,11 @@
 
                     </li>
                     <li class="nav-item ">
+                        <a class="nav-link text-white" href="{{ route('admin.create-clients') }}">Clients</a>
+
+
+                    </li>
+                    <li class="nav-item ">
                         <a class="nav-link text-white" href="{{ route('admin.about-us') }}">About Us</a>
 
 
@@ -116,7 +121,7 @@
 
     <script>
         $(document).ready(function() {
-            $('#summernote').summernote({
+            $('.summernote').summernote({
                 height: 250,
             });          
 

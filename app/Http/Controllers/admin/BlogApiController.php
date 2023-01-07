@@ -39,7 +39,7 @@ class BlogApiController extends Controller
         $request->validate([
             'title' => 'required',
             'text' => 'required',
-            'thumbnail' => 'required|image'
+            // 'thumbnail' => 'required|image'
         ]);
 
 
@@ -98,11 +98,11 @@ class BlogApiController extends Controller
      */
     public function update(Request $request, $id)
     {
-        // $request->validate([
-        //     'title' => 'required',
-        //     'text' => 'required',
+        $request->validate([
+            'title' => 'required',
+            'text' => 'required',
         //     'thumbnail' => 'required|image'
-        // ]);
+        ]);
 
         $blog = Blog::find($id);
 
