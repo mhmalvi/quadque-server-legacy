@@ -1,12 +1,5 @@
 <template>
   <div>
-    <!-- <loading
-      :active="isLoading"
-      :is-full-page="fullPage"
-      :background-color="background"
-      :loader="loader"
-      :opacity="opacity"
-    /> -->
     <div class="row d-flex justify-content-center">
       <div v-if="this.is_editing == true" @click="disable_button()" class="mt-3">
         <button class="btn btn-primary">Create Case Study</button>

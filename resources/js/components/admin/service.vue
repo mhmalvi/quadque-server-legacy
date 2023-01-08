@@ -108,7 +108,7 @@
                   v-model="identity_design_des"
                 /> -->
                 <!-- <input class="summernote" v-model="identity_design_des" /> -->
-                <!-- <el-tiptap v-model="identity_design_des" :extensions="extensions" /> -->
+                <el-tiptap v-model="identity_design_des" :extensions="extensions" />
                 <!-- <textarea v-model="identity_design_des" id="summernote"></textarea> -->
                 <div class="text-danger" v-if="this.identity_design_desError">
                   {{ this.identity_design_desError }}
@@ -239,6 +239,7 @@
               <th>No.</th>
               <th>Name</th>
               <th>Thumbnail</th>
+              <th>identity description</th>
               <th style="width: 36%">Description</th>
 
               <th>Action</th>
@@ -256,6 +257,7 @@
               <td style="vertical-align: middle">
                 <img :src="list.file" width="100" height="100" />
               </td>
+              <td v-html="list.identity_design_des"></td>
               <td v-html="list.content"></td>
 
               <td style="vertical-align: middle; width: 15%; color: white">
@@ -308,6 +310,9 @@ import {
   ListItem,
   BulletList,
   OrderedList,
+  Iframe,
+  TextAlign,
+  History
 } from 'element-tiptap';
 export default {
   // name:"service-component",
@@ -365,7 +370,10 @@ export default {
         new ListItem(),
         new BulletList(),
         new OrderedList(),
-        new Image()
+        new Image(),
+        new Iframe(),
+        new TextAlign(),
+        new History()
       ],
       // editorConfig: {
       // 		toolbar: [
@@ -409,7 +417,6 @@ export default {
       this.description = "";
       this.file = "";
       $(".summernote").summernote("code", "");
-      $(".summernote").summernote("code", "");
 
       (this.identity_design_title = ""),
         (this.identity_design_des = ""),
@@ -445,7 +452,6 @@ export default {
       }
 
       this.content = $(".summernote").summernote("code");
-      this.identity_design_des = $(".summernote").summernote("code");
       // var menuList = {
       //   'identity_menu_list': this.identity_menus,
       //   'services_capabilities_menu_list':this.service_capability_menus
@@ -486,7 +492,6 @@ export default {
             this.service_name = "";
             this.description = "";
             this.file = "";
-            $(".summernote").summernote("code", "");
             $(".summernote").summernote("code", "");
 
             (this.identity_design_title = ""),
@@ -586,7 +591,6 @@ export default {
           this.service_capability_menu =
             response.data.services_capabilities_menu;
           $(".summernote").summernote("code", this.content);
-          $(".summernote").summernote("code", this.identity_design_des);
 
           this.service_deliver_title = response.data.service_deliver_title;
           this.service_deliver_description = response.data.service_deliver_des;
