@@ -33,6 +33,7 @@
         "@fortawesome/free-solid-svg-icons": "^6.2.0",
         "@fortawesome/vue-fontawesome": "^2.0.8",
         "ckeditor4-vue": "^2.2.1",
+        "element-tiptap": "^1.27.1",
         "sweetalert2": "^11.6.16",
         "vue-axios": "^3.4.1",
         "vue-dplayer": "^0.0.10",
