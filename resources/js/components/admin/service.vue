@@ -108,7 +108,7 @@
                   v-model="identity_design_des"
                 /> -->
                 <!-- <input class="summernote" v-model="identity_design_des" /> -->
-                <el-tiptap v-model="identity_design_des" :extensions="extensions" />
+                <!-- <el-tiptap v-model="identity_design_des" :extensions="extensions" ></el-tiptap> -->
                 <!-- <textarea v-model="identity_design_des" id="summernote"></textarea> -->
                 <div class="text-danger" v-if="this.identity_design_desError">
                   {{ this.identity_design_desError }}
@@ -292,34 +292,31 @@
 <script>
 import axios from "axios";
 // import { VueEditor } from "vue2-editor";
-// import { ElementTiptap } from 'element-tiptap';
+//  import { ElementTiptap } from 'element-tiptap';
 // import { ImageDrop } from "quill-image-drop-module";
 // import ImageResize from "quill-image-resize-module";
 // import VueFroala from "vue-froala-wysiwyg";
-import {
-  // necessary extensions
-  Doc,
-  Text,
-  Paragraph,
-  Heading,
-  Bold,
-  Underline,
-  Italic,
-  Image,
-  Strike,
-  ListItem,
-  BulletList,
-  OrderedList,
-  Iframe,
-  TextAlign,
-  History
-} from 'element-tiptap';
+// import {
+//   // necessary extensions
+//   Doc,
+//   Text,
+//   Paragraph,
+//   Heading,
+//   Bold,
+//   Underline,
+//   Italic,
+//   Image,
+//   Strike,
+//   ListItem,
+//   BulletList,
+//   OrderedList,
+//   Iframe,
+//   TextAlign,
+//   History
+// } from 'element-tiptap';
 export default {
   // name:"service-component",
   components: {
-    // VueEditor,
-    // VueFroala
-    // 'el-tiptap': ElementTiptap,
   },
   data() {
     return {
@@ -358,23 +355,23 @@ export default {
       temporary_id: "",
       is_editing: false,
       temp_thumbnail_url: "",
-      extensions: [
-        new Doc(),
-        new Text(),
-        new Paragraph(),
-        new Heading({ level: 5 }),
-        new Bold({ bubble: true }), // render command-button in bubble menu.
-        new Underline({ bubble: true, menubar: false }), // render command-button in bubble menu but not in menubar.
-        new Italic(),
-        new Strike(),
-        new ListItem(),
-        new BulletList(),
-        new OrderedList(),
-        new Image(),
-        new Iframe(),
-        new TextAlign(),
-        new History()
-      ],
+      // extensions: [
+      //   new Doc(),
+      //   new Text(),
+      //   new Paragraph(),
+      //   new Heading({ level: 5 }),
+      //   new Bold({ bubble: true }), // render command-button in bubble menu.
+      //   new Underline({ bubble: true, menubar: false }), // render command-button in bubble menu but not in menubar.
+      //   new Italic(),
+      //   new Strike(),
+      //   new ListItem(),
+      //   new BulletList(),
+      //   new OrderedList(),
+      //   new Image(),
+      //   new Iframe(),
+      //   new TextAlign(),
+      //   new History()
+      // ],
       // editorConfig: {
       // 		toolbar: [
       // 			[ 'Source' ],
