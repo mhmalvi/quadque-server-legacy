@@ -45,9 +45,15 @@
                     </li>
 
                     <li class="nav-item">
-                        <a class="nav-link text-white" href="{{ route('admin.casestudy') }}">Case Study</a>
+                        <a class="nav-link text-white" href="{{ route('admin.casestudy') }}">Case Study for Mobile</a>
 
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-white" href="{{ route('admin.casestudydesktop') }}">Case Study for Desktop</a>
+
+
+                    </li>
+
                     <li class="nav-item ">
                         <a class="nav-link text-white" href="{{ route('admin.blog') }}">Blog</a>
 
@@ -68,6 +74,7 @@
 
 
                     </li>
+
                     <li class="nav-item ">
                         <a class="nav-link text-white" href="{{ route('admin.about-us') }}">About Us</a>
 

@@ -15,7 +15,7 @@
               );
             ">
             <h4 style="margin-top: 1%" class="card-title text-white text-center">
-              {{ this.is_editing ? "Update Case Study" : "Create Case Study" }}
+              {{ this.is_editing ? "Update Case Study for Mobile View" : "Create Case Study for Mobile View" }}
             </h4>
           </div>
           <div class="card-body">
