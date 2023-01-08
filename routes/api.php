@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\admin\CaseStudyApiController;
+use App\Http\Controllers\CaseStudyDesktopController;
 use App\Http\Controllers\admin\BlogApiController;
 use App\Http\Controllers\admin\ServiceController;
 use App\Http\Controllers\admin\HomeApiController;
@@ -32,6 +33,9 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('case-studies', [CaseStudyApiController::class, 'index']);
 Route::get('case-studies/{id}', [CaseStudyApiController::class, 'show']);
+
+Route::get('case-studies-desktop', [CaseStudyDesktopController::class, 'index']);
+Route::get('case-studies-desktop/{id}', [CaseStudyDesktopController::class, 'get_by_id']);
 
 Route::get('manage-blogs', [BlogApiController::class, 'index']);
 Route::get('manage-blogs/{id}', [BlogApiController::class, 'show']);

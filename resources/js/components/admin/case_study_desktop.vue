@@ -259,7 +259,8 @@ export default {
       this.group_images_7 = e.target.files[0];
       this.group_images_7_tmp=""
     },
-    disable_button() {
+      disable_button() {
+        $(".summernote").summernote("code", "");
       this.is_editing = false;
       this.name = "";
       this.image = "";
@@ -291,7 +292,7 @@ export default {
       document.getElementById("group_images_5").value = "";
       document.getElementById("group_images_6").value = "";
       document.getElementById("group_images_7").value = "";
-      $(".summernote").summernote("code", "");
+      
     },
     fetchAll() {
       axios

@@ -16,6 +16,10 @@ class CaseStudyDesktopController extends Controller
         return view('user.components.caseStudyDetailsDesktop', compact('blogs'));
     }
 
+    public function get_by_id(Request $request){
+        return CaseStudyDesktop::find($request->id);
+    }
+
 
     public function getMore($num)
     {
