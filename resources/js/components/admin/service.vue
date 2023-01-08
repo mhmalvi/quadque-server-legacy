@@ -90,7 +90,7 @@
               </div>
               <div class="form-group">
                 <label for="title">Identity Design Description </label>
-                <el-tiptap v-model="content" :extensions="extensions" />
+                <el-tiptap v-model="identity_design_des" :extensions="extensions" />
                 <div class="text-danger" v-if="this.identity_design_desError">
                   {{ this.identity_design_desError }}
                 </div>
