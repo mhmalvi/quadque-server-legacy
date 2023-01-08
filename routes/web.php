@@ -6,6 +6,7 @@ use App\Http\Controllers\ClientSpeakController;
 use App\Http\Controllers\admin\HomeApiController;
 use App\Http\Controllers\BlogController;
 use App\Http\Controllers\CaseStudyController;
+use App\Http\Controllers\CaseStudyDesktopController;
 use App\Http\Controllers\UserPageController;
 use App\Http\Controllers\admin\ServiceController;
 use App\Http\Controllers\AboutUsController;
@@ -69,6 +70,13 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::get('/case-study/edit/{id}', [CaseStudyController::class, 'edit']);
         Route::post('/case-study/update/', [CaseStudyController::class, 'update']);
         Route::get('/case-study/delete/{id}', [CaseStudyController::class, 'destroy']);
+
+        Route::get('/case-study-desktop', [CaseStudyDesktopController::class, 'show'])->name('casestudydesktop');
+        Route::get('/case-study-desktop/get', [CaseStudyDesktopController::class, 'index']);
+        Route::post('/case-study-desktop/store', [CaseStudyDesktopController::class, 'store'])->name('case-study-desktop.store');
+        Route::get('/case-study-desktop/edit/{id}', [CaseStudyDesktopController::class, 'edit']);
+        Route::post('/case-study-desktop/update/', [CaseStudyDesktopController::class, 'update']);
+        Route::get('/case-study-desktop/delete/{id}', [CaseStudyDesktopController::class, 'destroy']);
 
         //blogs route
         Route::get('/blog', [BlogController::class, 'index'])->name('blog');

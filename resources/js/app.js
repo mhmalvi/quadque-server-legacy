@@ -85,6 +85,10 @@ Vue.component(
     "about-component",
     require("./components/admin/aboutUs.vue").default
 );
+Vue.component(
+    "casestudydesktop-component",
+    require("./components/admin/case_study_desktop.vue").default
+);
 
 // if (location.hostname == "127.0.0.1") {
 //     Vue.prototype.$base = "http://127.0.0.1:8000/#";

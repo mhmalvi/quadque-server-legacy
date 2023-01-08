@@ -15,7 +15,7 @@
               );
             ">
             <h4 style="margin-top: 1%" class="card-title text-white text-center">
-              {{ this.is_editing ? "Update Case Study for Mobile View" : "Create Case Study for Mobile View" }}
+              {{ this.is_editing ? "Update Case Study for Desktop View" : "Create Case Study  for Desktop View" }}
             </h4>
           </div>
           <div class="card-body">
@@ -295,7 +295,7 @@ export default {
     },
     fetchAll() {
       axios
-        .get("/admin/case-study/get")
+        .get("/admin/case-study-desktop/get")
         .then((response) => {
           this.lists = response.data;
           console.log(this.lists);
@@ -332,9 +332,9 @@ export default {
       let url;
       this.isLoading = true;
       if (this.is_editing) {
-        url = `/admin/case-study/update/`;
+        url = `/admin/case-study-desktop/update/`;
       } else {
-        url = `/admin/case-study/store`;
+        url = `/admin/case-study-desktop/store`;
       }
       this.content = $(".summernote").summernote("code");
       let fd = new FormData();
@@ -442,7 +442,7 @@ export default {
       this.temporary_id = list_id;
 
       axios
-        .get(`/admin/case-study/edit/${this.temporary_id}`)
+        .get(`/admin/case-study-desktop/edit/${this.temporary_id}`)
         .then((response) => {
           console.log(response);
           this.name = response.data.com_name;
@@ -463,7 +463,7 @@ export default {
         .catch((error) => { });
     },
     destroyList(list_id) {
-      axios.get(`/admin/case-study/delete/${list_id}`).then((response) => {
+      axios.get(`/admin/case-study-desktop/delete/${list_id}`).then((response) => {
         // this.success = response.data.success;
         this.fetchAll();
         this.$swal.fire({
@@ -471,20 +471,24 @@ export default {
           text: "Deleted",
         });
         this.name = "";
-        this.image = "";
-        this.summary1 = "";
-        this.summary2 = "";
-        this.content = "";
-        this.group_images_1 = "";
-        this.group_images_2 = "";
-        this.group_images_3 = "";
-        this.group_images_4 = "";
-        this.group_images_5 = "";
-        this.group_images_6 = "";
-        this.group_images_7 = "";
-        this.con_2_img_1 = "";
-        this.con_2_img_2 = "";
-        this.con_2_img_3 = "";
+            this.image = "";
+            this.summary1 = "";
+            this.summary2 = "";
+            this.content = "";
+            this.group_images_1 = "";
+            this.group_images_2 = "";
+            this.group_images_3 = "";
+            this.group_images_4 = "";
+            this.group_images_5 = "";
+            this.group_images_6 = "";
+            this.group_images_7 = "";
+            this.group_images_1_tmp = "";
+            this.group_images_2_tmp = "";
+            this.group_images_3_tmp = "";
+            this.group_images_4_tmp = "";
+            this.group_images_5_tmp = "";
+            this.group_images_6_tmp = "";
+            this.group_images_7_tmp = "";
         document.getElementById("image").value = "";
         document.getElementById("case_con_1_img").value = "";
         document.getElementById("con_2_img_1").value = "";
