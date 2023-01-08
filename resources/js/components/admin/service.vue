@@ -90,7 +90,7 @@
               </div>
               <div class="form-group">
                 <label for="title">Identity Design Description </label>
-                <el-tiptap v-model="content" :extensions="extensions" />
+                <el-tiptap v-model="identity_design_des" :extensions="extensions" />
                 <div class="text-danger" v-if="this.identity_design_desError">
                   {{ this.identity_design_desError }}
                 </div>
@@ -293,7 +293,10 @@ import {
   OrderedList,
   Iframe,
   TextAlign,
-  History
+  History,
+  Fullscreen,
+  FontSize,
+  SelectAll
 } from 'element-tiptap';
 export default {
   // name:"service-component",
@@ -352,7 +355,10 @@ export default {
         new Image(),
         new Iframe(),
         new TextAlign(),
-        new History()
+        new History(),
+        new Fullscreen(),
+        new FontSize(),
+        new SelectAll
       ],
       // editorConfig: {
       // 		toolbar: [
