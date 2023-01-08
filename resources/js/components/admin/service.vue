@@ -296,7 +296,8 @@ import {
   History,
   Fullscreen,
   FontSize,
-  SelectAll
+  SelectAll,
+  Preview
 } from 'element-tiptap';
 export default {
   // name:"service-component",
@@ -358,7 +359,8 @@ export default {
         new History(),
         new Fullscreen(),
         new FontSize(),
-        new SelectAll
+        new SelectAll(),
+        new Preview()
       ],
       // editorConfig: {
       // 		toolbar: [

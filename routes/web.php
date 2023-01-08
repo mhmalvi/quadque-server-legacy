@@ -10,6 +10,7 @@ use App\Http\Controllers\CaseStudyDesktopController;
 use App\Http\Controllers\UserPageController;
 use App\Http\Controllers\admin\ServiceController;
 use App\Http\Controllers\AboutUsController;
+use App\Http\Controllers\StartProjectController;
 use App\Http\Controllers\Clients;
 use Illuminate\Support\Facades\Route;
 
@@ -113,6 +114,9 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::get('/clients/edit/{id}', [Clients::class, 'edit']);
         Route::post('/clients/update/', [Clients::class, 'update']);
         Route::get('/clients/delete/{id}', [Clients::class, 'destroy']);
+        
+        Route::get("/view-mail", [StartProjectController::class, "index"]);
+        Route::post('/mail', [StartProjectController::class, "store"]);
 
         Route::get('/current', [AdminController::class, 'logged_admin']);
 
