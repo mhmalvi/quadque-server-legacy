@@ -88,28 +88,9 @@
                   {{ this.descriptionError }}
                 </div>
               </div>
-              <!--  -->
-              <!-- <div class="form-group">
-                <label for="title">Identity Design Title</label>
-                <input
-                  type="text"
-                  class="form-control"
-                  v-model="identity_design_title"
-                  placeholder="Enter title"
-                  required
-                />
-                <div class="text-danger" v-if="this.identity_design_titleError">
-                  {{ this.identity_design_titleError }}
-                </div>
-              </div> -->
               <div class="form-group">
                 <label for="title">Identity Design Description </label>
-                <!-- <vue-editor
-                  v-model="identity_design_des"
-                /> -->
-                <!-- <input class="summernote" v-model="identity_design_des" /> -->
-                <!-- <el-tiptap v-model="identity_design_des" :extensions="extensions" ></el-tiptap> -->
-                <!-- <textarea v-model="identity_design_des" id="summernote"></textarea> -->
+                <el-tiptap v-model="content" :extensions="extensions" />
                 <div class="text-danger" v-if="this.identity_design_desError">
                   {{ this.identity_design_desError }}
                 </div>
@@ -296,27 +277,28 @@ import axios from "axios";
 // import { ImageDrop } from "quill-image-drop-module";
 // import ImageResize from "quill-image-resize-module";
 // import VueFroala from "vue-froala-wysiwyg";
-// import {
-//   // necessary extensions
-//   Doc,
-//   Text,
-//   Paragraph,
-//   Heading,
-//   Bold,
-//   Underline,
-//   Italic,
-//   Image,
-//   Strike,
-//   ListItem,
-//   BulletList,
-//   OrderedList,
-//   Iframe,
-//   TextAlign,
-//   History
-// } from 'element-tiptap';
+import {
+  // necessary extensions
+  Doc,
+  Text,
+  Paragraph,
+  Heading,
+  Bold,
+  Underline,
+  Italic,
+  Image,
+  Strike,
+  ListItem,
+  BulletList,
+  OrderedList,
+  Iframe,
+  TextAlign,
+  History
+} from 'element-tiptap';
 export default {
   // name:"service-component",
   components: {
+    // 'el-tiptap': ElementTiptap,
   },
   data() {
     return {
@@ -355,23 +337,23 @@ export default {
       temporary_id: "",
       is_editing: false,
       temp_thumbnail_url: "",
-      // extensions: [
-      //   new Doc(),
-      //   new Text(),
-      //   new Paragraph(),
-      //   new Heading({ level: 5 }),
-      //   new Bold({ bubble: true }), // render command-button in bubble menu.
-      //   new Underline({ bubble: true, menubar: false }), // render command-button in bubble menu but not in menubar.
-      //   new Italic(),
-      //   new Strike(),
-      //   new ListItem(),
-      //   new BulletList(),
-      //   new OrderedList(),
-      //   new Image(),
-      //   new Iframe(),
-      //   new TextAlign(),
-      //   new History()
-      // ],
+      extensions: [
+        new Doc(),
+        new Text(),
+        new Paragraph(),
+        new Heading({ level: 5 }),
+        new Bold({ bubble: true }), // render command-button in bubble menu.
+        new Underline({ bubble: true, menubar: false }), // render command-button in bubble menu but not in menubar.
+        new Italic(),
+        new Strike(),
+        new ListItem(),
+        new BulletList(),
+        new OrderedList(),
+        new Image(),
+        new Iframe(),
+        new TextAlign(),
+        new History()
+      ],
       // editorConfig: {
       // 		toolbar: [
       // 			[ 'Source' ],

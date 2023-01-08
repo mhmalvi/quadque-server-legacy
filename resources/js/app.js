@@ -29,17 +29,23 @@ import {
 import Vue from "vue";
 import VueSweetalert2 from "vue-sweetalert2";
 import "sweetalert2/dist/sweetalert2.min.css";
-// import "vue-loading-overlay/dist/css/index.css";
 
-// import "mavon-editor/dist/css/index.css";
-// // use
-// Vue.use(mavonEditor);
+import ElementUI from 'element-ui';
+import { ElementTiptapPlugin } from 'element-tiptap';
+// import ElementUI's styles
+import 'element-ui/lib/theme-chalk/index.css';
+// import this package's styles
+import 'element-tiptap/lib/index.css';
+
+// use ElementUI's plugin
+Vue.use(ElementUI);
+// use this package's plugin
+Vue.use(ElementTiptapPlugin, {
+  /* plugin options */
+});
+// Now you register `'el-tiptap'` component globally.
 library.add(faTwitter, faFacebookF, faYoutube, faInstagram);
-// import CKEditor from "ckeditor4-vue";
-
-// Vue.use(CKEditor);
 Vue.use(VueSweetalert2);
-// Vue.use(VueLazyload);
 Vue.component("marquee-text", MarqueeText);
 Vue.component("dynamic-marquee", DynamicMarquee);
 
