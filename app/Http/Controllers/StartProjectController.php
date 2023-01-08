@@ -10,9 +10,9 @@ use Illuminate\Support\Facades\Mail;
 class StartProjectController extends Controller
 {
     public function index(){
-        return view('emails.startProject');
+        return view('emails.startProject')->with('order ');
     }
-    public function store(Request $request, StartProject $order){
+    public function store(Request $request){
         Mail::to("megatanjib@gmail.com")->send(new StartProject($order));
     }
 }
