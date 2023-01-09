@@ -38,7 +38,6 @@
                 <label for="title">Our Vision</label><br />
                 <textarea
                   v-model="our_vision"
-                  
                   class="form-control"
                   rows="4"
                   required
@@ -138,9 +137,9 @@
             </tr>
           </thead>
           <tbody v-if="lists.length > 0">
-            <tr v-for="(list,index) in lists" :key="index">
+            <tr v-for="(list, index) in lists" :key="index">
               <td style="vertical-align: middle; font-weight: 500">
-                {{ index+1 }}.
+                {{ index + 1 }}.
               </td>
               <td
                 style="vertical-align: middle; font-weight: 500"
@@ -274,13 +273,13 @@ export default {
       // fd.append("why_choose_us", this.why_choose_us);
       axios
         .post(url, {
-          "our_vision": this.our_vision,
-          "our_mission": this.our_mission,
-          "our_goal": this.our_goal,
-          "our_objective": this.our_objective,
-          "who_we_are": this.who_we_are,
-          "why_choose_us": this.why_choose_us,
-          "id":this.temporary_id
+          our_vision: this.our_vision,
+          our_mission: this.our_mission,
+          our_goal: this.our_goal,
+          our_objective: this.our_objective,
+          who_we_are: this.who_we_are,
+          why_choose_us: this.why_choose_us,
+          id: this.temporary_id,
         })
         .then((response) => {
           this.success = response.data.success;

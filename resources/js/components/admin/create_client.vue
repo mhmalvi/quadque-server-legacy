@@ -1,7 +1,11 @@
 <template>
   <div>
     <div class="row d-flex justify-content-center">
-      <div v-if="this.is_editing == true" @click="disable_button()" class="mt-3">
+      <div
+        v-if="this.is_editing == true"
+        @click="disable_button()"
+        class="mt-3"
+      >
         <button class="btn btn-primary">Create Blog</button>
       </div>
       <div class="col-md-12 mt-4">
@@ -9,33 +13,54 @@
           {{ this.success }}
         </div> -->
         <div class="card">
-          <div class="card-header" style="
+          <div
+            class="card-header"
+            style="
               height: 47px;
               background-image: linear-gradient(
                 to right,
                 rgb(242, 112, 156),
                 rgb(255, 148, 114)
               );
-            ">
-            <h4 style="margin-top: 1%" class="card-title text-white text-center">
-              {{ this.is_editing ? "Update Client List" : "Create Client List" }}
+            "
+          >
+            <h4
+              style="margin-top: 1%"
+              class="card-title text-white text-center"
+            >
+              {{
+                this.is_editing ? "Update Client List" : "Create Client List"
+              }}
             </h4>
           </div>
           <div class="card-body">
             <form>
               <div class="form-group">
                 <label for="thumbnail">Client Thumbnails</label>
-                <input type="file" class="form-control" id="thumbnail" @change="uploadfile" />
+                <input
+                  type="file"
+                  class="form-control"
+                  id="thumbnail"
+                  @change="uploadfile"
+                />
                 <div class="text-danger" v-if="this.thumbnailError">
                   {{ this.thumbnailError }}
                 </div>
                 <p class="my-2 text-center" v-if="this.temp_thumbnail_url">
-                  <img :src="this.temp_thumbnail_url" width="150" height="150" />
+                  <img
+                    :src="this.temp_thumbnail_url"
+                    width="150"
+                    height="150"
+                  />
                 </p>
               </div>
 
               <div>
-                <button type="button" class="btn btn-block btn-save text-white" @click="save">
+                <button
+                  type="button"
+                  class="btn btn-block btn-save text-white"
+                  @click="save"
+                >
                   {{ this.is_editing ? "Update" : "Save" }}
                 </button>
               </div>
@@ -58,7 +83,7 @@
           <tbody v-if="lists.length > 0">
             <tr v-for="(list, index) in lists" :key="index">
               <td style="vertical-align: middle; font-weight: 500">
-                {{ index+1 }}.
+                {{ index + 1 }}.
               </td>
 
               <td>
@@ -67,8 +92,17 @@
               </td>
 
               <td style="vertical-align: middle; color: white">
-                <button type="button" class="btn btn-primary text-white" @click="editList(list.id)">
-                  Edit</button><button type="button" class="btn btn-danger ml-1" @click="destroyList(list.id)">
+                <button
+                  type="button"
+                  class="btn btn-primary text-white"
+                  @click="editList(list.id)"
+                >
+                  Edit</button
+                ><button
+                  type="button"
+                  class="btn btn-danger ml-1"
+                  @click="destroyList(list.id)"
+                >
                   Delete
                 </button>
               </td>
@@ -103,7 +137,7 @@ import axios from "axios";
 //   ListItem,
 //   BulletList,
 //   OrderedList,
-//   Image,Iframe,CodeBlock,Blockquote,TodoItem,TodoList,TextAlign,Indent,LineHeight,HorizontalRule,HardBreak,TrailingNode,History,Table ,TableHeader,TableCell,TableRow,FormatClear,TextColor,TextHighlight,Preview,Print,Fullscreen,SelectAll,FontType,FontSize,CodeView 
+//   Image,Iframe,CodeBlock,Blockquote,TodoItem,TodoList,TextAlign,Indent,LineHeight,HorizontalRule,HardBreak,TrailingNode,History,Table ,TableHeader,TableCell,TableRow,FormatClear,TextColor,TextHighlight,Preview,Print,Fullscreen,SelectAll,FontType,FontSize,CodeView
 // } from 'element-tiptap';
 export default {
   // components: {
@@ -115,7 +149,7 @@ export default {
       lists: [],
       images: [],
       title: "",
-      thumbnail: '',
+      thumbnail: "",
       text: "",
       titleError: "",
       textError: "",
@@ -123,7 +157,7 @@ export default {
       success: "",
       temporary_id: "",
       is_editing: false,
-      temp_thumbnail_url: '',
+      temp_thumbnail_url: "",
       blog_no: 1,
 
       // extensions: [
@@ -147,7 +181,7 @@ export default {
       this.is_editing = false;
       this.title = "";
       this.text = "";
-      this.thumbnail = '';
+      this.thumbnail = "";
       this.temp_thumbnail_url = "";
       // $(".summernote").summernote("code", "");
     },
@@ -157,10 +191,9 @@ export default {
         .then((response) => {
           // console.log(response.data);
           this.lists = response.data;
-          console.log(lists)
-
+          console.log(lists);
         })
-        .catch((error) => { });
+        .catch((error) => {});
     },
     uploadfile(e) {
       this.thumbnail = e.target.files[0];
@@ -181,9 +214,8 @@ export default {
       axios
         .post(url, fd)
         .then((response) => {
-          console.log(response)
+          console.log(response);
           this.success = response.data.message;
-
 
           if (this.success == "created") {
             this.fetchAll();
@@ -208,7 +240,7 @@ export default {
               // timer: 1500,
             });
           }
-          
+
           setTimeout(function () {
             this.success = "";
           }, 5000);
@@ -238,11 +270,11 @@ export default {
         .get(`/admin/clients/edit/${this.temporary_id}`)
         .then((response) => {
           // console.log(response)
-          this.thumbnail = response.data.client_images
+          this.thumbnail = response.data.client_images;
           this.temp_thumbnail_url = response.data.client_images;
-          console.log(this.temp_thumbnail_url)
+          console.log(this.temp_thumbnail_url);
         })
-        .catch((error) => { });
+        .catch((error) => {});
     },
     destroyList(list_id) {
       axios.get(`/admin/clients/delete/${list_id}`).then((response) => {
@@ -281,9 +313,11 @@ div {
 
 .card-header {
   border: none;
-  background-image: linear-gradient(to right,
-      rgb(242, 112, 156),
-      rgb(255, 148, 114));
+  background-image: linear-gradient(
+    to right,
+    rgb(242, 112, 156),
+    rgb(255, 148, 114)
+  );
 }
 
 thead {
@@ -302,7 +336,7 @@ thead {
   transition: 2s ease;
 }
 
-.table-striped>tbody>tr:nth-of-type(odd)>* {
+.table-striped > tbody > tr:nth-of-type(odd) > * {
   --bs-table-accent-bg: rgb(229 231 255);
   color: var(--bs-table-striped-color);
   border: none;

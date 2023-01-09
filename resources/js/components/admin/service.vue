@@ -230,9 +230,9 @@
             </tr>
           </thead>
           <tbody v-if="lists.length > 0">
-            <tr v-for="(list,index) in lists" :key="index">
+            <tr v-for="(list, index) in lists" :key="index">
               <td style="vertical-align: middle; font-weight: 500">
-                {{ index+1 }}.
+                {{ index + 1 }}.
               </td>
               <td style="vertical-align: middle; font-weight: 500">
                 {{ list.service_name }}
@@ -301,7 +301,7 @@ import {
   FontSize,
   SelectAll,
   Preview,
-  Table ,
+  Table,
   TableHeader,
   TableCell,
   TableRow,
@@ -368,7 +368,7 @@ export default {
         new FontSize(),
         new SelectAll(),
         new Preview(),
-        new Table (),
+        new Table(),
         new TableHeader(),
         new TableCell(),
         new TableRow(),
