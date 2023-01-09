@@ -40,15 +40,15 @@
         <p>Phone:{{ $phone }}</p>
         <div>
 
-            <div>
+    <div>
 
-                <p>Email: {{ $email }}</p>
-                <div>
+        <p>Email: {{ $email }}</p>
+    <div>
 
-                    <div>
-                        
-                        <p>{{ $help }}</p>
-                        <div>
+    <div>
+
+        <p>{{ $help }}</p>
+    <div>
 
 
 
