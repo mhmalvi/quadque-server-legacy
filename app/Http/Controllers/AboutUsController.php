@@ -82,7 +82,7 @@ class AboutUsController extends Controller
 
     public function showAll()
     {
-        return AboutUs::all();
+        return AboutUs::orderBy('id','DESC')->get();
     }
 
     /**

@@ -78,7 +78,7 @@ class CaseStudyController extends Controller
      */
     public function getAll()
     {
-        $case_studies = CaseStudy::all();
+        $case_studies = CaseStudy::orderBy('id','DESC')->get();
 
         return response()->json($case_studies);
     }

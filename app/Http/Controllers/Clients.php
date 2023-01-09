@@ -14,7 +14,7 @@ class Clients extends Controller
      */
     public function index()
     {
-        return Client::all();
+        return Client::orderBy('id','DESC')->get();
     }
 
     /**
