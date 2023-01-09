@@ -8,7 +8,9 @@
     {{-- <p>Email: {{ $email }}</p> --}}
     {{-- @endforeach --}}
     {{-- --}}
-    <i><h3>Congrats</h3></i>
+    <i>
+        <h3>Congrats</h3>
+    </i>
     <div>
         <p>Category: {{ $category }}</p>
 
@@ -36,17 +38,17 @@
     <div>
 
         <p>Phone:{{ $phone }}</p>
-    <div>
+        <div>
 
-    <div>
+            <div>
 
-         <p>Email: {{ $email }}</p>
-    <div>
+                <p>Email: {{ $email }}</p>
+                <div>
 
-    <div>
-
-        <p>{{ $help }}</p>
-    <div>
+                    <div>
+                        
+                        <p>{{ $help }}</p>
+                        <div>
 
 
 

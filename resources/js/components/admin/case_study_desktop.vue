@@ -1,21 +1,35 @@
 <template>
   <div>
     <div class="row d-flex justify-content-center">
-      <div v-if="this.is_editing == true" @click="disable_button()" class="mt-3">
+      <div
+        v-if="this.is_editing == true"
+        @click="disable_button()"
+        class="mt-3"
+      >
         <button class="btn btn-primary">Create Case Study</button>
       </div>
       <div class="col-md-12 mt-4">
         <div class="card">
-          <div class="card-header" style="
+          <div
+            class="card-header"
+            style="
               height: 47px;
               background-image: linear-gradient(
                 to right,
                 rgb(242, 112, 156),
                 rgb(255, 148, 114)
               );
-            ">
-            <h4 style="margin-top: 1%" class="card-title text-white text-center">
-              {{ this.is_editing ? "Update Case Study for Desktop View" : "Create Case Study  for Desktop View" }}
+            "
+          >
+            <h4
+              style="margin-top: 1%"
+              class="card-title text-white text-center"
+            >
+              {{
+                this.is_editing
+                  ? "Update Case Study for Desktop View"
+                  : "Create Case Study  for Desktop View"
+              }}
             </h4>
           </div>
           <div class="card-body">
@@ -25,7 +39,12 @@
             <form @submit.prevent="save">
               <div class="form-group">
                 <label for="company_name">Create Case Study Name</label>
-                <input type="text" class="form-control" id="company_name" v-model="name" />
+                <input
+                  type="text"
+                  class="form-control"
+                  id="company_name"
+                  v-model="name"
+                />
                 <div class="text-danger" v-if="this.nameError">
                   {{ this.nameError }}
                 </div>
@@ -33,7 +52,12 @@
 
               <div class="form-group">
                 <label for="company_image">Create Case Icon</label>
-                <input type="file" class="form-control" id="company_image" @change="uploadfile" />
+                <input
+                  type="file"
+                  class="form-control"
+                  id="company_image"
+                  @change="uploadfile"
+                />
                 <div class="text-danger" v-if="this.imageError">
                   {{ this.imageError }}
                 </div>
@@ -43,45 +67,118 @@
               </div>
               <div class="form-group">
                 <label for="company_name">First Summary</label>
-                <textarea type="text" class="form-control" id="summary1" v-model="summary1"></textarea>
+                <textarea
+                  type="text"
+                  class="form-control"
+                  id="summary1"
+                  v-model="summary1"
+                ></textarea>
                 <!-- <div class="text-danger" v-if="this.nameError">
                   {{ this.nameError }}
                 </div> -->
               </div>
               <div class="form-group">
                 <label for="company_image">Group Images</label>
-                <input type="file" class="form-control" id="company_image" @change="group_img_1" />
+                <input
+                  type="file"
+                  class="form-control"
+                  id="company_image"
+                  @change="group_img_1"
+                />
                 <p class="my-2 text-center" v-if="this.group_images_1_tmp">
-                  <img :src="this.group_images_1_tmp" width="150" height="150" />
+                  <img
+                    :src="this.group_images_1_tmp"
+                    width="150"
+                    height="150"
+                  />
                 </p>
-                <input type="file" class="form-control" id="company_image" @change="group_img_2" />
+                <input
+                  type="file"
+                  class="form-control"
+                  id="company_image"
+                  @change="group_img_2"
+                />
                 <p class="my-2 text-center" v-if="this.group_images_2_tmp">
-                  <img :src="this.group_images_2_tmp" width="150" height="150" />
+                  <img
+                    :src="this.group_images_2_tmp"
+                    width="150"
+                    height="150"
+                  />
                 </p>
-                <input type="file" class="form-control" id="company_image" @change="group_img_3" />
+                <input
+                  type="file"
+                  class="form-control"
+                  id="company_image"
+                  @change="group_img_3"
+                />
                 <p class="my-2 text-center" v-if="this.group_images_3_tmp">
-                  <img :src="this.group_images_3_tmp" width="150" height="150" />
+                  <img
+                    :src="this.group_images_3_tmp"
+                    width="150"
+                    height="150"
+                  />
                 </p>
-                <input type="file" class="form-control" id="company_image" @change="group_img_4" />
+                <input
+                  type="file"
+                  class="form-control"
+                  id="company_image"
+                  @change="group_img_4"
+                />
                 <p class="my-2 text-center" v-if="this.group_images_4_tmp">
-                  <img :src="this.group_images_4_tmp" width="150" height="150" />
+                  <img
+                    :src="this.group_images_4_tmp"
+                    width="150"
+                    height="150"
+                  />
                 </p>
-                <input type="file" class="form-control" id="company_image" @change="group_img_5" />
+                <input
+                  type="file"
+                  class="form-control"
+                  id="company_image"
+                  @change="group_img_5"
+                />
                 <p class="my-2 text-center" v-if="this.group_images_5_tmp">
-                  <img :src="this.group_images_5_tmp" width="150" height="150" />
+                  <img
+                    :src="this.group_images_5_tmp"
+                    width="150"
+                    height="150"
+                  />
                 </p>
-                <input type="file" class="form-control" id="company_image" @change="group_img_6" />
+                <input
+                  type="file"
+                  class="form-control"
+                  id="company_image"
+                  @change="group_img_6"
+                />
                 <p class="my-2 text-center" v-if="this.group_images_6_tmp">
-                  <img :src="this.group_images_6_tmp" width="150" height="150" />
+                  <img
+                    :src="this.group_images_6_tmp"
+                    width="150"
+                    height="150"
+                  />
                 </p>
-                <input type="file" class="form-control" id="company_image" @change="group_img_7" />
+                <input
+                  type="file"
+                  class="form-control"
+                  id="company_image"
+                  @change="group_img_7"
+                />
                 <p class="my-2 text-center" v-if="this.group_images_7_tmp">
-                  <img :src="this.group_images_7_tmp" width="150" height="150" />
+                  <img
+                    :src="this.group_images_7_tmp"
+                    width="150"
+                    height="150"
+                  />
                 </p>
               </div>
               <div class="form-group">
                 <label for="company_name">Second Summary</label>
-                <textarea type="text" class="form-control" id="summary1" v-model="summary2"></textarea>
+                <textarea
+                  type="text"
+                  class="form-control"
+                  id="summary1"
+                  v-model="summary2"
+                ></textarea>
                 <!-- <div class="text-danger" v-if="this.nameError">
                   {{ this.nameError }}
                 </div> -->
@@ -99,11 +196,18 @@
                 <!-- <vue-editor v-model="content"></vue-editor> -->
               </div>
 
-
-
-              <div class="form-group" id="my-strictly-unique-vue-upload-multiple-image">
+              <div
+                class="form-group"
+                id="my-strictly-unique-vue-upload-multiple-image"
+              >
                 <label for="company_image">Agency Multi Images</label>
-                <input type="file" class="form-control" id="company_image" @change="agency" multiple />
+                <input
+                  type="file"
+                  class="form-control"
+                  id="company_image"
+                  @change="agency"
+                  multiple
+                />
                 <!-- <vue-upload-multiple-image
                   @upload-success="save"
                   @before-remove="beforeRemove"
@@ -119,7 +223,7 @@
               </div>
               <div>
                 <!-- <ckeditor :editor="editor" v-model="editorData" :config="editorConfig"></ckeditor> -->
-                <button type="submit" class="btn btn-block btn-save text-white" >
+                <button type="submit" class="btn btn-block btn-save text-white">
                   {{ this.is_editing ? "Update" : "Save" }}
                 </button>
               </div>
@@ -141,15 +245,24 @@
             </tr>
           </thead>
           <tbody v-if="lists.length > 0">
-            <tr v-for="list in lists" :key="list.id">
+            <tr v-for="(list, index) in lists" :key="index">
               <td>{{ list.com_name }}</td>
               <td v-html="list.content"></td>
               <td>
                 <img :src="list.com_image" width="100" height="100" />
               </td>
               <td>
-                <button type="button" class="btn btn-primary text-white" @click="editList(list.id)">
-                  Edit</button><button type="button" class="btn btn-danger ml-1" @click="destroyList(list.id)">
+                <button
+                  type="button"
+                  class="btn btn-primary text-white"
+                  @click="editList(list.id)"
+                >
+                  Edit</button
+                ><button
+                  type="button"
+                  class="btn btn-danger ml-1"
+                  @click="destroyList(list.id)"
+                >
                   Delete
                 </button>
               </td>
@@ -174,7 +287,6 @@ import VueUploadMultipleImage from "vue-upload-multiple-image";
 // import Loading from "vue-loading-overlay";
 
 export default {
-  
   data() {
     return {
       isLoading: false,
@@ -182,7 +294,7 @@ export default {
       loader: "bars",
       lists: [],
       service_lists: [],
-      selected_services:[],
+      selected_services: [],
       name: "",
       agency_images: [],
       image: "",
@@ -224,7 +336,6 @@ export default {
     // Loading,
   },
   methods: {
-
     addField(value, fieldType) {
       fieldType.push({ value: "" });
     },
@@ -233,34 +344,34 @@ export default {
     },
     group_img_1(e) {
       this.group_images_1 = e.target.files[0];
-      this.group_images_1_tmp=""
+      this.group_images_1_tmp = "";
     },
     group_img_2(e) {
       this.group_images_2 = e.target.files[0];
-      this.group_images_2_tmp=""
+      this.group_images_2_tmp = "";
     },
     group_img_3(e) {
       this.group_images_3 = e.target.files[0];
-      this.group_images_3_tmp=""
+      this.group_images_3_tmp = "";
     },
     group_img_4(e) {
       this.group_images_4 = e.target.files[0];
-      this.group_images_4_tmp=""
+      this.group_images_4_tmp = "";
     },
     group_img_5(e) {
       this.group_images_5 = e.target.files[0];
-      this.group_images_5_tmp=""
+      this.group_images_5_tmp = "";
     },
     group_img_6(e) {
       this.group_images_6 = e.target.files[0];
-      this.group_images_6_tmp=""
+      this.group_images_6_tmp = "";
     },
     group_img_7(e) {
       this.group_images_7 = e.target.files[0];
-      this.group_images_7_tmp=""
+      this.group_images_7_tmp = "";
     },
-      disable_button() {
-        $(".summernote").summernote("code", "");
+    disable_button() {
+      $(".summernote").summernote("code", "");
       this.is_editing = false;
       this.name = "";
       this.image = "";
@@ -292,7 +403,6 @@ export default {
       document.getElementById("group_images_5").value = "";
       document.getElementById("group_images_6").value = "";
       document.getElementById("group_images_7").value = "";
-      
     },
     fetchAll() {
       axios
@@ -301,24 +411,23 @@ export default {
           this.lists = response.data;
           console.log(this.lists);
         })
-        .catch((error) => { });
+        .catch((error) => {});
     },
     fetchAllServices() {
       // console.log("fetch");
       axios
         .get("/admin/service/get")
         .then((response) => {
-
           this.service_lists = response.data;
           console.log(this.service_lists);
         })
-        .catch((error) => { });
+        .catch((error) => {});
     },
     uploadfile(e) {
       this.image = e.target.files[0];
       this.temp_image_url = "";
     },
-    
+
     // group_images() {
     //   this.gr_images = this.$refs.group_images.files[0];
     // },
@@ -327,7 +436,7 @@ export default {
       console.log(this.agency_images);
     },
 
-    save:function(event) {
+    save: function (event) {
       // this.uploadImageSuccess()
       // console.log("data", formData, index, fileList);
       let url;
@@ -390,12 +499,11 @@ export default {
             this.group_images_5_tmp = "";
             this.group_images_6_tmp = "";
             this.group_images_7_tmp = "";
-            
 
             $(".summernote").summernote("code", "");
             this.temp_image_url = "";
             this.temporary_id = "";
-            event.target.reset()
+            event.target.reset();
             this.$swal.fire({
               // position: "top-end",
               icon: "success",
@@ -461,48 +569,50 @@ export default {
           this.group_images_6_tmp = response.data.group_images_6;
           this.group_images_7_tmp = response.data.group_images_7;
         })
-        .catch((error) => { });
+        .catch((error) => {});
     },
     destroyList(list_id) {
-      axios.get(`/admin/case-study-desktop/delete/${list_id}`).then((response) => {
-        // this.success = response.data.success;
-        this.fetchAll();
-        this.$swal.fire({
-          icon: "error",
-          text: "Deleted",
+      axios
+        .get(`/admin/case-study-desktop/delete/${list_id}`)
+        .then((response) => {
+          // this.success = response.data.success;
+          this.fetchAll();
+          this.$swal.fire({
+            icon: "error",
+            text: "Deleted",
+          });
+          this.name = "";
+          this.image = "";
+          this.summary1 = "";
+          this.summary2 = "";
+          this.content = "";
+          this.group_images_1 = "";
+          this.group_images_2 = "";
+          this.group_images_3 = "";
+          this.group_images_4 = "";
+          this.group_images_5 = "";
+          this.group_images_6 = "";
+          this.group_images_7 = "";
+          this.group_images_1_tmp = "";
+          this.group_images_2_tmp = "";
+          this.group_images_3_tmp = "";
+          this.group_images_4_tmp = "";
+          this.group_images_5_tmp = "";
+          this.group_images_6_tmp = "";
+          this.group_images_7_tmp = "";
+          document.getElementById("image").value = "";
+          document.getElementById("case_con_1_img").value = "";
+          document.getElementById("con_2_img_1").value = "";
+          document.getElementById("con_2_img_2").value = "";
+          document.getElementById("con_2_img_3").value = "";
+          this.temp_image_url = "";
+          this.temporary_id = "";
         });
-        this.name = "";
-            this.image = "";
-            this.summary1 = "";
-            this.summary2 = "";
-            this.content = "";
-            this.group_images_1 = "";
-            this.group_images_2 = "";
-            this.group_images_3 = "";
-            this.group_images_4 = "";
-            this.group_images_5 = "";
-            this.group_images_6 = "";
-            this.group_images_7 = "";
-            this.group_images_1_tmp = "";
-            this.group_images_2_tmp = "";
-            this.group_images_3_tmp = "";
-            this.group_images_4_tmp = "";
-            this.group_images_5_tmp = "";
-            this.group_images_6_tmp = "";
-            this.group_images_7_tmp = "";
-        document.getElementById("image").value = "";
-        document.getElementById("case_con_1_img").value = "";
-        document.getElementById("con_2_img_1").value = "";
-        document.getElementById("con_2_img_2").value = "";
-        document.getElementById("con_2_img_3").value = "";
-        this.temp_image_url = "";
-        this.temporary_id = "";
-      });
     },
   },
   mounted() {
     this.fetchAll();
-    this.fetchAllServices()
+    this.fetchAllServices();
   },
 };
 </script>
@@ -532,9 +642,11 @@ div {
 
 .card-header {
   border: none;
-  background-image: linear-gradient(to right,
-      rgb(242, 112, 156),
-      rgb(255, 148, 114));
+  background-image: linear-gradient(
+    to right,
+    rgb(242, 112, 156),
+    rgb(255, 148, 114)
+  );
 }
 
 table tbody tr {
@@ -562,7 +674,7 @@ thead {
   transition: 2s ease;
 }
 
-.table-striped>tbody>tr:nth-of-type(odd)>* {
+.table-striped > tbody > tr:nth-of-type(odd) > * {
   --bs-table-accent-bg: rgb(229 231 255);
   color: var(--bs-table-striped-color);
   border: none;

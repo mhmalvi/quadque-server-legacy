@@ -78,9 +78,9 @@
             </tr>
           </thead>
           <tbody v-if="lists.length > 0">
-            <tr v-for="list in lists" :key="list.id">
+            <tr v-for="(list, index) in lists" :key="index">
               <td style="vertical-align: middle; font-weight: 500">
-                {{ list.id }}.
+                {{ index + 1 }}.
               </td>
               <td
                 style="vertical-align: middle; font-weight: 500"

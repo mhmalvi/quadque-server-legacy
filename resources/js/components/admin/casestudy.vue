@@ -141,7 +141,7 @@
             </tr>
           </thead>
           <tbody v-if="lists.length > 0">
-            <tr v-for="list in lists" :key="list.id">
+            <tr v-for="(list,index) in lists" :key="index">
               <td>{{ list.com_name }}</td>
               <td v-html="list.content"></td>
               <td>
