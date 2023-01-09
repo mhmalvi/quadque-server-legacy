@@ -1,14 +1,14 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Laravel 8 Send Email Example</title>
+    <title>Start Project</title>
 </head>
 <body>
     {{-- @foreach($data as $datas) --}}
     {{-- <p>Email: {{ $email }}</p> --}}
     {{-- @endforeach --}}
     {{-- --}}
-
+    <p>Category: {{ $category }}</p>
 
     <p>Sub Categories:</p>
 

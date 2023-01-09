@@ -20,7 +20,7 @@ class BlogController extends Controller
     public function fetchBlog()
     {
 
-        return Blog::all();
+        return Blog::orderBy('id', 'DESC')->get();
         // dd($blogs);
         // $moreblogs = '';
         // foreach ($blogs as $blog) {
