@@ -20,7 +20,7 @@ class BlogController extends Controller
     public function fetchBlog()
     {
 
-        return $blogs = Blog::all()->orderBy('id','desc')->get();
+        return Blog::all();
         // dd($blogs);
         // $moreblogs = '';
         // foreach ($blogs as $blog) {
@@ -105,6 +105,7 @@ class BlogController extends Controller
      */
     public function store(Request $request)
     {
+        // dd($request->all());
         //validation input
         $request->validate([
             'title' => 'required',

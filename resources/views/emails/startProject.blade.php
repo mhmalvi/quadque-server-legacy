@@ -4,19 +4,21 @@
     <title>Laravel 8 Send Email Example</title>
 </head>
 <body>
-<p>Email: {{ $email }}</p>
+    {{-- @foreach($data as $datas) --}}
+    {{-- <p>Email: {{ $email }}</p> --}}
+    {{-- @endforeach --}}
+    {{-- --}}
 
-    {{--  --}}
-    {{-- @foreach($data as $datas)
-    <p>Category : {{ $datas->sub_categories }}</p>
+
+    <p>Sub Categories:</p>
 
 
-    <p>Sub Categories:</p> --}}
-    {{-- @foreach($sub_categories as $sub_category)
-    <p>{{ $sub_category }}</p>
+    @foreach($sub_categories as $sub_category)
+    <h2>{{ $sub_category }}</h2>
+    @endforeach
+    <p>{{ $category }}</p>
 
-    @endforeach --}}
-    {{-- <p>Name:{{ $name }}</p>
+    <p>Name:{{ $name }}</p>
 
 
     <p>Phone:{{ $phone }}</p>
@@ -26,7 +28,6 @@
 
 
     <p>{{ $help }}</p>
-    @endforeach --}}
 
 
 

@@ -28,20 +28,22 @@ class StartProjectController extends Controller
         //     //     echo 'Key:'.$key,'Value:'.$subCategory;
         //     // }
         //     // echo $sub_categories;
-            $name = $request->name;
-            $phone = $request->phone;
-            $category = $request->category;
-            $sub_categories = $request->sub_category;
+        // dd($request->sub_category);
+        $name = $request->name;
+        $phone = $request->phone;
+        $category = $request->category;
+        $sub_categories = $request->sub_category;
+        // dd($sub_categories);
         //     'email' => $request->email,
-            $help = $request->help;
+        $help = $request->help;
         //     // 'title' => "Title";
         // ];
         // Mail::send('emails.startProject', ['data1' => $data], function ($message) use ($data) {
         //     $message->to($data['email']);
         //     //->attachData($pdf->output(), "ApplyOnline.pdf");
         // });
-        Mail::to($email)->send(new StartProject($email));
-        
+        Mail::to($email)->send(new StartProject($email, $name, $phone, $category, $sub_categories,$help));
+
         // die;
         // return view('emails.startProject',compact('category', 'sub_categories', 'name', 'phone', 'email', 'help'));
     }

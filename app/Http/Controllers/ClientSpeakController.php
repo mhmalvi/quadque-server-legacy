@@ -29,7 +29,7 @@ class ClientSpeakController extends Controller
     public function showAll()
     {
         
-        return ClientSpeak::all();
+        return ClientSpeak::orderBy('id', 'DESC')->get();
     }
 
     /**

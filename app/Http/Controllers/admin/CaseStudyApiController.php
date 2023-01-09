@@ -15,7 +15,7 @@ class CaseStudyApiController extends Controller
      */
     public function index()
     {
-        return CaseStudy::all();
+        return CaseStudy::all()->sortByDesc('id');
     }
 
     /**

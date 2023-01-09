@@ -81,7 +81,7 @@ class CaseStudyDesktopController extends Controller
      */
     public function getAll()
     {
-        $case_studies = CaseStudyDesktop::all();
+        $case_studies = CaseStudyDesktop::all()->so;
 
         return response()->json($case_studies);
     }

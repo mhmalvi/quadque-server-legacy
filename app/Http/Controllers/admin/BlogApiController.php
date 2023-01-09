@@ -15,7 +15,7 @@ class BlogApiController extends Controller
      */
     public function index()
     {
-        return Blog::all()->sortByDesc('id');
+        return Blog::orderBy('id', 'DESC')->get();
     }
 
     /**
