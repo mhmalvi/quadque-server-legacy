@@ -46,7 +46,7 @@ Route::view('/casestudy/details', 'user.components.caseStudyDetails');
 Route::get('desktop/casestudy/details', [CaseStudyController::class, 'desktopMoreCaseStudy']);
 Route::view('/mobile/blog/details', 'user.components.mobileBlogDetails');
 
-Route::post("send-mail", [StartProjectController::class, "store"]);
+// Route::post("send-mail", [StartProjectController::class, "store"]);
 
 Route::prefix('admin')->name('admin.')->group(function () {
 

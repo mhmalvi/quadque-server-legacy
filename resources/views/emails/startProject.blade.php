@@ -8,26 +8,45 @@
     {{-- <p>Email: {{ $email }}</p> --}}
     {{-- @endforeach --}}
     {{-- --}}
-    <p>Category: {{ $category }}</p>
+    <i><h3>Congrats</h3></i>
+    <div>
+        <p>Category: {{ $category }}</p>
 
-    <p>Sub Categories:</p>
+    </div>
 
+    <div>
+        <p>Sub Categories:</p><br>
 
-    @foreach($sub_categories as $sub_category)
-    <h2>{{ $sub_category }}</h2>
-    @endforeach
-    <p>{{ $category }}</p>
+        <ol>
+            @foreach($sub_categories as $sub_category)
+            <li>{{ $sub_category }}</li>
+            @endforeach
 
-    <p>Name:{{ $name }}</p>
-
-
-    <p>Phone:{{ $phone }}</p>
-
-
-    <p>Email: {{ $email }}</p>
+        </ol>
 
 
-    <p>{{ $help }}</p>
+
+    </div>
+
+    <div>
+
+        <p>Name:{{ $name }}</p>
+    </div>
+
+    <div>
+
+        <p>Phone:{{ $phone }}</p>
+    <div>
+
+    <div>
+
+         <p>Email: {{ $email }}</p>
+    <div>
+
+    <div>
+
+        <p>{{ $help }}</p>
+    <div>
 
 
 

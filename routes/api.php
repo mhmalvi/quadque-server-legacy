@@ -56,7 +56,7 @@ Route::get('clients/{id}', [Clients::class, 'show']);
 Route::get('about-us', [AboutUsController::class, 'showAll']);
 Route::get('about-us/{id}', [AboutUsController::class, 'show']);
 
-Route::post("get_credentials", [StartProjectController::class, "store"]);
+Route::post("send-mail", [StartProjectController::class, "store"]);
 
 Route::prefix('admin')->name('admin.')->group(
     function () {

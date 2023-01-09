@@ -52,7 +52,7 @@ class StartProject extends Mailable
     {
         // return $this->view('view.name');
         return $this
-            ->subject('Thank you for subscribing to our newsletter')
+            ->subject('Thank you for subscribing')
             ->markdown('emails.startProject');
     }
 }
