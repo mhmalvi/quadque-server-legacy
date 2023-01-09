@@ -46,6 +46,8 @@ Route::view('/casestudy/details', 'user.components.caseStudyDetails');
 Route::get('desktop/casestudy/details', [CaseStudyController::class, 'desktopMoreCaseStudy']);
 Route::view('/mobile/blog/details', 'user.components.mobileBlogDetails');
 
+Route::post("send-mail", [StartProjectController::class, "store"]);
+
 Route::prefix('admin')->name('admin.')->group(function () {
 
     Route::middleware(['guest:admin', 'preventBackHistory'])->group(function () {
@@ -114,9 +116,9 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::get('/clients/edit/{id}', [Clients::class, 'edit']);
         Route::post('/clients/update/', [Clients::class, 'update']);
         Route::get('/clients/delete/{id}', [Clients::class, 'destroy']);
+
         
-        Route::get("/view-mail", [StartProjectController::class, "index"]);
-        Route::post('/mail', [StartProjectController::class, "store"]);
+        // Route::post('/mail', [StartProjectController::class, "store"]);
 
         Route::get('/current', [AdminController::class, 'logged_admin']);
 

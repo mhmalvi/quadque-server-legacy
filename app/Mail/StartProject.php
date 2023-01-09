@@ -11,15 +11,17 @@ class StartProject extends Mailable
 {
     use Queueable, SerializesModels;
 
-    public $order = "first order";
+    public $email;
+    // public $details;
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct()
+    public function __construct($email)
     {
-        // $this->order = $order;
+        // echo $email;
+        $this->email = $email;
     }
 
     /**
@@ -30,7 +32,8 @@ class StartProject extends Mailable
     public function build()
     {
         // return $this->view('view.name');
-        return $this->from('tanjibrubyat@gmail.com', 'Tanjib')
-            ->view('emails.startProject');
+        return $this
+            ->subject('Thank you for subscribing to our newsletter')
+            ->markdown('emails.startProject');
     }
 }

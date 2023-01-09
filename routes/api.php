@@ -8,6 +8,7 @@ use App\Http\Controllers\admin\HomeApiController;
 use App\Http\Controllers\ClientSpeakController;
 use App\Http\Controllers\AboutUsController;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\StartProjectController;
 use App\Http\Controllers\Clients;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -54,6 +55,8 @@ Route::get('clients/{id}', [Clients::class, 'show']);
 
 Route::get('about-us', [AboutUsController::class, 'showAll']);
 Route::get('about-us/{id}', [AboutUsController::class, 'show']);
+
+Route::post("get_credentials", [StartProjectController::class, "store"]);
 
 Route::prefix('admin')->name('admin.')->group(
     function () {
