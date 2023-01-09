@@ -20,7 +20,7 @@ class ServiceController extends Controller
 
     public function showAll()
     {
-        return Service::all()->sortByDesc('id');
+        return Service::orderBy('id','DESC')->get();
     }
 
     /**
