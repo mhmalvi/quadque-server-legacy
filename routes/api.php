@@ -39,7 +39,7 @@ Route::get('case-studies-desktop', [CaseStudyDesktopController::class, 'index'])
 Route::get('case-studies-desktop/{id}', [CaseStudyDesktopController::class, 'get_by_id']);
 
 Route::get('manage-blogs', [BlogApiController::class, 'index']);
-Route::get('manage-blogs/{id}', [BlogApiController::class, 'show']);
+Route::get('manage-blogs/{slug}', [BlogApiController::class, 'show']);
 
 Route::get('home-videos', [HomeApiController::class, 'index']);
 Route::get('home-videos/{id}', [HomeApiController::class, 'show']);

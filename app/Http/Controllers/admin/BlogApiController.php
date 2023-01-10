@@ -71,11 +71,24 @@ class BlogApiController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($slug)
     {
-        $blog = Blog::find($id);
-
-        return response()->json($blog);
+        // dd($slug);
+        // $blogs = Blog::all();
+        // dd($blogs);
+        $blog = Blog::where('slug', $slug)->first();
+        // dd($blog);
+        if($blog){
+            return response()->json(
+                [
+                    'message'=>'success',
+                    $blog
+                ]
+            );
+        }else{
+            return response()->json('failed');
+        }
+        
     }
 
     /**

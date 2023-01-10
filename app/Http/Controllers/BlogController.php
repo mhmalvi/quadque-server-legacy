@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Blog;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 
 class BlogController extends Controller
 {
@@ -121,15 +122,18 @@ class BlogController extends Controller
             $file_path = $app_url . ":8000/assets/img/blogs/" . $fileName;
         }
 
-
+        $slug = Str::slug($request->title, '-');
+        // dd($slug);
         $save = Blog::create([
             'title' => $request->title,
             'text' => $request->text,
-            'thumbnail' => $file_path
+            'thumbnail' => $file_path,
+            'slug' => $slug
         ]);
 
         if ($save) {
             return response()->json([
+
 
                 'success' => 'created'
 
@@ -181,6 +185,7 @@ class BlogController extends Controller
 
         $blog->title = $request->title;
         $blog->text = $request->text;
+        $blog->slug = $request->slug;
         $app_url = env('APP_URL');
         if ($request->thumbnail) {
 

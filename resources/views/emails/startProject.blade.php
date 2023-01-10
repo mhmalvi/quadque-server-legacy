@@ -14,7 +14,7 @@
     <div>
         <p>Category: {{ $category }}</p>
 
-    </div>
+    </div><br>
 
     <div>
         <p>Sub Categories:</p><br>
@@ -28,22 +28,26 @@
 
 
 
-    </div>
+    </div><br>
+
 
     <div>
 
         <p>Name:{{ $name }}</p>
-    </div>
+    </div><br>
+
 
     <div>
 
         <p>Phone:{{ $phone }}</p>
-        <div>
+        <div><br>
+
 
     <div>
 
         <p>Email: {{ $email }}</p>
-    <div>
+    <div><br>
+
 
     <div>
 
