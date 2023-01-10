@@ -77,19 +77,19 @@ class BlogApiController extends Controller
         // dd($slug);
         // $blogs = Blog::all();
         // dd($blogs);
-        try {
             $blog = Blog::where('slug', $slug)->first();
-            return response()->json([
-                'status' => '200',
-                'message' => 'success',
-                'data' => $blog
-            ]);
-        } catch (Throwable $e) {
+            if($blog){
+                return response()->json([
+                    'status' => '200',
+                    'message' => 'success',
+                    'data' => $blog
+                ]);
+            }else{
             return response()->json([
                 'status' => '424',
                 'message' => 'failed',
             ]);
-        }
+            }
     }
 
     /**

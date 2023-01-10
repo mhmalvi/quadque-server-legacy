@@ -5,6 +5,7 @@ namespace App\Http\Controllers\admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\CaseStudy;
+use Throwable;
 
 class CaseStudyApiController extends Controller
 {
@@ -15,7 +16,7 @@ class CaseStudyApiController extends Controller
      */
     public function index()
     {
-        return CaseStudy::orderBy('id','DESC')->get();
+        return CaseStudy::orderBy('id', 'DESC')->get();
     }
 
     /**
@@ -68,7 +69,19 @@ class CaseStudyApiController extends Controller
      */
     public function show($id)
     {
-        return CaseStudy::find($id);
+        try {
+            $case_study = CaseStudy::find($id);
+            return response()->json([
+                'message' => 'success',
+                'status' => 200,
+                'data' => $case_study
+            ]);
+        } catch (Throwable $e) {
+            return response()->json([
+                'message' => 'failed',
+                'status' => 424,
+            ]);
+        }
     }
 
     /**
