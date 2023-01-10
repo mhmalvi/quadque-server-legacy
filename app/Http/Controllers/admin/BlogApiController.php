@@ -76,19 +76,18 @@ class BlogApiController extends Controller
         // dd($slug);
         // $blogs = Blog::all();
         // dd($blogs);
-        $blog = Blog::where('slug', $slug)->first();
+        return $blog = Blog::where('slug', $slug)->first();
         // dd($blog);
-        if($blog){
-            return response()->json(
-                [
-                    'message'=>'success',
-                    $blog
-                ]
-            );
-        }else{
-            return response()->json('failed');
-        }
-        
+        // if ($blog) {
+        //     return response()->json(
+    
+        //             'message' => 'success',
+        //             $blog
+                
+        //     );
+        // } else {
+        //     return response()->json('failed');
+        // }
     }
 
     /**
@@ -114,7 +113,7 @@ class BlogApiController extends Controller
         $request->validate([
             'title' => 'required',
             'text' => 'required',
-        //     'thumbnail' => 'required|image'
+            //     'thumbnail' => 'required|image'
         ]);
 
         $blog = Blog::find($id);
