@@ -85,6 +85,10 @@ class BlogApiController extends Controller
                 'data' => $blog
             ]);
         } catch (Throwable $e) {
+            return response()->json([
+                'status' => '424',
+                'message' => 'failed',
+            ]);
         }
     }
 
