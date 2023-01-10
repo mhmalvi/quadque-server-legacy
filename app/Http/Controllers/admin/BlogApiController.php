@@ -5,6 +5,7 @@ namespace App\Http\Controllers\admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Blog;
+use Throwable;
 
 class BlogApiController extends Controller
 {
@@ -76,18 +77,15 @@ class BlogApiController extends Controller
         // dd($slug);
         // $blogs = Blog::all();
         // dd($blogs);
-        return $blog = Blog::where('slug', $slug)->first();
-        // dd($blog);
-        // if ($blog) {
-        //     return response()->json(
-    
-        //             'message' => 'success',
-        //             $blog
-                
-        //     );
-        // } else {
-        //     return response()->json('failed');
-        // }
+        try {
+            $blog = Blog::where('slug', $slug)->first();
+            return response()->json([
+                'status' => '200',
+                'message' => 'success',
+                'data' => $blog
+            ]);
+        } catch (Throwable $e) {
+        }
     }
 
     /**
