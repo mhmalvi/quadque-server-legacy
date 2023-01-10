@@ -16,7 +16,19 @@ class BlogApiController extends Controller
      */
     public function index()
     {
-        return Blog::orderBy('id', 'DESC')->get();
+        $blogs=Blog::orderBy('id', 'DESC')->get();
+        if(!$blogs->isEmpty()){
+            return response()->json([
+                'status' => '200',
+                'message' => 'success',
+                'data' => $blogs
+            ]);
+        }else{
+            return response()->json([
+                'status' => '424',
+                'message' => 'failed',
+            ]);
+        }
     }
 
     /**
@@ -85,10 +97,10 @@ class BlogApiController extends Controller
                     'data' => $blog
                 ]);
             }else{
-            return response()->json([
-                'status' => '424',
-                'message' => 'failed',
-            ]);
+                return response()->json([
+                    'status' => '424',
+                    'message' => 'failed',
+                ]);
             }
     }
 
@@ -122,6 +134,7 @@ class BlogApiController extends Controller
 
         $blog->title = $request->title;
         $blog->text = $request->text;
+        $blog->slug = $request->slug;
 
         if ($request->thumbnail) {
 

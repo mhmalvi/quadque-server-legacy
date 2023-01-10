@@ -41,7 +41,7 @@
               </div>
               <div v-if="this.is_editing" class="form-group">
                 <label for="title">Slug</label>
-                <input type="string" v-model="slug" class="form-control" />
+                <input type="string" v-model="slug" value="title" class="form-control" />
                 <!-- <div class="text-danger" v-if="this.titleError">
                   {{ this.titleError }}
                 </div> -->
@@ -173,6 +173,7 @@ export default {
   // components: {
   //   'el-tiptap': ElementTiptap,
   // },
+  
   data() {
     return {
       lists: [],
@@ -187,7 +188,7 @@ export default {
       is_editing: false,
       temp_thumbnail_url: "",
       blog_no: 1,
-      slug:""
+      // slug:""
 
       // extensions: [
       //   new Doc(),
@@ -205,6 +206,11 @@ export default {
       // ],
     };
   },
+  computed: {
+        slug(){
+            return this.title.replace(/\s+/g, '-').toLowerCase();
+        }
+    },
   methods: {
     disable_button() {
       this.is_editing = false;
@@ -309,7 +315,8 @@ export default {
         .then((response) => {
           this.title = response.data.title;
           this.text = response.data.text;
-          this.slug=response.data.slug
+          // this.slug=response.data.slug
+          // this.thumbnail = response.data.thumbnail;
           $(".summernote").summernote("code", this.text);
           this.temp_thumbnail_url = response.data.thumbnail;
         })

@@ -69,14 +69,14 @@ class CaseStudyApiController extends Controller
      */
     public function show($id)
     {
-        try {
-            $case_study = CaseStudy::find($id);
+        $case_study = CaseStudy::find($id);
+        if ($case_study) {
             return response()->json([
                 'message' => 'success',
                 'status' => 200,
                 'data' => $case_study
             ]);
-        } catch (Throwable $e) {
+        } else {
             return response()->json([
                 'message' => 'failed',
                 'status' => 424,

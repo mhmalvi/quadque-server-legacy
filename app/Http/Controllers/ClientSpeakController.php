@@ -28,8 +28,21 @@ class ClientSpeakController extends Controller
 
     public function showAll()
     {
-        
-        return ClientSpeak::orderBy('id', 'DESC')->get();
+
+        $client_speak = ClientSpeak::orderBy('id', 'DESC')->get();
+        // dd($client_speak);
+        if (!$client_speak->isEmpty()) {
+            return response()->json([
+                'status' => '200',
+                'message' => 'success',
+                'data' => $client_speak
+            ]);
+        } else {
+            return response()->json([
+                'status' => '424',
+                'message' => 'failed',
+            ]);
+        }
     }
 
     /**
@@ -77,7 +90,19 @@ class ClientSpeakController extends Controller
      */
     public function show($id)
     {
-        return $client = ClientSpeak::find($id);
+        $client = ClientSpeak::find($id);
+        if ($client) {
+            return response()->json([
+                'status' => '200',
+                'message' => 'success',
+                'data' => $client
+            ]);
+        } else {
+            return response()->json([
+                'status' => '424',
+                'message' => 'failed',
+            ]);
+        }
     }
 
     /**
@@ -131,8 +156,7 @@ class ClientSpeakController extends Controller
      */
     public function destroy(Request $request)
     {
-        $client_speak=ClientSpeak::find($request->id);
+        $client_speak = ClientSpeak::find($request->id);
         $client_speak->delete();
-
     }
 }
