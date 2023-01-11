@@ -79,6 +79,20 @@
                   {{ this.textError }}
                 </div>
               </div>
+              <div class="form-group">
+                <label for="title">Blog Meta Keyword</label>
+                <input type v-model="meta_keyword" class="form-control" />
+                <!-- <div class="text-danger" v-if="this.titleError">
+                  {{ this.titleError }}
+                </div> -->
+              </div>
+              <div class="form-group">
+                <label for="title">Blog Short Description</label>
+                <input v-model="short_description" class="form-control" />
+                <!-- <div class="text-danger" v-if="this.titleError">
+                  {{ this.titleError }}
+                </div> -->
+              </div>
               <div>
                 <button
                   type="button"

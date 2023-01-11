@@ -92,7 +92,7 @@ class BlogApiController extends Controller
             $blog = Blog::where('slug', $slug)->first();
             if($blog){
                 return response()->json([
-                    'status' => '200',
+                    'status' => 200,
                     'message' => 'success',
                     'data' => $blog
                 ]);
