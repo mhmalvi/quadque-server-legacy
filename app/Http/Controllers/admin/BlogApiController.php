@@ -98,7 +98,7 @@ class BlogApiController extends Controller
                 ]);
             }else{
                 return response()->json([
-                    'status' => '424',
+                    'status' => 424,
                     'message' => 'failed',
                 ]);
             }
