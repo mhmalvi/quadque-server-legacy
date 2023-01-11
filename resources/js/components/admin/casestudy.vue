@@ -50,6 +50,19 @@
                 </div>
               </div>
 
+              <div class="form-group" v-if="this.is_editing">
+                <label for="company_name">Slug</label>
+                <input                
+                  type="string"
+                  class="form-control"
+                  id="company_name"
+                  v-model="slug"
+                />
+                <div class="text-danger" v-if="this.nameError">
+                  {{ this.nameError }}
+                </div>
+              </div>
+
               <div class="form-group">
                 <label for="company_image">Create Case Icon</label>
                 <input
@@ -249,7 +262,15 @@
                   @click="editList(list.id)"
                 >
                   Edit</button
-                ><button
+                >
+                <button
+                  type="button"
+                  class="btn btn-primary text-white"
+                  @click="editList(list.id)"
+                >
+                  view content</button
+                >
+                <button
                   type="button"
                   class="btn btn-danger ml-1"
                   @click="destroyList(list.id)"
@@ -278,6 +299,11 @@ import VueUploadMultipleImage from "vue-upload-multiple-image";
 // import Loading from "vue-loading-overlay";
 
 export default {
+  computed: {
+    slug() {
+      return this.name.replace(/\s+/g, "-").toLowerCase();
+    },
+  },
   data() {
     return {
       isLoading: false,

@@ -15,9 +15,7 @@
         <div class="card">
           <div
             class="card-header text-center"
-            style="
-              height: 47px;
-              background-image: linear-gradient(
+            style="height: 47px;background-image: linear-gradient(
                 to right,
                 rgb(242, 112, 156),
                 rgb(255, 148, 114)
@@ -28,7 +26,7 @@
               class="card-title text-white text-center"
               style="margin-top: 1%"
             >
-              {{ this.is_editing ? "Update Service" : "Create Service" }}
+              {{ this.is_editing ? "Update Service for mobile" : "Create Service for mobile" }}
             </h4>
           </div>
           <div class="card-body">
