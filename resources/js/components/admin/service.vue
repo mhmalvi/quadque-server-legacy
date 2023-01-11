@@ -355,7 +355,7 @@ export default {
       identity_menus: [],
       service_deliver_title: "",
       service_deliver_description: "",
-      service_title:"",
+      service_title: "",
       // our_latest_work_title: "",
 
       service_nameError: "",
@@ -419,12 +419,11 @@ export default {
     };
   },
   computed: {
-        slug(){
-            return this.service_name.replace(/\s+/g, '-').toLowerCase();
-        }
+    slug() {
+      return this.service_name.replace(/\s+/g, "-").toLowerCase();
     },
+  },
   methods: {
-    
     disable_button() {
       this.is_editing = false;
       this.service_name = "";
@@ -441,7 +440,7 @@ export default {
         (this.service_deliver_title = ""),
         (this.service_deliver_description = ""),
         (this.temp_thumbnail_url = "");
-        this.service_title=""
+      this.service_title = "";
     },
     fetchAll() {
       // console.log("fetch");
@@ -541,7 +540,6 @@ export default {
 
           // console.log(this.success)
 
-          
           setTimeout(function () {
             this.success = "";
           }, 5000);
