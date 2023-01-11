@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\ClientSpeak;
+use Illuminate\Support\Str;
 
 class ClientSpeakController extends Controller
 {
@@ -73,7 +74,8 @@ class ClientSpeakController extends Controller
             $file_path = $app_url . ":8000/assets/img/client-speak/" . $fileName;
             $client_speak->image = $file_path;
         }
-
+        // $slug = Str::slug($request->name, '-');
+        // $client_speak->slug = $slug;
 
         $save = $client_speak->save();
 

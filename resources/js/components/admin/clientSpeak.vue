@@ -47,6 +47,16 @@
                   {{ this.nameError }}
                 </div>
               </div>
+              <!-- <div class="form-group" v-if="this.is_editing">
+                <label for="title">slug</label>
+                <input
+                  type="string"
+                  class="form-control"
+                  v-model="slug"
+                  placeholder="Enter slug"
+                  required
+                />
+              </div> -->
               <!-- {{ designation }} -->
               <div class="form-group">
                 <label for="title">Client Designation</label>
@@ -193,6 +203,11 @@ export default {
       // blog_no: 1,
     };
   },
+  // computed: {
+  //       slug(){
+  //           return this.name.replace(/\s+/g, '-').toLowerCase();
+  //       }
+  //   },
   methods: {
     disable_button() {
       this.is_editing = false;
@@ -200,7 +215,8 @@ export default {
       this.designation = "";
       this.description = "";
       this.file = "";
-      $("#summernote").summernote("code", "");
+      // this.slug=""
+      // $("#summernote").summernote("code", "");
       this.temp_thumbnail_url = "";
     },
     fetchAll() {
@@ -209,7 +225,7 @@ export default {
         .get("/admin/client-speak/get")
         .then((response) => {
           // console.log(response);
-          this.lists = response.data;
+          this.lists = response.data.data;
         })
         .catch((error) => {});
     },
@@ -226,7 +242,7 @@ export default {
         url = `/admin/client-speak/store`;
       }
 
-      this.description = $("#summernote").summernote("code");
+      // this.description = $("#summernote").summernote("code");
       let fd = new FormData();
       fd.append("name", this.name);
       fd.append("designation", this.designation);
@@ -250,7 +266,7 @@ export default {
             this.name = "";
             this.description = "";
             this.designation = "";
-            $("#summernote").summernote("code", this.description);
+            // $("#summernote").summernote("code", this.description);
             document.getElementById("image").value = "";
             this.temporary_id = "";
             this.temp_thumbnail_url = "";

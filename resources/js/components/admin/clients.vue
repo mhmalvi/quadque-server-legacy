@@ -185,7 +185,7 @@ export default {
         .get("/admin/about-us/get")
         .then((response) => {
           console.log(response);
-          this.lists = response.data;
+          this.lists = response.data.data;
         })
         .catch((error) => {});
     },
