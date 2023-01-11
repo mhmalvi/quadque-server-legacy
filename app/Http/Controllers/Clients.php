@@ -14,7 +14,7 @@ class Clients extends Controller
      */
     public function index()
     {
-        return Client::orderBy('id','DESC')->get();
+        return Client::orderBy('id', 'DESC')->get();
     }
 
     /**
@@ -72,7 +72,19 @@ class Clients extends Controller
     }
     public function show($id)
     {
-        return Client::find($id);
+        $clients = Client::find($id);
+        if ($clients) {
+            return response()->json([
+                'message' => 'success',
+                'status' => 200,
+                'data' => $clients
+            ]);
+        }else{
+            return response()->json([
+                'message' => 'failed',
+                'status' => 424,
+            ]);
+        }
     }
 
     /**

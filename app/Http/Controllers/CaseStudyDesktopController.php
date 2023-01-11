@@ -17,7 +17,14 @@ class CaseStudyDesktopController extends Controller
     }
 
     public function get_by_id(Request $request){
-        return CaseStudyDesktop::find($request->id);
+        $case_study_desktop = CaseStudyDesktop::find($request->id);
+        if($case_study_desktop){
+            return response()->json([
+                'message'=>'success',
+                'status'=>200,
+                'data'=> $case_study_desktop
+            ]);
+        }
     }
 
 
