@@ -5,6 +5,7 @@ namespace App\Http\Controllers\admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Service;
+use Illuminate\Support\Str;
 
 class ServiceController extends Controller
 {
@@ -20,7 +21,7 @@ class ServiceController extends Controller
 
     public function showAll()
     {
-        $services=Service::all();
+        $services = Service::all();
         if (!$services->isEmpty()) {
             return response()->json([
                 'status' => 200,
@@ -67,6 +68,7 @@ class ServiceController extends Controller
         $app_url = env('APP_URL');
         $service = new Service();
         $service->service_name = $request->service_name;
+        $service->service_title = $request->service_title;
         $service->description = $request->description;
 
         // $service->identity_design_title = $request->identity_design_title;
@@ -89,6 +91,8 @@ class ServiceController extends Controller
             $service->file = $file_path;
         }
 
+        $slug = Str::slug($request->title, '-');
+        $service->slug = $slug;
         $save = $service->save();
 
         if ($save) {
@@ -150,7 +154,7 @@ class ServiceController extends Controller
         // dd("hello");
         $service->service_name = $request->service_name;
         $service->description = $request->description;
-
+        $service->service_title = $request->service_title;
         // $service->identity_design_title = $request->identity_design_title;
         $service->identity_design_des = $request->identity_design_des;
         $service->content = $request->content;
@@ -171,7 +175,7 @@ class ServiceController extends Controller
             $service->file = $file_path;
         }
         // dd("hello");
-
+        $service->slug = $request->slug;
         $update = $service->save();
 
         if ($update) {

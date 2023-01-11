@@ -11,6 +11,7 @@ use App\Http\Controllers\UserPageController;
 use App\Http\Controllers\admin\ServiceController;
 use App\Http\Controllers\AboutUsController;
 use App\Http\Controllers\StartProjectController;
+use App\Http\Controllers\ServiceDesktopController;
 use App\Http\Controllers\Clients;
 use Illuminate\Support\Facades\Route;
 
@@ -95,6 +96,13 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::get('/service/edit/{id}', [ServiceController::class, 'edit']);
         Route::post('/service/update/', [ServiceController::class, 'update']);
         Route::get('/service/delete/{id}', [ServiceController::class, 'destroy']);
+
+        Route::get('/service-desktop', [ServiceDesktopController::class, 'index'])->name('service-desktop');
+        Route::get('/service-desktop/get', [ServiceDesktopController::class, 'showAll'])->name('service-desktop.get');
+        Route::post('/service-desktop/store', [ServiceDesktopController::class, 'store'])->name('service-desktop.store');
+        Route::get('/service-desktop/edit/{id}', [ServiceDesktopController::class, 'edit']);
+        Route::post('/service-desktop/update/', [ServiceDesktopController::class, 'update']);
+        Route::get('/service-desktop/delete/{id}', [ServiceDesktopController::class, 'destroy']);
 
         Route::get('/client-speak', [ClientSpeakController::class, 'index'])->name('client-speak');
         Route::get('/client-speak/get', [ClientSpeakController::class, 'showAll'])->name('client-speak.get');

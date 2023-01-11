@@ -60,10 +60,16 @@
 
                     </li>
                     <li class="nav-item ">
-                        <a class="nav-link text-white" href="{{ route('admin.service') }}">Service</a>
+                        <a class="nav-link text-white" href="{{ route('admin.service') }}">Service for mobile</a>
 
 
                     </li>
+                    <li class="nav-item ">
+                        <a class="nav-link text-white" href="{{ route('admin.service-desktop') }}">Service for desktop</a>
+
+
+                    </li>
+
                     <li class="nav-item ">
                         <a class="nav-link text-white" href="{{ route('admin.client-speak') }}">Client Speak</a>
 

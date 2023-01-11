@@ -86,6 +86,10 @@ Vue.component(
     require("./components/admin/service.vue").default
 );
 Vue.component(
+    "service-desktop-component",
+    require("./components/admin/service_desktop.vue").default
+);
+Vue.component(
     "dashboard-component",
     require("./components/admin/dashboard.vue").default
 );

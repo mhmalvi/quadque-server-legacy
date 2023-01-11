@@ -47,6 +47,32 @@
                 </div>
               </div>
               <div class="form-group">
+                <label for="title">Service Title</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  v-model="service_title"
+                  placeholder="Enter service title"
+                  required
+                />
+                <div class="text-danger" v-if="this.service_nameError">
+                  {{ this.service_nameError }}
+                </div>
+              </div>
+              <div class="form-group" v-if="this.is_editing">
+                <label for="title">slug</label>
+                <input
+                  type="string"
+                  class="form-control"
+                  v-model="slug"
+                  placeholder="Enter slug"
+                  required
+                />
+                <!-- <div class="text-danger" v-if="this.service_nameError">
+                  {{ this.service_nameError }}
+                </div> -->
+              </div>
+              <div class="form-group">
                 <label for="thumbnail">Service File</label>
                 <input
                   type="file"
@@ -317,6 +343,7 @@ export default {
       service_name: "",
       file: "",
       description: "",
+      // slug:"",
       // identity_design_title: "",
       identity_design_des: "",
       identity_design_menus: "",
@@ -328,7 +355,7 @@ export default {
       identity_menus: [],
       service_deliver_title: "",
       service_deliver_description: "",
-
+      service_title:"".
       // our_latest_work_title: "",
 
       service_nameError: "",
@@ -391,24 +418,13 @@ export default {
       // blog_no: 1,
     };
   },
+  computed: {
+        slug(){
+            return this.service_name.replace(/\s+/g, '-').toLowerCase();
+        }
+    },
   methods: {
-    // addIdentityMenu: function () {
-    //   this.identity_menus.push({
-    //     identity_design_menus: '',
-    //   });
-    // },
-    // removeIdentityMenu: function (index) {
-    //   this.identity_menus.splice(index, 1);
-    // },
-
-    // addServiceCapabilityMenu: function () {
-    //   this.service_capability_menus.push({
-    //     service_capability_menu: '',
-    //   });
-    // },
-    // removeServiceCapabilityMenu: function (index) {
-    //   this.service_capability_menus.splice(index, 1);
-    // },
+    
     disable_button() {
       this.is_editing = false;
       this.service_name = "";
@@ -425,6 +441,7 @@ export default {
         (this.service_deliver_title = ""),
         (this.service_deliver_description = ""),
         (this.temp_thumbnail_url = "");
+        this.service_title=""
     },
     fetchAll() {
       // console.log("fetch");
@@ -432,7 +449,7 @@ export default {
         .get("/admin/service/get")
         .then((response) => {
           console.log(response);
-          this.lists = response.data;
+          this.lists = response.data.data;
         })
         .catch((error) => {});
     },
@@ -456,6 +473,7 @@ export default {
       // }
       let fd = new FormData();
       fd.append("service_name", this.service_name);
+      fd.append("service_title", this.service_title);
       fd.append("description", this.description);
       fd.append("file", this.file);
 
@@ -464,6 +482,7 @@ export default {
 
       fd.append("project_count", this.project_count);
       fd.append("happy_clients", this.happy_clients);
+      fd.append("slug", this.slug);
 
       // fd.append('identity_menus[]', menuList)
 
@@ -508,7 +527,9 @@ export default {
               showConfirmButton: true,
               // timer: 1500,
             });
+            this.is_editing = false;
           } else if (this.success == "updated") {
+            this.is_editing = true;
             this.$swal.fire({
               // position: "top-end",
               icon: "success",
@@ -520,7 +541,7 @@ export default {
 
           // console.log(this.success)
 
-          this.is_editing = false;
+          
           setTimeout(function () {
             this.success = "";
           }, 5000);
