@@ -368,7 +368,7 @@ export default {
       this.summary1 = "";
       this.summary2 = "";
       this.content = "";
-
+      this.content="",
       this.temp_image_url = "";
 
       this.group_images = "";

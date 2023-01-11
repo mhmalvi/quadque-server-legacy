@@ -41,7 +41,7 @@
                   type="text"
                   class="form-control"
                   v-model="name"
-                  placeholder="Enter service name"
+                  placeholder="Enter client name"
                 />
                 <div class="text-danger" v-if="this.nameError">
                   {{ this.nameError }}
@@ -54,7 +54,7 @@
                   type="text"
                   class="form-control"
                   v-model="designation"
-                  placeholder="Enter service name"
+                  placeholder="Enter designation"
                 />
                 <div class="text-danger" v-if="this.designationError">
                   {{ this.designationError }}
