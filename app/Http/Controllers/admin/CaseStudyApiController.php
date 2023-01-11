@@ -16,7 +16,19 @@ class CaseStudyApiController extends Controller
      */
     public function index()
     {
-        return CaseStudy::orderBy('id', 'DESC')->get();
+        $case_study = CaseStudy::orderBy('id', 'DESC')->get();
+        if (!$case_study->isEmpty()) {
+            return response()->json([
+                'status' => 200,
+                'message' => 'success',
+                'data' => $case_study
+            ]);
+        } else {
+            return response()->json([
+                'status' => 424,
+                'message' => 'failed',
+            ]);
+        }
     }
 
     /**

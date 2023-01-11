@@ -20,7 +20,19 @@ class ServiceController extends Controller
 
     public function showAll()
     {
-        return Service::orderBy('id','DESC')->get();
+        $services=Service::orderBy('id','DESC')->get();
+        if (!$services->isEmpty()) {
+            return response()->json([
+                'status' => 200,
+                'message' => 'success',
+                'data' => $services
+            ]);
+        } else {
+            return response()->json([
+                'status' => 424,
+                'message' => 'failed',
+            ]);
+        }
     }
 
     /**

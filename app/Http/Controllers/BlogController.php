@@ -22,6 +22,7 @@ class BlogController extends Controller
     {
 
         return Blog::orderBy('id', 'DESC')->get();
+        
         // dd($blogs);
         // $moreblogs = '';
         // foreach ($blogs as $blog) {

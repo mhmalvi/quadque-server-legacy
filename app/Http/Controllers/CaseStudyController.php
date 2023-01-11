@@ -79,8 +79,19 @@ class CaseStudyController extends Controller
     public function getAll()
     {
         $case_studies = CaseStudy::orderBy('id','DESC')->get();
-
-        return response()->json($case_studies);
+        if (!$case_studies->isEmpty()) {
+            return response()->json([
+                'status' => 200,
+                'message' => 'success',
+                'data' => $case_studies
+            ]);
+        } else {
+            return response()->json([
+                'status' => 424,
+                'message' => 'failed',
+            ]);
+        }
+        // return response()->json($case_studies);
     }
     /**
      * Display a listing of the resource.

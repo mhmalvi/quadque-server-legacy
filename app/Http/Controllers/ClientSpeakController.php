@@ -29,20 +29,20 @@ class ClientSpeakController extends Controller
     public function showAll()
     {
 
-        return $client_speak = ClientSpeak::orderBy('id', 'DESC')->get();
+        $client_speak = ClientSpeak::orderBy('id', 'DESC')->get();
         // dd($client_speak);
-        // if (!$client_speak->isEmpty()) {
-        //     return response()->json([
-        //         'status' => 200,
-        //         'message' => 'success',
-        //         'data' => $client_speak
-        //     ]);
-        // } else {
-        //     return response()->json([
-        //         'status' => 424,
-        //         'message' => 'failed',
-        //     ]);
-        // }
+        if (!$client_speak->isEmpty()) {
+            return response()->json([
+                'status' => 200,
+                'message' => 'success',
+                'data' => $client_speak
+            ]);
+        } else {
+            return response()->json([
+                'status' => 424,
+                'message' => 'failed',
+            ]);
+        }
     }
 
     /**

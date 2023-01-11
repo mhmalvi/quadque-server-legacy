@@ -35,7 +35,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('case-studies', [CaseStudyApiController::class, 'index']);
 Route::get('case-studies/{id}', [CaseStudyApiController::class, 'show']);
 
-Route::get('case-studies-desktop', [CaseStudyDesktopController::class, 'index']);
+Route::get('case-studies-desktop', [CaseStudyDesktopController::class, 'getAll']);
 Route::get('case-studies-desktop/{id}', [CaseStudyDesktopController::class, 'get_by_id']);
 
 Route::get('manage-blogs', [BlogApiController::class, 'index']);

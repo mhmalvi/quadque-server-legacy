@@ -14,7 +14,19 @@ class Clients extends Controller
      */
     public function index()
     {
-        return Client::orderBy('id', 'DESC')->get();
+        $clients=Client::orderBy('id', 'DESC')->get();
+        if (!$clients->isEmpty()) {
+            return response()->json([
+                'status' => 200,
+                'message' => 'success',
+                'data' => $clients
+            ]);
+        } else {
+            return response()->json([
+                'status' => 424,
+                'message' => 'failed',
+            ]);
+        }
     }
 
     /**

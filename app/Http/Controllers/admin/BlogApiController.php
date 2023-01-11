@@ -16,19 +16,19 @@ class BlogApiController extends Controller
      */
     public function index()
     {
-        return $blogs=Blog::orderBy('id', 'DESC')->get();
-        // if(!$blogs->isEmpty()){
-        //     return response()->json([
-        //         'status' => 200,
-        //         'message' => 'success',
-        //         'data' => $blogs
-        //     ]);
-        // }else{
-        //     return response()->json([
-        //         'status' => 424,
-        //         'message' => 'failed',
-        //     ]);
-        // }
+        $blogs=Blog::orderBy('id', 'DESC')->get();
+        if(!$blogs->isEmpty()){
+            return response()->json([
+                'status' => 200,
+                'message' => 'success',
+                'data' => $blogs
+            ]);
+        }else{
+            return response()->json([
+                'status' => 424,
+                'message' => 'failed',
+            ]);
+        }
     }
 
     /**

@@ -90,7 +90,19 @@ class CaseStudyDesktopController extends Controller
     {
         $case_studies = CaseStudyDesktop::orderBy('id','DESC')->get();
 
-        return response()->json($case_studies);
+        // return response()->json($case_studies);
+        if (!$case_studies->isEmpty()) {
+            return response()->json([
+                'status' => 200,
+                'message' => 'success',
+                'data' => $case_studies
+            ]);
+        } else {
+            return response()->json([
+                'status' => 424,
+                'message' => 'failed',
+            ]);
+        }
     }
     /**
      * Display a listing of the resource.
