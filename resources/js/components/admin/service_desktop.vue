@@ -28,7 +28,11 @@
               class="card-title text-white text-center"
               style="margin-top: 1%"
             >
-              {{ this.is_editing ? "Update Service for Desktop" : "Create Service for Desktop" }}
+              {{
+                this.is_editing
+                  ? "Update Service for Desktop"
+                  : "Create Service for Desktop"
+              }}
             </h4>
           </div>
           <div class="card-body">
@@ -40,6 +44,19 @@
                   class="form-control"
                   v-model="service_name"
                   placeholder="Enter service name"
+                  required
+                />
+                <div class="text-danger" v-if="this.service_nameError">
+                  {{ this.service_nameError }}
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="title">Service Title</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  v-model="service_title"
+                  placeholder="Enter service title"
                   required
                 />
                 <div class="text-danger" v-if="this.service_nameError">
@@ -406,12 +423,11 @@ export default {
     };
   },
   computed: {
-        slug(){
-            return this.service_name.replace(/\s+/g, '-').toLowerCase();
-        }
+    slug() {
+      return this.service_name.replace(/\s+/g, "-").toLowerCase();
     },
+  },
   methods: {
-    
     disable_button() {
       this.is_editing = false;
       this.service_name = "";
@@ -526,7 +542,6 @@ export default {
 
           // console.log(this.success)
 
-          
           setTimeout(function () {
             this.success = "";
           }, 5000);

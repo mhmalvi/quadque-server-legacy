@@ -100,9 +100,9 @@ class ServiceDesktopController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($slug)
     {
-        $service = ServiceDesktop::find($id);
+        $service = ServiceDesktop::where($id);
         if ($service) {
             return response()->json([
                 'message' => 'success',

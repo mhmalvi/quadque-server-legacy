@@ -106,9 +106,9 @@ class ServiceController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($slug)
     {
-        $service = Service::find($id);
+        $service = Service::where('slug', $slug)->first();
         if ($service) {
             return response()->json([
                 'message' => 'success',

@@ -45,7 +45,10 @@ Route::get('home-videos', [HomeApiController::class, 'index']);
 Route::get('home-videos/{id}', [HomeApiController::class, 'show']);
 // Route::resource('home-videos', HomeController::class);
 Route::get('services', [ServiceController::class, 'showAll']);
-Route::get('services/{id}', [ServiceController::class, 'show']);
+Route::get('services/{slug}', [ServiceController::class, 'show']);
+
+Route::get('services-desktop', [ServiceDesktopController::class, 'showAll']);
+Route::get('services-desktop/{slug}', [ServiceDesktopController::class, 'show']);
 
 Route::get('client-speaks', [ClientSpeakController::class, 'showAll']);
 Route::get('client-speaks/{id}', [ClientSpeakController::class, 'show']);
