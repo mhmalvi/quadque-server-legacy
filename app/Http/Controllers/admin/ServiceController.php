@@ -20,7 +20,7 @@ class ServiceController extends Controller
 
     public function showAll()
     {
-        $services=Service::all()->get();
+        $services=Service::all();
         if (!$services->isEmpty()) {
             return response()->json([
                 'status' => 200,
