@@ -418,7 +418,8 @@ export default {
   },
   computed: {
     slug() {
-      return this.service_name.replace(/\s+/g, "-").toLowerCase();
+      let data = this.service_name.replace(/\s/g ,"-").toLowerCase();
+      return data.replace(/\//g ,"-")
     },
   },
   methods: {
