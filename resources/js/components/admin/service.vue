@@ -355,7 +355,7 @@ export default {
       identity_menus: [],
       service_deliver_title: "",
       service_deliver_description: "",
-      service_title:"".
+      service_title:"",
       // our_latest_work_title: "",
 
       service_nameError: "",
