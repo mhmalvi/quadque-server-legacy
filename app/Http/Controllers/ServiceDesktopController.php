@@ -68,6 +68,7 @@ class ServiceDesktopController extends Controller
 
         // $service->identity_design_title = $request->identity_design_title;
         $service->identity_design_des = $request->identity_design_des;
+        $service->identity_design_services_list = $request->identity_design_services_list;
         $service->content = $request->content;
 
         $service->project_count = $request->project_count;
@@ -152,6 +153,7 @@ class ServiceDesktopController extends Controller
 
         // $service->identity_design_title = $request->identity_design_title;
         $service->identity_design_des = $request->identity_design_des;
+        $service->identity_design_services_list = $request->identity_design_services_list;
         $service->content = $request->content;
 
         $service->project_count = $request->project_count;

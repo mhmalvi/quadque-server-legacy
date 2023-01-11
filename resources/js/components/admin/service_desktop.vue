@@ -72,9 +72,6 @@
                   placeholder="Enter slug"
                   required
                 />
-                <!-- <div class="text-danger" v-if="this.service_nameError">
-                  {{ this.service_nameError }}
-                </div> -->
               </div>
               <div class="form-group">
                 <label for="thumbnail">Service File</label>
@@ -127,6 +124,17 @@
                 <div class="text-danger" v-if="this.identity_design_desError">
                   {{ this.identity_design_desError }}
                 </div>
+              </div>
+              <div class="form-group">
+                <label for="title">Identity Design Services List <span style="color:red;">(Comma separated)</span></label>
+                <input
+                @keydown.space.prevent
+                  type="string"
+                  class="form-control"
+                  v-model="identity_design_services_list"
+                  placeholder="Enter list"
+                  required
+                />
               </div>
               <!-- <a class="btn btn-primary" style="height: 40px;" @click="addIdentityMenu">Add (+)</a> -->
               <div class="form-group mt-4">
@@ -346,7 +354,8 @@ export default {
       lists: [],
       service_name: "",
       file: "",
-      description: "",
+        description: "",
+      service_title:"",
       // slug:"",
       // identity_design_title: "",
       identity_design_des: "",
@@ -379,6 +388,7 @@ export default {
       temporary_id: "",
       is_editing: false,
       temp_thumbnail_url: "",
+      identity_design_services_list: "",
       extensions: [
         new Doc(),
         new Text(),
@@ -443,7 +453,9 @@ export default {
         (this.service_capability_menu = ""),
         (this.service_deliver_title = ""),
         (this.service_deliver_description = ""),
-        (this.temp_thumbnail_url = "");
+              (this.temp_thumbnail_url = "");
+          this.identity_design_services_list = "";
+        this.service_title=""
     },
     fetchAll() {
       // console.log("fetch");
@@ -472,7 +484,7 @@ export default {
       // var menuList = {
       //   'identity_menu_list': this.identity_menus,
       //   'services_capabilities_menu_list':this.service_capability_menus
-      // }
+      // }identity_design_services_list
       let fd = new FormData();
       fd.append("service_name", this.service_name);
       fd.append("description", this.description);
@@ -480,6 +492,10 @@ export default {
 
       // fd.append("identity_design_title", this.identity_design_title);
       fd.append("identity_design_des", this.identity_design_des);
+      fd.append(
+        "identity_design_services_list",
+        this.identity_design_services_list
+      );
 
       fd.append("project_count", this.project_count);
       fd.append("happy_clients", this.happy_clients);
@@ -521,6 +537,7 @@ export default {
               (this.service_deliver_title = ""),
               (this.service_deliver_description = ""),
               (this.temp_thumbnail_url = "");
+            this.identity_design_services_list = "";
             this.$swal.fire({
               // position: "top-end",
               icon: "success",
@@ -597,7 +614,8 @@ export default {
           this.identity_design_title = response.data.identity_design_title;
 
           this.content = response.data.content;
-          this.identity_design_des = response.data.identity_design_des;
+            this.identity_design_des = response.data.identity_design_des;
+          this.identity_design_services_list = response.data.identity_design_services_list;
           this.identity_design_menus = response.data.identity_design_menus;
 
           this.project_count = response.data.project_count;
@@ -630,11 +648,13 @@ export default {
           (this.identity_design_des = ""),
           (this.identity_design_menus = ""),
           (this.project_count = ""),
-          (this.happy_clients = ""),
+            (this.happy_clients = ""),
+          this.service_title="",
           (this.services_capabilities_menus = ""),
           (this.service_deliver_title = ""),
           (this.service_deliver_description = ""),
-          (this.temp_thumbnail_url = "");
+              (this.temp_thumbnail_url = "");
+          this.identity_design_services_list=""
       });
     },
   },

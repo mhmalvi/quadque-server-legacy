@@ -71,7 +71,7 @@ class ServiceController extends Controller
         $service->service_title = $request->service_title;
         $service->description = $request->description;
 
-        // $service->identity_design_title = $request->identity_design_title;
+        // $service->identity_design_title = $request->identity_design_title; identity_design_services_list
         $service->identity_design_des = $request->identity_design_des;
         $service->content = $request->content;
 
@@ -157,6 +157,7 @@ class ServiceController extends Controller
         $service->service_title = $request->service_title;
         // $service->identity_design_title = $request->identity_design_title;
         $service->identity_design_des = $request->identity_design_des;
+        
         $service->content = $request->content;
 
         $service->project_count = $request->project_count;
