@@ -77,12 +77,36 @@ class AboutUsController extends Controller
      */
     public function show($id)
     {
-        return AboutUs::find($id);
+        $about_us = AboutUs::find($id);
+        if ($about_us) {
+            return response()->json([
+                'message' => 'success',
+                'status' => 200,
+                'data' => $about_us
+            ]);
+        } else {
+            return response()->json([
+                'message' => 'failed',
+                'status' => 424,
+            ]);
+        }
     }
 
     public function showAll()
     {
-        return AboutUs::orderBy('id','DESC')->get();
+        $about_us=AboutUs::orderBy('id','DESC')->get();
+        if (!$about_us->isEmpty()) {
+            return response()->json([
+                'status' => 200,
+                'message' => 'success',
+                'data' => $about_us
+            ]);
+        } else {
+            return response()->json([
+                'status' => 424,
+                'message' => 'failed',
+            ]);
+        }
     }
 
     /**

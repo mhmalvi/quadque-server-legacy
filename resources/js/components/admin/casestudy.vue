@@ -233,7 +233,7 @@
       </div>
     </div>
     <div class="row mt-5 d-flex justify-content-center">
-      <div class="col-md-8">
+      <div class="col-md-12">
         <h4>Case Study Lists</h4>
         <table class="table table-striped">
           <thead>
