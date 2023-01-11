@@ -4,6 +4,7 @@ use App\Http\Controllers\admin\CaseStudyApiController;
 use App\Http\Controllers\CaseStudyDesktopController;
 use App\Http\Controllers\admin\BlogApiController;
 use App\Http\Controllers\admin\ServiceController;
+use App\Http\Controllers\ServiceDesktopController;
 use App\Http\Controllers\admin\HomeApiController;
 use App\Http\Controllers\ClientSpeakController;
 use App\Http\Controllers\AboutUsController;

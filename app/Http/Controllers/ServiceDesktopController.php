@@ -17,17 +17,18 @@ class ServiceDesktopController extends Controller
     public function showAll()
     {
         $services = ServiceDesktop::all();
+        // dd($services);
         if (!$services->isEmpty()) {
             return response()->json([
                 'status' => 200,
                 'message' => 'success',
                 'data' => $services
-            ]);
+            ],200);
         } else {
             return response()->json([
                 'status' => 424,
                 'message' => 'failed',
-            ]);
+            ],424);
         }
     }
 
@@ -102,7 +103,7 @@ class ServiceDesktopController extends Controller
      */
     public function show($slug)
     {
-        $service = ServiceDesktop::where($id);
+        $service = ServiceDesktop::where('slug',$slug)->first();
         if ($service) {
             return response()->json([
                 'message' => 'success',
