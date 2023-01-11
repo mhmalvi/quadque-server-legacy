@@ -39,6 +39,10 @@
                   {{ this.titleError }}
                 </div>
               </div>
+              <div class="form-group">
+                <label for="title">Blog Author</label>
+                <input type="text" v-model="author" class="form-control" />
+              </div>
               <div v-if="this.is_editing" class="form-group">
                 <label for="title">Slug</label>
                 <input type="string" v-model="slug" value="title" class="form-control" />
@@ -79,16 +83,14 @@
                   {{ this.textError }}
                 </div>
               </div>
+              
               <div class="form-group">
                 <label for="title">Blog Meta Keyword</label>
-                <input type v-model="meta_keyword" class="form-control" />
-                <!-- <div class="text-danger" v-if="this.titleError">
-                  {{ this.titleError }}
-                </div> -->
+                <input type="text" v-model="meta_keyword" class="form-control" />
               </div>
               <div class="form-group">
                 <label for="title">Blog Short Description</label>
-                <input v-model="short_description" class="form-control" />
+                <input type="text" v-model="short_description" class="form-control" />
                 <!-- <div class="text-danger" v-if="this.titleError">
                   {{ this.titleError }}
                 </div> -->
