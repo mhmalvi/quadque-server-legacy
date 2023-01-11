@@ -20,7 +20,7 @@ class ServiceController extends Controller
 
     public function showAll()
     {
-        $services=Service::orderBy('id','DESC')->get();
+        $services=Service::all()->get();
         if (!$services->isEmpty()) {
             return response()->json([
                 'status' => 200,
