@@ -450,6 +450,7 @@ export default {
       fd.append("name", this.name);
       fd.append("summary1", this.summary1);
       fd.append("summary2", this.summary2);
+      fd.append("slug", this.slug);
       // for (let i = 0; i < this.agency_images.length; i++) {
       //   fd.append("agency_images[]", this.agency_images[i]);
       // }

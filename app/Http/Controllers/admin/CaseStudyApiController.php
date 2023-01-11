@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\CaseStudy;
 use Throwable;
+use Illuminate\Support\Str;
 
 class CaseStudyApiController extends Controller
 {
@@ -63,9 +64,11 @@ class CaseStudyApiController extends Controller
             $file_path = $app_url . ":8000/assets/img/case_study/" . $fileName;
         }
 
+        $slug = Str::slug($request->title, '-');
         CaseStudy::create([
             'com_name' => $request->name,
-            'com_image' => $file_path
+            'com_image' => $file_path,
+            'slug' => $slug
         ]);
         return response()->json([
             'name' => $request->name,
@@ -79,20 +82,20 @@ class CaseStudyApiController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($slug)
     {
-        $case_study = CaseStudy::find($id);
+        $case_study = CaseStudy::where('slug', $slug);
         if ($case_study) {
             return response()->json([
                 'message' => 'success',
                 'status' => 200,
                 'data' => $case_study
-            ]);
+            ], 200);
         } else {
             return response()->json([
                 'message' => 'failed',
                 'status' => 424,
-            ]);
+            ], 424);
         }
     }
 
@@ -128,10 +131,11 @@ class CaseStudyApiController extends Controller
         //     'name' => 'required',
         //     'image' => 'required|image'
         // ]);
-
+        
         $case_study = CaseStudy::find($id);
         $app_url = env('APP_URL');
         $case_study->com_name = $request->name;
+        $case_study->slug = $request->slug;
 
         if ($request->image) {
 

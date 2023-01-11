@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Blog;
 use App\Models\CaseStudy;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 
 class CaseStudyController extends Controller
 {
@@ -139,11 +140,13 @@ class CaseStudyController extends Controller
         // }
         // $ser_id=implode(',',$service_id);
         // die;
+        $slug = Str::slug($request->name,'-');
         $case_study = new CaseStudy();
         $case_study->com_name = $request->name;
         $case_study->summary1 = $request->summary1;
         $case_study->summary2 = $request->summary2;
         $case_study->content = $request->content;
+        $case_study->slug = $slug;
         // $case_study->service_id = $ser_id;
         $app_url = env('APP_URL');
 
@@ -205,6 +208,7 @@ class CaseStudyController extends Controller
         $case_study->summary1 = $request->summary1;
         $case_study->summary2 = $request->summary2;
         $case_study->content = $request->content;
+        $case_study->slug = $request->slug;
         // $case_study->service_id = $ser_id;
         $app_url = env('APP_URL');
 
