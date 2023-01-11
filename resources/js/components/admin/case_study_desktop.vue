@@ -83,89 +83,11 @@
                   type="file"
                   class="form-control"
                   id="company_image"
-                  @change="group_img_1"
+                  @change="group_img"
                 />
                 <p class="my-2 text-center" v-if="this.group_images_1_tmp">
                   <img
                     :src="this.group_images_1_tmp"
-                    width="150"
-                    height="150"
-                  />
-                </p>
-                <input
-                  type="file"
-                  class="form-control"
-                  id="company_image"
-                  @change="group_img_2"
-                />
-                <p class="my-2 text-center" v-if="this.group_images_2_tmp">
-                  <img
-                    :src="this.group_images_2_tmp"
-                    width="150"
-                    height="150"
-                  />
-                </p>
-                <input
-                  type="file"
-                  class="form-control"
-                  id="company_image"
-                  @change="group_img_3"
-                />
-                <p class="my-2 text-center" v-if="this.group_images_3_tmp">
-                  <img
-                    :src="this.group_images_3_tmp"
-                    width="150"
-                    height="150"
-                  />
-                </p>
-                <input
-                  type="file"
-                  class="form-control"
-                  id="company_image"
-                  @change="group_img_4"
-                />
-                <p class="my-2 text-center" v-if="this.group_images_4_tmp">
-                  <img
-                    :src="this.group_images_4_tmp"
-                    width="150"
-                    height="150"
-                  />
-                </p>
-                <input
-                  type="file"
-                  class="form-control"
-                  id="company_image"
-                  @change="group_img_5"
-                />
-                <p class="my-2 text-center" v-if="this.group_images_5_tmp">
-                  <img
-                    :src="this.group_images_5_tmp"
-                    width="150"
-                    height="150"
-                  />
-                </p>
-                <input
-                  type="file"
-                  class="form-control"
-                  id="company_image"
-                  @change="group_img_6"
-                />
-                <p class="my-2 text-center" v-if="this.group_images_6_tmp">
-                  <img
-                    :src="this.group_images_6_tmp"
-                    width="150"
-                    height="150"
-                  />
-                </p>
-                <input
-                  type="file"
-                  class="form-control"
-                  id="company_image"
-                  @change="group_img_7"
-                />
-                <p class="my-2 text-center" v-if="this.group_images_7_tmp">
-                  <img
-                    :src="this.group_images_7_tmp"
                     width="150"
                     height="150"
                   />
@@ -196,7 +118,7 @@
                 <!-- <vue-editor v-model="content"></vue-editor> -->
               </div>
 
-              <div
+              <!-- <div
                 class="form-group"
                 id="my-strictly-unique-vue-upload-multiple-image"
               >
@@ -208,19 +130,10 @@
                   @change="agency"
                   multiple
                 />
-                <!-- <vue-upload-multiple-image
-                  @upload-success="save"
-                  @before-remove="beforeRemove"
-                  @edit-image="editImage"
-                  :data-images="images"
-                  dragText=""
-                  primaryText=""
-                  browseText="Select Image"
-                ></vue-upload-multiple-image> -->
                 <p class="my-2 text-center" v-if="this.temp_image_url">
                   <img :src="this.temp_image_url" width="150" height="150" />
                 </p>
-              </div>
+              </div> -->
               <div>
                 <!-- <ckeditor :editor="editor" v-model="editorData" :config="editorConfig"></ckeditor> -->
                 <button type="submit" class="btn btn-block btn-save text-white">
@@ -300,7 +213,7 @@ export default {
       image: "",
       summary1: "",
       summary2: "",
-      group_images_1: "",
+      group_images: "",
       group_images_2: "",
       group_images_3: "",
       group_images_4: "",
@@ -342,34 +255,11 @@ export default {
     removeField(index, fieldType) {
       fieldType.splice(index, 1);
     },
-    group_img_1(e) {
-      this.group_images_1 = e.target.files[0];
+    group_img(e) {
+      this.group_images = e.target.files[0];
       this.group_images_1_tmp = "";
     },
-    group_img_2(e) {
-      this.group_images_2 = e.target.files[0];
-      this.group_images_2_tmp = "";
-    },
-    group_img_3(e) {
-      this.group_images_3 = e.target.files[0];
-      this.group_images_3_tmp = "";
-    },
-    group_img_4(e) {
-      this.group_images_4 = e.target.files[0];
-      this.group_images_4_tmp = "";
-    },
-    group_img_5(e) {
-      this.group_images_5 = e.target.files[0];
-      this.group_images_5_tmp = "";
-    },
-    group_img_6(e) {
-      this.group_images_6 = e.target.files[0];
-      this.group_images_6_tmp = "";
-    },
-    group_img_7(e) {
-      this.group_images_7 = e.target.files[0];
-      this.group_images_7_tmp = "";
-    },
+
     disable_button() {
       $(".summernote").summernote("code", "");
       this.is_editing = false;
@@ -381,13 +271,7 @@ export default {
 
       this.temp_image_url = "";
 
-      this.group_images_1 = "";
-      this.group_images_2 = "";
-      this.group_images_3 = "";
-      this.group_images_4 = "";
-      this.group_images_5 = "";
-      this.group_images_6 = "";
-      this.group_images_7 = "";
+      this.group_images = "";
       this.group_images_1_tmp = "";
       this.group_images_2_tmp = "";
       this.group_images_3_tmp = "";
@@ -451,21 +335,15 @@ export default {
       fd.append("name", this.name);
       fd.append("summary1", this.summary1);
       fd.append("summary2", this.summary2);
-      for (let i = 0; i < this.agency_images.length; i++) {
-        fd.append("agency_images[]", this.agency_images[i]);
-      }
-      for (let j = 0; j < this.selected_services.length; j++) {
-        fd.append("selected_services[]", this.selected_services[j]);
-      }
+      // for (let i = 0; i < this.agency_images.length; i++) {
+      //   fd.append("agency_images[]", this.agency_images[i]);
+      // }
+      // for (let j = 0; j < this.selected_services.length; j++) {
+      //   fd.append("selected_services[]", this.selected_services[j]);
+      // }
       // fd.append("group_images", this.gr_images);
       fd.append("content", this.content);
-      fd.append("group_images_1", this.group_images_1);
-      fd.append("group_images_2", this.group_images_2);
-      fd.append("group_images_3", this.group_images_3);
-      fd.append("group_images_4", this.group_images_4);
-      fd.append("group_images_5", this.group_images_5);
-      fd.append("group_images_6", this.group_images_6);
-      fd.append("group_images_7", this.group_images_7);
+      fd.append("group_images", this.group_images);
 
       fd.append("image", this.image);
       fd.append("id", this.temporary_id);
@@ -485,13 +363,7 @@ export default {
             this.summary1 = "";
             this.summary2 = "";
             this.content = "";
-            this.group_images_1 = "";
-            this.group_images_2 = "";
-            this.group_images_3 = "";
-            this.group_images_4 = "";
-            this.group_images_5 = "";
-            this.group_images_6 = "";
-            this.group_images_7 = "";
+            this.group_images = "";
             this.group_images_1_tmp = "";
             this.group_images_2_tmp = "";
             this.group_images_3_tmp = "";
@@ -561,13 +433,7 @@ export default {
           this.content = response.data.content;
           $(".summernote").summernote("code", this.content);
           // $(".summernote").summernote("code", this.second_content);
-          this.group_images_1_tmp = response.data.group_images_1;
-          this.group_images_2_tmp = response.data.group_images_2;
-          this.group_images_3_tmp = response.data.group_images_3;
-          this.group_images_4_tmp = response.data.group_images_4;
-          this.group_images_5_tmp = response.data.group_images_5;
-          this.group_images_6_tmp = response.data.group_images_6;
-          this.group_images_7_tmp = response.data.group_images_7;
+          this.group_images_1_tmp = response.data.group_images;
         })
         .catch((error) => {});
     },

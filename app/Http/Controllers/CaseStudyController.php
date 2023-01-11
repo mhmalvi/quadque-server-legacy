@@ -155,70 +155,14 @@ class CaseStudyController extends Controller
             $file_path = $app_url . ":8000/assets/img/case_study/" . $fileName;
             $case_study->com_image = $file_path;
         }
-
-        if ($request->group_images_1) {
-
-            $fileName = time() . '.' . $request->group_images_1->getClientOriginalExtension();
-            $request->group_images_1->move(public_path('assets/img/case_study'), $fileName);
-            $file_path = $app_url . ":8000/assets/img/case_study/" . $fileName;
-            $case_study->group_images_1 = $file_path;
-        }
-        if ($request->group_images_2) {
-
-            $fileName = time() . '.' . $request->group_images_2->getClientOriginalExtension();
-            $request->group_images_2->move(public_path('assets/img/case_study'), $fileName);
-            $file_path = $app_url . ":8000/assets/img/case_study/" . $fileName;
-            $case_study->group_images_2 = $file_path;
-        }
-        if ($request->group_images_3) {
-
-            $fileName = time() . '.' . $request->group_images_3->getClientOriginalExtension();
-            $request->group_images_3->move(public_path('assets/img/case_study'), $fileName);
-            $file_path = $app_url . ":8000/assets/img/case_study/" . $fileName;
-            $case_study->group_images_3 = $file_path;
-        }
-        if ($request->group_images_4) {
-
-            $fileName = time() . '.' . $request->group_images_4->getClientOriginalExtension();
-            $request->group_images_4->move(public_path('assets/img/case_study'), $fileName);
-            $file_path = $app_url . ":8000/assets/img/case_study/" . $fileName;
-            $case_study->group_images_4 = $file_path;
-        }
-        if ($request->group_images_5) {
-
-            $fileName = time() . '.' . $request->group_images_5->getClientOriginalExtension();
-            $request->group_images_5->move(public_path('assets/img/case_study'), $fileName);
-            $file_path = $app_url . ":8000/assets/img/case_study/" . $fileName;
-            $case_study->group_images_5 = $file_path;
-        }
-        if ($request->group_images_6) {
-
-            $fileName = time() . '.' . $request->group_images_6->getClientOriginalExtension();
-            $request->group_images_6->move(public_path('assets/img/case_study'), $fileName);
-            $file_path = $app_url . ":8000/assets/img/case_study/" . $fileName;
-            $case_study->group_images_6 = $file_path;
-        }
-        if ($request->group_images_7) {
-
-            $fileName = time() . '.' . $request->group_images_7->getClientOriginalExtension();
-            $request->group_images_7->move(public_path('assets/img/case_study'), $fileName);
-            $file_path = $app_url . ":8000/assets/img/case_study/" . $fileName;
-            $case_study->group_images_7 = $file_path;
-        }
         
+        if ($request->group_images) {
 
-        
-        $file_path=array();
-        if ($request->hasFile('agency_images')) {
-            foreach ($request->file('agency_images') as $image) {
-                $imageName = time() . '.' . $image->getClientOriginalExtension();
-                $image->move(public_path('assets/img/case_study/agency_images'), $imageName);
-                $file_path[] = $app_url . ":8000/assets/img/case_study/agency_images/" . $imageName;
-                // $case_study->agency = $file_path;
-            }
-            $agency_files= implode('|', $file_path);
-            $case_study->agency = $agency_files;
-        }   
+            $fileName = time() . '.' . $request->group_images->getClientOriginalExtension();
+            $request->group_images->move(public_path('assets/img/case_study'), $fileName);
+            $file_path = $app_url . ":8000/assets/img/case_study/" . $fileName;
+            $case_study->group_images = $file_path;
+        }
 
         $save = $case_study->save();
         // $file_path=[];        
@@ -272,72 +216,16 @@ class CaseStudyController extends Controller
             $file_path = $app_url . ":8000/assets/img/case_study/" . $fileName;
             $case_study->com_image = $file_path;
         }
-
-        if ($request->group_images_1) {
-
-            $fileName = time() . '.' . $request->group_images_1->getClientOriginalExtension();
-            $request->group_images_1->move(public_path('assets/img/case_study'), $fileName);
-            $file_path = $app_url . ":8000/assets/img/case_study/" . $fileName;
-            $case_study->group_images_1 = $file_path;
-        }
-        if ($request->group_images_2) {
-
-            $fileName = time() . '.' . $request->group_images_2->getClientOriginalExtension();
-            $request->group_images_2->move(public_path('assets/img/case_study'), $fileName);
-            $file_path = $app_url . ":8000/assets/img/case_study/" . $fileName;
-            $case_study->group_images_2 = $file_path;
-        }
-        if ($request->group_images_3) {
-
-            $fileName = time() . '.' . $request->group_images_3->getClientOriginalExtension();
-            $request->group_images_3->move(public_path('assets/img/case_study'), $fileName);
-            $file_path = $app_url . ":8000/assets/img/case_study/" . $fileName;
-            $case_study->group_images_3 = $file_path;
-        }
-        if ($request->group_images_4) {
-
-            $fileName = time() . '.' . $request->group_images_4->getClientOriginalExtension();
-            $request->group_images_4->move(public_path('assets/img/case_study'), $fileName);
-            $file_path = $app_url . ":8000/assets/img/case_study/" . $fileName;
-            $case_study->group_images_4 = $file_path;
-        }
-        if ($request->group_images_5) {
-
-            $fileName = time() . '.' . $request->group_images_5->getClientOriginalExtension();
-            $request->group_images_5->move(public_path('assets/img/case_study'), $fileName);
-            $file_path = $app_url . ":8000/assets/img/case_study/" . $fileName;
-            $case_study->group_images_5 = $file_path;
-        }
-        if ($request->group_images_6) {
-
-            $fileName = time() . '.' . $request->group_images_6->getClientOriginalExtension();
-            $request->group_images_6->move(public_path('assets/img/case_study'), $fileName);
-            $file_path = $app_url . ":8000/assets/img/case_study/" . $fileName;
-            $case_study->group_images_6 = $file_path;
-        }
-        if ($request->group_images_7) {
-
-            $fileName = time() . '.' . $request->group_images_7->getClientOriginalExtension();
-            $request->group_images_7->move(public_path('assets/img/case_study'), $fileName);
-            $file_path = $app_url . ":8000/assets/img/case_study/" . $fileName;
-            $case_study->group_images_7 = $file_path;
-        }
         
+        if ($request->group_images) {
 
-        
-        $file_path=array();
-        if ($request->hasFile('agency_images')) {
-            foreach ($request->file('agency_images') as $image) {
-                $imageName = time() . '.' . $image->getClientOriginalExtension();
-                $image->move(public_path('assets/img/case_study/agency_images'), $imageName);
-                $file_path[] = $app_url . ":8000/assets/img/case_study/agency_images/" . $imageName;
-                // $case_study->agency = $file_path;
-            }
-            $agency_files= implode('|', $file_path);
-            $case_study->agency = $agency_files;
+            $fileName = time() . '.' . $request->group_images->getClientOriginalExtension();
+            $request->group_images->move(public_path('assets/img/case_study'), $fileName);
+            $file_path = $app_url . ":8000/assets/img/case_study/" . $fileName;
+            $case_study->group_images = $file_path;
         }
 
-
+        // dd("hello");
         $save = $case_study->save();
 
         if ($save) {

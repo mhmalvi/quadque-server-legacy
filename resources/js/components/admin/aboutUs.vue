@@ -34,6 +34,13 @@
           <div class="card-body">
             <form>
               <!-- {{ description }} -->
+              <div v-if="this.is_editing" class="form-group">
+                <label for="title">Slug</label>
+                <input type="string" v-model="slug" value="title" class="form-control" />
+                <!-- <div class="text-danger" v-if="this.titleError">
+                  {{ this.titleError }}
+                </div> -->
+              </div>
               <div class="form-group">
                 <label for="title">Our Vision</label><br />
                 <textarea
@@ -222,6 +229,11 @@ export default {
       // blog_no: 1,
     };
   },
+  computed: {
+        slug(){
+            return this.title.replace(/\s+/g, '-').toLowerCase();
+        }
+    },
   methods: {
     disable_button() {
       this.is_editing = false;
