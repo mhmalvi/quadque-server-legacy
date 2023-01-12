@@ -15,7 +15,9 @@
         <div class="card">
           <div
             class="card-header text-center"
-            style="height: 47px;background-image: linear-gradient(
+            style="
+              height: 47px;
+              background-image: linear-gradient(
                 to right,
                 rgb(242, 112, 156),
                 rgb(255, 148, 114)
@@ -37,6 +39,19 @@
                   type="text"
                   class="form-control"
                   v-model="service_name"
+                  placeholder="Enter service name"
+                  required
+                />
+                <div class="text-danger" v-if="this.service_nameError">
+                  {{ this.service_nameError }}
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="title">Service Short Description</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  v-model="service_short_description"
                   placeholder="Enter service name"
                   required
                 />
@@ -365,6 +380,7 @@ export default {
       success: "",
       temporary_id: "",
       is_editing: false,
+      service_short_description: "",
       temp_thumbnail_url: "",
     };
   },
@@ -383,7 +399,7 @@ export default {
       $(".summernote").summernote("code", "");
 
       (this.identity_design_title = ""),
-        (this.identity_design_des = ""),
+        (this.service_short_description = ""((this.identity_design_des = ""))),
         (this.project_count = ""),
         (this.happy_clients = ""),
         (this.content = ""),
@@ -425,6 +441,7 @@ export default {
       fd.append("service_name", this.service_name);
       fd.append("service_title", this.service_title);
       fd.append("description", this.description);
+      fd.append("service_short_description", this.service_short_description);
       fd.append("file", this.file);
 
       // fd.append("identity_design_title", this.identity_design_title);
@@ -469,7 +486,9 @@ export default {
               (this.service_capability_menu = ""),
               (this.service_deliver_title = ""),
               (this.service_deliver_description = ""),
-              (this.temp_thumbnail_url = "");
+              (this.service_short_description = ""(
+                (this.temp_thumbnail_url = "")
+              ));
             this.$swal.fire({
               // position: "top-end",
               icon: "success",
@@ -542,6 +561,8 @@ export default {
           // this.file = response.data.file;
           this.service_name = response.data.service_name;
           this.description = response.data.description;
+          this.service_short_description =
+            response.data.service_short_description;
 
           this.identity_design_title = response.data.identity_design_title;
 
@@ -551,8 +572,7 @@ export default {
 
           this.project_count = response.data.project_count;
           this.happy_clients = response.data.happy_clients;
-          this.service_title =
-            response.data.service_title;
+          this.service_title = response.data.service_title;
           this.services_capabilities_title =
             response.data.services_capabilities_title;
           this.services_capabilities_des =
@@ -585,6 +605,7 @@ export default {
           (this.service_deliver_title = ""),
           (this.service_deliver_description = ""),
           (this.temp_thumbnail_url = "");
+        this.service_short_description = "";
       });
     },
   },
