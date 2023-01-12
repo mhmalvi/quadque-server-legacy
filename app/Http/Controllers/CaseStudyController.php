@@ -146,7 +146,15 @@ class CaseStudyController extends Controller
         $case_study->summary1 = $request->summary1;
         $case_study->summary2 = $request->summary2;
         $case_study->content = $request->content;
+        $case_study->description = $request->description;
+        $case_study->our_content_header = $request->our_content_header;
         $case_study->slug = $slug;
+        $case_study->title_1 = $request->title_1;
+        $case_study->description_1 = $request->description_1;
+        $case_study->title_2 = $request->title_2;
+        $case_study->description_2 = $request->description_2;
+        $case_study->title_3 = $request->title_3;
+        $case_study->description_3 = $request->description_3;
         // $case_study->service_id = $ser_id;
         $app_url = env('APP_URL');
 
@@ -157,6 +165,46 @@ class CaseStudyController extends Controller
             $request->image->move(public_path('assets/img/case_study'), $fileName);
             $file_path = $app_url . ":8000/assets/img/case_study/" . $fileName;
             $case_study->com_image = $file_path;
+        }
+
+        if ($request->long_banner) {
+
+            $fileName = time() . '.' . $request->long_banner->getClientOriginalExtension();
+            $request->long_banner->move(public_path('assets/img/case_study'), $fileName);
+            $file_path = $app_url . ":8000/assets/img/case_study/" . $fileName;
+            $case_study->long_banner = $file_path;
+        }
+
+        if ($request->short_banner) {
+
+            $fileName = time() . '.' . $request->short_banner->getClientOriginalExtension();
+            $request->short_banner->move(public_path('assets/img/case_study'), $fileName);
+            $file_path = $app_url . ":8000/assets/img/case_study/" . $fileName;
+            $case_study->short_banner = $file_path;
+        }
+
+        if ($request->image_1) {
+
+            $fileName = time() . '.' . $request->image_1->getClientOriginalExtension();
+            $request->image_1->move(public_path('assets/img/case_study'), $fileName);
+            $file_path = $app_url . ":8000/assets/img/case_study/" . $fileName;
+            $case_study->image_1 = $file_path;
+        }
+
+        if ($request->image_2) {
+
+            $fileName = time() . '.' . $request->image_2->getClientOriginalExtension();
+            $request->image_2->move(public_path('assets/img/case_study'), $fileName);
+            $file_path = $app_url . ":8000/assets/img/case_study/" . $fileName;
+            $case_study->image_2 = $file_path;
+        }
+
+        if ($request->image_3) {
+
+            $fileName = time() . '.' . $request->image_3->getClientOriginalExtension();
+            $request->image_3->move(public_path('assets/img/case_study'), $fileName);
+            $file_path = $app_url . ":8000/assets/img/case_study/" . $fileName;
+            $case_study->image_3 = $file_path;
         }
         
         if ($request->group_images) {
@@ -208,7 +256,15 @@ class CaseStudyController extends Controller
         $case_study->summary1 = $request->summary1;
         $case_study->summary2 = $request->summary2;
         $case_study->content = $request->content;
+        $case_study->description = $request->description;
+        $case_study->our_content_header = $request->our_content_header;
         $case_study->slug = $request->slug;
+        $case_study->title_1 = $request->title_1;
+        $case_study->description_1 = $request->description_1;
+        $case_study->title_2 = $request->title_2;
+        $case_study->description_2 = $request->description_2;
+        $case_study->title_3 = $request->title_3;
+        $case_study->description_3 = $request->description_3;
         // $case_study->service_id = $ser_id;
         $app_url = env('APP_URL');
 
@@ -220,7 +276,47 @@ class CaseStudyController extends Controller
             $file_path = $app_url . ":8000/assets/img/case_study/" . $fileName;
             $case_study->com_image = $file_path;
         }
-        
+
+        if ($request->long_banner) {
+
+            $fileName = time() . '.' . $request->long_banner->getClientOriginalExtension();
+            $request->long_banner->move(public_path('assets/img/case_study'), $fileName);
+            $file_path = $app_url . ":8000/assets/img/case_study/" . $fileName;
+            $case_study->long_banner = $file_path;
+        }
+
+        if ($request->short_banner) {
+
+            $fileName = time() . '.' . $request->short_banner->getClientOriginalExtension();
+            $request->short_banner->move(public_path('assets/img/case_study'), $fileName);
+            $file_path = $app_url . ":8000/assets/img/case_study/" . $fileName;
+            $case_study->short_banner = $file_path;
+        }
+
+        if ($request->image_1) {
+
+            $fileName = time() . '.' . $request->image_1->getClientOriginalExtension();
+            $request->image_1->move(public_path('assets/img/case_study'), $fileName);
+            $file_path = $app_url . ":8000/assets/img/case_study/" . $fileName;
+            $case_study->image_1 = $file_path;
+        }
+
+        if ($request->image_2) {
+
+            $fileName = time() . '.' . $request->image_2->getClientOriginalExtension();
+            $request->image_2->move(public_path('assets/img/case_study'), $fileName);
+            $file_path = $app_url . ":8000/assets/img/case_study/" . $fileName;
+            $case_study->image_2 = $file_path;
+        }
+
+        if ($request->image_3) {
+
+            $fileName = time() . '.' . $request->image_3->getClientOriginalExtension();
+            $request->image_3->move(public_path('assets/img/case_study'), $fileName);
+            $file_path = $app_url . ":8000/assets/img/case_study/" . $fileName;
+            $case_study->image_3 = $file_path;
+        }
+
         if ($request->group_images) {
 
             $fileName = time() . '.' . $request->group_images->getClientOriginalExtension();

@@ -27,12 +27,12 @@ class ServiceController extends Controller
                 'status' => 200,
                 'message' => 'success',
                 'data' => $services
-            ]);
+            ], 200);
         } else {
             return response()->json([
                 'status' => 424,
-                'message' => 'failed',
-            ]);
+                'message' => 'Not found',
+            ], 424);
         }
     }
 
@@ -54,17 +54,6 @@ class ServiceController extends Controller
      */
     public function store(Request $request)
     {
-        // dd($request->all());
-        // dd($request->identity_menus);
-        // for($i=0;$i<count($request->identity_menus);$i++){
-        //     echo $request->identity_menus[$i];
-        // }
-        // die;
-        // $request->validate([
-        //     'service_name' => 'required',
-        //     'file' => 'required',
-        //     'description' => 'required'
-        // ]);
         $app_url = env('APP_URL');
         $service = new Service();
         $service->service_name = $request->service_name;
@@ -114,12 +103,12 @@ class ServiceController extends Controller
                 'message' => 'success',
                 'status' => 200,
                 'data' => $service
-            ]);
+            ],200);
         } else {
             return response()->json([
-                'message' => 'failed',
+                'message' => 'Not found',
                 'status' => 424,
-            ]);
+            ],424);
         }
     }
 
@@ -157,7 +146,7 @@ class ServiceController extends Controller
         $service->service_title = $request->service_title;
         // $service->identity_design_title = $request->identity_design_title;
         $service->identity_design_des = $request->identity_design_des;
-        
+
         $service->content = $request->content;
 
         $service->project_count = $request->project_count;

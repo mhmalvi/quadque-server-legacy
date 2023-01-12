@@ -86,20 +86,12 @@ Vue.component(
     require("./components/admin/service.vue").default
 );
 Vue.component(
-    "service-desktop-component",
-    require("./components/admin/service_desktop.vue").default
-);
-Vue.component(
     "dashboard-component",
     require("./components/admin/dashboard.vue").default
 );
 Vue.component(
     "about-component",
     require("./components/admin/aboutUs.vue").default
-);
-Vue.component(
-    "casestudydesktop-component",
-    require("./components/admin/case_study_desktop.vue").default
 );
 
 // if (location.hostname == "127.0.0.1") {

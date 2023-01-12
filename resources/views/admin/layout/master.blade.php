@@ -45,12 +45,7 @@
                     </li>
 
                     <li class="nav-item">
-                        <a class="nav-link text-white" href="{{ route('admin.casestudy') }}">Case Study for Mobile</a>
-
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link text-white" href="{{ route('admin.casestudydesktop') }}">Case Study for Desktop</a>
-
+                        <a class="nav-link text-white" href="{{ route('admin.casestudy') }}">Case Study</a>
 
                     </li>
 
@@ -60,12 +55,7 @@
 
                     </li>
                     <li class="nav-item ">
-                        <a class="nav-link text-white" href="{{ route('admin.service') }}">Service for mobile</a>
-
-
-                    </li>
-                    <li class="nav-item ">
-                        <a class="nav-link text-white" href="{{ route('admin.service-desktop') }}">Service for desktop</a>
+                        <a class="nav-link text-white" href="{{ route('admin.service') }}">Service</a>
 
 
                     </li>

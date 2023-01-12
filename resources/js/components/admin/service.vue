@@ -15,7 +15,9 @@
         <div class="card">
           <div
             class="card-header text-center"
-            style="height: 47px;background-image: linear-gradient(
+            style="
+              height: 47px;
+              background-image: linear-gradient(
                 to right,
                 rgb(242, 112, 156),
                 rgb(255, 148, 114)
@@ -26,7 +28,7 @@
               class="card-title text-white text-center"
               style="margin-top: 1%"
             >
-              {{ this.is_editing ? "Update Service for mobile" : "Create Service for mobile" }}
+              {{ this.is_editing ? "Update Service" : "Create Service" }}
             </h4>
           </div>
           <div class="card-body">
@@ -58,7 +60,7 @@
                 </div>
               </div>
               <div class="form-group" v-if="this.is_editing">
-                <label for="title">slug</label>
+                <label for="title">Slug</label>
                 <input
                   type="string"
                   class="form-control"
@@ -92,14 +94,6 @@
               </div>
               <div class="form-group">
                 <label for="title">Service Description</label><br />
-
-                <!-- <textarea
-                  v-model="design"
-                  class="form-control summernote"
-                  rows="4"
-
-                  required
-                ></textarea> -->
                 <textarea
                   v-model="description"
                   class="form-control"
@@ -114,10 +108,16 @@
               </div>
               <div class="form-group">
                 <label for="title">Identity Design Description </label>
-                <el-tiptap
+                <textarea
+                  v-model="identity_design_des"
+                  class="form-control"
+                  cols="30"
+                  rows="10"
+                ></textarea>
+                <!-- <el-tiptap
                   v-model="identity_design_des"
                   :extensions="extensions"
-                />
+                /> -->
                 <div class="text-danger" v-if="this.identity_design_desError">
                   {{ this.identity_design_desError }}
                 </div>
@@ -176,7 +176,6 @@
                   ></label
                 >
                 <textarea
-                  @keydown.space.prevent
                   type="text"
                   class="form-control"
                   v-model="service_capability_menu"
@@ -349,13 +348,9 @@ export default {
       happy_clients: "",
       content: "",
       service_capability_menu: "",
-      service_capability_menus: [],
-      identity_menus: [],
       service_deliver_title: "",
       service_deliver_description: "",
       service_title: "",
-      // our_latest_work_title: "",
-
       service_nameError: "",
       descriptionError: "",
       fileError: "",
@@ -373,53 +368,12 @@ export default {
       temporary_id: "",
       is_editing: false,
       temp_thumbnail_url: "",
-      extensions: [
-        new Doc(),
-        new Text(),
-        new Paragraph(),
-        new Heading({ level: 5 }),
-        new Bold({ bubble: true }), // render command-button in bubble menu.
-        new Underline({ bubble: true, menubar: false }), // render command-button in bubble menu but not in menubar.
-        new Italic(),
-        new Strike(),
-        new ListItem(),
-        new BulletList(),
-        new OrderedList(),
-        new Image(),
-        new Iframe(),
-        new TextAlign(),
-        new History(),
-        new Fullscreen(),
-        new FontSize(),
-        new SelectAll(),
-        new Preview(),
-        new Table(),
-        new TableHeader(),
-        new TableCell(),
-        new TableRow(),
-      ],
-      // editorConfig: {
-      // 		toolbar: [
-      // 			[ 'Source' ],
-      // 			[ 'Styles', 'Format', 'Font', 'FontSize' ],
-      // 			[ 'Bold', 'Italic' ],
-      // 			[ 'Undo', 'Redo' ],
-      // 			[ 'About' ]
-      // 		]
-      // 	}
-      // editorSettings: {
-      //   modules: {
-      //     imageDrop: true,
-      //     imageResize: {}
-      //   }
-      // }
-      // blog_no: 1,
     };
   },
   computed: {
     slug() {
-      let data = this.service_name.replace(/\s/g ,"-").toLowerCase();
-      return data.replace(/\//g ,"-")
+      let data = this.service_name.replace(/\s+/g, "-").toLowerCase();
+      return data.replace(/\//g, "-");
     },
   },
   methods: {
@@ -588,7 +542,7 @@ export default {
           console.log(response);
           this.service_name = response.data.service_name;
           // this.file = response.data.file;
-
+          this.service_name = response.data.service_name;
           this.description = response.data.description;
 
           this.identity_design_title = response.data.identity_design_title;
@@ -599,7 +553,8 @@ export default {
 
           this.project_count = response.data.project_count;
           this.happy_clients = response.data.happy_clients;
-
+          this.service_title =
+            response.data.service_title;
           this.services_capabilities_title =
             response.data.services_capabilities_title;
           this.services_capabilities_des =

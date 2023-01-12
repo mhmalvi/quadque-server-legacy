@@ -25,11 +25,7 @@
               style="margin-top: 1%"
               class="card-title text-white text-center"
             >
-              {{
-                this.is_editing
-                  ? "Update Case Study for Mobile View"
-                  : "Create Case Study for Mobile View"
-              }}
+              {{ this.is_editing ? "Update Case Study" : "Create Case Study" }}
             </h4>
           </div>
           <div class="card-body">
@@ -44,6 +40,7 @@
                   class="form-control"
                   id="company_name"
                   v-model="name"
+                  required
                 />
                 <div class="text-danger" v-if="this.nameError">
                   {{ this.nameError }}
@@ -52,15 +49,16 @@
 
               <div class="form-group" v-if="this.is_editing">
                 <label for="company_name">Slug</label>
-                <input                
+                <input
                   type="string"
                   class="form-control"
                   id="company_name"
                   v-model="slug"
+                  required
                 />
-                <div class="text-danger" v-if="this.nameError">
+                <!-- <div class="text-danger" v-if="this.nameError">
                   {{ this.nameError }}
-                </div>
+                </div> -->
               </div>
 
               <div class="form-group">
@@ -70,6 +68,7 @@
                   class="form-control"
                   id="company_image"
                   @change="uploadfile"
+                  required
                 />
                 <div class="text-danger" v-if="this.imageError">
                   {{ this.imageError }}
@@ -79,12 +78,26 @@
                 </p>
               </div>
               <div class="form-group">
+                <label for="company_name">Description</label>
+                <textarea
+                  type="text"
+                  class="form-control"
+                  id="description"
+                  v-model="description"
+                  required
+                ></textarea>
+                <!-- <div class="text-danger" v-if="this.nameError">
+                  {{ this.nameError }}
+                </div> -->
+              </div>
+              <div class="form-group">
                 <label for="company_name">First Summary</label>
                 <textarea
                   type="text"
                   class="form-control"
                   id="summary1"
                   v-model="summary1"
+                  required
                 ></textarea>
                 <!-- <div class="text-danger" v-if="this.nameError">
                   {{ this.nameError }}
@@ -97,6 +110,7 @@
                   class="form-control"
                   id="company_image"
                   @change="group_img"
+                  required
                 />
                 <p class="my-2 text-center" v-if="this.group_images_1_tmp">
                   <img
@@ -105,84 +119,27 @@
                     height="150"
                   />
                 </p>
-                <!-- <input
-                  type="file"
-                  class="form-control"
-                  id="company_image"
-                  @change="group_img_2"
-                />
-                <p class="my-2 text-center" v-if="this.group_images_2_tmp">
-                  <img
-                    :src="this.group_images_2_tmp"
-                    width="150"
-                    height="150"
-                  />
-                </p>
+                <label for="company_image">Desktop Image</label>
                 <input
                   type="file"
                   class="form-control"
-                  id="company_image"
-                  @change="group_img_3"
+                  id="long_banner"
+                  @change="long_image"
                 />
-                <p class="my-2 text-center" v-if="this.group_images_3_tmp">
-                  <img
-                    :src="this.group_images_3_tmp"
-                    width="150"
-                    height="150"
-                  />
+                <p class="my-2 text-center" v-if="this.long_banner_tmp">
+                  <img :src="this.long_banner_tmp" width="150" height="150" />
                 </p>
+                <label for="company_image">Mobile Image</label>
                 <input
                   type="file"
                   class="form-control"
-                  id="company_image"
-                  @change="group_img_4"
+                  id="short_banner"
+                  @change="short_image"
+                  
                 />
-                <p class="my-2 text-center" v-if="this.group_images_4_tmp">
-                  <img
-                    :src="this.group_images_4_tmp"
-                    width="150"
-                    height="150"
-                  />
+                <p class="my-2 text-center" v-if="this.short_banner_tmp">
+                  <img :src="this.short_banner_tmp" width="150" height="150" />
                 </p>
-                <input
-                  type="file"
-                  class="form-control"
-                  id="company_image"
-                  @change="group_img_5"
-                />
-                <p class="my-2 text-center" v-if="this.group_images_5_tmp">
-                  <img
-                    :src="this.group_images_5_tmp"
-                    width="150"
-                    height="150"
-                  />
-                </p>
-                <input
-                  type="file"
-                  class="form-control"
-                  id="company_image"
-                  @change="group_img_6"
-                />
-                <p class="my-2 text-center" v-if="this.group_images_6_tmp">
-                  <img
-                    :src="this.group_images_6_tmp"
-                    width="150"
-                    height="150"
-                  />
-                </p>
-                <input
-                  type="file"
-                  class="form-control"
-                  id="company_image"
-                  @change="group_img_7"
-                />
-                <p class="my-2 text-center" v-if="this.group_images_7_tmp">
-                  <img
-                    :src="this.group_images_7_tmp"
-                    width="150"
-                    height="150"
-                  />
-                </p> -->
               </div>
               <div class="form-group">
                 <label for="company_name">Second Summary</label>
@@ -191,6 +148,7 @@
                   class="form-control"
                   id="summary1"
                   v-model="summary2"
+                  required
                 ></textarea>
                 <!-- <div class="text-danger" v-if="this.nameError">
                   {{ this.nameError }}
@@ -208,19 +166,133 @@
                 </textarea> -->
                 <!-- <vue-editor v-model="content"></vue-editor> -->
               </div>
-
-              <!-- <div
-                class="form-group"
-                id="my-strictly-unique-vue-upload-multiple-image"
-              >
-                <label for="company_image">Agency Multi Images</label>
+              <div class="form-group">
+                <label for="company_name">Our Content Header</label>
+                <input
+                  type="string"
+                  class="form-control"
+                  id="company_name"
+                  v-model="our_content_header"
+                  required
+                />
+              </div>
+              <div class="form-group">
+                <label for="company_name">Our Content First Title</label>
+                <input
+                  type="string"
+                  class="form-control"
+                  id="company_name"
+                  v-model="title_1"
+                  required
+                />
+                <div class="text-danger" v-if="this.title_1_Error">
+                  {{ this.title_1_Error }}
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="company_image">Our Content First Image</label>
                 <input
                   type="file"
                   class="form-control"
                   id="company_image"
-                  @change="agency"
-                  multiple
+                  @change="upload_first_image"
+                  required
                 />
+                <p class="my-2 text-center" v-if="this.image_1_tmp">
+                  <img :src="this.image_1_tmp" width="150" height="150" />
+                </p>
+              </div>
+              <div class="form-group">
+                <label for="company_name">First Description</label>
+                <textarea
+                  type="text"
+                  class="form-control"
+                  id="description"
+                  v-model="description_1"
+                  required
+                ></textarea>
+                <!-- <div class="text-danger" v-if="this.nameError">
+                  {{ this.nameError }}
+                </div> -->
+              </div>
+
+              <div class="form-group">
+                <label for="company_name">Our Content Second Title </label>
+                <input
+                  type="string"
+                  class="form-control"
+                  id="company_name"
+                  v-model="title_2"
+                />
+              </div>
+              <div class="form-group">
+                <label for="company_image">Our Content Second Image</label>
+                <input
+                  type="file"
+                  class="form-control"
+                  id="company_image"
+                  @change="upload_second_image"
+                />
+                <p class="my-2 text-center" v-if="this.image_2_tmp">
+                  <img :src="this.image_2_tmp" width="150" height="150" />
+                </p>
+              </div>
+              <div class="form-group">
+                <label for="company_name">Second Description</label>
+                <textarea
+                  type="text"
+                  class="form-control"
+                  id="description"
+                  v-model="description_2"
+                ></textarea>
+                <!-- <div class="text-danger" v-if="this.nameError">
+                  {{ this.nameError }}
+                </div> -->
+              </div>
+              <div class="form-group">
+                <label for="company_name">Our Content Third Title </label>
+                <input
+                  type="string"
+                  class="form-control"
+                  id="company_name"
+                  v-model="title_3"
+                />
+              </div>
+              <div class="form-group">
+                <label for="company_image">Our Content Third Image</label>
+                <input
+                  type="file"
+                  class="form-control"
+                  id="company_image"
+                  @change="upload_third_image"
+                />
+                <p class="my-2 text-center" v-if="this.image_3_tmp">
+                  <img :src="this.image_3_tmp" width="150" height="150" />
+                </p>
+              </div>
+              <div class="form-group">
+                <label for="company_name">Third Description</label>
+                <textarea
+                  type="text"
+                  class="form-control"
+                  id="description"
+                  v-model="description_3"
+                ></textarea>
+                <!-- <div class="text-danger" v-if="this.nameError">
+                  {{ this.nameError }}
+                </div> -->
+              </div>
+              <!-- <div class="form-group">
+                <label for="company_image">Agency Images</label>
+                <input
+                  type="file"
+                  class="form-control"
+                  id="company_image"
+                  @change="upload_third_image"
+                />
+                <div class="text-danger" v-if="this.imageError">
+                  {{ this.imageError }}
+                </div>
                 <p class="my-2 text-center" v-if="this.temp_image_url">
                   <img :src="this.temp_image_url" width="150" height="150" />
                 </p>
@@ -261,15 +333,15 @@
                   class="btn btn-primary text-white"
                   @click="editList(list.id)"
                 >
-                  Edit</button
-                >
-                <button
+                  Edit
+                </button>
+                <!-- <button
                   type="button"
                   class="btn btn-primary text-white"
                   @click="editList(list.id)"
                 >
-                  view content</button
-                >
+                  view content
+                </button> -->
                 <button
                   type="button"
                   class="btn btn-danger ml-1"
@@ -301,7 +373,8 @@ import VueUploadMultipleImage from "vue-upload-multiple-image";
 export default {
   computed: {
     slug() {
-      return this.name.replace(/\s+/g, "-").toLowerCase();
+      let data = this.name.replace(/\s+/g, "-").toLowerCase();
+      return data.replace(/\//g, "-")
     },
   },
   data() {
@@ -311,27 +384,31 @@ export default {
       loader: "bars",
       lists: [],
       service_lists: [],
-      selected_services: [],
       name: "",
       agency_images: [],
       image: "",
       summary1: "",
       summary2: "",
       group_images: "",
-      group_images_2: "",
-      group_images_3: "",
-      group_images_4: "",
-      group_images_5: "",
-      group_images_6: "",
-      group_images_7: "",
+      long_banner: "",
+      short_banner: "",
       content: "",
+      our_content_header: "",
+      title_1: "",
+      image_1: "",
+      description_1: "",
+      title_2: "",
+      image_2: "",
+      description_2: "",
+      title_3: "",
+      image_3: "",
+      description_3: "",
       group_images_1_tmp: "",
-      group_images_2_tmp: "",
-      group_images_3_tmp: "",
-      group_images_4_tmp: "",
-      group_images_5_tmp: "",
-      group_images_6_tmp: "",
-      group_images_7_tmp: "",
+      image_1_tmp: "",
+      image_2_tmp: "",
+      image_3_tmp: "",
+      long_banner_tmp: "",
+      short_banner_tmp: "",
       nameError: "",
       imageError: "",
       description: "",
@@ -340,6 +417,7 @@ export default {
       temporary_id: "",
       is_editing: false,
       temp_image_url: "",
+      title_1_Error: "",
       // loading: false,
       // return { value: '' }
       // value:''
@@ -353,36 +431,36 @@ export default {
     // Loading,
   },
   methods: {
-    addField(value, fieldType) {
-      fieldType.push({ value: "" });
-    },
-    removeField(index, fieldType) {
-      fieldType.splice(index, 1);
-    },
+    // addField(value, fieldType) {
+    //   fieldType.push({ value: "" });
+    // },
+    // removeField(index, fieldType) {
+    //   fieldType.splice(index, 1);
+    // },
     group_img(e) {
       this.group_images = e.target.files[0];
       this.group_images_1_tmp = "";
     },
-    // group_img_2(e) {
-    //   this.group_images_2 = e.target.files[0];
-    //   this.group_images_2_tmp = "";
-    // },
-    // group_img_3(e) {
-    //   this.group_images_3 = e.target.files[0];
-    //   this.group_images_3_tmp = "";
-    // },
-    // group_img_4(e) {
-    //   this.group_images_4 = e.target.files[0];
-    //   this.group_images_4_tmp = "";
-    // },
-    // group_img_5(e) {
-    //   this.group_images_5 = e.target.files[0];
-    //   this.group_images_5_tmp = "";
-    // },
-    // group_img_6(e) {
-    //   this.group_images_6 = e.target.files[0];
-    //   this.group_images_6_tmp = "";
-    // },
+    upload_first_image(e) {
+      this.image_1 = e.target.files[0];
+      this.image_1_tmp = "";
+    },
+    upload_second_image(e) {
+      this.image_2 = e.target.files[0];
+      this.image_2_tmp = "";
+    },
+    upload_third_image(e) {
+      this.image_3 = e.target.files[0];
+      this.image_3_tmp = "";
+    },
+    long_image(e) {
+      this.long_banner = e.target.files[0];
+      this.long_banner_tmp = "";
+    },
+    short_image(e) {
+      this.short_banner = e.target.files[0];
+      this.short_banner_tmp = "";
+    },
     // group_img_7(e) {
     //   this.group_images_7 = e.target.files[0];
     //   this.group_images_7_tmp = "";
@@ -393,12 +471,27 @@ export default {
       this.image = "";
       this.summary1 = "";
       this.summary2 = "";
+      this.long_banner = "";
+      this.short_banner = "";
       this.content = "";
-      this.content="",
-      this.temp_image_url = "";
-
-      this.group_images = "";
+      (this.our_content_header = ""),
+        (this.title_1 = ""),
+        (this.image_1 = ""),
+        (this.description_1 = ""),
+        (this.title_2 = ""),
+        (this.image_2 = ""),
+        (this.description_2 = ""),
+        (this.title_3 = ""),
+        (this.image_3 = ""),
+        (this.description_3 = ""),
+        (this.temp_image_url = "");
+      (this.image_1_tmp = ""),
+        (this.image_2_tmp = ""),
+        (this.image_3_tmp = ""),
+        (this.group_images = "");
       this.group_images_1_tmp = "";
+      this.long_banner_tmp = ""
+      this.short_banner_tmp=""
       document.getElementById("image").value = "";
       document.getElementById("group_images").value = "";
       $(".summernote").summernote("code", "");
@@ -451,16 +544,21 @@ export default {
       fd.append("summary1", this.summary1);
       fd.append("summary2", this.summary2);
       fd.append("slug", this.slug);
-      // for (let i = 0; i < this.agency_images.length; i++) {
-      //   fd.append("agency_images[]", this.agency_images[i]);
-      // }
-      // for (let j = 0; j < this.selected_services.length; j++) {
-      //   fd.append("selected_services[]", this.selected_services[j]);
-      // }
-      // fd.append("group_images", this.gr_images);
+      fd.append("description", this.description);
       fd.append("content", this.content);
       fd.append("group_images", this.group_images);
-
+      fd.append("long_banner", this.long_banner);
+      fd.append("short_banner", this.short_banner);
+      fd.append("our_content_header", this.our_content_header);
+      fd.append("title_1", this.title_1);
+      fd.append("image_1", this.image_1);
+      fd.append("description_1", this.description_1);
+      fd.append("title_2", this.title_2);
+      fd.append("image_2", this.image_2);
+      fd.append("description_2", this.description_2);
+      fd.append("title_3", this.title_3);
+      fd.append("image_3", this.image_3);
+      fd.append("description_3", this.description_3);
       fd.append("image", this.image);
       fd.append("id", this.temporary_id);
       console.log(fd);
@@ -480,11 +578,19 @@ export default {
             this.summary2 = "";
             this.content = "";
             this.group_images = "";
-
-            $(".summernote").summernote("code", "");
-            this.temp_image_url = "";
-            this.temporary_id = "";
-            event.target.reset();
+            (this.long_banner = ""),
+              (this.short_banner = ""),
+              (this.our_content_header = ""),
+              (this.title_1 = ""),
+              (this.image_1 = ""),
+              (this.description_1 = ""),
+              (this.title_2 = ""),
+              (this.image_2 = ""),
+              (this.description_2 = ""),
+              (this.title_3 = ""),
+              (this.image_3 = ""),
+              (this.description_3 = ""),
+              (this.temp_image_url = "");
             this.$swal.fire({
               // position: "top-end",
               icon: "success",
@@ -493,6 +599,12 @@ export default {
               // timer: 1500,
             });
             document.getElementById("image").value = "";
+            document.getElementById("group_images").value = "";
+            $(".summernote").summernote("code", "");
+            this.temp_image_url = "";
+            this.temporary_id = "";
+            event.target.reset();
+
             this.isLoading = false;
           } else if (response.data.success == "updated") {
             this.is_editing = true;
@@ -540,6 +652,18 @@ export default {
           this.summary1 = response.data.summary1;
           this.summary2 = response.data.summary2;
           this.content = response.data.content;
+          this.our_content_header = response.data.our_content_header;
+          this.title_1 = response.data.title_1;
+          this.title_2 = response.data.title_2;
+          this.title_3 = response.data.title_3;
+          this.description_1 = response.data.description_1;
+          this.description_2 = response.data.description_2;
+          this.description_3 = response.data.description_3;
+          this.long_banner_tmp = response.data.long_banner;
+          this.short_banner_tmp = response.data.short_banner;
+          this.image_1_tmp = response.data.image_1;
+          this.image_2_tmp = response.data.image_2;
+          this.image_3_tmp = response.data.image_3;
           $(".summernote").summernote("code", this.content);
           // $(".summernote").summernote("code", this.second_content);
           this.group_images_1_tmp = response.data.group_images;

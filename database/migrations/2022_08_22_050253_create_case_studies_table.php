@@ -18,20 +18,24 @@ class CreateCaseStudiesTable extends Migration
             $table->string('com_name');
             $table->string('com_image');
             $table->string('description');
+            $table->text('slug');
             $table->text('summary1');
-            $table->string('group_images_1');
-            $table->string('group_images_2');
-            $table->string('group_images_3');
-            $table->string('group_images_4');
-            $table->string('group_images_5');
-            $table->string('group_images_6');
-            $table->string('group_images_7');
-            $table->string('img1');
+            $table->string('group_images');
+            $table->string('long_banner')->nullable();
+            $table->string('short_banner')->nullable();
             $table->text('summary2');
-            //////////content 1
             $table->longText('content');
-            ///////////agency
-            $table->string('agency');
+            $table->text('our_content_header');
+            $table->text('title_1');
+            $table->string('image_1');
+            $table->text('description_1');
+            $table->text('title_2')->nullable();
+            $table->string('image_2')->nullable();
+            $table->text('description_2')->nullable();
+            $table->text('title_3')->nullable();
+            $table->string('image_3')->nullable();
+            $table->text('description_3')->nullable();
+            $table->string('agency')->nullable();
             $table->timestamps();
         });
     }

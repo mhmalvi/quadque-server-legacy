@@ -23,12 +23,12 @@ class CaseStudyApiController extends Controller
                 'status' => 200,
                 'message' => 'success',
                 'data' => $case_study
-            ]);
+            ], 200);
         } else {
             return response()->json([
                 'status' => 424,
-                'message' => 'failed',
-            ]);
+                'message' => 'Not found',
+            ],424);
         }
     }
 
@@ -84,7 +84,8 @@ class CaseStudyApiController extends Controller
      */
     public function show($slug)
     {
-        $case_study = CaseStudy::where('slug', $slug);
+        // dd($slug);
+        $case_study = CaseStudy::where('slug', $slug)->first();
         if ($case_study) {
             return response()->json([
                 'message' => 'success',
@@ -93,7 +94,7 @@ class CaseStudyApiController extends Controller
             ], 200);
         } else {
             return response()->json([
-                'message' => 'failed',
+                'message' => 'Not found',
                 'status' => 424,
             ], 424);
         }
@@ -131,7 +132,7 @@ class CaseStudyApiController extends Controller
         //     'name' => 'required',
         //     'image' => 'required|image'
         // ]);
-        
+
         $case_study = CaseStudy::find($id);
         $app_url = env('APP_URL');
         $case_study->com_name = $request->name;
