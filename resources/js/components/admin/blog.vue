@@ -100,12 +100,11 @@
               </div>
               <div class="form-group">
                 <label for="title">Blog Short Description</label>
-                <input
-                  type="text"
+                <textarea
                   v-model="short_description"
                   class="form-control"
                   
-                />
+                ></textarea>
                 <!-- <div class="text-danger" v-if="this.titleError">
                   {{ this.titleError }}
                 </div> -->

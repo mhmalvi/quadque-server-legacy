@@ -48,13 +48,13 @@
               </div>
               <div class="form-group">
                 <label for="title">Service Short Description</label>
-                <input
+                <textarea
                   type="text"
                   class="form-control"
                   v-model="service_short_description"
                   placeholder="Enter service short description"
                   required
-                />
+                ></textarea>
                 <div class="text-danger" v-if="this.service_nameError">
                   {{ this.service_nameError }}
                 </div>
