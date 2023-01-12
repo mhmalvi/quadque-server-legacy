@@ -22,7 +22,7 @@ class BlogController extends Controller
     {
 
         return Blog::orderBy('id', 'DESC')->get();
-        
+
         // dd($blogs);
         // $moreblogs = '';
         // foreach ($blogs as $blog) {
@@ -109,11 +109,11 @@ class BlogController extends Controller
     {
         // dd($request->all());
         //validation input
-        $request->validate([
-            'title' => 'required',
-            'text' => 'required',
-            'thumbnail' => 'required|image'
-        ]);
+        // $request->validate([
+        //     'title' => 'required',
+        //     'text' => 'required',
+        //     'thumbnail' => 'required|image'
+        // ]);
 
         $app_url = env('APP_URL');
         if ($request->thumbnail) {
@@ -129,7 +129,11 @@ class BlogController extends Controller
             'title' => $request->title,
             'text' => $request->text,
             'thumbnail' => $file_path,
-            'slug' => $slug
+            'slug' => $slug,
+            'meta_keyword' => $request->meta_keyword,
+            'short_description' => $request->short_description,
+            'author' => $request->author
+
         ]);
 
         if ($save) {
@@ -173,7 +177,7 @@ class BlogController extends Controller
      * @param  \App\Models\Blog  $blog
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Blog $blog)
+    public function update(Request $request)
     {
         //validation input
         $request->validate([
@@ -181,13 +185,17 @@ class BlogController extends Controller
             'text' => 'required',
             // 'thumbnail' => 'required|image'
         ]);
-
+        // dd($request->id);
         $blog = Blog::find($request->id);
-
+        // dd($request->all());
         $blog->title = $request->title;
         $blog->text = $request->text;
         $blog->slug = $request->slug;
+        $blog->meta_keyword = $request->meta_keyword;
+        $blog->short_description = $request->short_description;
+        $blog->author = $request->author;
         $app_url = env('APP_URL');
+        // dd($request->thumbnail);
         if ($request->thumbnail) {
 
             $fileName = time() . '.' . $request->thumbnail->getClientOriginalExtension();

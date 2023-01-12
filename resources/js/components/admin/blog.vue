@@ -15,7 +15,8 @@
         <div class="card">
           <div
             class="card-header"
-            style="              height: 47px;
+            style="
+              height: 47px;
               background-image: linear-gradient(
                 to right,
                 rgb(242, 112, 156),
@@ -31,7 +32,7 @@
             </h4>
           </div>
           <div class="card-body">
-            <form>
+            <form @submit.prevent="save">
               <div class="form-group">
                 <label for="title">Blog Title</label>
                 <input v-model="title" class="form-control" />
@@ -45,7 +46,12 @@
               </div>
               <div v-if="this.is_editing" class="form-group">
                 <label for="title">Slug</label>
-                <input type="string" v-model="slug" value="title" class="form-control" />
+                <input
+                  type="string"
+                  v-model="slug"
+                  value="title"
+                  class="form-control"
+                />
                 <!-- <div class="text-danger" v-if="this.titleError">
                   {{ this.titleError }}
                 </div> -->
@@ -83,23 +89,30 @@
                   {{ this.textError }}
                 </div>
               </div>
-              
+
               <div class="form-group">
                 <label for="title">Blog Meta Keyword</label>
-                <input type="text" v-model="meta_keyword" class="form-control" />
+                <input
+                  type="text"
+                  v-model="meta_keyword"
+                  class="form-control"
+                />
               </div>
               <div class="form-group">
                 <label for="title">Blog Short Description</label>
-                <input type="text" v-model="short_description" class="form-control" />
+                <input
+                  type="text"
+                  v-model="short_description"
+                  class="form-control"
+                />
                 <!-- <div class="text-danger" v-if="this.titleError">
                   {{ this.titleError }}
                 </div> -->
               </div>
               <div>
                 <button
-                  type="button"
+                  type="submit"
                   class="btn btn-block btn-save text-white"
-                  @click="save"
                 >
                   {{ this.is_editing ? "Update" : "Save" }}
                 </button>
@@ -189,7 +202,7 @@ export default {
   // components: {
   //   'el-tiptap': ElementTiptap,
   // },
-  
+
   data() {
     return {
       lists: [],
@@ -204,6 +217,10 @@ export default {
       is_editing: false,
       temp_thumbnail_url: "",
       blog_no: 1,
+      author: "",
+      meta_keyword: "",
+      short_description: "",
+
       // slug:""
 
       // extensions: [
@@ -223,10 +240,14 @@ export default {
     };
   },
   computed: {
-        slug(){
-            return this.title.replace(/\s+/g, '-').toLowerCase();
-        }
+    slug() {
+      // return this.title.replace(/\s+/g, '-').toLowerCase();
+
+      let data = this.title.replace(/\s+/g, "-").toLowerCase();
+      let datas = data.replace(/\/+/g, "-");
+      return datas.replace(/\?+/g, " ");
     },
+  },
   methods: {
     disable_button() {
       this.is_editing = false;
@@ -265,6 +286,10 @@ export default {
       fd.append("thumbnail", this.thumbnail);
       fd.append("id", this.temporary_id);
       fd.append("slug", this.slug);
+      fd.append("meta_keyword", this.meta_keyword);
+      fd.append("short_description", this.short_description);
+      fd.append("author", this.author);
+      fd.append("id", this.temporary_id);
       axios
         .post(url, fd)
         .then((response) => {
@@ -274,7 +299,7 @@ export default {
             this.title = "";
             this.text = "";
             $(".summernote").summernote("code", this.text);
-            document.getElementById("thumbnail").value = "";
+            // document.getElementById("thumbnail").value = "";
             this.temporary_id = "";
             this.temp_thumbnail_url = "";
             this.$swal.fire({
@@ -329,8 +354,14 @@ export default {
       axios
         .get(`/admin/blog/edit/${this.temporary_id}`)
         .then((response) => {
+          // console.log(response)
           this.title = response.data.title;
           this.text = response.data.text;
+          this.author = response.data.author;
+          this.short_description = response.data.short_description;
+          this.meta_keyword = response.data.meta_keyword;
+          this.slug = response.data.slug;
+          // this.thumbnail = response.data.thumbnail;
           // this.slug=response.data.slug
           // this.thumbnail = response.data.thumbnail;
           $(".summernote").summernote("code", this.text);
