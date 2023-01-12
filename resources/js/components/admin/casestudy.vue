@@ -371,7 +371,8 @@ export default {
   computed: {
     slug() {
       let data = this.name.replace(/\s+/g, "-").toLowerCase();
-      return data.replace(/\//g, "-")
+      let datas = data.replace(/\s+/g, "-")
+      return datas.replace(/\?+/g, " ")
     },
   },
   data() {

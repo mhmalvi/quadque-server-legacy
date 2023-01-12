@@ -15,9 +15,7 @@
         <div class="card">
           <div
             class="card-header text-center"
-            style="
-              height: 47px;
-              background-image: linear-gradient(
+            style="height: 47px;background-image: linear-gradient(
                 to right,
                 rgb(242, 112, 156),
                 rgb(255, 148, 114)
