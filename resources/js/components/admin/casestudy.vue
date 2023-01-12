@@ -66,7 +66,6 @@
                 <input
                   type="file"
                   class="form-control"
-                  id="company_image"
                   @change="uploadfile"
                 />
                 <div class="text-danger" v-if="this.imageError">
@@ -103,11 +102,10 @@
                 </div> -->
               </div>
               <div class="form-group">
-                <label for="company_image">Group Images</label>
+                <label for="group_img">Group Images</label>
                 <input
                   type="file"
                   class="form-control"
-                  id="company_image"
                   @change="group_img"
                 />
                 <p class="my-2 text-center" v-if="this.group_images_1_tmp">
@@ -117,21 +115,24 @@
                     height="150"
                   />
                 </p>
-                <label for="company_image">Desktop Image</label>
+                
+              </div>
+              <div class="form-group">
+                <label for="long_image">Desktop Image</label>
                 <input
                   type="file"
                   class="form-control"
-                  id="long_banner"
                   @change="long_image"
                 />
                 <p class="my-2 text-center" v-if="this.long_banner_tmp">
                   <img :src="this.long_banner_tmp" width="150" height="150" />
                 </p>
-                <label for="company_image">Mobile Image</label>
+              </div>
+              <div class="form-group">
+                <label for="short_image">Mobile Image</label>
                 <input
                   type="file"
                   class="form-control"
-                  id="short_banner"
                   @change="short_image"
                   
                 />
@@ -188,11 +189,10 @@
                 </div>
               </div>
               <div class="form-group">
-                <label for="company_image">Our Content First Image</label>
+                <label for="upload_first_image">Our Content First Image</label>
                 <input
                   type="file"
                   class="form-control"
-                  id="company_image"
                   @change="upload_first_image"
                 />
                 <p class="my-2 text-center" v-if="this.image_1_tmp">
@@ -223,11 +223,10 @@
                 />
               </div>
               <div class="form-group">
-                <label for="company_image">Our Content Second Image</label>
+                <label for="upload_second_image">Our Content Second Image</label>
                 <input
                   type="file"
                   class="form-control"
-                  id="company_image"
                   @change="upload_second_image"
                 />
                 <p class="my-2 text-center" v-if="this.image_2_tmp">
@@ -256,11 +255,10 @@
                 />
               </div>
               <div class="form-group">
-                <label for="company_image">Our Content Third Image</label>
+                <label for="upload_third_image">Our Content Third Image</label>
                 <input
                   type="file"
                   class="form-control"
-                  id="company_image"
                   @change="upload_third_image"
                 />
                 <p class="my-2 text-center" v-if="this.image_3_tmp">
@@ -389,7 +387,7 @@ export default {
       summary2: "",
       group_images: "",
       long_banner: "",
-      short_banner: "",
+      short_banner_img: "",
       content: "",
       our_content_header: "",
       title_1: "",
@@ -456,7 +454,7 @@ export default {
       this.long_banner_tmp = "";
     },
     short_image(e) {
-      this.short_banner = e.target.files[0];
+      this.short_banner_img = e.target.files[0];
       this.short_banner_tmp = "";
     },
     // group_img_7(e) {
@@ -470,7 +468,7 @@ export default {
       this.summary1 = "";
       this.summary2 = "";
       this.long_banner = "";
-      this.short_banner = "";
+      this.short_banner_img = "";
       this.content = "";
       (this.our_content_header = ""),
         (this.title_1 = ""),
@@ -546,7 +544,7 @@ export default {
       fd.append("content", this.content);
       fd.append("group_images", this.group_images);
       fd.append("long_banner", this.long_banner);
-      fd.append("short_banner", this.short_banner);
+      fd.append("short_banner", this.short_banner_img);
       fd.append("our_content_header", this.our_content_header);
       fd.append("title_1", this.title_1);
       fd.append("image_1", this.image_1);
@@ -577,7 +575,7 @@ export default {
             this.content = "";
             this.group_images = "";
             (this.long_banner = ""),
-              (this.short_banner = ""),
+              (this.short_banner_img = ""),
               (this.our_content_header = ""),
               (this.title_1 = ""),
               (this.image_1 = ""),
