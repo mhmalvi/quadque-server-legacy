@@ -55,8 +55,8 @@
                   placeholder="Enter service title"
                   required
                 />
-                <div class="text-danger" v-if="this.service_nameError">
-                  {{ this.service_nameError }}
+                <div class="text-danger" v-if="this.service_titleError">
+                  {{ this.service_titleError }}
                 </div>
               </div>
               <div class="form-group" v-if="this.is_editing">

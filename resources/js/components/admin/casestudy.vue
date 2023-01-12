@@ -68,7 +68,6 @@
                   class="form-control"
                   id="company_image"
                   @change="uploadfile"
-                  required
                 />
                 <div class="text-danger" v-if="this.imageError">
                   {{ this.imageError }}
@@ -110,7 +109,6 @@
                   class="form-control"
                   id="company_image"
                   @change="group_img"
-                  required
                 />
                 <p class="my-2 text-center" v-if="this.group_images_1_tmp">
                   <img
@@ -196,7 +194,6 @@
                   class="form-control"
                   id="company_image"
                   @change="upload_first_image"
-                  required
                 />
                 <p class="my-2 text-center" v-if="this.image_1_tmp">
                   <img :src="this.image_1_tmp" width="150" height="150" />
@@ -652,6 +649,7 @@ export default {
           this.summary1 = response.data.summary1;
           this.summary2 = response.data.summary2;
           this.content = response.data.content;
+          this.description = response.data.description;
           this.our_content_header = response.data.our_content_header;
           this.title_1 = response.data.title_1;
           this.title_2 = response.data.title_2;
