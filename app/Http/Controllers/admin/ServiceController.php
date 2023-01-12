@@ -80,12 +80,14 @@ class ServiceController extends Controller
             $service->file = $file_path;
         }
 
-        $slug = Str::slug($request->title, '-');
+        $slug = Str::slug($request->service_name, '-');
         $service->slug = $slug;
         $save = $service->save();
 
         if ($save) {
-            return response()->json(['success' => 'created']);
+            return response()->json(['success' => 'created'],200);
+        }else{
+            return response()->json(['message' => 'failed'], 402);
         }
     }
 
@@ -169,7 +171,9 @@ class ServiceController extends Controller
         $update = $service->save();
 
         if ($update) {
-            return response()->json(['success' => 'updated']);
+            return response()->json(['success' => 'updated'],200);
+        }else{
+            return response()->json(['message' => 'failed'], 402);
         }
     }
 
