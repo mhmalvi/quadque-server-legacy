@@ -195,7 +195,7 @@ class CaseStudyController extends Controller
 
             $fileName = time() . '.' . $request->image_2->getClientOriginalExtension();
             $request->image_2->move(public_path('assets/img/case_study/image_2'), $fileName);
-            $file_path = $app_url . ":8000/assets/img/case_study//image_2" . $fileName;
+            $file_path = $app_url . ":8000/assets/img/case_study//image_2/" . $fileName;
             $case_study->image_2 = $file_path;
         }
 

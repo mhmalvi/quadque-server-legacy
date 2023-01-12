@@ -396,18 +396,21 @@ export default {
       this.service_name = "";
       this.description = "";
       this.file = "";
+      this.identity_design_title = "",
+        this.service_short_description = ""
+      this.identity_design_des = "",
+      this.project_count = "",
+      this.happy_clients = "",
+      this.content = "",
+      this.service_capability_menu = "",
+      this.service_deliver_title = "",
+      this.service_deliver_description = "",
+      this.temp_thumbnail_url = "";
+      this.service_title = "";
+      document.getElementById('thumbnail').value = ""
       $(".summernote").summernote("code", "");
 
-      (this.identity_design_title = ""),
-        (this.service_short_description = ""((this.identity_design_des = ""))),
-        (this.project_count = ""),
-        (this.happy_clients = ""),
-        (this.content = ""),
-        (this.service_capability_menu = ""),
-        (this.service_deliver_title = ""),
-        (this.service_deliver_description = ""),
-        (this.temp_thumbnail_url = "");
-      this.service_title = "";
+      
     },
     fetchAll() {
       // console.log("fetch");

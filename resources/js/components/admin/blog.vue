@@ -255,6 +255,10 @@ export default {
       this.text = "";
       this.thumbnail = "";
       this.temp_thumbnail_url = "";
+      this.author = ""
+      this.meta_keyword = ""
+      this.short_description = ""
+      
       $(".summernote").summernote("code", "");
     },
     fetchAll() {
