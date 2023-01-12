@@ -31,7 +31,7 @@ class StartProject extends Mailable
         $this->phone = $phone;
         $this->category = $category;
         $this->sub_categories = $sub_categories;
-        // ddd($this->sub_categories);
+        // dd($this->sub_categories);
         $this->help = $help;
         // return $data=[
         //     'email'=> $email,

@@ -20,9 +20,9 @@
         <p>Sub Categories:</p><br>
 
         <ol>
-            @foreach($sub_categories as $sub_category)
-            <li>{{ $sub_category }}</li>
-            @endforeach
+            {{-- @foreach($sub_categories as $sub_category) --}}
+            <li>{{ $sub_categories}}</li>
+            {{-- @endforeach --}}
 
         </ol>
 
