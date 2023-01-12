@@ -52,7 +52,7 @@
                   type="text"
                   class="form-control"
                   v-model="service_short_description"
-                  placeholder="Enter service name"
+                  placeholder="Enter service short description"
                   required
                 />
                 <div class="text-danger" v-if="this.service_nameError">
