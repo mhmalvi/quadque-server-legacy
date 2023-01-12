@@ -35,14 +35,14 @@
             <form @submit.prevent="save">
               <div class="form-group">
                 <label for="title">Blog Title</label>
-                <input v-model="title" class="form-control" />
+                <input v-model="title" class="form-control" required/>
                 <div class="text-danger" v-if="this.titleError">
                   {{ this.titleError }}
                 </div>
               </div>
               <div class="form-group">
                 <label for="title">Blog Author</label>
-                <input type="text" v-model="author" class="form-control" />
+                <input type="text" v-model="author" class="form-control" required/>
               </div>
               <div v-if="this.is_editing" class="form-group">
                 <label for="title">Slug</label>
@@ -104,6 +104,7 @@
                   type="text"
                   v-model="short_description"
                   class="form-control"
+                  
                 />
                 <!-- <div class="text-danger" v-if="this.titleError">
                   {{ this.titleError }}
