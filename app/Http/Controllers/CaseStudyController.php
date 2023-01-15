@@ -217,10 +217,6 @@ class CaseStudyController extends Controller
         
 
         $save = $case_study->save();
-        // $file_path=[];        
-
-
-
         if ($save) {
             return response()->json(['success' => 'created']);
         }

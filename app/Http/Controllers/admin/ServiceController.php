@@ -83,15 +83,21 @@ class ServiceController extends Controller
 
         $agency_img = [];
         // if ($request->hasfile('agency')) {
-            dd($request->file('agency'));
-            foreach ($request->file('agency') as $imagefile) {
-                $name = time() . rand(1, 50) . '.' . $imagefile->extension();
-                $imagefile->move(public_path('assets/img/services/agency'), $name);
-            $agency_img[] = $name;
-            }
+            // dd($request->agency);
+            // for($i=0;$i<count($request->agency);$i++){
+            //     echo $request->agency[$i];
+            // }
+            // die;
+            // $agency=implode(',',$request->agency);
+            // dd($agency);
+            // foreach ($request->file('agency') as $imagefile) {
+            //     $name = time() . rand(1, 50) . '.' . $imagefile->extension();
+            //     $imagefile->move(public_path('assets/img/services/agency'), $name);
+            // $agency_img[] = $name;
+            // }
         // }
         // dd($agency);
-        $service->agency = $agency_img;
+        // $service->agency = $agency_img;
 
         $slug = Str::slug($request->service_name, '-');
         $service->slug = $slug;
@@ -159,6 +165,7 @@ class ServiceController extends Controller
         // dd("hello");
         $service->service_name = $request->service_name;
         $service->description = $request->description;
+        // dd($request->service_short_description);
         $service->short_description = $request->service_short_description;
         $service->service_title = $request->service_title;
         // $service->identity_design_title = $request->identity_design_title;
