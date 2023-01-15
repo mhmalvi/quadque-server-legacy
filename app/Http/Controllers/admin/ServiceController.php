@@ -93,7 +93,7 @@ class ServiceController extends Controller
             foreach ($request->file('agency') as $imagefile) {
                 $name = time() . rand(1, 50) . '.' . $imagefile->extension();
                 $imagefile->move(public_path('assets/img/services/agency'), $name);
-                $file_path = $app_url . ":8000/assets/img/services/agency/" . $fileName;
+                $file_path = $app_url . ":8000/assets/img/services/agency/" . $name;
                 $agency_img[] = $file_path;
                 $service->agency = $agency_img;
             }
