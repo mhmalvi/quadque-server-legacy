@@ -82,30 +82,32 @@ class ServiceController extends Controller
         }
 
         $agency_img = [];
-        // if ($request->hasfile('agency')) {
+        if ($request->hasfile('agency')) {
             // dd($request->agency);
-            // for($i=0;$i<count($request->agency);$i++){
-            //     echo $request->agency[$i];
+            // foreach($request->file('agency') as $file){
+            //     echo $file;
             // }
             // die;
             // $agency=implode(',',$request->agency);
             // dd($agency);
-            // foreach ($request->file('agency') as $imagefile) {
-            //     $name = time() . rand(1, 50) . '.' . $imagefile->extension();
-            //     $imagefile->move(public_path('assets/img/services/agency'), $name);
-            // $agency_img[] = $name;
-            // }
-        // }
-        // dd($agency);
-        // $service->agency = $agency_img;
+            foreach ($request->file('agency') as $imagefile) {
+                $name = time() . rand(1, 50) . '.' . $imagefile->extension();
+                $imagefile->move(public_path('assets/img/services/agency'), $name);
+                $file_path = $app_url . ":8000/assets/img/services/agency/" . $fileName;
+                $agency_img[] = $file_path;
+                $service->agency = $agency_img;
+            }
+        }
+        $file=implode(',', $service->agency);
+        $service->agency=$file;
 
         $slug = Str::slug($request->service_name, '-');
         $service->slug = $slug;
         $save = $service->save();
 
         if ($save) {
-            return response()->json(['success' => 'created'],200);
-        }else{
+            return response()->json(['success' => 'created'], 200);
+        } else {
             return response()->json(['message' => 'failed'], 402);
         }
     }
@@ -124,12 +126,12 @@ class ServiceController extends Controller
                 'message' => 'success',
                 'status' => 200,
                 'data' => $service
-            ],200);
+            ], 200);
         } else {
             return response()->json([
                 'message' => 'Not found',
                 'status' => 424,
-            ],424);
+            ], 424);
         }
     }
 
@@ -157,7 +159,7 @@ class ServiceController extends Controller
         $request->validate([
             'service_name' => 'required',
             'description' => 'required',
-            'service_title'=>'required'
+            'service_title' => 'required'
             // 'file' => 'required'
         ]);
         $app_url = env('APP_URL');
@@ -193,8 +195,8 @@ class ServiceController extends Controller
         $update = $service->save();
 
         if ($update) {
-            return response()->json(['success' => 'updated'],200);
-        }else{
+            return response()->json(['success' => 'updated'], 200);
+        } else {
             return response()->json(['message' => 'failed'], 402);
         }
     }
