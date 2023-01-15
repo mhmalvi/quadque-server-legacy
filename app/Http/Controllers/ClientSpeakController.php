@@ -128,7 +128,7 @@ class ClientSpeakController extends Controller
     public function update(Request $request)
     {
         $client_speak = ClientSpeak::find($request->id);
-        // dd($request);
+        // dd($request->description);
         $client_speak->name = $request->name;
         $client_speak->designation = $request->designation;
         $client_speak->description = $request->description;

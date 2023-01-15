@@ -242,7 +242,7 @@ export default {
         url = `/admin/client-speak/store`;
       }
 
-      // this.description = $("#summernote").summernote("code");
+      this.description = $("#summernote").summernote("code");
       let fd = new FormData();
       fd.append("name", this.name);
       fd.append("designation", this.designation);
@@ -266,7 +266,7 @@ export default {
             this.name = "";
             this.description = "";
             this.designation = "";
-            // $("#summernote").summernote("code", this.description);
+            $("#summernote").summernote("code", this.description);
             document.getElementById("image").value = "";
             this.temporary_id = "";
             this.temp_thumbnail_url = "";
@@ -331,7 +331,7 @@ export default {
           this.designation = response.data.designation;
           this.description = response.data.description;
           $("#summernote").summernote("code", this.description);
-          this.temp_thumbnail_url = response.data.file;
+          this.temp_thumbnail_url = response.data.image;
         })
         .catch((error) => {});
     },
