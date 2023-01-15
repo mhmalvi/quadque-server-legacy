@@ -4,7 +4,6 @@
       <loading :active="isLoading" :is-full-page="fullPage" :loader="loader" />
     </div> -->
     <div class="row d-flex justify-content-center">
-      
       <div
         v-if="this.is_editing == true"
         @click="disable_button()"
@@ -43,6 +42,7 @@
                   type="text"
                   class="form-control"
                   v-model="service_name"
+                  @change="get_slug"
                   placeholder="Enter service name"
                   required
                 />
@@ -77,7 +77,14 @@
                 </div> -->
               </div>
               <div class="form-group" v-if="this.is_editing">
-                <label for="title">Slug</label>
+                <label for="title">Slug</label
+                ><input
+                  @click="get_slug"
+                  class="ml-4"
+                  type="checkbox"
+                  v-model="checked"
+                />
+                based on service name
                 <input
                   type="string"
                   class="form-control"
@@ -89,6 +96,7 @@
                   {{ this.service_nameError }}
                 </div> -->
               </div>
+
               <div class="form-group">
                 <label for="thumbnail">Service File</label>
                 <input
@@ -245,15 +253,10 @@
                   type="file"
                   class="form-control"
                   id="thumbnail"
-                  
                   @change="agencyFiles"
                 />
                 <p class="my-2 text-center" v-if="this.agency_img_tmp">
-                  <img
-                    :src="this.agency_img_tmp"
-                    width="150"
-                    height="150"
-                  />
+                  <img :src="this.agency_img_tmp" width="150" height="150" />
                 </p>
               </div>
 
@@ -303,8 +306,7 @@
 
               <td>
                 <!-- {{ image[index] }} -->
-                <img width="150"
-                    height="150" :src="list.agency" alt="">
+                <img width="150" height="150" :src="list.agency" alt="" />
               </td>
               <td style="vertical-align: middle; width: 15%; color: white">
                 <button
@@ -340,7 +342,7 @@ import axios from "axios";
 import Loading from "vue-loading-overlay";
 export default {
   // name:"service-component",
-   components: {
+  components: {
     // 'lottie': Lottie
     Loading,
   },
@@ -348,7 +350,7 @@ export default {
     return {
       lists: [],
       service_name: "",
-      agency:"",
+      agency: "",
       file: "",
       description: "",
       isLoading: true,
@@ -381,18 +383,20 @@ export default {
       is_editing: false,
       service_short_description: "",
       temp_thumbnail_url: "",
+      slug: "",
+      checked: false,
+      agency_img_tmp:""
       // agency_img: [],
       // multi_img: "",
       // multiple_img:""
-      
     };
   },
-  computed: {
-    slug() {
-      let data = this.service_name.replace(/\s+/g, "-").toLowerCase();
-      return data.replace(/\//g, "-");
-    },
-  },
+  // computed: {
+  //   slug() {
+  //     let data = this.service_name.replace(/\s+/g, "-").toLowerCase();
+  //       return data.replace(/\//g, "-");
+  //     }
+  // },
   methods: {
     agencyFiles(e) {
       this.agency = e.target.files[0];
@@ -403,22 +407,30 @@ export default {
       this.service_name = "";
       this.description = "";
       this.file = "";
-      this.identity_design_title = "",
-        this.service_short_description = ""
-        this.agency_img_tmp=""
-      this.identity_design_des = "",
-      this.project_count = "",
-      this.happy_clients = "",
-      this.content = "",
-      this.service_capability_menu = "",
-      this.service_deliver_title = "",
-      this.service_deliver_description = "",
-      this.temp_thumbnail_url = "";
+      (this.identity_design_title = ""), (this.service_short_description = "");
+      this.agency_img_tmp = "";
+      (this.identity_design_des = ""),
+        (this.project_count = ""),
+        (this.happy_clients = ""),
+        (this.content = ""),
+        (this.service_capability_menu = ""),
+        (this.service_deliver_title = ""),
+        (this.service_deliver_description = ""),
+        (this.temp_thumbnail_url = "");
       this.service_title = "";
-      document.getElementById('thumbnail').value = ""
+      document.getElementById("thumbnail").value = "";
       $(".summernote").summernote("code", "");
-
-      
+    },
+    get_slug() {
+      console.log(this.checked)
+      if (this.is_editing == true && this.checked == true) {
+        this.slug = localStorage.getItem('slug_tmp')
+      }
+      else {
+        this.slug = this.service_name.replace(/\s+/g, "-").toLowerCase();
+        return this.slug.replace(/\//g, "-");
+        
+      }
     },
     fetchAll() {
       // console.log("fetch");
@@ -426,9 +438,9 @@ export default {
         .get("/admin/service/get")
         .then((response) => {
           // this.isLoading = false;
-          
+
           this.lists = response.data.data;
-          console.log(this.lists)
+          console.log(this.lists);
         })
         .catch((error) => {});
     },
@@ -439,7 +451,7 @@ export default {
 
     save() {
       let url;
-      this.loader=true
+      this.loader = true;
       if (this.is_editing) {
         url = `/admin/service/update/`;
       } else {
@@ -477,11 +489,10 @@ export default {
       axios
         .post(url, fd)
         .then((response) => {
-          
           this.success = response.data.success;
           this.fetchAll();
           if (this.success == "created") {
-            this.loader=false
+            this.loader = false;
             this.$swal.fire({
               // position: "top-end",
               icon: "success",
@@ -493,8 +504,7 @@ export default {
             this.description = "";
             this.file = "";
             $(".summernote").summernote("code", "");
-            this.agency_img_tmp=""
-            (this.identity_design_title = ""),
+            (this.agency_img_tmp = ""((this.identity_design_title = ""))),
               (this.identity_design_des = ""),
               (this.project_count = ""),
               (this.happy_clients = ""),
@@ -505,7 +515,7 @@ export default {
               (this.service_short_description = ""(
                 (this.temp_thumbnail_url = "")
               ));
-            
+
             this.is_editing = false;
           } else if (this.success == "updated") {
             this.is_editing = true;
@@ -571,15 +581,15 @@ export default {
           // this.file = response.data.file;
           this.service_name = response.data.service_name;
           this.description = response.data.description;
-          this.service_short_description =
-            response.data.short_description;
+          this.service_short_description = response.data.short_description;
 
           this.identity_design_title = response.data.identity_design_title;
 
           this.content = response.data.content;
           this.identity_design_des = response.data.identity_design_des;
           this.identity_design_menus = response.data.identity_design_menus;
-
+          this.slug = response.data.slug;
+          
           this.project_count = response.data.project_count;
           this.happy_clients = response.data.happy_clients;
           this.service_title = response.data.service_title;
@@ -596,6 +606,9 @@ export default {
 
           this.temp_thumbnail_url = response.data.file;
           this.agency_img_tmp = response.data.agency;
+          localStorage.setItem('slug_tmp', this.slug);
+          // this.get_slug = localStorage.getItem('slug_tmp')
+          // console.log(this.get_slug)
         })
         .catch((error) => {});
     },
@@ -616,7 +629,7 @@ export default {
           (this.service_deliver_title = ""),
           (this.service_deliver_description = ""),
           (this.temp_thumbnail_url = "");
-          this.agency_img_tmp=""
+        this.agency_img_tmp = "";
         this.service_short_description = "";
       });
     },
@@ -624,6 +637,7 @@ export default {
   mounted() {
     // this.isLoading = true;
     this.fetchAll();
+    this.get_slug();
   },
 };
 </script>
