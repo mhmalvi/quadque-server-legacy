@@ -1,8 +1,8 @@
 <template>
   <div>
-    <div class="loader">
+    <!-- <div class="loader">
       <loading :active="isLoading" :is-full-page="fullPage" :loader="loader" />
-    </div>
+    </div> -->
     <div class="row d-flex justify-content-center">
       
       <div
@@ -72,9 +72,9 @@
                   placeholder="Enter service title"
                   required
                 />
-                <div class="text-danger" v-if="this.service_titleError">
+                <!-- <div class="text-danger" v-if="this.service_titleError">
                   {{ this.service_titleError }}
-                </div>
+                </div> -->
               </div>
               <div class="form-group" v-if="this.is_editing">
                 <label for="title">Slug</label>
@@ -380,6 +380,7 @@ export default {
       is_editing: false,
       service_short_description: "",
       temp_thumbnail_url: "",
+      agency_img:[]
     };
   },
   computed: {
@@ -419,7 +420,7 @@ export default {
       axios
         .get("/admin/service/get")
         .then((response) => {
-          this.isLoading = false;
+          // this.isLoading = false;
           console.log(response);
           this.lists = response.data.data;
         })
@@ -561,7 +562,7 @@ export default {
       axios
         .get(`/admin/service/edit/${this.temporary_id}`)
         .then((response) => {
-          console.log(response.data);
+          // console.log(response.data);
           this.service_name = response.data.service_name;
           // this.file = response.data.file;
           this.service_name = response.data.service_name;
@@ -591,16 +592,14 @@ export default {
 
           this.temp_thumbnail_url = response.data.file;
           this.agency_img_tmp = response.data.agency;
-          this.agency_img = this.agency_img_tmp.split(',')
+          // this.agency_img = this.agency_img_tmp.split(',')
           // console.log(this.agency_img)
         })
         .catch((error) => {});
     },
     destroyList(list_id) {
-      this.loader=true
       axios.get(`/admin/service/delete/${list_id}`).then((response) => {
         // this.success = response.data.success;
-        this.loader=false
         this.fetchAll();
         this.$swal.fire({
           icon: "error",
@@ -620,7 +619,7 @@ export default {
     },
   },
   mounted() {
-    this.isLoading = true;
+    // this.isLoading = true;
     this.fetchAll();
   },
 };
@@ -633,12 +632,12 @@ div {
   font-family: sans-serif;
 }
 
-.loader{
+/* .loader{
   justify-content: center;
   position: absolute;
   top: 40%;
   left: 30%;
-}
+} */
 
 .btn-edit {
   background: #0093e9;
