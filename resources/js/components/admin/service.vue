@@ -84,7 +84,7 @@
                   type="checkbox"
                   v-model="checked"
                 />
-                based on service name
+                <label style="color:blue">select to get based on service name</label>
                 <input
                   type="string"
                   class="form-control"

@@ -49,8 +49,18 @@
                 <input
                   type="string"
                   v-model="slug"
+                  
                   value="title"
                   class="form-control"
+                />
+                <label style="color:blue">select to get based on service name</label>
+                <input
+                  type="string"
+                  class="form-control"
+                  @click="get_slug"
+                  v-model="slug"
+                  placeholder="Enter slug"
+                  required
                 />
                 <!-- <div class="text-danger" v-if="this.titleError">
                   {{ this.titleError }}
@@ -181,34 +191,16 @@
 </template>
 <script>
 import axios from "axios";
-// import { ElementTiptap } from 'element-tiptap';
 
-// import {
-//   // necessary extensions
-//   Doc,
-//   Text,
-//   Paragraph,
-//   Heading,
-//   Bold,
-//   Underline,
-//   Italic,
-//   Strike,
-//   ListItem,
-//   BulletList,
-//   OrderedList,
-//   Image,Iframe,CodeBlock,Blockquote,TodoItem,TodoList,TextAlign,Indent,LineHeight,HorizontalRule,HardBreak,TrailingNode,History,Table ,TableHeader,TableCell,TableRow,FormatClear,TextColor,TextHighlight,Preview,Print,Fullscreen,SelectAll,FontType,FontSize,CodeView
-// } from 'element-tiptap';
 export default {
-  // components: {
-  //   'el-tiptap': ElementTiptap,
-  // },
-
   data() {
     return {
       lists: [],
       title: "",
       thumbnail: "",
       text: "",
+      slug: "",
+      checked: false,
       titleError: "",
       textError: "",
       thumbnailError: "",
@@ -239,15 +231,15 @@ export default {
       // ],
     };
   },
-  computed: {
-    slug() {
-      // return this.title.replace(/\s+/g, '-').toLowerCase();
+  // computed: {
+  //   slug() {
+  //     // return this.title.replace(/\s+/g, '-').toLowerCase();
 
-      let data = this.title.replace(/\s+/g, "-").toLowerCase();
-      let datas = data.replace(/\/+/g, "-");
-      return datas.replace(/\?+/g, " ");
-    },
-  },
+  //     let data = this.title.replace(/\s+/g, "-").toLowerCase();
+  //     let datas = data.replace(/\/+/g, "-");
+  //     return datas.replace(/\?+/g, " ");
+  //   },
+  // },
   methods: {
     disable_button() {
       this.is_editing = false;
@@ -260,6 +252,17 @@ export default {
       this.short_description = ""
       
       $(".summernote").summernote("code", "");
+    },
+    get_slug() {
+      console.log(this.checked)
+      if (this.is_editing == true && this.checked == true) {
+        this.slug = localStorage.getItem('slug_tmp')
+      }
+      else {
+        this.slug = this.service_name.replace(/\s+/g, "-").toLowerCase();
+        return this.slug.replace(/\//g, "-");
+        
+      }
     },
     fetchAll() {
       axios
@@ -370,6 +373,7 @@ export default {
           // this.thumbnail = response.data.thumbnail;
           $(".summernote").summernote("code", this.text);
           this.temp_thumbnail_url = response.data.thumbnail;
+          localStorage.setItem('slug_tmp', this.slug);
         })
         .catch((error) => {});
     },
