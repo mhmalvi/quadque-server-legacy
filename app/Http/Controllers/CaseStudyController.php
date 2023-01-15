@@ -79,7 +79,7 @@ class CaseStudyController extends Controller
      */
     public function getAll()
     {
-        $case_studies = CaseStudy::orderBy('id','DESC')->get();
+        $case_studies = CaseStudy::orderBy('id', 'DESC')->get();
         if (!$case_studies->isEmpty()) {
             return response()->json([
                 'status' => 200,
@@ -140,7 +140,7 @@ class CaseStudyController extends Controller
         // }
         // $ser_id=implode(',',$service_id);
         // die;
-        $slug = Str::slug($request->name,'-');
+        $slug = Str::slug($request->name, '-');
         $case_study = new CaseStudy();
         $case_study->com_name = $request->name;
         $case_study->summary1 = $request->summary1;
@@ -206,7 +206,7 @@ class CaseStudyController extends Controller
             $file_path = $app_url . ":8000/assets/img/case_study/image_3/" . $fileName;
             $case_study->image_3 = $file_path;
         }
-        
+
         if ($request->group_images) {
 
             $fileName = time() . '.' . $request->group_images->getClientOriginalExtension();
@@ -214,11 +214,12 @@ class CaseStudyController extends Controller
             $file_path = $app_url . ":8000/assets/img/case_study/group_images/" . $fileName;
             $case_study->group_images = $file_path;
         }
+        
 
         $save = $case_study->save();
         // $file_path=[];        
 
-        
+
 
         if ($save) {
             return response()->json(['success' => 'created']);

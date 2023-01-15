@@ -81,6 +81,17 @@ class ServiceController extends Controller
             $service->file = $file_path;
         }
 
+        $agency = [];
+        if ($request->hasfile('agency')) {
+
+            foreach ($request->file('agency') as $imagefile) {
+                $name = time() . rand(1, 50) . '.' . $imagefile->extension();
+                $imagefile->move(public_path('assets/img/services/agency'), $name);
+                $agency[] = $name;
+            }
+        }
+        $service->$agency = $agency;
+
         $slug = Str::slug($request->service_name, '-');
         $service->slug = $slug;
         $save = $service->save();

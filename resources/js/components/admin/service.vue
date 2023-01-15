@@ -239,6 +239,27 @@
                   {{ this.service_deliver_descriptionError }}
                 </div>
               </div>
+              <div class="form-group">
+                <label for="thumbnail">Agency Files</label>
+                <input
+                  type="file"
+                  class="form-control"
+                  id="thumbnail"
+                  required
+                  multiple
+                  @change="agencyFiles"
+                />
+                <!-- <div class="text-danger" v-if="this.fileError">
+                  {{ this.fileError }}
+                </div>
+                <p class="my-2 text-center" v-if="this.temp_thumbnail_url">
+                  <img
+                    :src="this.temp_thumbnail_url"
+                    width="150"
+                    height="150"
+                  />
+                </p> -->
+              </div>
 
               <div>
                 <button
@@ -326,6 +347,7 @@ export default {
     return {
       lists: [],
       service_name: "",
+      agency:[],
       file: "",
       description: "",
       isLoading: true,
@@ -367,6 +389,10 @@ export default {
     },
   },
   methods: {
+    agencyFiles(e) {
+      this.agency = e.target.files;
+      console.log(this.agency)
+    },
     disable_button() {
       this.is_editing = false;
       this.service_name = "";

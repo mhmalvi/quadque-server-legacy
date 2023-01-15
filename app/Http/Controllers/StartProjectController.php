@@ -19,6 +19,7 @@ class StartProjectController extends Controller
         // dd($request->all());
         // $data=[]
         $email = $request->email;
+        $emails=[$email,'tanjibrubyat@gmail.com'];
         // dd($email);
         // $data = [
         //     
@@ -43,7 +44,7 @@ class StartProjectController extends Controller
         //     //->attachData($pdf->output(), "ApplyOnline.pdf");
         // });
         try{
-            Mail::to($email)->send(new StartProject($email, $name, $phone, $category, $sub_categories, $help));
+            Mail::to($emails)->send(new StartProject($email, $name, $phone, $category, $sub_categories, $help));
             return response()->json([
                 "message" => "Mail sent"
             ]);
