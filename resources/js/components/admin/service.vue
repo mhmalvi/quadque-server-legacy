@@ -245,20 +245,16 @@
                   type="file"
                   class="form-control"
                   id="thumbnail"
-                  required
-                  multiple
+                  
                   @change="agencyFiles"
                 />
-                <!-- <div class="text-danger" v-if="this.fileError">
-                  {{ this.fileError }}
-                </div>
-                <p class="my-2 text-center" v-if="this.temp_thumbnail_url">
+                <p class="my-2 text-center" v-if="this.agency_img_tmp">
                   <img
-                    :src="this.temp_thumbnail_url"
+                    :src="this.agency_img_tmp"
                     width="150"
                     height="150"
                   />
-                </p> -->
+                </p>
               </div>
 
               <div>
@@ -307,7 +303,8 @@
 
               <td>
                 <!-- {{ image[index] }} -->
-                <img :src="multiple_img" alt="">
+                <img width="150"
+                    height="150" :src="list.agency" alt="">
               </td>
               <td style="vertical-align: middle; width: 15%; color: white">
                 <button
@@ -351,7 +348,7 @@ export default {
     return {
       lists: [],
       service_name: "",
-      agency:[],
+      agency:"",
       file: "",
       description: "",
       isLoading: true,
@@ -384,9 +381,9 @@ export default {
       is_editing: false,
       service_short_description: "",
       temp_thumbnail_url: "",
-      agency_img: [],
-      multi_img: "",
-      multiple_img:""
+      // agency_img: [],
+      // multi_img: "",
+      // multiple_img:""
       
     };
   },
@@ -398,8 +395,8 @@ export default {
   },
   methods: {
     agencyFiles(e) {
-      this.agency = e.target.files;
-      console.log(this.agency)
+      this.agency = e.target.files[0];
+      // console.log(this.agency)
     },
     disable_button() {
       this.is_editing = false;
@@ -408,6 +405,7 @@ export default {
       this.file = "";
       this.identity_design_title = "",
         this.service_short_description = ""
+        this.agency_img_tmp=""
       this.identity_design_des = "",
       this.project_count = "",
       this.happy_clients = "",
@@ -430,11 +428,7 @@ export default {
           // this.isLoading = false;
           
           this.lists = response.data.data;
-          // console.log(this.lists);
-          this.multi_img = this.lists[0].agency
-          // console.log(this.multi_img);
-          this.multiple_img = this.multi_img.split(',')
-          // console.log(this.multiple_img)
+          console.log(this.lists)
         })
         .catch((error) => {});
     },
@@ -463,9 +457,7 @@ export default {
       fd.append("description", this.description);
       fd.append("service_short_description", this.service_short_description);
       fd.append("file", this.file);
-      for (let i = 0; i < this.agency.length; i++) {
-        fd.append("agency[]", this.agency[i]);
-      }
+      fd.append("agency", this.agency);
       fd.append("identity_design_des", this.identity_design_des);
 
       fd.append("project_count", this.project_count);
@@ -501,7 +493,7 @@ export default {
             this.description = "";
             this.file = "";
             $(".summernote").summernote("code", "");
-
+            this.agency_img_tmp=""
             (this.identity_design_title = ""),
               (this.identity_design_des = ""),
               (this.project_count = ""),
@@ -604,8 +596,6 @@ export default {
 
           this.temp_thumbnail_url = response.data.file;
           this.agency_img_tmp = response.data.agency;
-          this.agency_img = this.agency_img_tmp.split(',')
-          console.log(this.agency_img)
         })
         .catch((error) => {});
     },
@@ -626,6 +616,7 @@ export default {
           (this.service_deliver_title = ""),
           (this.service_deliver_description = ""),
           (this.temp_thumbnail_url = "");
+          this.agency_img_tmp=""
         this.service_short_description = "";
       });
     },

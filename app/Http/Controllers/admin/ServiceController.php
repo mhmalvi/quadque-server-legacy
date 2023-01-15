@@ -81,33 +81,24 @@ class ServiceController extends Controller
             $file_path = $app_url . ":8000/assets/services/" . $fileName;
             $service->file = $file_path;
         }
-
+        if ($request->agency) {
+            $fileName = time() . '.' . $request->agency->getClientOriginalExtension();
+            $request->agency->move(public_path('assets/services/agency'), $fileName);
+            $file_path = $app_url . ":8000/assets/services/agency/" . $fileName;
+            $service->agency = $file_path;
+        }
 
 
         $slug = Str::slug($request->service_name, '-');
         $service->slug = $slug;
         $save = $service->save();
-        // dd($service->id);
-        $service_id=$service->id;
         // dd($service_id);
         // $agency_img = [];
-        if ($request->hasfile('agency')) {
-            $agency_img = new AgencyImage();
-            // dd($request->file('agency'));
-            foreach ($request->file('agency') as $imagefile) {
-                $name = time() . rand(1, 50) . '.' . $imagefile->extension();
-                $imagefile->move(public_path('assets/img/services/agency'), $name);
-                $file_path = $app_url . ":8000/assets/img/services/agency/" . $name;
-                $agency_image = $file_path;
-                $agency_img->images = $agency_image;
-                $agency_img->services_id= $service_id;
-                $agency_img->save();
-            }
-        }
-        
+
+
         // dd($agency_img);
         // $file=implode(',', $service->agency);
-        
+
         if ($save) {
             return response()->json(['success' => 'created'], 200);
         } else {
