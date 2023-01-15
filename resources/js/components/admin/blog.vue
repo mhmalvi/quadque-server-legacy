@@ -47,21 +47,21 @@
               <div v-if="this.is_editing" class="form-group">
                 <label for="title">Slug</label>
                 <input
+                  type="checkbox"
+                  @click="get_slug"
+                  v-model="checked"
+                  class="ml-3"
+                  placeholder="Enter slug"
+                />
+                <label style="color:blue">select to get based on title</label>
+                <input
                   type="string"
                   v-model="slug"
                   
                   value="title"
                   class="form-control"
                 />
-                <label style="color:blue">select to get based on service name</label>
-                <input
-                  type="string"
-                  class="form-control"
-                  @click="get_slug"
-                  v-model="slug"
-                  placeholder="Enter slug"
-                  required
-                />
+                
                 <!-- <div class="text-danger" v-if="this.titleError">
                   {{ this.titleError }}
                 </div> -->
@@ -259,7 +259,7 @@ export default {
         this.slug = localStorage.getItem('slug_tmp')
       }
       else {
-        this.slug = this.service_name.replace(/\s+/g, "-").toLowerCase();
+        this.slug = this.title.replace(/\s+/g, "-").toLowerCase();
         return this.slug.replace(/\//g, "-");
         
       }

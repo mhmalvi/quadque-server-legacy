@@ -381,6 +381,8 @@ export default {
       lists: [],
       service_lists: [],
       name: "",
+      slug: "",
+      checked: false,
       agency_images: [],
       image: "",
       summary1: "",
@@ -457,10 +459,17 @@ export default {
       this.short_banner_img = e.target.files[0];
       this.short_banner_tmp = "";
     },
-    // group_img_7(e) {
-    //   this.group_images_7 = e.target.files[0];
-    //   this.group_images_7_tmp = "";
-    // },
+    get_slug() {
+      console.log(this.checked)
+      if (this.is_editing == true && this.checked == true) {
+        this.slug = localStorage.getItem('slug_tmp')
+      }
+      else {
+        this.slug = this.title.replace(/\s+/g, "-").toLowerCase();
+        return this.slug.replace(/\//g, "-");
+        
+      }
+    },
     disable_button() {
       this.is_editing = false;
       this.name = "";
