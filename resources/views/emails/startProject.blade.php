@@ -1,6 +1,11 @@
 <!DOCTYPE html>
+
+
 <html>
+
 <head>
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+
     <title>Start Project</title>
 </head>
 <body>
@@ -43,16 +48,16 @@
         <div><br>
 
 
-    <div>
+            <div>
 
-        <p>Email: {{ $email }}</p>
-    <div><br>
+                <p>Email: {{ $email }}</p>
+                <div><br>
 
 
-    <div>
+                    <div>
 
-        <p>{{ $help }}</p>
-    <div>
+                        <p>{{ $help }}</p>
+                        <div>
 
 
 

@@ -1,6 +1,10 @@
 <template>
   <div>
+    <div class="loader">
+      <loading :active="isLoading" :is-full-page="fullPage" :loader="loader" />
+    </div>
     <div class="row d-flex justify-content-center">
+      
       <div
         v-if="this.is_editing == true"
         @click="disable_button()"
@@ -311,41 +315,12 @@
 </template>
 <script>
 import axios from "axios";
-// import { VueEditor } from "vue2-editor";
-//  import { ElementTiptap } from 'element-tiptap';
-// import { ImageDrop } from "quill-image-drop-module";
-// import ImageResize from "quill-image-resize-module";
-// import VueFroala from "vue-froala-wysiwyg";
-import {
-  // necessary extensions
-  Doc,
-  Text,
-  Paragraph,
-  Heading,
-  Bold,
-  Underline,
-  Italic,
-  Image,
-  Strike,
-  ListItem,
-  BulletList,
-  OrderedList,
-  Iframe,
-  TextAlign,
-  History,
-  Fullscreen,
-  FontSize,
-  SelectAll,
-  Preview,
-  Table,
-  TableHeader,
-  TableCell,
-  TableRow,
-} from "element-tiptap";
+import Loading from "vue-loading-overlay";
 export default {
   // name:"service-component",
-  components: {
-    // 'el-tiptap': ElementTiptap,
+   components: {
+    // 'lottie': Lottie
+    Loading,
   },
   data() {
     return {
@@ -353,8 +328,9 @@ export default {
       service_name: "",
       file: "",
       description: "",
-      // slug:"",
-      // identity_design_title: "",
+      isLoading: true,
+      fullPage: true,
+      loader: "bars",
       identity_design_des: "",
       identity_design_menus: "",
       project_count: "",
@@ -417,6 +393,7 @@ export default {
       axios
         .get("/admin/service/get")
         .then((response) => {
+          this.isLoading = false;
           console.log(response);
           this.lists = response.data.data;
         })
@@ -429,6 +406,7 @@ export default {
 
     save() {
       let url;
+      this.loader=true
       if (this.is_editing) {
         url = `/admin/service/update/`;
       } else {
@@ -473,9 +451,18 @@ export default {
       axios
         .post(url, fd)
         .then((response) => {
+          
           this.success = response.data.success;
           this.fetchAll();
           if (this.success == "created") {
+            this.loader=false
+            this.$swal.fire({
+              // position: "top-end",
+              icon: "success",
+              title: "Service Saved",
+              showConfirmButton: true,
+              // timer: 1500,
+            });
             this.service_name = "";
             this.description = "";
             this.file = "";
@@ -492,13 +479,7 @@ export default {
               (this.service_short_description = ""(
                 (this.temp_thumbnail_url = "")
               ));
-            this.$swal.fire({
-              // position: "top-end",
-              icon: "success",
-              title: "Service Saved",
-              showConfirmButton: true,
-              // timer: 1500,
-            });
+            
             this.is_editing = false;
           } else if (this.success == "updated") {
             this.is_editing = true;
@@ -592,8 +573,10 @@ export default {
         .catch((error) => {});
     },
     destroyList(list_id) {
+      this.loader=true
       axios.get(`/admin/service/delete/${list_id}`).then((response) => {
         // this.success = response.data.success;
+        this.loader=false
         this.fetchAll();
         this.$swal.fire({
           icon: "error",
@@ -613,6 +596,7 @@ export default {
     },
   },
   mounted() {
+    this.isLoading = true;
     this.fetchAll();
   },
 };
@@ -623,6 +607,13 @@ export default {
 div {
   letter-spacing: 1px;
   font-family: sans-serif;
+}
+
+.loader{
+  justify-content: center;
+  position: absolute;
+  top: 40%;
+  left: 30%;
 }
 
 .btn-edit {
