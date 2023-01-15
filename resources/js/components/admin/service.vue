@@ -450,20 +450,15 @@ export default {
       fd.append("description", this.description);
       fd.append("service_short_description", this.service_short_description);
       fd.append("file", this.file);
-
-      // fd.append("identity_design_title", this.identity_design_title);
+      for (let i = 0; i < this.agency.length; i++) {
+        fd.append("agency[]", this.agency[i]);
+      }
       fd.append("identity_design_des", this.identity_design_des);
 
       fd.append("project_count", this.project_count);
       fd.append("happy_clients", this.happy_clients);
       fd.append("slug", this.slug);
-
-      // fd.append('identity_menus[]', menuList)
-
-      // fd.append('menus',menuList);
       fd.append("content", this.content);
-      // for (let m = 0; m < this.service_capability_menus.length; m++) {
-      //   var cap_menus = JSON.stringify(this.service_capability_menus[m])
       fd.append("service_capability_menus", this.service_capability_menu);
       // }
       fd.append("service_deliver_title", this.service_deliver_title);

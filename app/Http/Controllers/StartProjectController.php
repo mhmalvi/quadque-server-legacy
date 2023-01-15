@@ -18,8 +18,9 @@ class StartProjectController extends Controller
     {
         // dd($request->all());
         // $data=[]
+        $company_email = env('MAIL_FROM_ADDRESS');
         $email = $request->email;
-        $emails=[$email,'tanjibrubyat@gmail.com'];
+        $emails = [$email, $company_email];
         // dd($email);
         // $data = [
         //     
@@ -43,19 +44,19 @@ class StartProjectController extends Controller
         //     $message->to($data['email']);
         //     //->attachData($pdf->output(), "ApplyOnline.pdf");
         // });
-        try{
+        try {
             Mail::to($emails)->send(new StartProject($email, $name, $phone, $category, $sub_categories, $help));
             return response()->json([
                 "message" => "Mail sent"
             ]);
-        }catch(Throwable $e){
+        } catch (Throwable $e) {
             report($e);
 
             return response()->json([
-                'message'=>"failsed to send mail"
+                'message' => "failsed to send mail"
             ]);
         }
-        
+
         // die;
         // return view('emails.startProject',compact('category', 'sub_categories', 'name', 'phone', 'email', 'help'));
     }
