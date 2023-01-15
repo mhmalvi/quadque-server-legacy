@@ -143,7 +143,7 @@ class AboutUsController extends Controller
      */
     public function update(Request $request)
     {
-        // dd($request->id);
+        // dd($request->$request->id);
         $about_us = AboutUs::find($request->id);
         $about_us->our_vision = $request->our_vision;
         $about_us->our_mission = $request->our_mission;

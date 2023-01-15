@@ -566,7 +566,7 @@ export default {
       axios
         .get(`/admin/service/edit/${this.temporary_id}`)
         .then((response) => {
-          console.log(response);
+          console.log(response.data);
           this.service_name = response.data.service_name;
           // this.file = response.data.file;
           this.service_name = response.data.service_name;

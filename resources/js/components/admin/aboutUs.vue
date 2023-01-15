@@ -34,13 +34,10 @@
           <div class="card-body">
             <form>
               <!-- {{ description }} -->
-              <div v-if="this.is_editing" class="form-group">
+              <!-- <div v-if="this.is_editing" class="form-group">
                 <label for="title">Slug</label>
                 <input type="string" v-model="slug" value="title" class="form-control" />
-                <!-- <div class="text-danger" v-if="this.titleError">
-                  {{ this.titleError }}
-                </div> -->
-              </div>
+              </div> -->
               <div class="form-group">
                 <label for="title">Our Vision</label><br />
                 <textarea
@@ -373,18 +370,12 @@ export default {
 
     editList(list_id) {
       this.is_editing = true;
-      this.our_vision = "";
-      this.our_mission = "";
-      this.our_goal = "";
-      this.our_objective = "";
-      this.who_we_are = "";
-      this.why_choose_us = "";
       this.temporary_id = list_id;
 
       axios
         .get(`/admin/about-us/edit/${this.temporary_id}`)
         .then((response) => {
-          console.log(response);
+          console.log(response.data);
           this.our_vision = response.data.our_vision;
           this.our_mission = response.data.our_mission;
           this.our_goal = response.data.our_goal;
