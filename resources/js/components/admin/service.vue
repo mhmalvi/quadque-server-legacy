@@ -286,7 +286,7 @@
               <th>Thumbnail</th>
               <th>identity description</th>
               <th style="width: 36%">Description</th>
-
+              <th>Agency Images</th>
               <th>Action</th>
             </tr>
           </thead>
@@ -305,6 +305,10 @@
               <td v-html="list.identity_design_des"></td>
               <td v-html="list.content"></td>
 
+              <td>
+                <!-- {{ image[index] }} -->
+                <img :src="multiple_img" alt="">
+              </td>
               <td style="vertical-align: middle; width: 15%; color: white">
                 <button
                   type="button"
@@ -380,7 +384,10 @@ export default {
       is_editing: false,
       service_short_description: "",
       temp_thumbnail_url: "",
-      agency_img:[]
+      agency_img: [],
+      multi_img: "",
+      multiple_img:""
+      
     };
   },
   computed: {
@@ -421,8 +428,13 @@ export default {
         .get("/admin/service/get")
         .then((response) => {
           // this.isLoading = false;
-          console.log(response);
+          
           this.lists = response.data.data;
+          // console.log(this.lists);
+          this.multi_img = this.lists[0].agency
+          // console.log(this.multi_img);
+          this.multiple_img = this.multi_img.split(',')
+          // console.log(this.multiple_img)
         })
         .catch((error) => {});
     },
@@ -592,8 +604,8 @@ export default {
 
           this.temp_thumbnail_url = response.data.file;
           this.agency_img_tmp = response.data.agency;
-          // this.agency_img = this.agency_img_tmp.split(',')
-          // console.log(this.agency_img)
+          this.agency_img = this.agency_img_tmp.split(',')
+          console.log(this.agency_img)
         })
         .catch((error) => {});
     },

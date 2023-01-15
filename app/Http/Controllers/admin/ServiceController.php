@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Service;
 use Illuminate\Support\Str;
+use App\Models\AgencyImage;
 
 class ServiceController extends Controller
 {
@@ -81,30 +82,32 @@ class ServiceController extends Controller
             $service->file = $file_path;
         }
 
-        $agency_img = [];
-        if ($request->hasfile('agency')) {
-            // dd($request->agency);
-            // foreach($request->file('agency') as $file){
-            //     echo $file;
-            // }
-            // die;
-            // $agency=implode(',',$request->agency);
-            // dd($agency);
-            foreach ($request->file('agency') as $imagefile) {
-                $name = time() . rand(1, 50) . '.' . $imagefile->extension();
-                $imagefile->move(public_path('assets/img/services/agency'), $name);
-                $file_path = $app_url . ":8000/assets/img/services/agency/" . $name;
-                $agency_img[] = $file_path;
-                $service->agency = $agency_img;
-            }
-        }
-        $file=implode(',', $service->agency);
-        $service->agency=$file;
+
 
         $slug = Str::slug($request->service_name, '-');
         $service->slug = $slug;
         $save = $service->save();
-
+        // dd($service->id);
+        $service_id=$service->id;
+        // dd($service_id);
+        // $agency_img = [];
+        if ($request->hasfile('agency')) {
+            $agency_img = new AgencyImage();
+            // dd($request->file('agency'));
+            foreach ($request->file('agency') as $imagefile) {
+                $name = time() . rand(1, 50) . '.' . $imagefile->extension();
+                $imagefile->move(public_path('assets/img/services/agency'), $name);
+                $file_path = $app_url . ":8000/assets/img/services/agency/" . $name;
+                $agency_image = $file_path;
+                $agency_img->images = $agency_image;
+                $agency_img->services_id= $service_id;
+                $agency_img->save();
+            }
+        }
+        
+        // dd($agency_img);
+        // $file=implode(',', $service->agency);
+        
         if ($save) {
             return response()->json(['success' => 'created'], 200);
         } else {
