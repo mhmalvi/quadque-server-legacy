@@ -256,8 +256,9 @@ export default {
       axios
         .get("/admin/about-us/get")
         .then((response) => {
-          console.log(response);
-          this.lists = response.data;
+          
+          this.lists = response.data.data;
+          console.log(this.lists);
         })
         .catch((error) => {});
     },

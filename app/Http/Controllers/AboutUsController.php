@@ -49,23 +49,36 @@ class AboutUsController extends Controller
         //     $fileName = time() . '.' . $request->thumbnail->getClientOriginalExtension();
         //     $request->thumbnail->move(public_path('assets/img/blogs'), $fileName);
         // }
+        $save = new AboutUs();
+        $save->our_vision = $request->our_vision;
+        $save->our_mission = $request->our_mission;
+        $save->our_goal = $request->our_goal;
+        $save->our_objective = $request->our_objective;
+        $save->who_we_are = $request->who_we_are;
+        $save->why_choose_us = $request->why_choose_us;
 
-
-        $save = AboutUs::create([
-            'our_vision' => $request->our_vision,
-            'our_mission' => $request->our_mission,
-            'our_goal' => $request->our_goal,
-            'our_objective' => $request->our_objective,
-            'who_we_are' => $request->who_we_are,
-            'why_choose_us' => $request->why_choose_us
-        ]);
+        $save = $save->save();
+        // $save = AboutUs::create([
+        //     'our_vision' => $request->our_vision,
+        //     'our_mission' => $request->our_mission,
+        //     'our_goal' => $request->our_goal,
+        //     'our_objective' => $request->our_objective,
+        //     'who_we_are' => $request->who_we_are,
+        //     'why_choose_us' => $request->why_choose_us
+        // ]);
 
         if ($save) {
             return response()->json([
 
                 'success' => 'created'
 
-            ]);
+            ], 200);
+        }else{
+            return response()->json([
+
+                'message' => 'failed'
+
+            ], 424);
         }
     }
 
@@ -94,18 +107,19 @@ class AboutUsController extends Controller
 
     public function showAll()
     {
-        $about_us=AboutUs::orderBy('id','DESC')->get();
+        $about_us = AboutUs::orderBy('id', 'DESC')->get();
+        // dd($about_us);
         if (!$about_us->isEmpty()) {
             return response()->json([
                 'status' => 200,
                 'message' => 'success',
                 'data' => $about_us
-            ]);
+            ], 200);
         } else {
             return response()->json([
                 'status' => 424,
                 'message' => 'failed',
-            ]);
+            ], 424);
         }
     }
 
