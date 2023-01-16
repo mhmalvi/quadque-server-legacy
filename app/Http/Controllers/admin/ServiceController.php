@@ -81,12 +81,7 @@ class ServiceController extends Controller
             $file_path = $app_url . ":8000/assets/services/" . $fileName;
             $service->file = $file_path;
         }
-        if ($request->agency) {
-            $fileName = time() . '.' . $request->agency->getClientOriginalExtension();
-            $request->agency->move(public_path('assets/services/agency'), $fileName);
-            $file_path = $app_url . ":8000/assets/services/agency/" . $fileName;
-            $service->agency = $file_path;
-        }
+        
 
 
         $slug = Str::slug($request->service_name, '-');

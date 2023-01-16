@@ -252,7 +252,7 @@ export default {
     get_slug() {
       console.log(this.checked)
       if (this.is_editing == true && this.checked == true) {
-        this.slug = localStorage.getItem('slug_tmp')
+        this.slug = localStorage.getItem('blog_slug')
       }
       else {
         this.slug = this.title.replace(/\s+/g, "-").toLowerCase();
@@ -369,7 +369,7 @@ export default {
           // this.thumbnail = response.data.thumbnail;
           $(".summernote").summernote("code", this.text);
           this.temp_thumbnail_url = response.data.thumbnail;
-          localStorage.setItem('slug_tmp', this.slug);
+          localStorage.setItem('blog_slug', this.slug);
         })
         .catch((error) => {});
     },
@@ -437,6 +437,14 @@ thead {
   --bs-table-accent-bg: rgb(229 231 255);
   color: var(--bs-table-striped-color);
   border: none;
+}
+
+.note-editor.note-airframe .note-editing-area .note-editable, .note-editor.note-frame .note-editing-area .note-editable {
+    padding: 10px;
+    overflow: auto;
+    word-wrap: break-word;
+    background: black !important;
+    color: white !important;
 }
 
 /* .note-editor.note-airframe.fullscreen, .note-editor.note-frame.fullscreen {

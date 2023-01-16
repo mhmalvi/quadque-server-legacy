@@ -146,6 +146,7 @@ class CaseStudyController extends Controller
         $case_study->summary1 = $request->summary1;
         $case_study->summary2 = $request->summary2;
         $case_study->content = $request->content;
+        $case_study->meta_keyword = $request->meta_keyword;
         $case_study->description = $request->description;
         $case_study->our_content_header = $request->our_content_header;
         $case_study->slug = $slug;
@@ -214,6 +215,12 @@ class CaseStudyController extends Controller
             $file_path = $app_url . ":8000/assets/img/case_study/group_images/" . $fileName;
             $case_study->group_images = $file_path;
         }
+        if ($request->agency) {
+            $fileName = time() . '.' . $request->agency->getClientOriginalExtension();
+            $request->agency->move(public_path('assets/case_study/agency'), $fileName);
+            $file_path = $app_url . ":8000/assets/case_study/agency/" . $fileName;
+            $case_study->agency = $file_path;
+        }
         
 
         $save = $case_study->save();
@@ -254,6 +261,7 @@ class CaseStudyController extends Controller
         $case_study->summary2 = $request->summary2;
         $case_study->content = $request->content;
         $case_study->description = $request->description;
+        $case_study->meta_keyword = $request->meta_keyword;
         $case_study->our_content_header = $request->our_content_header;
         $case_study->slug = $request->slug;
         $case_study->title_1 = $request->title_1;
@@ -320,6 +328,12 @@ class CaseStudyController extends Controller
             $request->group_images->move(public_path('assets/img/case_study/group_images'), $fileName);
             $file_path = $app_url . ":8000/assets/img/case_study/group_images/" . $fileName;
             $case_study->group_images = $file_path;
+        }
+        if ($request->agency) {
+            $fileName = time() . '.' . $request->agency->getClientOriginalExtension();
+            $request->agency->move(public_path('assets/case_study/agency'), $fileName);
+            $file_path = $app_url . ":8000/assets/case_study/agency/" . $fileName;
+            $case_study->agency = $file_path;
         }
 
         // dd("hello");

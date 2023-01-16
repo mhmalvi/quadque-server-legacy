@@ -65,6 +65,7 @@ class ClientSpeakController extends Controller
         $client_speak->name = $request->name;
         $client_speak->designation = $request->designation;
         $client_speak->description = $request->description;
+        $client_speak->meta_keyword = $request->meta_keyword;
         $app_url = env('APP_URL');
 
         if ($request->image) {
@@ -132,6 +133,7 @@ class ClientSpeakController extends Controller
         $client_speak->name = $request->name;
         $client_speak->designation = $request->designation;
         $client_speak->description = $request->description;
+        $client_speak->meta_keyword = $request->meta_keyword;
         $app_url = env('APP_URL');
 
         if ($request->image) {

@@ -53,6 +53,7 @@ class Clients extends Controller
         ]);
         $app_url = env('APP_URL');
         $clients = new Client();
+        $clients->meta_keyword = $request->meta_keyword;
         $file_path = array();
         if ($request->hasFile('client_images')) {
             $imageName = time() . '.' . $request->client_images->getClientOriginalExtension();

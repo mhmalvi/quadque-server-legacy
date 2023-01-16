@@ -281,6 +281,18 @@
                   {{ this.nameError }}
                 </div> -->
               </div>
+              <div class="form-group">
+                <label for="thumbnail">Agency Files</label>
+                <input
+                  type="file"
+                  class="form-control"
+                  id="thumbnail"
+                  @change="agencyFiles"
+                />
+                <p class="my-2 text-center" v-if="this.agency_img_tmp">
+                  <img :src="this.agency_img_tmp" width="150" height="150" />
+                </p>
+              </div>
               <!-- <div class="form-group">
                 <label for="company_image">Agency Images</label>
                 <input
@@ -316,6 +328,7 @@
               <th>Company Name</th>
               <th>Company Description</th>
               <th>Company Icon</th>
+              <th>Agency Images</th>
               <th>Action</th>
             </tr>
           </thead>
@@ -325,6 +338,10 @@
               <td v-html="list.content"></td>
               <td>
                 <img :src="list.com_image" width="100" height="100" />
+              </td>
+              <td>
+                <!-- {{ image[index] }} -->
+                <img width="150" height="150" :src="list.agency" alt="" />
               </td>
               <td>
                 <button
@@ -382,6 +399,7 @@ export default {
       isLoading: false,
       fullPage: true,
       loader: "bars",
+      agency: "",
       lists: [],
       service_lists: [],
       name: "",
@@ -439,6 +457,10 @@ export default {
     // removeField(index, fieldType) {
     //   fieldType.splice(index, 1);
     // },
+    agencyFiles(e) {
+      this.agency = e.target.files[0];
+      // console.log(this.agency)
+    },
     group_img(e) {
       this.group_images = e.target.files[0];
       this.group_images_1_tmp = "";
@@ -466,7 +488,7 @@ export default {
     get_slug() {
       console.log(this.checked)
       if (this.is_editing == true && this.checked == true) {
-        this.slug = localStorage.getItem('slug_tmp')
+        this.slug = localStorage.getItem('case_study_slug')
       }
       else {
         this.slug = this.name.replace(/\s+/g, "-").toLowerCase();
@@ -555,6 +577,7 @@ export default {
       fd.append("slug", this.slug);
       fd.append("description", this.description);
       fd.append("content", this.content);
+      fd.append("agency", this.agency);
       fd.append("group_images", this.group_images);
       fd.append("long_banner", this.long_banner);
       fd.append("short_banner", this.short_banner_img);
@@ -661,6 +684,7 @@ export default {
           this.summary1 = response.data.summary1;
           this.summary2 = response.data.summary2;
           this.content = response.data.content;
+          this.slug = response.data.slug
           this.description = response.data.description;
           this.our_content_header = response.data.our_content_header;
           this.title_1 = response.data.title_1;
@@ -674,6 +698,8 @@ export default {
           this.image_1_tmp = response.data.image_1;
           this.image_2_tmp = response.data.image_2;
           this.image_3_tmp = response.data.image_3;
+          this.agency_img_tmp = response.data.agency;
+          localStorage.setItem('case_study_slug',this.slug)
           $(".summernote").summernote("code", this.content);
           // $(".summernote").summernote("code", this.second_content);
           this.group_images_1_tmp = response.data.group_images;
@@ -697,6 +723,7 @@ export default {
         this.con_2_img_1 = "";
         this.con_2_img_2 = "";
         this.con_2_img_3 = "";
+        this.agency_img_tmp = "";
         document.getElementById("image").value = "";
         document.getElementById("case_con_1_img").value = "";
         document.getElementById("con_2_img_1").value = "";

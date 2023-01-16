@@ -247,18 +247,7 @@
                   {{ this.service_deliver_descriptionError }}
                 </div>
               </div>
-              <div class="form-group">
-                <label for="thumbnail">Agency Files</label>
-                <input
-                  type="file"
-                  class="form-control"
-                  id="thumbnail"
-                  @change="agencyFiles"
-                />
-                <p class="my-2 text-center" v-if="this.agency_img_tmp">
-                  <img :src="this.agency_img_tmp" width="150" height="150" />
-                </p>
-              </div>
+              
 
               <div>
                 <button
@@ -285,7 +274,7 @@
               <th>Thumbnail</th>
               <th>identity description</th>
               <th style="width: 36%">Description</th>
-              <th>Agency Images</th>
+              
               <th>Action</th>
             </tr>
           </thead>
@@ -304,10 +293,7 @@
               <td v-html="list.identity_design_des"></td>
               <td v-html="list.content"></td>
 
-              <td>
-                <!-- {{ image[index] }} -->
-                <img width="150" height="150" :src="list.agency" alt="" />
-              </td>
+              
               <td style="vertical-align: middle; width: 15%; color: white">
                 <button
                   type="button"
@@ -350,7 +336,7 @@ export default {
     return {
       lists: [],
       service_name: "",
-      agency: "",
+      
       file: "",
       description: "",
       isLoading: true,
@@ -398,10 +384,7 @@ export default {
   //     }
   // },
   methods: {
-    agencyFiles(e) {
-      this.agency = e.target.files[0];
-      // console.log(this.agency)
-    },
+    
     disable_button() {
       this.is_editing = false;
       this.service_name = "";
@@ -469,7 +452,7 @@ export default {
       fd.append("description", this.description);
       fd.append("service_short_description", this.service_short_description);
       fd.append("file", this.file);
-      fd.append("agency", this.agency);
+      
       fd.append("identity_design_des", this.identity_design_des);
 
       fd.append("project_count", this.project_count);
@@ -605,7 +588,7 @@ export default {
           this.service_deliver_description = response.data.service_deliver_des;
 
           this.temp_thumbnail_url = response.data.file;
-          this.agency_img_tmp = response.data.agency;
+          
           localStorage.setItem('slug_tmp', this.slug);
           // this.get_slug = localStorage.getItem('slug_tmp')
           // console.log(this.get_slug)
@@ -629,7 +612,7 @@ export default {
           (this.service_deliver_title = ""),
           (this.service_deliver_description = ""),
           (this.temp_thumbnail_url = "");
-        this.agency_img_tmp = "";
+        
         this.service_short_description = "";
       });
     },
