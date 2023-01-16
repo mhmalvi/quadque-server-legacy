@@ -61,10 +61,6 @@
                   value="title"
                   class="form-control"
                 />
-                
-                <!-- <div class="text-danger" v-if="this.titleError">
-                  {{ this.titleError }}
-                </div> -->
               </div>
               <div class="form-group">
                 <label for="thumbnail">Blog Thumbnail</label>

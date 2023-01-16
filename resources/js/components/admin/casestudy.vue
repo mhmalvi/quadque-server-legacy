@@ -46,19 +46,23 @@
                   {{ this.nameError }}
                 </div>
               </div>
-
-              <div class="form-group" v-if="this.is_editing">
-                <label for="company_name">Slug</label>
+              <div v-if="this.is_editing" class="form-group">
+                <label for="title">Slug</label>
+                <input
+                  type="checkbox"
+                  @click="get_slug"
+                  v-model="checked"
+                  class="ml-3"
+                  placeholder="Enter slug"
+                />
+                <label style="color:blue">select to get based on case study name</label>
                 <input
                   type="string"
-                  class="form-control"
-                  id="company_name"
                   v-model="slug"
-                  required
+                  
+                  value="title"
+                  class="form-control"
                 />
-                <!-- <div class="text-danger" v-if="this.nameError">
-                  {{ this.nameError }}
-                </div> -->
               </div>
 
               <div class="form-group">
@@ -465,7 +469,7 @@ export default {
         this.slug = localStorage.getItem('slug_tmp')
       }
       else {
-        this.slug = this.title.replace(/\s+/g, "-").toLowerCase();
+        this.slug = this.name.replace(/\s+/g, "-").toLowerCase();
         return this.slug.replace(/\//g, "-");
         
       }
