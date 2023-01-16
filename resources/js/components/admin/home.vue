@@ -67,30 +67,18 @@
                   </video>
                 </p>
               </div>
-              <!-- <div class="form-group">
-                <label for="text">Service description</label>
+              <div class="form-group">
+                <label for="company_name">Meta Keyword</label>
                 <textarea
-                  v-model="text"
-                  id="summernote"
+                  type="text"
                   class="form-control"
-                  rows="10"
+                  id="description"
+                  v-model="meta_keyword"
                 ></textarea>
-                <div class="text-danger" v-if="this.textError">
-                  {{ this.textError }}
-                </div>
-              </div>  -->
-              <!-- <div class="form-group">
-                <label for="title">Service Description</label><br />
-                <textarea
-                  v-model="description"
-                  id="summernote"
-                  class="form-control"
-                  rows="4"
-                ></textarea>
-                <div class="text-danger" v-if="this.titleError">
-                  {{ this.titleError }}
-                </div>
-              </div> -->
+                <!-- <div class="text-danger" v-if="this.nameError">
+                  {{ this.nameError }}
+                </div> -->
+              </div>
               <div>
                 <button
                   type="button"
@@ -184,7 +172,7 @@ export default {
       temporary_id: "",
       is_editing: false,
       temp_video_url: "",
-
+      meta_keyword:""
       // blog_no: 1,
     };
   },
@@ -193,6 +181,7 @@ export default {
       this.is_editing = false;
       this.video_name = "";
       this.temp_video_url = "";
+      this.meta_keyword=""
       this.file = "";
       e.target.files[0] = "";
     },
@@ -223,6 +212,7 @@ export default {
       // console.log(this.video_name);
       fd.append("name", this.video_name);
       fd.append("file", this.file);
+      fd.append("meta_keyword", this.meta_keyword);
       fd.append("id", this.temporary_id);
       axios
         .post(url, fd)
@@ -240,6 +230,13 @@ export default {
               showConfirmButton: true,
               // timer: 1500,
             });
+            this.video_name = "";
+
+          this.temporary_id = "";
+          this.file = "";
+          this.temp_video_url = "";
+          this.is_editing = false;
+          this.meta_keyword=""
           } else if (this.success == "updated") {
             this.$swal.fire({
               // position: "top-end",
@@ -251,12 +248,7 @@ export default {
           }
 
           // console.log(this.success)
-          this.video_name = "";
-
-          this.temporary_id = "";
-          this.file = "";
-          this.temp_video_url = "";
-          this.is_editing = false;
+          
           setTimeout(function () {
             this.success = "";
           }, 5000);
@@ -287,7 +279,7 @@ export default {
         .then((response) => {
           // console.log(response);
           this.video_name = response.data.name;
-          // console.log(this.$assetbase)
+           this.meta_keyword = response.data.meta_keyword;
           this.temp_video_url = response.data.file;
           // console.log()
         })
@@ -298,6 +290,13 @@ export default {
       axios.get(`/admin/home/delete/${list_id}`).then((response) => {
         // this.success = response.data.success;
         this.fetchAll();
+        this.video_name = "";
+
+          this.temporary_id = "";
+          this.file = "";
+          this.temp_video_url = "";
+          this.is_editing = false;
+          this.meta_keyword=""
         this.$swal.fire({
           icon: "error",
           text: "Deleted",

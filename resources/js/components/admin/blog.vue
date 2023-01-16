@@ -44,7 +44,7 @@
                 <label for="title">Blog Author</label>
                 <input type="text" v-model="author" class="form-control" required/>
               </div>
-              <div v-if="this.is_editing" class="form-group">
+              <div class="form-group">
                 <label for="title">Slug</label>
                 <input
                   type="checkbox"
@@ -208,34 +208,8 @@ export default {
       author: "",
       meta_keyword: "",
       short_description: "",
-
-      // slug:""
-
-      // extensions: [
-      //   new Doc(),
-      //   new Text(),
-      //   new Paragraph(),
-      //   new Heading({ level: 5 }),
-      //   new Bold({ bubble: true }), // render command-button in bubble menu.
-      //   new Underline({ bubble: true, menubar: false }), // render command-button in bubble menu but not in menubar.
-      //   new Italic(),
-      //   new Strike(),
-      //   new ListItem(),
-      //   new BulletList(),
-      //   new OrderedList(),
-      //   new Image(), new Iframe(), new CodeBlock(), new Blockquote(),new TodoItem(),new TodoList (),new TextAlign(),new Indent(),new LineHeight(),new HorizontalRule(),new HardBreak(),new TrailingNode(),new History(),new Table(),new TableHeader(),new TableCell(),new TableRow(),new FormatClear(),new TextColor(),new TextHighlight(),new Preview(),new Print(),new Fullscreen(),new SelectAll(),new FontType(),new FontSize(),new CodeView()
-      // ],
-    };
+    }
   },
-  // computed: {
-  //   slug() {
-  //     // return this.title.replace(/\s+/g, '-').toLowerCase();
-
-  //     let data = this.title.replace(/\s+/g, "-").toLowerCase();
-  //     let datas = data.replace(/\/+/g, "-");
-  //     return datas.replace(/\?+/g, " ");
-  //   },
-  // },
   methods: {
     disable_button() {
       this.is_editing = false;

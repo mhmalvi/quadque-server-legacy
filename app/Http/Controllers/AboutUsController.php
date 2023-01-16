@@ -56,6 +56,7 @@ class AboutUsController extends Controller
         $save->our_objective = $request->our_objective;
         $save->who_we_are = $request->who_we_are;
         $save->why_choose_us = $request->why_choose_us;
+        $save->meta_keyword = $request->meta_keyword;
 
         $save = $save->save();
         // $save = AboutUs::create([
@@ -151,6 +152,7 @@ class AboutUsController extends Controller
         $about_us->our_objective = $request->our_objective;
         $about_us->who_we_are = $request->who_we_are;
         $about_us->why_choose_us = $request->why_choose_us;
+        $about_us->meta_keyword = $request->meta_keyword;
         // $app_url = env('APP_URL');
 
 

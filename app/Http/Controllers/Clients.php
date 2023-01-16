@@ -54,7 +54,7 @@ class Clients extends Controller
         $app_url = env('APP_URL');
         $clients = new Client();
         $clients->meta_keyword = $request->meta_keyword;
-        $file_path = array();
+        // $file_path = array();
         if ($request->hasFile('client_images')) {
             $imageName = time() . '.' . $request->client_images->getClientOriginalExtension();
             $request->client_images->move(public_path('assets/img/clients'), $imageName);
@@ -123,22 +123,24 @@ class Clients extends Controller
         $app_url = env('APP_URL');
         // dd($request->all());
         $clients = Client::find($request->id);
-        $file_path = array();
+        $clients->meta_keyword = $request->meta_keyword;
+        // $file_path = array();
         if ($request->hasFile('client_images')) {
-            $imageName = time() . '.' . $request->client_images->getClientOriginalExtension();
-            $request->client_images->move(public_path('assets/img/clients'), $imageName);
+            $imageName = time() . '.' . $request->file('client_images')->getClientOriginalExtension();
+            $request->file('client_images')->move(public_path('assets/img/clients'), $imageName);
             $file_path = $app_url . ":8000/assets/img/clients/" . $imageName;
             // $case_study->agency = $file_path;
 
             $clients->client_images = $file_path;
-
+        }
+            // dd("hello");
             $save = $clients->save();
             if ($save) {
                 return response()->json([
                     'message' => 'updated'
                 ]);
             }
-        }
+        
     }
 
     /**

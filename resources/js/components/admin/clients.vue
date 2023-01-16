@@ -52,6 +52,7 @@
                   />
                 </p>
               </div>
+              
               <div>
                 <button
                   type="button"
@@ -143,41 +144,17 @@ export default {
   data() {
     return {
       lists: [],
-      our_vision: "",
-      our_mission: "",
-      our_goal: "",
-      our_objective: "",
-      who_we_are: "",
-      why_choose_us: "",
-      our_visionError: "",
-      our_missionError: "",
-      our_goalError: "",
-      our_objectiveError: "",
-      who_we_areError: "",
-      why_choose_usError: "",
       success: "",
       temporary_id: "",
       is_editing: false,
       temp_thumbnail_url: "",
+      image:""
       // blog_no: 1,
     };
   },
   methods: {
     disable_button() {
-      this.is_editing = false;
-      this.our_vision = "";
-      this.our_mission = "";
-      this.our_goal = "";
-      this.our_objective = "";
-      this.who_we_are = "";
-      this.why_choose_us = "";
-      // $("#summernote1").summernote1("code1", "");
-      // $("#summernote2").summernote2("code2", "");
-      // $("#summernote3").summernote3("code3", "");
-      // $("#summernote4").summernote4("code4", "");
-      // $("#summernote5").summernote5("code5", "");
-      // $("#summernote6").summernote6("code6", "");
-      // this.temp_thumbnail_url = "";
+      this.meta_keyword=""
     },
     fetchAll() {
       console.log("fetch");
@@ -189,10 +166,10 @@ export default {
         })
         .catch((error) => {});
     },
-    // uploadfile(e) {
-    //   this.image = e.target.files[0];
-    //   this.temp_thumbnail_url = "";
-    // },
+    uploadfile(e) {
+      this.image = e.target.files[0];
+      this.temp_thumbnail_url = "";
+    },
 
     save() {
       let url;
@@ -201,26 +178,12 @@ export default {
       } else {
         url = `/admin/about-us/store`;
       }
-
-      // this.description = $("#summernote").summernote("code");
-      // let fd = new FormData();
-      // fd
-      // fd.append("our_vision", this.our_vision);
-      // fd.append("our_mission", this.our_mission);
-      // fd.append("our_goal", this.our_goal);
-      // fd.append("our_objective", this.our_objective);
-      // fd.append("who_we_are", this.who_we_are);
-      // fd.append("why_choose_us", this.why_choose_us);
+      fd=new FormData()
+      fd.append("client_images", this.image);
+      fd.append("meta_keyword", this.meta_keyword);
+      fd.append("id", this.temporary_id);
       axios
-        .post(url, {
-          our_vision: this.our_vision,
-          our_mission: this.our_mission,
-          our_goal: this.our_goal,
-          our_objective: this.our_objective,
-          who_we_are: this.who_we_are,
-          why_choose_us: this.why_choose_us,
-          id: this.temporary_id,
-        })
+        .post(url,fd)
         .then((response) => {
           this.success = response.data.success;
           this.fetchAll();
@@ -232,13 +195,8 @@ export default {
               showConfirmButton: true,
               // timer: 1500,
             });
-            this.is_editing = false;
-            this.our_vision = "";
-            this.our_mission = "";
-            this.our_goal = "";
-            this.our_objective = "";
-            this.who_we_are = "";
-            this.why_choose_us = "";
+            
+            this.meta_keyword = "";
             this.temporary_id = "";
           } else if (this.success == "updated") {
             this.$swal.fire({
@@ -259,65 +217,18 @@ export default {
         })
         .catch((error) => {
           // console.log(error.response);
-          if (error.response.data.errors.our_vision) {
-            console.log("here");
-            console.log(error.response.data.errors.our_vision);
-            this.our_visionError = error.response.data.errors.our_vision[0];
-          } else {
-            this.our_visionError = "";
-          }
-
-          if (error.response.data.errors.our_mission) {
-            this.our_missionError = error.response.data.errors.our_mission[0];
-          } else {
-            this.our_missionError = "";
-          }
-
-          if (error.response.data.errors.our_goal) {
-            this.our_goalError = error.response.data.errors.our_goal[0];
-          } else {
-            this.our_goalError = "";
-          }
-          if (error.response.data.errors.our_objective) {
-            this.our_objectiveError =
-              error.response.data.errors.our_objective[0];
-          } else {
-            this.our_objectiveError = "";
-          }
-          if (error.response.data.errors.who_we_are) {
-            this.who_we_areError = error.response.data.errors.who_we_are[0];
-          } else {
-            this.who_we_areError = "";
-          }
-          if (error.response.data.errors.why_choose_us) {
-            this.why_choose_usError =
-              error.response.data.errors.why_choose_us[0];
-          } else {
-            this.why_choose_usError = "";
-          }
         });
     },
 
     editList(list_id) {
-      this.is_editing = true;
-      this.our_vision = "";
-      this.our_mission = "";
-      this.our_goal = "";
-      this.our_objective = "";
-      this.who_we_are = "";
-      this.why_choose_us = "";
       this.temporary_id = list_id;
 
       axios
         .get(`/admin/about-us/edit/${this.temporary_id}`)
         .then((response) => {
           console.log(response);
-          this.our_vision = response.data.our_vision;
-          this.our_mission = response.data.our_mission;
-          this.our_goal = response.data.our_goal;
-          this.our_objective = response.data.our_objective;
-          this.who_we_are = response.data.who_we_are;
-          this.why_choose_us = response.data.why_choose_us;
+          this.meta_keyword = response.data.meta_keyword;
+          this.temp_thumbnail_url=response.data.client_images
         })
         .catch((error) => {});
     },
@@ -325,6 +236,8 @@ export default {
       axios.get(`/admin/about-us/delete/${list_id}`).then((response) => {
         // this.success = response.data.success;
         this.fetchAll();
+        this.meta_keyword = ""
+        this.is_editing=false
         this.$swal.fire({
           icon: "error",
           text: "Deleted",

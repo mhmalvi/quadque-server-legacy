@@ -61,7 +61,7 @@ class ServiceController extends Controller
         $service->service_title = $request->service_title;
         $service->description = $request->description;
         $service->short_description = $request->service_short_description;
-
+        $service->meta_keyword = $request->meta_keyword;
         // $service->identity_design_title = $request->identity_design_title; identity_design_services_list
         $service->identity_design_des = $request->identity_design_des;
         $service->content = $request->content;
@@ -73,6 +73,7 @@ class ServiceController extends Controller
 
         $service->service_deliver_title = $request->service_deliver_title;
         $service->service_deliver_des = $request->service_deliver_description;
+        $service->slug = $request->slug;
 
         if ($request->file) {
 
@@ -84,8 +85,8 @@ class ServiceController extends Controller
         
 
 
-        $slug = Str::slug($request->service_name, '-');
-        $service->slug = $slug;
+        // $slug = Str::slug($request->service_name, '-');
+        // $service->slug = $slug;
         $save = $service->save();
         // dd($service_id);
         // $agency_img = [];
@@ -161,7 +162,7 @@ class ServiceController extends Controller
         $service->service_title = $request->service_title;
         // $service->identity_design_title = $request->identity_design_title;
         $service->identity_design_des = $request->identity_design_des;
-
+        $service->meta_keyword = $request->meta_keyword;
         $service->content = $request->content;
 
         $service->project_count = $request->project_count;

@@ -102,6 +102,18 @@
                   {{ this.descriptionError }}
                 </div>
               </div>
+              <div class="form-group">
+                <label for="company_name">Meta Keyword</label>
+                <textarea
+                  type="text"
+                  class="form-control"
+                  id="description"
+                  v-model="meta_keyword"
+                ></textarea>
+                <!-- <div class="text-danger" v-if="this.nameError">
+                  {{ this.nameError }}
+                </div> -->
+              </div>
               <div>
                 <button
                   type="button"
@@ -199,6 +211,7 @@ export default {
       temporary_id: "",
       is_editing: false,
       temp_thumbnail_url: "",
+      meta_keyword:""
       // blog_no: 1,
     };
   },
@@ -216,6 +229,7 @@ export default {
       this.file = "";
       // this.slug=""
       this.temp_thumbnail_url = "";
+      this.meta_keyword=""
     },
     fetchAll() {
       console.log("fetch");
@@ -246,6 +260,7 @@ export default {
       fd.append("description", this.description);
       fd.append("image", this.image);
       fd.append("id", this.temporary_id);
+      fd.append("meta_keyword", this.meta_keyword);
       axios
         .post(url, fd)
         .then((response) => {
@@ -318,7 +333,6 @@ export default {
       this.nameError = "";
       this.fileError = "";
       this.temporary_id = list_id;
-
       axios
         .get(`/admin/client-speak/edit/${this.temporary_id}`)
         .then((response) => {
@@ -327,6 +341,7 @@ export default {
           this.designation = response.data.designation;
           this.description = response.data.description;
           this.temp_thumbnail_url = response.data.image;
+          this.meta_keyword = response.data.meta_keyword;
         })
         .catch((error) => {});
     },
@@ -334,6 +349,14 @@ export default {
       axios.get(`/admin/client-speak/delete/${list_id}`).then((response) => {
         // this.success = response.data.success;
         this.fetchAll();
+        this.is_editing = false;
+        this.name = "";
+        this.designation = "";
+        this.description = "";
+        this.file = "";
+        // this.slug=""
+        this.temp_thumbnail_url = "";
+      this.meta_keyword=""
         this.$swal.fire({
           icon: "error",
           text: "Deleted",

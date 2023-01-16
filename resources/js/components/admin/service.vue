@@ -76,7 +76,7 @@
                   {{ this.service_titleError }}
                 </div> -->
               </div>
-              <div class="form-group" v-if="this.is_editing">
+              <div class="form-group">
                 <label for="title">Slug</label
                 ><input
                   @click="get_slug"
@@ -247,7 +247,18 @@
                   {{ this.service_deliver_descriptionError }}
                 </div>
               </div>
-              
+              <div class="form-group">
+                <label for="company_name">Meta Keyword</label>
+                <textarea
+                  type="text"
+                  class="form-control"
+                  id="description"
+                  v-model="meta_keyword"
+                ></textarea>
+                <!-- <div class="text-danger" v-if="this.nameError">
+                  {{ this.nameError }}
+                </div> -->
+              </div>
 
               <div>
                 <button
@@ -336,7 +347,7 @@ export default {
     return {
       lists: [],
       service_name: "",
-      
+      meta_keyword:"",
       file: "",
       description: "",
       isLoading: true,
@@ -400,6 +411,7 @@ export default {
         (this.service_deliver_title = ""),
         (this.service_deliver_description = ""),
         (this.temp_thumbnail_url = "");
+        this.meta_keyword=""
       this.service_title = "";
       document.getElementById("thumbnail").value = "";
       $(".summernote").summernote("code", "");
@@ -458,6 +470,7 @@ export default {
       fd.append("project_count", this.project_count);
       fd.append("happy_clients", this.happy_clients);
       fd.append("slug", this.slug);
+      fd.append("meta_keyword", this.meta_keyword);
       fd.append("content", this.content);
       fd.append("service_capability_menus", this.service_capability_menu);
       // }
@@ -495,9 +508,9 @@ export default {
               (this.service_capability_menu = ""),
               (this.service_deliver_title = ""),
               (this.service_deliver_description = ""),
-              (this.service_short_description = ""(
+              this.service_short_description = ""
                 (this.temp_thumbnail_url = "")
-              ));
+                this.meta_keyword=""
 
             this.is_editing = false;
           } else if (this.success == "updated") {
@@ -588,6 +601,7 @@ export default {
           this.service_deliver_description = response.data.service_deliver_des;
 
           this.temp_thumbnail_url = response.data.file;
+          this.meta_keyword = response.data.meta_keyword;
           
           localStorage.setItem('slug_tmp', this.slug);
           // this.get_slug = localStorage.getItem('slug_tmp')
@@ -603,6 +617,7 @@ export default {
           icon: "error",
           text: "Deleted",
         });
+        this.is_editing=false
         (this.identity_design_title = ""),
           (this.identity_design_des = ""),
           (this.identity_design_menus = ""),
@@ -612,6 +627,7 @@ export default {
           (this.service_deliver_title = ""),
           (this.service_deliver_description = ""),
           (this.temp_thumbnail_url = "");
+          this.meta_keyword=""
         
         this.service_short_description = "";
       });

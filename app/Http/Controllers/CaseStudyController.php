@@ -140,7 +140,7 @@ class CaseStudyController extends Controller
         // }
         // $ser_id=implode(',',$service_id);
         // die;
-        $slug = Str::slug($request->name, '-');
+        // $slug = Str::slug($request->name, '-');
         $case_study = new CaseStudy();
         $case_study->com_name = $request->name;
         $case_study->summary1 = $request->summary1;
@@ -149,7 +149,7 @@ class CaseStudyController extends Controller
         $case_study->meta_keyword = $request->meta_keyword;
         $case_study->description = $request->description;
         $case_study->our_content_header = $request->our_content_header;
-        $case_study->slug = $slug;
+        $case_study->slug = $request->slug;
         $case_study->title_1 = $request->title_1;
         $case_study->description_1 = $request->description_1;
         $case_study->title_2 = $request->title_2;

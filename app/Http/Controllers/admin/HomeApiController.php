@@ -49,6 +49,7 @@ class HomeApiController extends Controller
         // dd($app_url);
         $home_video = new HomeVideo();
         $home_video->name = $request->name;
+        $home_video->meta_keyword = $request->meta_keyword;
 
         if ($request->file) {
             $fileName = time() . '.' . $request->file->getClientOriginalExtension();
@@ -104,7 +105,7 @@ class HomeApiController extends Controller
         ]);
         $app_url = env('APP_URL');
         $home_video = HomeVideo::find($request->id);
-        // dd($home_video);
+        $home_video->meta_keyword = $request->meta_keyword;
         $home_video->name = $request->name;
 
         if ($request->file) {

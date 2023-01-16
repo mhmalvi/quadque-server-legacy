@@ -46,7 +46,7 @@
                   {{ this.nameError }}
                 </div>
               </div>
-              <div v-if="this.is_editing" class="form-group">
+              <div class="form-group">
                 <label for="title">Slug</label>
                 <input
                   type="checkbox"
@@ -153,9 +153,6 @@
                   v-model="summary2"
                   required
                 ></textarea>
-                <!-- <div class="text-danger" v-if="this.nameError">
-                  {{ this.nameError }}
-                </div> -->
               </div>
               <!-- <h4>Select service</h4>
               <div class="form-group" v-for="(service, index) in service_lists" :key="index">
@@ -244,6 +241,18 @@
                   class="form-control"
                   id="description"
                   v-model="description_2"
+                ></textarea>
+                <!-- <div class="text-danger" v-if="this.nameError">
+                  {{ this.nameError }}
+                </div> -->
+              </div>
+              <div class="form-group">
+                <label for="company_name">Meta Keyword</label>
+                <textarea
+                  type="text"
+                  class="form-control"
+                  id="description"
+                  v-model="meta_keyword"
                 ></textarea>
                 <!-- <div class="text-danger" v-if="this.nameError">
                   {{ this.nameError }}
@@ -387,13 +396,13 @@ import VueUploadMultipleImage from "vue-upload-multiple-image";
 // import Loading from "vue-loading-overlay";
 
 export default {
-  computed: {
-    slug() {
-      let data = this.name.replace(/\s+/g, "-").toLowerCase();
-      let datas = data.replace(/\s+/g, "-")
-      return datas.replace(/\?+/g, " ")
-    },
-  },
+  // computed: {
+  //   slug() {
+  //     let data = this.name.replace(/\s+/g, "-").toLowerCase();
+  //     let datas = data.replace(/\s+/g, "-")
+  //     return datas.replace(/\?+/g, " ")
+  //   },
+  // },
   data() {
     return {
       isLoading: false,
@@ -402,6 +411,7 @@ export default {
       agency: "",
       lists: [],
       service_lists: [],
+      meta_keyword:"",
       name: "",
       slug: "",
       checked: false,
@@ -522,7 +532,8 @@ export default {
       this.group_images = "";
       this.group_images_1_tmp = "";
       this.long_banner_tmp = ""
-      this.short_banner_tmp=""
+      this.short_banner_tmp = ""
+      this.meta_keyword=""
       document.getElementById("image").value = "";
       document.getElementById("group_images").value = "";
       $(".summernote").summernote("code", "");
@@ -578,6 +589,7 @@ export default {
       fd.append("description", this.description);
       fd.append("content", this.content);
       fd.append("agency", this.agency);
+      fd.append("meta_keyword", this.meta_keyword);
       fd.append("group_images", this.group_images);
       fd.append("long_banner", this.long_banner);
       fd.append("short_banner", this.short_banner_img);
@@ -693,6 +705,7 @@ export default {
           this.description_1 = response.data.description_1;
           this.description_2 = response.data.description_2;
           this.description_3 = response.data.description_3;
+          this.meta_keyword = response.data.meta_keyword;
           this.long_banner_tmp = response.data.long_banner;
           this.short_banner_tmp = response.data.short_banner;
           this.image_1_tmp = response.data.image_1;
@@ -724,6 +737,7 @@ export default {
         this.con_2_img_2 = "";
         this.con_2_img_3 = "";
         this.agency_img_tmp = "";
+        this.meta_keyword=""
         document.getElementById("image").value = "";
         document.getElementById("case_con_1_img").value = "";
         document.getElementById("con_2_img_1").value = "";

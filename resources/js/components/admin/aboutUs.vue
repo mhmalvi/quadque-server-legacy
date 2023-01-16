@@ -110,6 +110,18 @@
                   {{ this.why_choose_usError }}
                 </div>
               </div>
+              <div class="form-group">
+                <label for="company_name">Meta Keyword</label>
+                <textarea
+                  type="text"
+                  class="form-control"
+                  id="description"
+                  v-model="meta_keyword"
+                ></textarea>
+                <!-- <div class="text-danger" v-if="this.nameError">
+                  {{ this.nameError }}
+                </div> -->
+              </div>
               <div>
                 <button
                   type="button"
@@ -210,6 +222,7 @@ export default {
       our_vision: "",
       our_mission: "",
       our_goal: "",
+      meta_keyword: "",
       our_objective: "",
       who_we_are: "",
       why_choose_us: "",
@@ -227,10 +240,10 @@ export default {
     };
   },
   computed: {
-        slug(){
-            return this.title.replace(/\s+/g, '-').toLowerCase();
-        }
+    slug() {
+      return this.title.replace(/\s+/g, "-").toLowerCase();
     },
+  },
   methods: {
     disable_button() {
       this.is_editing = false;
@@ -240,6 +253,7 @@ export default {
       this.our_objective = "";
       this.who_we_are = "";
       this.why_choose_us = "";
+      this.meta_keyword = "";
       // $("#summernote1").summernote1("code1", "");
       // $("#summernote2").summernote2("code2", "");
       // $("#summernote3").summernote3("code3", "");
@@ -253,7 +267,6 @@ export default {
       axios
         .get("/admin/about-us/get")
         .then((response) => {
-          
           this.lists = response.data.data;
           console.log(this.lists);
         })
@@ -289,6 +302,7 @@ export default {
           our_objective: this.our_objective,
           who_we_are: this.who_we_are,
           why_choose_us: this.why_choose_us,
+          meta_keyword: this.meta_keyword,
           id: this.temporary_id,
         })
         .then((response) => {
@@ -310,6 +324,7 @@ export default {
             this.who_we_are = "";
             this.why_choose_us = "";
             this.temporary_id = "";
+            this.meta_keyword = "";
           } else if (this.success == "updated") {
             this.$swal.fire({
               // position: "top-end",
@@ -382,17 +397,26 @@ export default {
           this.our_objective = response.data.our_objective;
           this.who_we_are = response.data.who_we_are;
           this.why_choose_us = response.data.why_choose_us;
+          this.meta_keyword = response.data.meta_keyword;
         })
         .catch((error) => {});
     },
     destroyList(list_id) {
       axios.get(`/admin/about-us/delete/${list_id}`).then((response) => {
         // this.success = response.data.success;
+        this.is_editing = false;
         this.fetchAll();
         this.$swal.fire({
           icon: "error",
           text: "Deleted",
         });
+        this.our_vision = "";
+      this.our_mission = "";
+      this.our_goal = "";
+      this.our_objective = "";
+      this.who_we_are = "";
+      this.why_choose_us = "";
+      this.meta_keyword = "";
       });
     },
   },

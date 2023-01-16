@@ -54,6 +54,18 @@
                   />
                 </p>
               </div>
+              <div class="form-group">
+                <label for="company_name">Meta Keyword</label>
+                <textarea
+                  type="text"
+                  class="form-control"
+                  id="description"
+                  v-model="meta_keyword"
+                ></textarea>
+                <!-- <div class="text-danger" v-if="this.nameError">
+                  {{ this.nameError }}
+                </div> -->
+              </div>
 
               <div>
                 <button
@@ -77,6 +89,7 @@
             <tr>
               <td>No.</td>
               <th>Thumbnail</th>
+              <th>Meta Keyword</th>
               <th>Action</th>
             </tr>
           </thead>
@@ -89,6 +102,10 @@
               <td>
                 <!-- {{ list.thumbnail }} -->
                 <img :src="list.client_images" width="100" height="100" />
+              </td>
+              <td>
+                <!-- {{ list.thumbnail }} -->
+                {{ list.meta_keyword }}
               </td>
 
               <td style="vertical-align: middle; color: white">
@@ -122,23 +139,6 @@
 </template>
 <script>
 import axios from "axios";
-// import { ElementTiptap } from 'element-tiptap';
-
-// import {
-//   // necessary extensions
-//   Doc,
-//   Text,
-//   Paragraph,
-//   Heading,
-//   Bold,
-//   Underline,
-//   Italic,
-//   Strike,
-//   ListItem,
-//   BulletList,
-//   OrderedList,
-//   Image,Iframe,CodeBlock,Blockquote,TodoItem,TodoList,TextAlign,Indent,LineHeight,HorizontalRule,HardBreak,TrailingNode,History,Table ,TableHeader,TableCell,TableRow,FormatClear,TextColor,TextHighlight,Preview,Print,Fullscreen,SelectAll,FontType,FontSize,CodeView
-// } from 'element-tiptap';
 export default {
   // components: {
   //   'el-tiptap': ElementTiptap,
@@ -150,6 +150,7 @@ export default {
       images: [],
       title: "",
       thumbnail: "",
+      meta_keyword:"",
       text: "",
       titleError: "",
       textError: "",
@@ -181,6 +182,7 @@ export default {
       this.is_editing = false;
       this.title = "";
       this.text = "";
+      this.meta_keyword=""
       this.thumbnail = "";
       this.temp_thumbnail_url = "";
       // $(".summernote").summernote("code", "");
@@ -190,7 +192,7 @@ export default {
         .get("/admin/clients/get")
         .then((response) => {
           // console.log(response.data);
-          this.lists = response.data;
+          this.lists = response.data.data;
           console.log(lists);
         })
         .catch((error) => {});
@@ -210,6 +212,7 @@ export default {
 
       let fd = new FormData();
       fd.append("client_images", this.thumbnail);
+      fd.append("meta_keyword", this.meta_keyword);
       fd.append("id", this.temporary_id);
       axios
         .post(url, fd)
@@ -221,6 +224,7 @@ export default {
             this.fetchAll();
             document.getElementById("thumbnail").value = "";
             this.temporary_id = "";
+            this.meta_keyword=""
             this.temp_thumbnail_url = "";
             this.$swal.fire({
               // position: "top-end",
@@ -272,6 +276,7 @@ export default {
           // console.log(response)
           this.thumbnail = response.data.client_images;
           this.temp_thumbnail_url = response.data.client_images;
+          this.meta_keyword = response.data.meta_keyword;
           console.log(this.temp_thumbnail_url);
         })
         .catch((error) => {});
@@ -283,6 +288,9 @@ export default {
           icon: "error",
           text: "Deleted",
         });
+        this.thumbnail =""
+        this.temp_thumbnail_url =""
+        this.meta_keyword=""
         this.fetchAll();
       });
     },
