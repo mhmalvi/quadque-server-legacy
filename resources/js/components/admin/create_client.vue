@@ -48,7 +48,7 @@
                 </div>
                 <p class="my-2 text-center" v-if="this.temp_thumbnail_url">
                   <img
-                    :src="this.temp_thumbnail_url"
+                    :src="$base+this.temp_thumbnail_url"
                     width="150"
                     height="150"
                   />
@@ -101,7 +101,7 @@
 
               <td>
                 <!-- {{ list.thumbnail }} -->
-                <img :src="list.client_images" width="100" height="100" />
+                <img :src="$base+list.client_images" width="100" height="100" />
               </td>
               <td>
                 <!-- {{ list.thumbnail }} -->

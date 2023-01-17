@@ -76,7 +76,7 @@
                   {{ this.imageError }}
                 </div>
                 <p class="my-2 text-center" v-if="this.temp_image_url">
-                  <img :src="this.temp_image_url" width="150" height="150" />
+                  <img :src="$base+this.temp_image_url" width="150" height="150" />
                 </p>
               </div>
               <div class="form-group">
@@ -231,7 +231,7 @@
                   @change="upload_second_image"
                 />
                 <p class="my-2 text-center" v-if="this.image_2_tmp">
-                  <img :src="this.image_2_tmp" width="150" height="150" />
+                  <img :src="$base+this.image_2_tmp" width="150" height="150" />
                 </p>
               </div>
               <div class="form-group">
@@ -275,7 +275,7 @@
                   @change="upload_third_image"
                 />
                 <p class="my-2 text-center" v-if="this.image_3_tmp">
-                  <img :src="this.image_3_tmp" width="150" height="150" />
+                  <img :src="$base+this.image_3_tmp" width="150" height="150" />
                 </p>
               </div>
               <div class="form-group">
@@ -299,7 +299,7 @@
                   @change="agencyFiles"
                 />
                 <p class="my-2 text-center" v-if="this.agency_img_tmp">
-                  <img :src="this.agency_img_tmp" width="150" height="150" />
+                  <img :src="$base+this.agency_img_tmp" width="150" height="150" />
                 </p>
               </div>
               <!-- <div class="form-group">
@@ -350,6 +350,7 @@
               </td>
               <td>
                 <!-- {{ image[index] }} -->
+                <!-- {{ $base }} -->
                 <img width="150" height="150" :src="$base+list.agency" alt="" />
               </td>
               <td>

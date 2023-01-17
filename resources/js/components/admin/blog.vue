@@ -151,8 +151,8 @@
               </td>
 
               <td>
-                <!-- {{ list.thumbnail }} -->
-                <!-- {{ $base }} -->
+                <!-- {{ list.thumbnail }}
+                {{ $base }} -->
                 <img :src="$base+list.thumbnail" width="100" height="100" />
               </td>
               <td v-html="list.text"></td>

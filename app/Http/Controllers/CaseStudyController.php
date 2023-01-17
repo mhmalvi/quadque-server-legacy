@@ -148,7 +148,7 @@ class CaseStudyController extends Controller
         $case_study->title_3 = $request->title_3;
         $case_study->description_3 = $request->description_3;
         // $case_study->service_id = $ser_id;
-        $app_url = env('APP_URL');
+        // $app_url = env('APP_URL');
 
 
         if ($request->image) {

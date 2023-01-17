@@ -46,7 +46,7 @@
                 </div>
                 <p class="my-2 text-center" v-if="this.temp_thumbnail_url">
                   <img
-                    :src="this.temp_thumbnail_url"
+                    :src="$base+this.temp_thumbnail_url"
                     width="150"
                     height="150"
                   />
