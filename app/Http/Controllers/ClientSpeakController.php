@@ -72,7 +72,7 @@ class ClientSpeakController extends Controller
 
             $fileName = time() . '.' . $request->image->getClientOriginalExtension();
             $request->image->move(public_path('assets/img/client-speak'), $fileName);
-            $file_path = $app_url . ":8000/assets/img/client-speak/" . $fileName;
+            $file_path = "assets/img/client-speak/" . $fileName;
             $client_speak->image = $file_path;
         }
         // $slug = Str::slug($request->name, '-');
@@ -140,7 +140,7 @@ class ClientSpeakController extends Controller
 
             $fileName = time() . '.' . $request->image->getClientOriginalExtension();
             $request->image->move(public_path('assets/img/client-speak'), $fileName);
-            $file_path = $app_url . ":8000/assets/img/client-speak/" . $fileName;
+            $file_path = "assets/img/client-speak/" . $fileName;
             $client_speak->image = $file_path;
         }
 

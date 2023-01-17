@@ -58,7 +58,7 @@ class Clients extends Controller
         if ($request->hasFile('client_images')) {
             $imageName = time() . '.' . $request->client_images->getClientOriginalExtension();
             $request->client_images->move(public_path('assets/img/clients'), $imageName);
-            $file_path = $app_url . ":8000/assets/img/clients/" . $imageName;
+            $file_path = "assets/img/clients/" . $imageName;
             // $case_study->agency = $file_path;
 
             $clients->client_images = $file_path;
@@ -128,7 +128,7 @@ class Clients extends Controller
         if ($request->hasFile('client_images')) {
             $imageName = time() . '.' . $request->file('client_images')->getClientOriginalExtension();
             $request->file('client_images')->move(public_path('assets/img/clients'), $imageName);
-            $file_path = $app_url . ":8000/assets/img/clients/" . $imageName;
+            $file_path = "assets/img/clients/" . $imageName;
             // $case_study->agency = $file_path;
 
             $clients->client_images = $file_path;

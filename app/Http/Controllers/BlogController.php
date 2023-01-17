@@ -107,20 +107,12 @@ class BlogController extends Controller
      */
     public function store(Request $request)
     {
-        // dd($request->all());
-        //validation input
-        // $request->validate([
-        //     'title' => 'required',
-        //     'text' => 'required',
-        //     'thumbnail' => 'required|image'
-        // ]);
-
         $app_url = env('APP_URL');
         if ($request->thumbnail) {
 
             $fileName = time() . '.' . $request->thumbnail->getClientOriginalExtension();
             $request->thumbnail->move(public_path('assets/img/blogs'), $fileName);
-            $file_path = $app_url . ":8000/assets/img/blogs/" . $fileName;
+            $file_path = "assets/img/blogs/" . $fileName;
         }
 
         $slug = Str::slug($request->title, '-');
@@ -200,7 +192,7 @@ class BlogController extends Controller
 
             $fileName = time() . '.' . $request->thumbnail->getClientOriginalExtension();
             $request->thumbnail->move(public_path('assets/img/blogs'), $fileName);
-            $file_path = $app_url . ":8000/assets/img/blogs/" . $fileName;
+            $file_path = "assets/img/blogs/" . $fileName;
             $blog->thumbnail = $file_path;
         }
 

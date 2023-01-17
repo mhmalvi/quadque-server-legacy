@@ -53,7 +53,7 @@ class StartProjectController extends Controller
             report($e);
 
             return response()->json([
-                'message' => "failsed to send mail"
+                'message' => "failed to send mail"
             ]);
         }
 

@@ -55,7 +55,7 @@ class HomeApiController extends Controller
             $fileName = time() . '.' . $request->file->getClientOriginalExtension();
             $request->file->move(public_path('assets/home_video'), $fileName);
             
-            $file_path = $app_url . ":8000/assets/home_video/" . $fileName;
+            $file_path = "assets/home_video/" . $fileName;
             $home_video->file = $file_path;
         }
         
@@ -111,7 +111,7 @@ class HomeApiController extends Controller
         if ($request->file) {
             $fileName = time() . '.' . $request->file->getClientOriginalExtension();
             $request->file->move(public_path('assets/home_video'), $fileName);
-            $file_path = $app_url . ":8000/assets/home_video/" . $fileName;
+            $file_path = "assets/home_video/" . $fileName;
             $home_video->file = $file_path;
         }
 

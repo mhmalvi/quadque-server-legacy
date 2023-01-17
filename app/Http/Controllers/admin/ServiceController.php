@@ -79,7 +79,7 @@ class ServiceController extends Controller
 
             $fileName = time() . '.' . $request->file->getClientOriginalExtension();
             $request->file->move(public_path('assets/services'), $fileName);
-            $file_path = $app_url . ":8000/assets/services/" . $fileName;
+            $file_path = "assets/services/" . $fileName;
             $service->file = $file_path;
         }
         
@@ -177,7 +177,7 @@ class ServiceController extends Controller
 
             $fileName = time() . '.' . $request->file->getClientOriginalExtension();
             $request->file->move(public_path('assets/services'), $fileName);
-            $file_path = $app_url . ":8000/assets/services/" . $fileName;
+            $file_path = "assets/services/" . $fileName;
             $service->file = $file_path;
         }
         // dd("hello");
