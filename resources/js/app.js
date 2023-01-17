@@ -94,12 +94,14 @@ Vue.component(
     require("./components/admin/aboutUs.vue").default
 );
 
-// if (location.hostname == "127.0.0.1") {
-//     Vue.prototype.$base = "http://127.0.0.1:8000/#";
-//     Vue.prototype.$assetbase = "http://127.0.0.1:8000/";
-// } else if (location.hostname !== "localhost") {
-// } else {
-// }
+// http://latest.quadque.tech/
+if (location.hostname == "127.0.0.1") {
+    Vue.prototype.$base = "http://127.0.0.1:8000/";
+    // Vue.prototype.$assetbase = "http://127.0.0.1:8000/";
+} else if (location.hostname == "latest.quadque.tech") {
+    Vue.prototype.$base = "http://latest.quadque.tech/public/";
+} else {
+}
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to

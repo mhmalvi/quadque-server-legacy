@@ -114,7 +114,7 @@
                 />
                 <p class="my-2 text-center" v-if="this.group_images_1_tmp">
                   <img
-                    :src="this.group_images_1_tmp"
+                    :src="$base+this.group_images_1_tmp"
                     width="150"
                     height="150"
                   />
@@ -129,7 +129,7 @@
                   @change="long_image"
                 />
                 <p class="my-2 text-center" v-if="this.long_banner_tmp">
-                  <img :src="this.long_banner_tmp" width="150" height="150" />
+                  <img :src="$base+this.long_banner_tmp" width="150" height="150" />
                 </p>
               </div>
               <div class="form-group">
@@ -141,7 +141,7 @@
                   
                 />
                 <p class="my-2 text-center" v-if="this.short_banner_tmp">
-                  <img :src="this.short_banner_tmp" width="150" height="150" />
+                  <img :src="$base+this.short_banner_tmp" width="150" height="150" />
                 </p>
               </div>
               <div class="form-group">
@@ -197,7 +197,7 @@
                   @change="upload_first_image"
                 />
                 <p class="my-2 text-center" v-if="this.image_1_tmp">
-                  <img :src="this.image_1_tmp" width="150" height="150" />
+                  <img :src="$base+this.image_1_tmp" width="150" height="150" />
                 </p>
               </div>
               <div class="form-group">
@@ -346,11 +346,11 @@
               <td>{{ list.com_name }}</td>
               <td v-html="list.content"></td>
               <td>
-                <img :src="list.com_image" width="100" height="100" />
+                <img :src="$base+list.com_image" width="100" height="100" />
               </td>
               <td>
                 <!-- {{ image[index] }} -->
-                <img width="150" height="150" :src="list.agency" alt="" />
+                <img width="150" height="150" :src="$base+list.agency" alt="" />
               </td>
               <td>
                 <button
