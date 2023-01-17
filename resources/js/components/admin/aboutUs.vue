@@ -236,6 +236,7 @@ export default {
       temporary_id: "",
       is_editing: false,
       temp_thumbnail_url: "",
+      add_aboutus:""
       // blog_no: 1,
     };
   },
@@ -278,22 +279,14 @@ export default {
     // },
 
     save() {
+      
       let url;
       if (this.is_editing) {
         url = `/admin/about-us/update/`;
       } else {
         url = `/admin/about-us/store`;
       }
-
-      // this.description = $("#summernote").summernote("code");
-      // let fd = new FormData();
-      // fd
-      // fd.append("our_vision", this.our_vision);
-      // fd.append("our_mission", this.our_mission);
-      // fd.append("our_goal", this.our_goal);
-      // fd.append("our_objective", this.our_objective);
-      // fd.append("who_we_are", this.who_we_are);
-      // fd.append("why_choose_us", this.why_choose_us);
+      // console.log(response)
       axios
         .post(url, {
           our_vision: this.our_vision,
@@ -306,6 +299,7 @@ export default {
           id: this.temporary_id,
         })
         .then((response) => {
+          console.log("response")
           this.success = response.data.success;
           this.fetchAll();
           if (this.success == "created") {
@@ -343,7 +337,16 @@ export default {
           }, 5000);
         })
         .catch((error) => {
-          // console.log(error.response);
+          console.log(error.response.data.data);
+          if (error.response.data.data == 'exist') {
+            this.$swal.fire({
+              // position: "top-end",
+              icon: "failed",
+              title: "Data already exist. Please go to edit section to edit.",
+              showConfirmButton: true,
+              // timer: 1500,
+            });
+          }
           if (error.response.data.errors.our_vision) {
             console.log("here");
             console.log(error.response.data.errors.our_vision);

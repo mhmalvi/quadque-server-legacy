@@ -47,6 +47,9 @@ Vue.use(ElementTiptapPlugin, {
 });
 // Now you register `'el-tiptap'` component globally.
 library.add(faTwitter, faFacebookF, faYoutube, faInstagram);
+import VueSimpleAlert from "vue-simple-alert";
+
+Vue.use(VueSimpleAlert);
 Vue.use(VueSweetalert2);
 Vue.component("marquee-text", MarqueeText);
 Vue.component("dynamic-marquee", DynamicMarquee);
