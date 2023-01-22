@@ -1,5 +1,17 @@
 <template>
   <div>
+    <!-- <div style="position: relative;height: 100%; "> -->
+
+      <lottie-vue-player v-if="loader"
+        :src="`./9582-liquid-4-dot-loader.json`"
+        style="
+          top: 40%;position: sticky;
+          background: transparent;
+          z-index: 100;
+        "
+      >
+      </lottie-vue-player>
+    <!-- </div> -->
     <div class="row d-flex justify-content-center">
       <div
         v-if="this.is_editing == true"
@@ -35,14 +47,19 @@
             <form @submit.prevent="save">
               <div class="form-group">
                 <label for="title">Blog Title</label>
-                <input v-model="title" class="form-control" required/>
+                <input v-model="title" class="form-control" required />
                 <div class="text-danger" v-if="this.titleError">
                   {{ this.titleError }}
                 </div>
               </div>
               <div class="form-group">
                 <label for="title">Blog Author</label>
-                <input type="text" v-model="author" class="form-control" required/>
+                <input
+                  type="text"
+                  v-model="author"
+                  class="form-control"
+                  required
+                />
               </div>
               <div class="form-group">
                 <label for="title">Slug</label>
@@ -53,11 +70,10 @@
                   class="ml-3"
                   placeholder="Enter slug"
                 />
-                <label style="color:blue">select to get based on title</label>
+                <label style="color: blue">select to get based on title</label>
                 <input
                   type="string"
                   v-model="slug"
-                  
                   value="title"
                   class="form-control"
                 />
@@ -75,7 +91,7 @@
                 </div>
                 <p class="my-2 text-center" v-if="this.temp_thumbnail_url">
                   <img
-                    :src="$base+this.temp_thumbnail_url"
+                    :src="$base + this.temp_thumbnail_url"
                     width="150"
                     height="150"
                   />
@@ -109,17 +125,13 @@
                 <textarea
                   v-model="short_description"
                   class="form-control"
-                  
                 ></textarea>
                 <!-- <div class="text-danger" v-if="this.titleError">
                   {{ this.titleError }}
                 </div> -->
               </div>
               <div>
-                <button
-                  type="submit"
-                  class="btn btn-block btn-save text-white"
-                >
+                <button type="submit" class="btn btn-block btn-save text-white">
                   {{ this.is_editing ? "Update" : "Save" }}
                 </button>
               </div>
@@ -137,7 +149,7 @@
               <td>No.</td>
               <th>Title</th>
               <th>Thumbnail</th>
-              <th>Description</th>
+              <!-- <th>Description</th> -->
               <th>Action</th>
             </tr>
           </thead>
@@ -153,9 +165,9 @@
               <td>
                 <!-- {{ list.thumbnail }}
                 {{ $base }} -->
-                <img :src="$base+list.thumbnail" width="100" height="100" />
+                <img :src="$base + list.thumbnail" width="100" height="100" />
               </td>
-              <td v-html="list.text"></td>
+              <!-- <td v-html="list.text"></td> -->
 
               <td style="vertical-align: middle; color: white">
                 <button
@@ -192,6 +204,7 @@ import axios from "axios";
 export default {
   data() {
     return {
+      loader:false,
       lists: [],
       title: "",
       thumbnail: "",
@@ -209,7 +222,27 @@ export default {
       author: "",
       meta_keyword: "",
       short_description: "",
-    }
+      options: {
+        minimizable: false,
+        playerSize: "standard",
+        backgroundColor: "#fff",
+        backgroundStyle: "color",
+        theme: {
+          controlsView: "standard",
+          active: "light",
+          light: {
+            color: "#3D4852",
+            backgroundColor: "#fff",
+            opacity: "0.7",
+          },
+          dark: {
+            color: "#fff",
+            backgroundColor: "#202020",
+            opacity: "0.7",
+          },
+        },
+      },
+    };
   },
   methods: {
     disable_button() {
@@ -218,21 +251,19 @@ export default {
       this.text = "";
       this.thumbnail = "";
       this.temp_thumbnail_url = "";
-      this.author = ""
-      this.meta_keyword = ""
-      this.short_description = ""
-      
+      this.author = "";
+      this.meta_keyword = "";
+      this.short_description = "";
+
       $(".summernote").summernote("code", "");
     },
     get_slug() {
-      console.log(this.checked)
+      console.log(this.checked);
       if (this.is_editing == true && this.checked == true) {
-        this.slug = localStorage.getItem('blog_slug')
-      }
-      else {
+        this.slug = localStorage.getItem("blog_slug");
+      } else {
         this.slug = this.title.replace(/\s+/g, "-").toLowerCase();
         return this.slug.replace(/\//g, "-");
-        
       }
     },
     fetchAll() {
@@ -251,6 +282,7 @@ export default {
 
     save() {
       let url;
+      this.loader=true
       if (this.is_editing) {
         url = `/admin/blog/update/`;
       } else {
@@ -272,7 +304,7 @@ export default {
         .post(url, fd)
         .then((response) => {
           this.success = response.data.success;
-
+          this.loader=false
           if (this.success == "created") {
             this.title = "";
             this.text = "";
@@ -344,7 +376,7 @@ export default {
           // this.thumbnail = response.data.thumbnail;
           $(".summernote").summernote("code", this.text);
           this.temp_thumbnail_url = response.data.thumbnail;
-          localStorage.setItem('blog_slug', this.slug);
+          localStorage.setItem("blog_slug", this.slug);
         })
         .catch((error) => {});
     },
@@ -399,6 +431,20 @@ thead {
   border: none;
 }
 
+#animation-container #animation {
+    width: 100%;
+    height: 100%;
+    display: none !important;
+}
+.animation {
+    width: 100%;
+    height: 100%;
+    display: none !important;
+}
+
+.error{
+  display:none !important;
+}
 .btn-save {
   background: #5a67ff;
 }
@@ -414,12 +460,13 @@ thead {
   border: none;
 }
 
-.note-editor.note-airframe .note-editing-area .note-editable, .note-editor.note-frame .note-editing-area .note-editable {
-    padding: 10px;
-    overflow: auto;
-    word-wrap: break-word;
-    background: black !important;
-    color: white !important;
+.note-editor.note-airframe .note-editing-area .note-editable,
+.note-editor.note-frame .note-editing-area .note-editable {
+  padding: 10px;
+  overflow: auto;
+  word-wrap: break-word;
+  background: black !important;
+  color: white !important;
 }
 
 /* .note-editor.note-airframe.fullscreen, .note-editor.note-frame.fullscreen {

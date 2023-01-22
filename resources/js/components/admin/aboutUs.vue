@@ -273,10 +273,6 @@ export default {
         })
         .catch((error) => {});
     },
-    // uploadfile(e) {
-    //   this.image = e.target.files[0];
-    //   this.temp_thumbnail_url = "";
-    // },
 
     save() {
       

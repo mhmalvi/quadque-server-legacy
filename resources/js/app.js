@@ -31,7 +31,7 @@ import VueSweetalert2 from "vue-sweetalert2";
 import "sweetalert2/dist/sweetalert2.min.css";
 // import VueFroala from "vue-froala-wysiwyg";
 // Vue.use(VueFroala);
-
+import LottieVuePlayer from "@lottiefiles/vue-lottie-player";
 import ElementUI from 'element-ui';
 import { ElementTiptapPlugin } from 'element-tiptap';
 // import ElementUI's styles
@@ -45,6 +45,7 @@ Vue.use(ElementUI);
 Vue.use(ElementTiptapPlugin, {
   /* plugin options */
 });
+Vue.use(LottieVuePlayer);
 // Now you register `'el-tiptap'` component globally.
 library.add(faTwitter, faFacebookF, faYoutube, faInstagram);
 import VueSimpleAlert from "vue-simple-alert";
@@ -102,7 +103,7 @@ if (location.hostname == "localhost" || location.hostname == "127.0.0.1") {
     Vue.prototype.$base = "http://127.0.0.1:8000/";
     // Vue.prototype.$assetbase = "http://127.0.0.1:8000/";
 } else if (location.hostname == "latest.quadque.tech") {
-    Vue.prototype.$base = "http://latest.quadque.tech";
+    Vue.prototype.$base = "http://latest.quadque.tech/";
 } else {
 }
 

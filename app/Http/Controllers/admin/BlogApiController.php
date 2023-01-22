@@ -135,6 +135,7 @@ class BlogApiController extends Controller
         $blog->title = $request->title;
         $blog->text = $request->text;
         $blog->slug = $request->slug;
+        // unlink()
 
         if ($request->thumbnail) {
 

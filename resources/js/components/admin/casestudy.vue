@@ -1,5 +1,14 @@
 <template>
   <div>
+    <lottie-vue-player v-if="loader"
+        :src="`./9582-liquid-4-dot-loader.json`"
+        style="
+          top: 40%;position: sticky;
+          background: transparent;
+          z-index: 100;
+        "
+      >
+      </lottie-vue-player>
     <div class="row d-flex justify-content-center">
       <div
         v-if="this.is_editing == true"
@@ -335,7 +344,7 @@
           <thead>
             <tr>
               <th>Company Name</th>
-              <th>Company Description</th>
+              <!-- <th>Company Description</th> -->
               <th>Company Icon</th>
               <th>Agency Images</th>
               <th>Action</th>
@@ -344,7 +353,7 @@
           <tbody v-if="lists.length > 0">
             <tr v-for="(list, index) in lists" :key="index">
               <td>{{ list.com_name }}</td>
-              <td v-html="list.content"></td>
+              <!-- <td v-html="list.content"></td> -->
               <td>
                 <img :src="$base+list.com_image" width="100" height="100" />
               </td>
@@ -406,9 +415,7 @@ export default {
   // },
   data() {
     return {
-      isLoading: false,
-      fullPage: true,
-      loader: "bars",
+      loader:false,
       agency: "",
       lists: [],
       service_lists: [],
@@ -454,6 +461,26 @@ export default {
       // value:''
       background: "#fff",
       opacity: 0.5,
+      options: {
+        minimizable: false,
+        playerSize: "standard",
+        backgroundColor: "#fff",
+        backgroundStyle: "color",
+        theme: {
+          controlsView: "standard",
+          active: "light",
+          light: {
+            color: "#3D4852",
+            backgroundColor: "#fff",
+            opacity: "0.7",
+          },
+          dark: {
+            color: "#fff",
+            backgroundColor: "#202020",
+            opacity: "0.7",
+          },
+        },
+      },
     };
   },
   components: {
@@ -574,6 +601,7 @@ export default {
     save: function (event) {
       // this.uploadImageSuccess()
       // console.log("data", formData, index, fileList);
+      this.loader=true
       let url;
       this.isLoading = true;
       if (this.is_editing) {
@@ -611,7 +639,7 @@ export default {
         .post(url, fd)
         .then((response) => {
           this.fetchAll();
-          this.isLoading = false;
+          this.loader = false;
           // this.success = response.data.success;
           $(".summernote").summernote("code", this.content);
           // document.getElementById("thumbnail").value = "";
@@ -710,6 +738,7 @@ export default {
           this.long_banner_tmp = response.data.long_banner;
           this.short_banner_tmp = response.data.short_banner;
           this.image_1_tmp = response.data.image_1;
+          console.log(this.image_1_tmp)
           this.image_2_tmp = response.data.image_2;
           this.image_3_tmp = response.data.image_3;
           this.agency_img_tmp = response.data.agency;

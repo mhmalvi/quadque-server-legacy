@@ -188,8 +188,9 @@ class BlogController extends Controller
         $blog->author = $request->author;
         $app_url = env('APP_URL');
         // dd($request->thumbnail);
+        
         if ($request->thumbnail) {
-
+            unlink($blog->thumbnail);
             $fileName = time() . '.' . $request->thumbnail->getClientOriginalExtension();
             $request->thumbnail->move(public_path('assets/img/blogs'), $fileName);
             $file_path = "assets/img/blogs/" . $fileName;
@@ -216,9 +217,9 @@ class BlogController extends Controller
     public function destroy($id, Blog $caseStudy)
     {
         $blog = Blog::find($id);
-
+        
         $delete = $blog->delete();
-
+        unlink($blog->thumbnail);
         if ($delete) {
             return response()->json(['success' => 'You have successfully delete blog.']);
         }

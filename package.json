@@ -32,6 +32,7 @@
         "@fortawesome/free-regular-svg-icons": "^6.2.0",
         "@fortawesome/free-solid-svg-icons": "^6.2.0",
         "@fortawesome/vue-fontawesome": "^2.0.8",
+        "@lottiefiles/vue-lottie-player": "^1.1.0",
         "ckeditor4-vue": "^2.2.1",
         "element-tiptap": "^1.27.1",
         "element-ui": "^2.15.6",

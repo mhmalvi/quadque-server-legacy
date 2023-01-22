@@ -345,6 +345,7 @@ export default {
   },
   data() {
     return {
+      loader:false,
       lists: [],
       service_name: "",
       meta_keyword:"",
@@ -382,7 +383,27 @@ export default {
       temp_thumbnail_url: "",
       slug: "",
       checked: false,
-      agency_img_tmp:""
+      agency_img_tmp:"",
+      options: {
+        minimizable: false,
+        playerSize: "standard",
+        backgroundColor: "#fff",
+        backgroundStyle: "color",
+        theme: {
+          controlsView: "standard",
+          active: "light",
+          light: {
+            color: "#3D4852",
+            backgroundColor: "#fff",
+            opacity: "0.7",
+          },
+          dark: {
+            color: "#fff",
+            backgroundColor: "#202020",
+            opacity: "0.7",
+          },
+        },
+      },
       // agency_img: [],
       // multi_img: "",
       // multiple_img:""
@@ -515,6 +536,7 @@ export default {
             this.is_editing = false;
           } else if (this.success == "updated") {
             this.is_editing = true;
+            this.loader = false;
             this.$swal.fire({
               // position: "top-end",
               icon: "success",
