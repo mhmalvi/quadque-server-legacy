@@ -152,8 +152,8 @@ class ServiceController extends Controller
     {
         // dd("hello");
         $request->validate([
-            'slug' => 'required|unique:services',
-            'service_name' => 'required|unique:services',
+            'slug' => 'required',
+            'service_name' => 'required',
             'service_title' => 'required',
         ]);
         $app_url = env('APP_URL');

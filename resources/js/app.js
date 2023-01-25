@@ -103,7 +103,7 @@ if (location.hostname == "localhost" || location.hostname == "127.0.0.1") {
     Vue.prototype.$base = "http://127.0.0.1:8000/";
     // Vue.prototype.$assetbase = "http://127.0.0.1:8000/";
 } else if (location.hostname == "latest.quadque.tech") {
-    Vue.prototype.$base = "http://latest.quadque.tech/";
+    Vue.prototype.$base = "http://latest.quadque.tech/admin/";
 } else {
 }
 

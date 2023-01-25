@@ -1,8 +1,14 @@
 <template>
   <div>
-    <!-- <div class="loader">
-      <loading :active="isLoading" :is-full-page="fullPage" :loader="loader" />
-    </div> -->
+    <lottie-vue-player v-if="loader"
+        :src="`./9582-liquid-4-dot-loader.json`"
+        style="
+          top: 40%;position: sticky;
+          background: transparent;
+          z-index: 100;
+        "
+      >
+      </lottie-vue-player>
     <div class="row d-flex justify-content-center">
       <div
         v-if="this.is_editing == true"
@@ -278,7 +284,7 @@
     </div>
     <div class="row mt-5 d-flex justify-content-center">
       <div class="col-md-12">
-        <h4>Services Lists</h4>
+        <h4>Services Listsdfgdgfgfgf</h4>
         <table class="table table-striped text-center">
           <thead>
             <tr>
@@ -449,6 +455,7 @@ export default {
     },
     fetchAll() {
       // console.log("fetch");
+      this.loader=true
       axios
         .get("/admin/service/get")
         .then((response) => {
@@ -456,6 +463,7 @@ export default {
 
           this.lists = response.data.data;
           console.log(this.lists);
+          this.loader=false
         })
         .catch((error) => {});
     },

@@ -110,7 +110,6 @@ class BlogController extends Controller
         $request->validate([
             'slug' => 'required|unique:blogs',
             'title' => 'required|unique:blogs',
-            'thumbnail' => 'required',
             'author' => 'required'
         ]);
         $app_url = env('APP_URL');
@@ -179,9 +178,8 @@ class BlogController extends Controller
     {
         //validation input
         $request->validate([
-            'slug' => 'required|unique:blogs',
-            'title' => 'required|unique:blogs',
-            'thumbnail' => 'required',
+            'slug' => 'required',
+            'title' => 'required',
             'author' => 'required'
         ]);
         // dd($request->id);

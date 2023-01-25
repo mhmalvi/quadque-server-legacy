@@ -132,7 +132,6 @@ class ClientSpeakController extends Controller
             'name' => 'required',
             'designation' => 'required',
             'description' => 'required',
-            'image' => 'required|image'
         ]);
         $client_speak = ClientSpeak::find($request->id);
         // dd($request->description);

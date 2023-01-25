@@ -101,7 +101,6 @@ class HomeApiController extends Controller
         // dd($request->id);
         $request->validate([
             'name' => 'required',
-            'file' => 'required'
         ]);
         $app_url = env('APP_URL');
         $home_video = HomeVideo::find($request->id);
@@ -134,7 +133,6 @@ class HomeApiController extends Controller
     {
         $video = HomeVideo::find($id);
         $video->delete();
-        unlink($home_video->file);
         return response()->json(['success' => 'You have successfully deleted file.']);
     }
 }

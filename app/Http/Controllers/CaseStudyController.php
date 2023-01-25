@@ -246,11 +246,10 @@ class CaseStudyController extends Controller
     public function update(Request $request)
     {
         $request->validate([
-            'name' => 'required|unique:case_studies',
-            'slug' => 'required|unique:case_studies',
+            'name' => 'required',
+            'slug' => 'required',
             'summary1'=>'required',
             'summary2' => 'required',
-            'image'=>'required'
         ]);
         // dd($request->all());
         $case_study = CaseStudy::find($request->id);
