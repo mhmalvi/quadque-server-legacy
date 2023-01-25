@@ -88,7 +88,7 @@
                   <img :src="$base+this.temp_image_url" width="150" height="150" />
                 </p>
               </div>
-              <div class="form-group">
+              <!-- <div class="form-group">
                 <label for="company_name">Description</label>
                 <textarea
                   type="text"
@@ -97,10 +97,7 @@
                   v-model="description"
                   required
                 ></textarea>
-                <!-- <div class="text-danger" v-if="this.nameError">
-                  {{ this.nameError }}
-                </div> -->
-              </div>
+              </div> -->
               <div class="form-group">
                 <label for="company_name">First Summary</label>
                 <textarea
@@ -535,6 +532,7 @@ export default {
       }
     },
     disable_button() {
+      $(".summernote").summernote("code", "");
       this.is_editing = false;
       this.name = "";
       this.image = "";
@@ -542,6 +540,7 @@ export default {
       this.summary2 = "";
       this.long_banner = "";
       this.short_banner_img = "";
+      this.slug=""
       this.content = "";
       this.our_content_header = "",
       this.title_1 = "",
@@ -561,12 +560,15 @@ export default {
       this.group_images_1_tmp = "";
       this.long_banner_tmp = ""
       this.short_banner_tmp = ""
-      this.meta_keyword=""
+      this.meta_keyword = ""
+      this.agency_img_tmp=""
       document.getElementById("image").value = "";
       document.getElementById("group_images").value = "";
-      $(".summernote").summernote("code", "");
+      // $(".summernote").summernote("code", "");
     },
     fetchAll() {
+      // console.log("here")
+      // console.log($base)
       axios
         .get("/admin/case-study/get")
         .then((response) => {
@@ -605,7 +607,7 @@ export default {
       let url;
       this.isLoading = true;
       if (this.is_editing) {
-        url = `/admin/case-study/update/`;
+        url = `/admin/case-study/update`;
       } else {
         url = `/admin/case-study/store`;
       }
@@ -615,7 +617,7 @@ export default {
       fd.append("summary1", this.summary1);
       fd.append("summary2", this.summary2);
       fd.append("slug", this.slug);
-      fd.append("description", this.description);
+      // fd.append("description", this.description);
       fd.append("content", this.content);
       fd.append("agency", this.agency);
       fd.append("meta_keyword", this.meta_keyword);
@@ -697,10 +699,16 @@ export default {
         })
         .catch((error) => {
           if (error.response.data.errors.name) {
-            this.nameError = error.response.data.errors.name[0];
+            alert(error.response.data.errors.name[0])
+            // this.nameError = error.response.data.errors.name[0];
           } else {
             this.nameError = "";
           }
+          if (error.response.data.errors.slug) {
+            this.loader=false
+            alert('Slug already exists')
+          } 
+          
 
           if (error.response.data.errors.image) {
             this.imageError = error.response.data.errors.image[0];
@@ -726,7 +734,7 @@ export default {
           this.summary2 = response.data.summary2;
           this.content = response.data.content;
           this.slug = response.data.slug
-          this.description = response.data.description;
+          // this.description = response.data.description;
           this.our_content_header = response.data.our_content_header;
           this.title_1 = response.data.title_1;
           this.title_2 = response.data.title_2;

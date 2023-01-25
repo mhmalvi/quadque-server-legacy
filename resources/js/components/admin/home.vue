@@ -203,7 +203,7 @@ export default {
     save() {
       let url;
       if (this.is_editing) {
-        url = `/admin/home/update/`;
+        url = `/admin/home/update`;
       } else {
         url = `/admin/home/store`;
       }

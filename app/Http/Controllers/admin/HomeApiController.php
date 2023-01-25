@@ -109,6 +109,7 @@ class HomeApiController extends Controller
         $home_video->name = $request->name;
 
         if ($request->file) {
+            unlink($home_video->file);
             $fileName = time() . '.' . $request->file->getClientOriginalExtension();
             $request->file->move(public_path('assets/home_video'), $fileName);
             $file_path = "assets/home_video/" . $fileName;
@@ -133,6 +134,7 @@ class HomeApiController extends Controller
     {
         $video = HomeVideo::find($id);
         $video->delete();
+        unlink($home_video->file);
         return response()->json(['success' => 'You have successfully deleted file.']);
     }
 }

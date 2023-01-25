@@ -84,7 +84,9 @@
                   type="checkbox"
                   v-model="checked"
                 />
-                <label style="color:blue">select to get based on service name</label>
+                <label style="color: blue"
+                  >select to get based on service name</label
+                >
                 <input
                   type="string"
                   class="form-control"
@@ -111,7 +113,7 @@
                 </div>
                 <p class="my-2 text-center" v-if="this.temp_thumbnail_url">
                   <img
-                    :src="$base+this.temp_thumbnail_url"
+                    :src="$base + this.temp_thumbnail_url"
                     width="150"
                     height="150"
                   />
@@ -283,9 +285,9 @@
               <th>No.</th>
               <th>Name</th>
               <th>Thumbnail</th>
-              <th>identity description</th>
-              <th style="width: 36%">Description</th>
-              
+              <!-- <th>identity description</th>
+              <th style="width: 36%">Description</th> -->
+
               <th>Action</th>
             </tr>
           </thead>
@@ -299,17 +301,17 @@
               </td>
 
               <td style="vertical-align: middle">
-                <img :src="$base+list.file" width="100" height="100" />
+                <img :src="$base + list.file" width="100" height="100" />
               </td>
-              <td v-html="list.identity_design_des"></td>
-              <td v-html="list.content"></td>
+              <!-- <td v-html="list.identity_design_des"></td>
+              <td v-html="list.content"></td> -->
 
-              
               <td style="vertical-align: middle; width: 15%; color: white">
                 <button
                   type="button"
+                  id="edit"
                   class="btn btn-primary text-white"
-                  @click="editList(list.id)"
+                  @click="editList(list.id),topFunction()"
                 >
                   Edit</button
                 ><button
@@ -345,10 +347,10 @@ export default {
   },
   data() {
     return {
-      loader:false,
+      loader: false,
       lists: [],
       service_name: "",
-      meta_keyword:"",
+      meta_keyword: "",
       file: "",
       description: "",
       isLoading: true,
@@ -383,7 +385,7 @@ export default {
       temp_thumbnail_url: "",
       slug: "",
       checked: false,
-      agency_img_tmp:"",
+      agency_img_tmp: "",
       options: {
         minimizable: false,
         playerSize: "standard",
@@ -416,7 +418,6 @@ export default {
   //     }
   // },
   methods: {
-    
     disable_button() {
       this.is_editing = false;
       this.service_name = "";
@@ -432,20 +433,18 @@ export default {
         (this.service_deliver_title = ""),
         (this.service_deliver_description = ""),
         (this.temp_thumbnail_url = "");
-        this.meta_keyword=""
+      this.meta_keyword = "";
       this.service_title = "";
       document.getElementById("thumbnail").value = "";
       $(".summernote").summernote("code", "");
     },
     get_slug() {
-      console.log(this.checked)
+      console.log(this.checked);
       if (this.is_editing == true && this.checked == true) {
-        this.slug = localStorage.getItem('slug_tmp')
-      }
-      else {
+        this.slug = localStorage.getItem("slug_tmp");
+      } else {
         this.slug = this.service_name.replace(/\s+/g, "-").toLowerCase();
         return this.slug.replace(/\//g, "-");
-        
       }
     },
     fetchAll() {
@@ -469,7 +468,7 @@ export default {
       let url;
       this.loader = true;
       if (this.is_editing) {
-        url = `/admin/service/update/`;
+        url = `/admin/service/update`;
       } else {
         url = `/admin/service/store`;
       }
@@ -485,7 +484,7 @@ export default {
       fd.append("description", this.description);
       fd.append("service_short_description", this.service_short_description);
       fd.append("file", this.file);
-      
+
       fd.append("identity_design_des", this.identity_design_des);
 
       fd.append("project_count", this.project_count);
@@ -529,9 +528,10 @@ export default {
               (this.service_capability_menu = ""),
               (this.service_deliver_title = ""),
               (this.service_deliver_description = ""),
-              this.service_short_description = ""
+              (this.service_short_description = ""(
                 (this.temp_thumbnail_url = "")
-                this.meta_keyword=""
+              ));
+            this.meta_keyword = "";
 
             this.is_editing = false;
           } else if (this.success == "updated") {
@@ -561,23 +561,17 @@ export default {
           } else {
             this.service_nameError = "";
           }
+          if (error.response.data.errors.slug) {
+            this.loader = false;
+            alert("Slug already exists");
+          }
 
-          if (error.response.data.errors.description) {
-            this.descriptionError = error.response.data.errors.description[0];
+          if (error.response.data.errors.title) {
+            this.descriptionError = error.response.data.errors.title[0];
           } else {
             this.descriptionError = "";
           }
           if (error.response.data.errors.file) {
-            this.fileError = error.response.data.errors.file[0];
-          } else {
-            this.fileError = "";
-          }
-          if (error.response.data.errors.identity_design_titleError) {
-            this.fileError = error.response.data.errors.file[0];
-          } else {
-            this.fileError = "";
-          }
-          if (error.response.data.errors.identity_design_desError) {
             this.fileError = error.response.data.errors.file[0];
           } else {
             this.fileError = "";
@@ -607,7 +601,7 @@ export default {
           this.identity_design_des = response.data.identity_design_des;
           this.identity_design_menus = response.data.identity_design_menus;
           this.slug = response.data.slug;
-          
+
           this.project_count = response.data.project_count;
           this.happy_clients = response.data.happy_clients;
           this.service_title = response.data.service_title;
@@ -624,8 +618,8 @@ export default {
 
           this.temp_thumbnail_url = response.data.file;
           this.meta_keyword = response.data.meta_keyword;
-          
-          localStorage.setItem('slug_tmp', this.slug);
+
+          localStorage.setItem("slug_tmp", this.slug);
           // this.get_slug = localStorage.getItem('slug_tmp')
           // console.log(this.get_slug)
         })
@@ -639,8 +633,7 @@ export default {
           icon: "error",
           text: "Deleted",
         });
-        this.is_editing=false
-        (this.identity_design_title = ""),
+        (this.is_editing = false((this.identity_design_title = ""))),
           (this.identity_design_des = ""),
           (this.identity_design_menus = ""),
           (this.project_count = ""),
@@ -649,8 +642,8 @@ export default {
           (this.service_deliver_title = ""),
           (this.service_deliver_description = ""),
           (this.temp_thumbnail_url = "");
-          this.meta_keyword=""
-        
+        this.meta_keyword = "";
+
         this.service_short_description = "";
       });
     },
@@ -661,6 +654,24 @@ export default {
     this.get_slug();
   },
 };
+let mybutton = document.getElementById("edit");
+
+// When the user scrolls down 20px from the top of the document, show the button
+window.onscroll = function() {scrollFunction()};
+
+function scrollFunction() {
+  if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+    mybutton.style.display = "block";
+  } else {
+    mybutton.style.display = "none";
+  }
+}
+
+// When the user clicks on the button, scroll to the top of the document
+function topFunction() {
+  document.body.scrollTop = 0;
+  document.documentElement.scrollTop = 0;
+}
 </script>
 <style scoped>
 @import "../../../css/app.css";

@@ -205,7 +205,7 @@ export default {
     save() {
       let url;
       if (this.is_editing) {
-        url = `/admin/clients/update/`;
+        url = `/admin/clients/update`;
       } else {
         url = `/admin/clients/store`;
       }

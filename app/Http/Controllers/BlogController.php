@@ -107,6 +107,12 @@ class BlogController extends Controller
      */
     public function store(Request $request)
     {
+        $request->validate([
+            'slug' => 'required|unique:blogs',
+            'title' => 'required|unique:blogs',
+            'thumbnail' => 'required',
+            'author' => 'required'
+        ]);
         $app_url = env('APP_URL');
         if ($request->thumbnail) {
 
@@ -173,9 +179,10 @@ class BlogController extends Controller
     {
         //validation input
         $request->validate([
-            'title' => 'required',
-            'text' => 'required',
-            // 'thumbnail' => 'required|image'
+            'slug' => 'required|unique:blogs',
+            'title' => 'required|unique:blogs',
+            'thumbnail' => 'required',
+            'author' => 'required'
         ]);
         // dd($request->id);
         $blog = Blog::find($request->id);
@@ -188,7 +195,7 @@ class BlogController extends Controller
         $blog->author = $request->author;
         $app_url = env('APP_URL');
         // dd($request->thumbnail);
-        
+
         if ($request->thumbnail) {
             unlink($blog->thumbnail);
             $fileName = time() . '.' . $request->thumbnail->getClientOriginalExtension();
@@ -217,9 +224,9 @@ class BlogController extends Controller
     public function destroy($id, Blog $caseStudy)
     {
         $blog = Blog::find($id);
-        
+
         $delete = $blog->delete();
-        unlink($blog->thumbnail);
+        // unlink($blog->thumbnail);
         if ($delete) {
             return response()->json(['success' => 'You have successfully delete blog.']);
         }

@@ -137,7 +137,7 @@
               <th>No.</th>
               <th>Name</th>
               <th>Designation</th>
-              <th style="width: 36%">Description</th>
+              <!-- <th style="width: 36%">Description</th> -->
               <th>Thumbnail</th>
 
               <th>Action</th>
@@ -155,7 +155,7 @@
                 {{ list.designation }}
               </td>
 
-              <td style="vertical-align: middle" v-html="list.description">
+              <!-- <td style="vertical-align: middle" v-html="list.description"> -->
                 <!-- {{  }} -->
               </td>
 
@@ -249,7 +249,7 @@ export default {
     save() {
       let url;
       if (this.is_editing) {
-        url = `/admin/client-speak/update/`;
+        url = `/admin/client-speak/update`;
       } else {
         url = `/admin/client-speak/store`;
       }

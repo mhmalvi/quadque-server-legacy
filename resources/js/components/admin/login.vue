@@ -46,10 +46,10 @@
                   Login
                 </button>
               </div>
-              <div class="from-group d-flex justify-content-between">
+              <!-- <div class="from-group d-flex justify-content-between">
                 <a href="#" class="text-left">Forget Password</a>
                 <a :href="signupUrl" class="text-left">Sign Up</a>
-              </div>
+              </div> -->
             </form>
           </div>
         </div>

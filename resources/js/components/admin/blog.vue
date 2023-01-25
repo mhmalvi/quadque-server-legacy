@@ -284,7 +284,7 @@ export default {
       let url;
       this.loader=true
       if (this.is_editing) {
-        url = `/admin/blog/update/`;
+        url = `/admin/blog/update`;
       } else {
         url = `/admin/blog/store`;
       }
@@ -338,6 +338,13 @@ export default {
           console.log(error.response);
           if (error.response.data.errors.title) {
             this.titleError = error.response.data.errors.title[0];
+          } else {
+            this.titleError = "";
+          }
+
+          if (error.response.data.errors.slug) {
+            alert('Slug already exists')
+            this.loader=false
           } else {
             this.titleError = "";
           }

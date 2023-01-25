@@ -55,6 +55,11 @@ class ServiceController extends Controller
      */
     public function store(Request $request)
     {
+        $request->validate([
+            'slug' => 'required|unique:services',
+            'service_name' => 'required|unique:services',
+            'service_title' => 'required',
+        ]);
         $app_url = env('APP_URL');
         $service = new Service();
         $service->service_name = $request->service_name;
@@ -82,7 +87,7 @@ class ServiceController extends Controller
             $file_path = "assets/services/" . $fileName;
             $service->file = $file_path;
         }
-        
+
 
 
         // $slug = Str::slug($request->service_name, '-');
@@ -147,10 +152,9 @@ class ServiceController extends Controller
     {
         // dd("hello");
         $request->validate([
-            'service_name' => 'required',
-            'description' => 'required',
-            'service_title' => 'required'
-            // 'file' => 'required'
+            'slug' => 'required|unique:services',
+            'service_name' => 'required|unique:services',
+            'service_title' => 'required',
         ]);
         $app_url = env('APP_URL');
         $service = Service::find($request->id);
@@ -174,7 +178,7 @@ class ServiceController extends Controller
         $service->service_deliver_des = $request->service_deliver_description;
 
         if ($request->file) {
-
+            // unlink($service->file);
             $fileName = time() . '.' . $request->file->getClientOriginalExtension();
             $request->file->move(public_path('assets/services'), $fileName);
             $file_path = "assets/services/" . $fileName;
@@ -201,6 +205,7 @@ class ServiceController extends Controller
     {
         $service = Service::find($id);
         $service->delete();
+        // unlink($service->file);
         return response()->json(['success' => 'You have successfully deleted file.']);
     }
 }

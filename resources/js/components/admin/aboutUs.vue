@@ -278,7 +278,7 @@ export default {
       
       let url;
       if (this.is_editing) {
-        url = `/admin/about-us/update/`;
+        url = `/admin/about-us/update`;
       } else {
         url = `/admin/about-us/store`;
       }

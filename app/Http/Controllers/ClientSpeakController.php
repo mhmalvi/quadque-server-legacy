@@ -128,6 +128,12 @@ class ClientSpeakController extends Controller
      */
     public function update(Request $request)
     {
+        $request->validate([
+            'name' => 'required',
+            'designation' => 'required',
+            'description' => 'required',
+            'image' => 'required|image'
+        ]);
         $client_speak = ClientSpeak::find($request->id);
         // dd($request->description);
         $client_speak->name = $request->name;
@@ -137,7 +143,7 @@ class ClientSpeakController extends Controller
         $app_url = env('APP_URL');
 
         if ($request->image) {
-
+            unlink($client_speak->image);
             $fileName = time() . '.' . $request->image->getClientOriginalExtension();
             $request->image->move(public_path('assets/img/client-speak'), $fileName);
             $file_path = "assets/img/client-speak/" . $fileName;
@@ -162,5 +168,6 @@ class ClientSpeakController extends Controller
     {
         $client_speak = ClientSpeak::find($request->id);
         $client_speak->delete();
+        unlink($client_speak->image);
     }
 }

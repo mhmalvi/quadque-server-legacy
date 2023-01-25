@@ -130,7 +130,11 @@ class CaseStudyController extends Controller
         //validate the input
         // $path = 
         $request->validate([
-            'name' => 'required',
+            'name' => 'required|unique:case_studies',
+            'slug'=>'required|unique:case_studies',
+            'summary1' => 'required',
+            'summary2' => 'required',
+            'image'=>'required'
         ]);
         $case_study = new CaseStudy();
         $case_study->com_name = $request->name;
@@ -138,7 +142,7 @@ class CaseStudyController extends Controller
         $case_study->summary2 = $request->summary2;
         $case_study->content = $request->content;
         $case_study->meta_keyword = $request->meta_keyword;
-        $case_study->description = $request->description;
+        // $case_study->description = $request->description;
         $case_study->our_content_header = $request->our_content_header;
         $case_study->slug = $request->slug;
         $case_study->title_1 = $request->title_1;
@@ -242,8 +246,11 @@ class CaseStudyController extends Controller
     public function update(Request $request)
     {
         $request->validate([
-            'name' => 'required',
-            // 'image' => 'required|image'
+            'name' => 'required|unique:case_studies',
+            'slug' => 'required|unique:case_studies',
+            'summary1'=>'required',
+            'summary2' => 'required',
+            'image'=>'required'
         ]);
         // dd($request->all());
         $case_study = CaseStudy::find($request->id);
@@ -251,7 +258,7 @@ class CaseStudyController extends Controller
         $case_study->summary1 = $request->summary1;
         $case_study->summary2 = $request->summary2;
         $case_study->content = $request->content;
-        $case_study->description = $request->description;
+        // $case_study->description = $request->description;
         $case_study->meta_keyword = $request->meta_keyword;
         $case_study->our_content_header = $request->our_content_header;
         $case_study->slug = $request->slug;
