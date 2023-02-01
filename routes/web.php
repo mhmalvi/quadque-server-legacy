@@ -12,6 +12,7 @@ use App\Http\Controllers\admin\ServiceController;
 use App\Http\Controllers\AboutUsController;
 use App\Http\Controllers\StartProjectController;
 use App\Http\Controllers\ServiceDesktopController;
+use App\Http\Controllers\GalleryController;
 use App\Http\Controllers\Clients;
 use Illuminate\Support\Facades\Route;
 
@@ -124,6 +125,13 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::get('/clients/edit/{id}', [Clients::class, 'edit']);
         Route::post('/clients/update/', [Clients::class, 'update']);
         Route::get('/clients/delete/{id}', [Clients::class, 'destroy']);
+
+        Route::get('/gallery', [GalleryController::class, 'index'])->name('create.gallery');
+        Route::get('/gallery/get', [GalleryController::class, 'showAll'])->name('gallery.get');
+        Route::post('/gallery/store', [GalleryController::class, 'store'])->name('gallery.store');
+        Route::get('/gallery/edit/{id}', [GalleryController::class, 'edit']);
+        Route::post('/gallery/update/', [GalleryController::class, 'update']);
+        Route::get('/gallery/delete/{id}', [GalleryController::class, 'destroy']);
 
         
         // Route::post('/mail', [StartProjectController::class, "store"]);

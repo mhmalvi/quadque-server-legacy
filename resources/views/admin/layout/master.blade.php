@@ -72,6 +72,12 @@
 
 
                     </li>
+                    <li class="nav-item ">
+                        <a class="nav-link text-white" href="{{ route('admin.create.gallery') }}">Gallery</a>
+
+
+                    </li>
+
 
                     <li class="nav-item ">
                         <a class="nav-link text-white" href="{{ route('admin.about-us') }}">About Us</a>

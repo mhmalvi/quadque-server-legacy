@@ -10,6 +10,7 @@ use App\Http\Controllers\ClientSpeakController;
 use App\Http\Controllers\AboutUsController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\StartProjectController;
+use App\Http\Controllers\admin\GalleryApiController;
 use App\Http\Controllers\Clients;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -59,6 +60,9 @@ Route::get('clients/{id}', [Clients::class, 'show']);
 
 Route::get('about-us', [AboutUsController::class, 'showAll']);
 Route::get('about-us/{id}', [AboutUsController::class, 'show']);
+
+Route::get('gallery', [GalleryApiController::class, 'index']);
+Route::get('gallery/{id}', [GalleryApiController::class, 'show']);
 
 Route::post("send-mail", [StartProjectController::class, "store"]);
 

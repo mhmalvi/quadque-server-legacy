@@ -97,6 +97,10 @@ Vue.component(
     "about-component",
     require("./components/admin/aboutUs.vue").default
 );
+Vue.component(
+    "gallery-component",
+    require("./components/admin/gallery.vue").default
+);
 
 // http://latest.quadque.tech/
 if (location.hostname == "localhost" || location.hostname == "127.0.0.1") {
