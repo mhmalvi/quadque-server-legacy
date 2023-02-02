@@ -1,14 +1,11 @@
 <template>
   <div>
-    <lottie-vue-player v-if="loader"
-        :src="`./9582-liquid-4-dot-loader.json`"
-        style="
-          top: 40%;position: sticky;
-          background: transparent;
-          z-index: 100;
-        "
-      >
-      </lottie-vue-player>
+    <lottie-vue-player
+      v-if="loader"
+      :src="`./9582-liquid-4-dot-loader.json`"
+      style="top: 40%; position: sticky; background: transparent; z-index: 100"
+    >
+    </lottie-vue-player>
     <div class="row d-flex justify-content-center">
       <div
         v-if="this.is_editing == true"
@@ -284,7 +281,7 @@
     </div>
     <div class="row mt-5 d-flex justify-content-center">
       <div class="col-md-12">
-        <h4>Services Listsdfgdgfgfgf</h4>
+        <h4>Services List</h4>
         <table class="table table-striped text-center">
           <thead>
             <tr>
@@ -317,7 +314,7 @@
                   type="button"
                   id="edit"
                   class="btn btn-primary text-white"
-                  @click="editList(list.id),topFunction()"
+                  @click="editList(list.id), topFunction()"
                 >
                   Edit</button
                 ><button
@@ -426,6 +423,7 @@ export default {
   methods: {
     disable_button() {
       this.is_editing = false;
+      this.checked = false;
       this.service_name = "";
       this.description = "";
       this.file = "";
@@ -455,7 +453,7 @@ export default {
     },
     fetchAll() {
       // console.log("fetch");
-      this.loader=true
+      this.loader = true;
       axios
         .get("/admin/service/get")
         .then((response) => {
@@ -463,7 +461,7 @@ export default {
 
           this.lists = response.data.data;
           console.log(this.lists);
-          this.loader=false
+          this.loader = false;
         })
         .catch((error) => {});
     },
@@ -517,6 +515,7 @@ export default {
           this.fetchAll();
           if (this.success == "created") {
             this.loader = false;
+            this.checked = false;
             this.$swal.fire({
               // position: "top-end",
               icon: "success",
@@ -592,11 +591,11 @@ export default {
       this.service_nameError = "";
       this.fileError = "";
       this.temporary_id = list_id;
-
+      this.loader = true;
       axios
         .get(`/admin/service/edit/${this.temporary_id}`)
         .then((response) => {
-          // console.log(response.data);
+          this.loader = false;
           this.service_name = response.data.service_name;
           // this.file = response.data.file;
           this.service_name = response.data.service_name;
@@ -634,15 +633,16 @@ export default {
         .catch((error) => {});
     },
     destroyList(list_id) {
+      this.loader = true;
       axios.get(`/admin/service/delete/${list_id}`).then((response) => {
-        // this.success = response.data.success;
+        this.loader = false;
         this.fetchAll();
         this.$swal.fire({
           icon: "error",
           text: "Deleted",
         });
         (this.is_editing = false((this.identity_design_title = ""))),
-          (this.identity_design_des = ""),
+          (this.checked = false((this.identity_design_des = ""))),
           (this.identity_design_menus = ""),
           (this.project_count = ""),
           (this.happy_clients = ""),
@@ -665,7 +665,9 @@ export default {
 let mybutton = document.getElementById("edit");
 
 // When the user scrolls down 20px from the top of the document, show the button
-window.onscroll = function() {scrollFunction()};
+window.onscroll = function () {
+  scrollFunction();
+};
 
 function scrollFunction() {
   if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {

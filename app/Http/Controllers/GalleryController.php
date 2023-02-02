@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Gallery;
 use App\Models\GalleryImages;
 use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\Storage;
 
 class GalleryController extends Controller
 {
@@ -45,7 +46,9 @@ class GalleryController extends Controller
      */
     public function store(Request $request)
     {
-        // dd($request->all());
+        $request->validate([
+            'title'=>'required',
+        ]);
         $gallery = new Gallery();
         $gallery->album_title = $request->title;
         $gallery->album_caption = $request->album_caption;
@@ -64,7 +67,7 @@ class GalleryController extends Controller
                 for ($i = 0; $i < count($data); $i++) {
                     // echo $request->images[$i];
                     // $fileName = time() . '.' . $data[$i]->getClientOriginalExtension();
-                    $path = $data[$i]->store('/images/resource', ['disk' =>   'my_files']);
+                    $path = $data[$i]->store('assets/img/gallery', ['disk' =>   'my_files']);
                     // $file_path = "assets/img/gallery/" . $fileName;
                     $save = GalleryImages::create([
                         'images' => $path,
@@ -115,7 +118,7 @@ class GalleryController extends Controller
     public function edit($id)
     {
         $data = Gallery::find($id);
-        $images = GalleryImages::where('gallery_id',$id)->get();
+        $images = GalleryImages::where('gallery_id', $id)->get();
         // dd($data);
         return response()->json([
             'message' => 'success',
@@ -133,9 +136,47 @@ class GalleryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
-        //
+        // dd($request->all());
+        $gallery = Gallery::find($request->id);
+        $gallery->album_title = $request->title;
+        $gallery->album_caption = $request->album_caption;
+        $gallery->created_at = Carbon::now();
+        $save = $gallery->save();
+        // dd($gallery->id);
+        // $images = GalleryImages::where('gallery_id', $request->id)->get();
+        // dd($images);
+        $data = array();
+        if ($request->file('images')) {
+            foreach ($request->images as $image) {
+
+                $data[] = $image;
+            }
+            // dd($data);
+            if ($data) {
+                for ($i = 0; $i < count($data); $i++) {
+                    $path = $data[$i]->store('assets/img/gallery', ['disk' =>   'my_files']);
+                    $update = GalleryImages::create([
+                        'images' => $path,
+                        'gallery_id' => $request->id,
+                        'created_at' => Carbon::now()
+                    ]);
+                }
+            }
+            
+        }
+        if ($save) {
+            return response()->json([
+                'message' => 'updated',
+                'status' => 200
+            ], 200);
+        } else {
+            return response()->json([
+                'message' => 'failed to update',
+                'status' => 424
+            ], 424);
+        }
     }
 
     /**
@@ -148,5 +189,22 @@ class GalleryController extends Controller
     {
         $gallery = Gallery::find($id);
         $gallery->delete();
+    }
+
+    public function destroy_image($id)
+    {
+        $image = GalleryImages::where('id', $id)->first();
+        $delete_image = $image->delete();
+        if ($delete_image) {
+            return response()->json([
+                'status' => 'success',
+                'message' => 'deleted'
+            ]);
+        } else {
+            return response()->json([
+                'status' => 'failed',
+                'message' => 'not deleted'
+            ]);
+        }
     }
 }

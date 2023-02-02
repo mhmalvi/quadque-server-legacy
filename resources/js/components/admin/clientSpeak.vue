@@ -1,5 +1,11 @@
 <template>
   <div>
+    <lottie-vue-player
+      v-if="loader"
+      :src="`./9582-liquid-4-dot-loader.json`"
+      style="top: 40%; position: sticky; background: transparent; z-index: 100"
+    >
+    </lottie-vue-player>
     <div class="row d-flex justify-content-center">
       <div
         v-if="this.is_editing == true"
@@ -157,7 +163,7 @@
 
               <!-- <td style="vertical-align: middle" v-html="list.description"> -->
                 <!-- {{  }} -->
-              </td>
+              <!-- </td> -->
 
               <td style="vertical-align: middle">
                 <img :src="$base+list.image" width="100" height="100" />
@@ -198,6 +204,7 @@ export default {
   // name:"service-component",
   data() {
     return {
+      loader:false,
       lists: [],
       name: "",
       image: "",
@@ -232,11 +239,11 @@ export default {
       this.meta_keyword=""
     },
     fetchAll() {
-      console.log("fetch");
+      this.loader=true
       axios
         .get("/admin/client-speak/get")
         .then((response) => {
-          // console.log(response);
+          this.loader=false
           this.lists = response.data.data;
         })
         .catch((error) => {});
@@ -247,6 +254,7 @@ export default {
     },
 
     save() {
+      this.loader=true
       let url;
       if (this.is_editing) {
         url = `/admin/client-speak/update`;
@@ -264,13 +272,14 @@ export default {
       axios
         .post(url, fd)
         .then((response) => {
+          this.loader=false
           this.success = response.data.success;
           this.fetchAll();
           if (this.success == "created") {
             this.$swal.fire({
               // position: "top-end",
               icon: "success",
-              title: "Service Saved",
+              title: "Client Speak Saved",
               showConfirmButton: true,
               // timer: 1500,
             });
@@ -286,7 +295,7 @@ export default {
             this.$swal.fire({
               // position: "top-end",
               icon: "success",
-              title: "Service Updated",
+              title: "Client Speak Updated",
               showConfirmButton: true,
               // timer: 1500,
             });
@@ -329,6 +338,7 @@ export default {
     },
 
     editList(list_id) {
+      this.loader=true
       this.is_editing = true;
       this.nameError = "";
       this.fileError = "";
@@ -336,7 +346,7 @@ export default {
       axios
         .get(`/admin/client-speak/edit/${this.temporary_id}`)
         .then((response) => {
-          console.log(response);
+          this.loader=false
           this.name = response.data.name;
           this.designation = response.data.designation;
           this.description = response.data.description;
@@ -346,8 +356,9 @@ export default {
         .catch((error) => {});
     },
     destroyList(list_id) {
+      this.loader=true
       axios.get(`/admin/client-speak/delete/${list_id}`).then((response) => {
-        // this.success = response.data.success;
+        this.loader=false
         this.fetchAll();
         this.is_editing = false;
         this.name = "";

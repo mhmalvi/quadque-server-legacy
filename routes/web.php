@@ -132,8 +132,8 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::get('/gallery/edit/{id}', [GalleryController::class, 'edit']);
         Route::post('/gallery/update/', [GalleryController::class, 'update']);
         Route::get('/gallery/delete/{id}', [GalleryController::class, 'destroy']);
+        Route::get('/gallery/delete-image/{id}', [GalleryController::class, 'destroy_image']);
 
-        
         // Route::post('/mail', [StartProjectController::class, "store"]);
 
         Route::get('/current', [AdminController::class, 'logged_admin']);

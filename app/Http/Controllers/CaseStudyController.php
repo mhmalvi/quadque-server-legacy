@@ -272,7 +272,7 @@ class CaseStudyController extends Controller
 
         
         if ($request->image) {
-            unlink($case_study->com_image);
+            // unlink($case_study->com_image);
             $fileName = time() . '.' . $request->image->getClientOriginalExtension();
             $request->image->move(public_path('assets/img/case_study'), $fileName);
             $file_path = "assets/img/case_study/" . $fileName;
@@ -280,7 +280,7 @@ class CaseStudyController extends Controller
         }
 
         if ($request->long_banner) {
-            unlink($case_study->long_banner);
+            // unlink($case_study->long_banner);
             $fileName = time() . '.' . $request->long_banner->getClientOriginalExtension();
             $request->long_banner->move(public_path('assets/img/case_study/long_banner'), $fileName);
             $file_path = "assets/img/case_study/long_banner/" . $fileName;
@@ -288,7 +288,7 @@ class CaseStudyController extends Controller
         }
 
         if ($request->short_banner) {
-            unlink($case_study->short_banner);
+            // unlink($case_study->short_banner);
             $fileName = time() . '.' . $request->short_banner->getClientOriginalExtension();
             $request->short_banner->move(public_path('assets/img/case_study/short_banner'), $fileName);
             $file_path = "assets/img/case_study/short_banner/" . $fileName;
@@ -296,7 +296,7 @@ class CaseStudyController extends Controller
         }
 
         if ($request->image_1) {
-            unlink($case_study->image_1);
+            // unlink($case_study->image_1);
             $fileName = time() . '.' . $request->image_1->getClientOriginalExtension();
             $request->image_1->move(public_path('assets/img/case_study/image_1'), $fileName);
             $file_path = "assets/img/case_study/image_1/" . $fileName;
@@ -304,7 +304,7 @@ class CaseStudyController extends Controller
         }
 
         if ($request->image_2) {
-            unlink($case_study->image_2);
+            // unlink($case_study->image_2);
             $fileName = time() . '.' . $request->image_2->getClientOriginalExtension();
             $request->image_2->move(public_path('assets/img/case_study/image_2'), $fileName);
             $file_path = "assets/img/case_study/image_2/" . $fileName;
@@ -312,7 +312,7 @@ class CaseStudyController extends Controller
         }
 
         if ($request->image_3) {
-            unlink($case_study->image_3);
+            // unlink($case_study->image_3);
             $fileName = time() . '.' . $request->image_3->getClientOriginalExtension();
             $request->image_3->move(public_path('assets/img/case_study/image_3'), $fileName);
             $file_path = "assets/img/case_study/image_3/" . $fileName;
@@ -320,14 +320,14 @@ class CaseStudyController extends Controller
         }
 
         if ($request->group_images) {
-            unlink($case_study->group_images);
+            // unlink($case_study->group_images);
             $fileName = time() . '.' . $request->group_images->getClientOriginalExtension();
             $request->group_images->move(public_path('assets/img/case_study/group_images'), $fileName);
             $file_path = "assets/img/case_study/group_images/" . $fileName;
             $case_study->group_images = $file_path;
         }
         if ($request->agency) {
-            unlink($case_study->agency);
+            // unlink($case_study->agency);
             $fileName = time() . '.' . $request->agency->getClientOriginalExtension();
             $request->agency->move(public_path('assets/case_study/agency'), $fileName);
             $file_path = "assets/case_study/agency/" . $fileName;
@@ -353,14 +353,14 @@ class CaseStudyController extends Controller
         $caseStudy = CaseStudy::find($id);
         
         $delete = $caseStudy->delete();
-        unlink($caseStudy->agency);
-        unlink($caseStudy->group_images);
-        unlink($caseStudy->image_3);
-        unlink($caseStudy->image_2);
-        unlink($caseStudy->image_1);
-        unlink($caseStudy->short_banner);
-        unlink($caseStudy->long_banner);
-        unlink($caseStudy->com_image);
+        // unlink($caseStudy->agency);
+        // unlink($caseStudy->group_images);
+        // unlink($caseStudy->image_3);
+        // unlink($caseStudy->image_2);
+        // unlink($caseStudy->image_1);
+        // unlink($caseStudy->short_banner);
+        // unlink($caseStudy->long_banner);
+        // unlink($caseStudy->com_image);
         if ($delete) {
             return response()->json(['success' => 'You have successfully delete Case Study.']);
         }

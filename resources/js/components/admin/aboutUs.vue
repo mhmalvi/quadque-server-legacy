@@ -1,5 +1,11 @@
 <template>
   <div>
+    <lottie-vue-player
+      v-if="loader"
+      :src="`./9582-liquid-4-dot-loader.json`"
+      style="top: 40%; position: sticky; background: transparent; z-index: 100"
+    >
+    </lottie-vue-player>
     <div class="row d-flex justify-content-center">
       <div
         v-if="this.is_editing == true"
@@ -218,6 +224,7 @@ export default {
   // name:"service-component",
   data() {
     return {
+      loader:false,
       lists: [],
       our_vision: "",
       our_mission: "",
@@ -264,10 +271,11 @@ export default {
       // this.temp_thumbnail_url = "";
     },
     fetchAll() {
-      console.log("fetch");
+      this.loader=true
       axios
         .get("/admin/about-us/get")
         .then((response) => {
+          this.loader=false
           this.lists = response.data.data;
           console.log(this.lists);
         })
@@ -275,7 +283,7 @@ export default {
     },
 
     save() {
-      
+      this.loader=true
       let url;
       if (this.is_editing) {
         url = `/admin/about-us/update`;
@@ -295,7 +303,7 @@ export default {
           id: this.temporary_id,
         })
         .then((response) => {
-          console.log("response")
+          this.loader=false
           this.success = response.data.success;
           this.fetchAll();
           if (this.success == "created") {
@@ -383,13 +391,14 @@ export default {
     },
 
     editList(list_id) {
+      this.loader=true
       this.is_editing = true;
       this.temporary_id = list_id;
 
       axios
         .get(`/admin/about-us/edit/${this.temporary_id}`)
         .then((response) => {
-          console.log(response.data);
+          this.loader=false
           this.our_vision = response.data.our_vision;
           this.our_mission = response.data.our_mission;
           this.our_goal = response.data.our_goal;
@@ -401,8 +410,9 @@ export default {
         .catch((error) => {});
     },
     destroyList(list_id) {
+      this.loader=true
       axios.get(`/admin/about-us/delete/${list_id}`).then((response) => {
-        // this.success = response.data.success;
+        this.loader=false
         this.is_editing = false;
         this.fetchAll();
         this.$swal.fire({

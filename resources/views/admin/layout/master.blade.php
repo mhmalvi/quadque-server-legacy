@@ -30,8 +30,12 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarNavDropdown">
                 <ul class="navbar-nav text-white" id="nav">
-                    <li class="nav-item active">
-                        <a class="nav-link text-white" href="{{ route('admin.dashboard') }}">Dashboard</a>
+                    <li class="{{ request()->routeIs('admin.dashboard') ? 'active' : '' }} nav-item">
+
+
+
+
+                        <a  class="nav-link text-white" href="{{ route('admin.dashboard') }}">Dashboard</a>
 
 
                     </li>
@@ -41,45 +45,55 @@
                     </li>
                     @endif --}}
 
-                    <li class="nav-item">
+                    <li class="{{ request()->routeIs('admin.home') ? 'active' : '' }} nav-item">
+
+
                         <a class="nav-link text-white" href="{{ route('admin.home') }}">Home</a>
 
                     </li>
 
-                    <li class="nav-item">
+                    <li class="{{ request()->routeIs('admin.casestudy') ? 'active' : '' }} nav-item">
+
+
                         <a class="nav-link text-white" href="{{ route('admin.casestudy') }}">Case Study</a>
 
                     </li>
 
-                    <li class="nav-item ">
+                    <li class="{{ request()->routeIs('admin.blog') ? 'active' : '' }} nav-item">
+
                         <a class="nav-link text-white" href="{{ route('admin.blog') }}">Blog</a>
 
 
                     </li>
-                    <li class="nav-item ">
+                    <li class="{{ request()->routeIs('admin.service') ? 'active' : '' }} nav-item">
+
                         <a class="nav-link text-white" href="{{ route('admin.service') }}">Service</a>
 
 
                     </li>
 
-                    <li class="nav-item ">
+                    <li class="{{ request()->routeIs('admin.client-speak') ? 'active' : '' }} nav-item">
+
                         <a class="nav-link text-white" href="{{ route('admin.client-speak') }}">Client Speak</a>
 
 
                     </li>
-                    <li class="nav-item ">
+                    <li class="{{ request()->routeIs('admin.create-clients') ? 'active' : '' }} nav-item">
+
                         <a class="nav-link text-white" href="{{ route('admin.create-clients') }}">Clients</a>
 
 
                     </li>
-                    <li class="nav-item ">
+                    <li class="{{ request()->routeIs('admin.create.gallery') ? 'active' : '' }} nav-item">
+
                         <a class="nav-link text-white" href="{{ route('admin.create.gallery') }}">Gallery</a>
 
 
                     </li>
 
 
-                    <li class="nav-item ">
+                    <li class="{{ request()->routeIs('admin.about-us') ? 'active' : '' }} nav-item">
+
                         <a class="nav-link text-white" href="{{ route('admin.about-us') }}">About Us</a>
 
 
@@ -110,14 +124,14 @@
         </div>
     </div>
 
-    {{-- <style>
+    <style>
         .active,
-        .btn:hover {
-            background-color: #666;
+        .nav-item:hover {
+            background-color: black;
             color: white;
         }
 
-    </style> --}}
+    </style>
 
     <script src="{{ mix('js/app.js') }}" type="text/javascript"></script>
     <script src="https://cdn.jsdelivr.net/npm/vue-typical@latest/dist/vue-typical.umd.js"></script>

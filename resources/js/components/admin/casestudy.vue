@@ -1,14 +1,11 @@
 <template>
   <div>
-    <lottie-vue-player v-if="loader"
-        :src="`./9582-liquid-4-dot-loader.json`"
-        style="
-          top: 40%;position: sticky;
-          background: transparent;
-          z-index: 100;
-        "
-      >
-      </lottie-vue-player>
+    <lottie-vue-player
+      v-if="loader"
+      :src="`./9582-liquid-4-dot-loader.json`"
+      style="top: 40%; position: sticky; background: transparent; z-index: 100"
+    >
+    </lottie-vue-player>
     <div class="row d-flex justify-content-center">
       <div
         v-if="this.is_editing == true"
@@ -64,11 +61,12 @@
                   class="ml-3"
                   placeholder="Enter slug"
                 />
-                <label style="color:blue">select to get based on case study name</label>
+                <label style="color: blue"
+                  >select to get based on case study name</label
+                >
                 <input
                   type="string"
                   v-model="slug"
-                  
                   value="title"
                   class="form-control"
                 />
@@ -76,16 +74,16 @@
 
               <div class="form-group">
                 <label for="company_image">Create Case Icon</label>
-                <input
-                  type="file"
-                  class="form-control"
-                  @change="uploadfile"
-                />
+                <input type="file" class="form-control" @change="uploadfile" />
                 <div class="text-danger" v-if="this.imageError">
                   {{ this.imageError }}
                 </div>
                 <p class="my-2 text-center" v-if="this.temp_image_url">
-                  <img :src="$base+this.temp_image_url" width="150" height="150" />
+                  <img
+                    :src="$base + this.temp_image_url"
+                    width="150"
+                    height="150"
+                  />
                 </p>
               </div>
               <!-- <div class="form-group">
@@ -113,41 +111,35 @@
               </div>
               <div class="form-group">
                 <label for="group_img">Group Images</label>
-                <input
-                  type="file"
-                  class="form-control"
-                  @change="group_img"
-                />
+                <input type="file" class="form-control" @change="group_img" />
                 <p class="my-2 text-center" v-if="this.group_images_1_tmp">
                   <img
-                    :src="$base+this.group_images_1_tmp"
+                    :src="$base + this.group_images_1_tmp"
                     width="150"
                     height="150"
                   />
                 </p>
-                
               </div>
               <div class="form-group">
                 <label for="long_image">Desktop Image</label>
-                <input
-                  type="file"
-                  class="form-control"
-                  @change="long_image"
-                />
+                <input type="file" class="form-control" @change="long_image" />
                 <p class="my-2 text-center" v-if="this.long_banner_tmp">
-                  <img :src="$base+this.long_banner_tmp" width="150" height="150" />
+                  <img
+                    :src="$base + this.long_banner_tmp"
+                    width="150"
+                    height="150"
+                  />
                 </p>
               </div>
               <div class="form-group">
                 <label for="short_image">Mobile Image</label>
-                <input
-                  type="file"
-                  class="form-control"
-                  @change="short_image"
-                  
-                />
+                <input type="file" class="form-control" @change="short_image" />
                 <p class="my-2 text-center" v-if="this.short_banner_tmp">
-                  <img :src="$base+this.short_banner_tmp" width="150" height="150" />
+                  <img
+                    :src="$base + this.short_banner_tmp"
+                    width="150"
+                    height="150"
+                  />
                 </p>
               </div>
               <div class="form-group">
@@ -203,7 +195,11 @@
                   @change="upload_first_image"
                 />
                 <p class="my-2 text-center" v-if="this.image_1_tmp">
-                  <img :src="$base+this.image_1_tmp" width="150" height="150" />
+                  <img
+                    :src="$base + this.image_1_tmp"
+                    width="150"
+                    height="150"
+                  />
                 </p>
               </div>
               <div class="form-group">
@@ -230,14 +226,20 @@
                 />
               </div>
               <div class="form-group">
-                <label for="upload_second_image">Our Content Second Image</label>
+                <label for="upload_second_image"
+                  >Our Content Second Image</label
+                >
                 <input
                   type="file"
                   class="form-control"
                   @change="upload_second_image"
                 />
                 <p class="my-2 text-center" v-if="this.image_2_tmp">
-                  <img :src="$base+this.image_2_tmp" width="150" height="150" />
+                  <img
+                    :src="$base + this.image_2_tmp"
+                    width="150"
+                    height="150"
+                  />
                 </p>
               </div>
               <div class="form-group">
@@ -281,7 +283,11 @@
                   @change="upload_third_image"
                 />
                 <p class="my-2 text-center" v-if="this.image_3_tmp">
-                  <img :src="$base+this.image_3_tmp" width="150" height="150" />
+                  <img
+                    :src="$base + this.image_3_tmp"
+                    width="150"
+                    height="150"
+                  />
                 </p>
               </div>
               <div class="form-group">
@@ -305,7 +311,11 @@
                   @change="agencyFiles"
                 />
                 <p class="my-2 text-center" v-if="this.agency_img_tmp">
-                  <img :src="$base+this.agency_img_tmp" width="150" height="150" />
+                  <img
+                    :src="$base + this.agency_img_tmp"
+                    width="150"
+                    height="150"
+                  />
                 </p>
               </div>
               <!-- <div class="form-group">
@@ -352,12 +362,17 @@
               <td>{{ list.com_name }}</td>
               <!-- <td v-html="list.content"></td> -->
               <td>
-                <img :src="$base+list.com_image" width="100" height="100" />
+                <img :src="$base + list.com_image" width="100" height="100" />
               </td>
               <td>
                 <!-- {{ image[index] }} -->
                 <!-- {{ $base }} -->
-                <img width="150" height="150" :src="$base+list.agency" alt="" />
+                <img
+                  width="150"
+                  height="150"
+                  :src="$base + list.agency"
+                  alt=""
+                />
               </td>
               <td>
                 <button
@@ -412,11 +427,11 @@ export default {
   // },
   data() {
     return {
-      loader:false,
+      loader: false,
       agency: "",
       lists: [],
       service_lists: [],
-      meta_keyword:"",
+      meta_keyword: "",
       name: "",
       slug: "",
       checked: false,
@@ -521,57 +536,56 @@ export default {
       this.short_banner_tmp = "";
     },
     get_slug() {
-      console.log(this.checked)
+      console.log(this.checked);
       if (this.is_editing == true && this.checked == true) {
-        this.slug = localStorage.getItem('case_study_slug')
-      }
-      else {
+        this.slug = localStorage.getItem("case_study_slug");
+      } else {
         this.slug = this.name.replace(/\s+/g, "-").toLowerCase();
         return this.slug.replace(/\//g, "-");
-        
       }
     },
     disable_button() {
       $(".summernote").summernote("code", "");
       this.is_editing = false;
+      this.checked = false
       this.name = "";
       this.image = "";
       this.summary1 = "";
       this.summary2 = "";
       this.long_banner = "";
       this.short_banner_img = "";
-      this.slug=""
+      this.slug = "";
       this.content = "";
-      this.our_content_header = "",
-      this.title_1 = "",
-      this.image_1 = "",
-      this.description_1 = "",
-      this.title_2 = "",
-      this.image_2 = "",
-      this.description_2 = "",
-      this.title_3 = "",
-      this.image_3 = "",
-      this.description_3 = "",
-      this.temp_image_url = "";
-      this.image_1_tmp = "",
-      this.image_2_tmp = "",
-      this.image_3_tmp = "",
-      this.group_images = "";
+      (this.our_content_header = ""),
+        (this.title_1 = ""),
+        (this.image_1 = ""),
+        (this.description_1 = ""),
+        (this.title_2 = ""),
+        (this.image_2 = ""),
+        (this.description_2 = ""),
+        (this.title_3 = ""),
+        (this.image_3 = ""),
+        (this.description_3 = ""),
+        (this.temp_image_url = "");
+      (this.image_1_tmp = ""),
+        (this.image_2_tmp = ""),
+        (this.image_3_tmp = ""),
+        (this.group_images = "");
       this.group_images_1_tmp = "";
-      this.long_banner_tmp = ""
-      this.short_banner_tmp = ""
-      this.meta_keyword = ""
-      this.agency_img_tmp=""
+      this.long_banner_tmp = "";
+      this.short_banner_tmp = "";
+      this.meta_keyword = "";
+      this.agency_img_tmp = "";
       document.getElementById("image").value = "";
       document.getElementById("group_images").value = "";
       // $(".summernote").summernote("code", "");
     },
     fetchAll() {
-      // console.log("here")
-      // console.log($base)
+      this.loader = true;
       axios
         .get("/admin/case-study/get")
         .then((response) => {
+          this.loader = false;
           this.lists = response.data;
           console.log(this.lists);
         })
@@ -603,7 +617,7 @@ export default {
     save: function (event) {
       // this.uploadImageSuccess()
       // console.log("data", formData, index, fileList);
-      this.loader=true
+      this.loader = true;
       let url;
       this.isLoading = true;
       if (this.is_editing) {
@@ -646,6 +660,7 @@ export default {
           $(".summernote").summernote("code", this.content);
           // document.getElementById("thumbnail").value = "";
           if (response.data.success == "created") {
+            this.checked = false
             this.is_editing = false;
             this.name = "";
             this.image = "";
@@ -653,23 +668,23 @@ export default {
             this.summary2 = "";
             this.content = "";
             this.group_images = "";
-            this.long_banner = "",
-            this.short_banner_img = "",
-            this.our_content_header = "",
-            this.title_1 = "",
-            this.image_1 = "",
-            this.description_1 = "",
-            this.title_2 = "",
-            this.image_2 = "",
-            this.description_2 = "",
-            this.title_3 = "",
-            this.image_3 = "",
-            this.description_3 = "",
-            this.temp_image_url = "";
+            (this.long_banner = ""),
+              (this.short_banner_img = ""),
+              (this.our_content_header = ""),
+              (this.title_1 = ""),
+              (this.image_1 = ""),
+              (this.description_1 = ""),
+              (this.title_2 = ""),
+              (this.image_2 = ""),
+              (this.description_2 = ""),
+              (this.title_3 = ""),
+              (this.image_3 = ""),
+              (this.description_3 = ""),
+              (this.temp_image_url = "");
             this.$swal.fire({
               // position: "top-end",
               icon: "success",
-              title: "Service Saved",
+              title: "Case Study Saved",
               showConfirmButton: true,
               // timer: 1500,
             });
@@ -688,7 +703,7 @@ export default {
             this.$swal.fire({
               // position: "top-end",
               icon: "success",
-              title: "Service Updated",
+              title: "Case Study Updated",
               showConfirmButton: true,
               // timer: 1500,
             });
@@ -699,16 +714,15 @@ export default {
         })
         .catch((error) => {
           if (error.response.data.errors.name) {
-            alert(error.response.data.errors.name[0])
+            alert(error.response.data.errors.name[0]);
             // this.nameError = error.response.data.errors.name[0];
           } else {
             this.nameError = "";
           }
           if (error.response.data.errors.slug) {
-            this.loader=false
-            alert('Slug already exists')
-          } 
-          
+            this.loader = false;
+            alert("Slug already exists");
+          }
 
           if (error.response.data.errors.image) {
             this.imageError = error.response.data.errors.image[0];
@@ -723,17 +737,18 @@ export default {
       this.nameError = "";
       this.imageError = "";
       this.temporary_id = list_id;
-
+      this.loader = true;
       axios
         .get(`/admin/case-study/edit/${this.temporary_id}`)
         .then((response) => {
+          this.loader = false;
           console.log(response);
           this.name = response.data.com_name;
           this.temp_image_url = response.data.com_image;
           this.summary1 = response.data.summary1;
           this.summary2 = response.data.summary2;
           this.content = response.data.content;
-          this.slug = response.data.slug
+          this.slug = response.data.slug;
           // this.description = response.data.description;
           this.our_content_header = response.data.our_content_header;
           this.title_1 = response.data.title_1;
@@ -746,11 +761,11 @@ export default {
           this.long_banner_tmp = response.data.long_banner;
           this.short_banner_tmp = response.data.short_banner;
           this.image_1_tmp = response.data.image_1;
-          console.log(this.image_1_tmp)
+          console.log(this.image_1_tmp);
           this.image_2_tmp = response.data.image_2;
           this.image_3_tmp = response.data.image_3;
           this.agency_img_tmp = response.data.agency;
-          localStorage.setItem('case_study_slug',this.slug)
+          localStorage.setItem("case_study_slug", this.slug);
           $(".summernote").summernote("code", this.content);
           // $(".summernote").summernote("code", this.second_content);
           this.group_images_1_tmp = response.data.group_images;
@@ -758,9 +773,11 @@ export default {
         .catch((error) => {});
     },
     destroyList(list_id) {
+      this.loader=true
       axios.get(`/admin/case-study/delete/${list_id}`).then((response) => {
         // this.success = response.data.success;
         this.fetchAll();
+        this.loader=false
         this.$swal.fire({
           icon: "error",
           text: "Deleted",
@@ -775,7 +792,7 @@ export default {
         this.con_2_img_2 = "";
         this.con_2_img_3 = "";
         this.agency_img_tmp = "";
-        this.meta_keyword=""
+        this.meta_keyword = "";
         document.getElementById("image").value = "";
         document.getElementById("case_con_1_img").value = "";
         document.getElementById("con_2_img_1").value = "";

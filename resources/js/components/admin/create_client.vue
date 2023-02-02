@@ -1,5 +1,11 @@
 <template>
   <div>
+    <lottie-vue-player
+      v-if="loader"
+      :src="`./9582-liquid-4-dot-loader.json`"
+      style="top: 40%; position: sticky; background: transparent; z-index: 100"
+    >
+    </lottie-vue-player>
     <div class="row d-flex justify-content-center">
       <div
         v-if="this.is_editing == true"
@@ -48,7 +54,7 @@
                 </div>
                 <p class="my-2 text-center" v-if="this.temp_thumbnail_url">
                   <img
-                    :src="$base+this.temp_thumbnail_url"
+                    :src="$base + this.temp_thumbnail_url"
                     width="150"
                     height="150"
                   />
@@ -83,7 +89,7 @@
     </div>
     <div class="row mt-5 d-flex justify-content-center">
       <div class="col-md-12">
-        <h4>Blog Lists</h4>
+        <h4>Client Lists</h4>
         <table class="table table-striped text-center">
           <thead>
             <tr>
@@ -101,7 +107,11 @@
 
               <td>
                 <!-- {{ list.thumbnail }} -->
-                <img :src="$base+list.client_images" width="100" height="100" />
+                <img
+                  :src="$base + list.client_images"
+                  width="100"
+                  height="100"
+                />
               </td>
               <td>
                 <!-- {{ list.thumbnail }} -->
@@ -146,11 +156,12 @@ export default {
   // name:"createClient-component",
   data() {
     return {
+      loader: false,
       lists: [],
       images: [],
       title: "",
       thumbnail: "",
-      meta_keyword:"",
+      meta_keyword: "",
       text: "",
       titleError: "",
       textError: "",
@@ -182,16 +193,17 @@ export default {
       this.is_editing = false;
       this.title = "";
       this.text = "";
-      this.meta_keyword=""
+      this.meta_keyword = "";
       this.thumbnail = "";
       this.temp_thumbnail_url = "";
       // $(".summernote").summernote("code", "");
     },
     fetchAll() {
+      this.loader = true;
       axios
         .get("/admin/clients/get")
         .then((response) => {
-          // console.log(response.data);
+          this.loader = false;
           this.lists = response.data.data;
           console.log(lists);
         })
@@ -203,6 +215,7 @@ export default {
     },
 
     save() {
+      this.loader = true;
       let url;
       if (this.is_editing) {
         url = `/admin/clients/update`;
@@ -217,14 +230,14 @@ export default {
       axios
         .post(url, fd)
         .then((response) => {
-          console.log(response);
+          this.loader = false;
           this.success = response.data.message;
 
           if (this.success == "created") {
             this.fetchAll();
             document.getElementById("thumbnail").value = "";
             this.temporary_id = "";
-            this.meta_keyword=""
+            this.meta_keyword = "";
             this.temp_thumbnail_url = "";
             this.$swal.fire({
               // position: "top-end",
@@ -269,11 +282,11 @@ export default {
       this.titleError = "";
       this.thumbnailError = "";
       this.temporary_id = list_id;
-
+      this.loader = true;
       axios
         .get(`/admin/clients/edit/${this.temporary_id}`)
         .then((response) => {
-          // console.log(response)
+          this.loader = false;
           this.thumbnail = response.data.client_images;
           this.temp_thumbnail_url = response.data.client_images;
           this.meta_keyword = response.data.meta_keyword;
@@ -282,15 +295,16 @@ export default {
         .catch((error) => {});
     },
     destroyList(list_id) {
+      this.loader=true
       axios.get(`/admin/clients/delete/${list_id}`).then((response) => {
-        // this.success = response.data.success;
+        this.loader=false
         this.$swal.fire({
           icon: "error",
           text: "Deleted",
         });
-        this.thumbnail =""
-        this.temp_thumbnail_url =""
-        this.meta_keyword=""
+        this.thumbnail = "";
+        this.temp_thumbnail_url = "";
+        this.meta_keyword = "";
         this.fetchAll();
       });
     },

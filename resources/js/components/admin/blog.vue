@@ -247,6 +247,8 @@ export default {
   methods: {
     disable_button() {
       this.is_editing = false;
+      this.slug=""
+      this.checked = false
       this.title = "";
       this.text = "";
       this.thumbnail = "";
@@ -267,9 +269,11 @@ export default {
       }
     },
     fetchAll() {
+      this.loader=true
       axios
         .get("/admin/blog/get")
         .then((response) => {
+          this.loader=false
           console.log(response);
           this.lists = response.data;
         })
@@ -308,6 +312,8 @@ export default {
           if (this.success == "created") {
             this.title = "";
             this.text = "";
+            this.checked = false
+            this.slug=""
             $(".summernote").summernote("code", this.text);
             // document.getElementById("thumbnail").value = "";
             this.temporary_id = "";
@@ -363,6 +369,7 @@ export default {
     },
 
     editList(list_id) {
+      this.loader=true
       this.is_editing = true;
       this.titleError = "";
       this.thumbnailError = "";
@@ -371,7 +378,7 @@ export default {
       axios
         .get(`/admin/blog/edit/${this.temporary_id}`)
         .then((response) => {
-          // console.log(response)
+          this.loader=false
           this.title = response.data.title;
           this.text = response.data.text;
           this.author = response.data.author;
@@ -388,12 +395,23 @@ export default {
         .catch((error) => {});
     },
     destroyList(list_id) {
+      this.loader=true
       axios.get(`/admin/blog/delete/${list_id}`).then((response) => {
-        // this.success = response.data.success;
+        this.loader=false
         this.$swal.fire({
           icon: "error",
           text: "Deleted",
         });
+        this.is_editing = false;
+      this.slug=""
+      this.checked = false
+      this.title = "";
+      this.text = "";
+      this.thumbnail = "";
+      this.temp_thumbnail_url = "";
+      this.author = "";
+      this.meta_keyword = "";
+      this.short_description = "";
         this.fetchAll();
       });
     },

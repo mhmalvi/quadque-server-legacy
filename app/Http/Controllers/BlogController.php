@@ -195,7 +195,7 @@ class BlogController extends Controller
         // dd($request->thumbnail);
 
         if ($request->thumbnail) {
-            unlink($blog->thumbnail);
+            // unlink($blog->thumbnail);
             $fileName = time() . '.' . $request->thumbnail->getClientOriginalExtension();
             $request->thumbnail->move(public_path('assets/img/blogs'), $fileName);
             $file_path = "assets/img/blogs/" . $fileName;

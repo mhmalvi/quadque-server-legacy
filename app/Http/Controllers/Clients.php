@@ -126,7 +126,7 @@ class Clients extends Controller
         $clients->meta_keyword = $request->meta_keyword;
         // $file_path = array();
         if ($request->hasFile('client_images')) {
-            unlink($clients->client_images);
+            // unlink($clients->client_images);
             $imageName = time() . '.' . $request->file('client_images')->getClientOriginalExtension();
             $request->file('client_images')->move(public_path('assets/img/clients'), $imageName);
             $file_path = "assets/img/clients/" . $imageName;
@@ -154,6 +154,6 @@ class Clients extends Controller
     {
         $clients = Client::find($id);
         $clients->delete();
-        unlink($clients->client_images);
+        // unlink($clients->client_images);
     }
 }
