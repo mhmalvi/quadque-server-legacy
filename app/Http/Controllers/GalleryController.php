@@ -47,7 +47,7 @@ class GalleryController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'title'=>'required',
+            'title' => 'required',
         ]);
         $gallery = new Gallery();
         $gallery->album_title = $request->title;
@@ -136,6 +136,23 @@ class GalleryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
+
+    public function update_image(Request $request)
+    {
+        // dd($request->all());
+        $image = GalleryImages::find($request->id);
+        if ($request->file('images')) {
+            $data = $request->images;
+            $path = $data->store('assets/img/gallery', ['disk' =>   'my_files']);
+            $image->images = $path;
+            $update = $image->save();
+            if ($update) {
+                return response()->json([
+                    'message' => 'updated'
+                ]);
+            }
+        }
+    }
     public function update(Request $request)
     {
         // dd($request->all());
@@ -164,7 +181,6 @@ class GalleryController extends Controller
                     ]);
                 }
             }
-            
         }
         if ($save) {
             return response()->json([

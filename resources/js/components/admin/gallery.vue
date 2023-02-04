@@ -1,36 +1,23 @@
 <template>
   <div>
-    <lottie-vue-player
-      v-if="loader"
-      :src="`./9582-liquid-4-dot-loader.json`"
-      style="top: 40%; position: sticky; background: transparent; z-index: 100"
-    >
+    <lottie-vue-player v-if="loader" :src="`./9582-liquid-4-dot-loader.json`"
+      style="top: 40%; position: sticky; background: transparent; z-index: 100">
     </lottie-vue-player>
     <div class="row d-flex justify-content-center">
-      <div
-        v-if="this.is_editing == true"
-        @click="disable_button()"
-        class="mt-3"
-      >
+      <div v-if="this.is_editing == true" @click="disable_button()" class="mt-3">
         <button class="btn btn-primary">Add Gallery Images</button>
       </div>
       <div class="col-md-6 mt-4">
         <div class="card">
-          <div
-            class="card-header text-center"
-            style="
+          <div class="card-header text-center" style="
               height: 47px;
               background-image: linear-gradient(
                 to right,
                 rgb(242, 112, 156),
                 rgb(255, 148, 114)
               );
-            "
-          >
-            <h4
-              class="card-title text-white text-center"
-              style="margin-top: 1%"
-            >
+            ">
+            <h4 class="card-title text-white text-center" style="margin-top: 1%">
               {{ this.is_editing ? "Update Gallery" : "Create Gallery" }}
             </h4>
           </div>
@@ -38,54 +25,34 @@
             <form @submit.prevent="save()" method="post">
               <div class="form-group">
                 <label for="title">Album Title</label><br />
-                <input
-                  type="text"
-                  class="form-control"
-                  v-model="title"
-                  required
-                />
+                <input type="text" class="form-control" v-model="title" required />
                 <div class="text-danger" v-if="this.titleError">
                   {{ this.titleError }}
                 </div>
               </div>
               <div class="form-group">
                 <label for="title">Album Caption</label><br />
-                <textarea
-                  class="form-control"
-                  v-model="album_caption"
-                  required
-                ></textarea>
+                <textarea class="form-control" v-model="album_caption" required></textarea>
               </div>
               <div class="form-group">
                 <label for="title">Album Images</label><br />
-                <input
-                  type="file"
-                  class="form-control"
-                  @change="image_handler"
-                  required
-                  multiple
-                />
+                <input type="file" class="form-control" @change="image_handler" required multiple />
               </div>
               <div>
-                <button
-                  type="button"
-                  class="btn btn-block btn-save text-white"
-                  @click="save"
-                >
+                <button type="button" class="btn btn-block btn-save text-white" @click="save">
                   {{ this.is_editing ? "Update" : "Save" }}
                 </button>
               </div>
               <div v-if="is_editing == true">
-                <form
-                  v-for="(image, index) in gallery_images"
-                  :key="index"
-                  class="mt-3"
-                >
-                  <a @click.prevent="get_img_id(image.id, album_id)" class="btn"
-                    >X</a
-                  >
-                  <img style="width: 20%" :src="$base+image.images" alt="" />
+                <form v-for="(image, index) in gallery_images" :key="index" class="mt-3">
+                  <a @click.prevent="get_img_id(image.id, album_id)" class="btn">X</a>
+                  <img style="width: 20%" :src="$base + image.images" alt="" />
+                  <form method="post" class="my-3">
+                    <input type="file" @change="update_image" class="form-control mb-2">
+                    <button @click.prevent="update(image.id,album_id)" class="btn btn-success" type="submit">Update</button>
+                  </form>
                 </form>
+
               </div>
             </form>
           </div>
@@ -118,17 +85,8 @@
                 {{ list.album_caption }}
               </td>
               <td style="vertical-align: middle; width: 15%; color: white">
-                <button
-                  type="button"
-                  class="btn btn-primary text-white"
-                  @click="editList(list.id)"
-                >
-                  Edit</button
-                ><button
-                  type="button"
-                  class="btn btn-danger ml-1"
-                  @click="destroyList(list.id)"
-                >
+                <button type="button" class="btn btn-primary text-white" @click="editList(list.id)">
+                  Edit</button><button type="button" class="btn btn-danger ml-1" @click="destroyList(list.id)">
                   Delete
                 </button>
               </td>
@@ -164,6 +122,8 @@ export default {
       images: [],
       temporary_id: "",
       titleError: "",
+      replace_image: "",
+      replace_id:""
     };
   },
   methods: {
@@ -186,7 +146,21 @@ export default {
           this.loader = false;
           console.log(this.lists);
         })
-        .catch((error) => {});
+        .catch((error) => { });
+    },
+
+    update_image(e) {
+      this.replace_image = e.target.files[0]
+      console.log(this.replace_image)
+    },
+    update(id,album_id) {
+      let formData = new FormData()
+      formData.append('images',this.replace_image)
+      formData.append('id',id)
+      axios.post('/admin/gallery/update-image',formData).then((res) => {
+        alert('updated')
+        this.editList(album_id);
+      })
     },
 
     get_img_id(id, album_id) {
@@ -198,7 +172,7 @@ export default {
           this.editList(album_id);
           alert("Deleted");
         })
-        .catch((error) => {});
+        .catch((error) => { });
     },
 
     image_handler(e) {
@@ -278,8 +252,8 @@ export default {
     editList(list_id) {
       this.loader = true;
       this.is_editing = true;
-      this.titleError= "",
-      this.temporary_id = list_id;
+      this.titleError = "",
+        this.temporary_id = list_id;
 
       axios
         .get(`/admin/gallery/edit/${this.temporary_id}`)
@@ -296,7 +270,7 @@ export default {
           // this.why_choose_us = response.data.why_choose_us;
           // this.meta_keyword = response.data.meta_keyword;
         })
-        .catch((error) => {});
+        .catch((error) => { });
     },
     destroyList(list_id) {
       this.loader = true;
@@ -328,36 +302,42 @@ div {
   letter-spacing: 1px;
   font-family: sans-serif;
 }
+
 .btn-edit {
   background: #0093e9;
 }
+
 .card-header {
-  background-image: linear-gradient(
-    to right,
-    rgb(242, 112, 156),
-    rgb(255, 148, 114)
-  );
+  background-image: linear-gradient(to right,
+      rgb(242, 112, 156),
+      rgb(255, 148, 114));
 }
+
 thead {
   /* background: #84a4ff; */
   background-image: linear-gradient(to right, #0093e9, #80d0c7);
   color: white;
   border: none;
 }
+
 .card {
   border-top: none;
 }
+
 .card-header {
   border: none;
 }
+
 .btn-save {
   background: #5a67ff;
 }
+
 .btn-save:hover {
   background: #0093e9;
   transition: 2s ease;
 }
-.table-striped > tbody > tr:nth-of-type(odd) > * {
+
+.table-striped>tbody>tr:nth-of-type(odd)>* {
   --bs-table-accent-bg: rgb(229 231 255);
   color: var(--bs-table-striped-color);
   border: none;
