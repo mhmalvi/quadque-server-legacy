@@ -12,7 +12,7 @@
         @click="disable_button()"
         class="mt-3"
       >
-        <button class="btn btn-primary">Create Blog</button>
+        <button class="btn btn-primary">Create Clients</button>
       </div>
       <div class="col-md-12 mt-4">
         <!-- <div class="alert alert-success" v-if="this.success">
@@ -263,9 +263,17 @@ export default {
           }, 5000);
         })
         .catch((error) => {
+          this.loader=false
           console.log(error.response);
           if (error.response.data.errors.client_images) {
             this.thumbnailError = error.response.data.errors.client_images[0];
+            this.$swal.fire({
+              // position: "top-end",
+              // icon: "success",
+              title: this.thumbnailError,
+              showConfirmButton: true,
+              // timer: 1500,
+            });
           } else {
             this.thumbnailError = "";
           }

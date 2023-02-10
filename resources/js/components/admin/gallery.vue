@@ -33,10 +33,16 @@
               <div class="form-group">
                 <label for="title">Album Caption</label><br />
                 <textarea class="form-control" v-model="album_caption" required></textarea>
+                <div class="text-danger" v-if="this.albumError">
+                  {{ this.albumError }}
+                </div>
               </div>
               <div class="form-group">
                 <label for="title">Album Images</label><br />
                 <input type="file" class="form-control" @change="image_handler" required multiple />
+                <div class="text-danger" v-if="this.imageError">
+                  {{ this.imageError }}
+                </div>
               </div>
               <div>
                 <button type="button" class="btn btn-block btn-save text-white" @click="save">
@@ -123,7 +129,10 @@ export default {
       temporary_id: "",
       titleError: "",
       replace_image: "",
-      replace_id:""
+      replace_id:"",
+      title_Error:"",
+      albumError:"",
+      imageError:""
     };
   },
   methods: {
@@ -135,6 +144,8 @@ export default {
       this.image_Error = "";
       this.image_caption_Error = "";
       this.title_Error = "";
+      this.album_Error=""
+      this.imageError=""
     },
     fetchAll() {
       this.loader = true;
@@ -201,6 +212,9 @@ export default {
         .post(url, formdata)
         .then((response) => {
           this.loader = false;
+          this.albumError=""
+          this.titleError=""
+          this.imageError=""
           this.success = response.data.message;
           this.fetchAll();
           if (this.success == "created") {
@@ -239,12 +253,27 @@ export default {
           }, 5000);
         })
         .catch((error) => {
+          this.loader=false
           if (error.response.data.errors.title) {
             this.loader = false;
             console.log(error.response.data.errors.our_vision);
             this.titleError = error.response.data.errors.title[0];
           } else {
             this.titleError = "";
+          }
+          if (error.response.data.errors.album_caption) {
+            this.loader = false;
+            console.log(error.response.data.errors.album_caption);
+            this.albumError = error.response.data.errors.album_caption[0];
+          } else {
+            this.albumError = "";
+          }
+          if (error.response.data.errors.images) {
+            this.loader = false;
+            console.log(error.response.data.errors.images);
+            this.imageError = error.response.data.errors.images[0];
+          } else {
+            this.imageError = "";
           }
         });
     },

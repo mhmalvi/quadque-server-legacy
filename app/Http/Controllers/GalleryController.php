@@ -48,6 +48,8 @@ class GalleryController extends Controller
     {
         $request->validate([
             'title' => 'required',
+            'album_caption'=>'required',
+            'images'=>'required'
         ]);
         $gallery = new Gallery();
         $gallery->album_title = $request->title;

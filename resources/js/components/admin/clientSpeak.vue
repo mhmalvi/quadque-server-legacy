@@ -275,6 +275,11 @@ export default {
       axios
         .post(url, fd)
         .then((response) => {
+          this.image = "";
+            this.nameError=""
+            this.descriptionError=""
+            this.designationError= "",
+            this.fileError=""
           this.loader=false
           this.success = response.data.success;
           this.fetchAll();
@@ -293,7 +298,7 @@ export default {
             document.getElementById("image").value = "";
             this.temporary_id = "";
             this.temp_thumbnail_url = "";
-            this.image = "";
+            
           } else if (this.success == "updated") {
             this.$swal.fire({
               // position: "top-end",
