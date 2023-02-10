@@ -74,7 +74,7 @@
 
               <div class="form-group">
                 <label for="company_image">Create Case Icon</label>
-                <input type="file" class="form-control" @change="uploadfile" />
+                <input type="file" class="form-control" @change="uploadfile" required />
                 <div class="text-danger" v-if="this.imageError">
                   {{ this.imageError }}
                 </div>
@@ -103,7 +103,6 @@
                   class="form-control"
                   id="summary1"
                   v-model="summary1"
-                  required
                 ></textarea>
                 <!-- <div class="text-danger" v-if="this.nameError">
                   {{ this.nameError }}
@@ -149,7 +148,6 @@
                   class="form-control"
                   id="summary1"
                   v-model="summary2"
-                  required
                 ></textarea>
               </div>
               <!-- <h4>Select service</h4>
@@ -171,7 +169,6 @@
                   class="form-control"
                   id="company_name"
                   v-model="our_content_header"
-                  required
                 />
               </div>
               <div class="form-group">
@@ -181,7 +178,6 @@
                   class="form-control"
                   id="company_name"
                   v-model="title_1"
-                  required
                 />
                 <div class="text-danger" v-if="this.title_1_Error">
                   {{ this.title_1_Error }}
@@ -209,7 +205,6 @@
                   class="form-control"
                   id="description"
                   v-model="description_1"
-                  required
                 ></textarea>
                 <!-- <div class="text-danger" v-if="this.nameError">
                   {{ this.nameError }}
@@ -414,8 +409,6 @@
 <script>
 import axios from "axios";
 import VueUploadMultipleImage from "vue-upload-multiple-image";
-// import { VueEditor } from "vue2-editor";
-// import Loading from "vue-loading-overlay";
 
 export default {
   // computed: {

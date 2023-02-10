@@ -127,14 +127,10 @@ class CaseStudyController extends Controller
      */
     public function store(Request $request)
     {
-        //validate the input
-        // $path = 
+        // dd($request->all());
         $request->validate([
-            'name' => 'required|unique:case_studies',
-            'slug'=>'required|unique:case_studies',
-            'summary1' => 'required',
-            'summary2' => 'required',
-            'image'=>'required'
+            // 'name' => 'required|unique:case_studies',
+            'image' => 'required'
         ]);
         $case_study = new CaseStudy();
         $case_study->com_name = $request->name;
@@ -142,7 +138,6 @@ class CaseStudyController extends Controller
         $case_study->summary2 = $request->summary2;
         $case_study->content = $request->content;
         $case_study->meta_keyword = $request->meta_keyword;
-        // $case_study->description = $request->description;
         $case_study->our_content_header = $request->our_content_header;
         $case_study->slug = $request->slug;
         $case_study->title_1 = $request->title_1;
@@ -151,10 +146,6 @@ class CaseStudyController extends Controller
         $case_study->description_2 = $request->description_2;
         $case_study->title_3 = $request->title_3;
         $case_study->description_3 = $request->description_3;
-        // $case_study->service_id = $ser_id;
-        // $app_url = env('APP_URL');
-
-
         if ($request->image) {
 
             $fileName = time() . '.' . $request->image->getClientOriginalExtension();
@@ -216,7 +207,7 @@ class CaseStudyController extends Controller
             $file_path = "assets/case_study/agency/" . $fileName;
             $case_study->agency = $file_path;
         }
-        
+
 
         $save = $case_study->save();
         if ($save) {
@@ -248,7 +239,7 @@ class CaseStudyController extends Controller
         $request->validate([
             'name' => 'required',
             'slug' => 'required',
-            'summary1'=>'required',
+            'summary1' => 'required',
             'summary2' => 'required',
         ]);
         // dd($request->all());
@@ -270,7 +261,7 @@ class CaseStudyController extends Controller
         // $case_study->service_id = $ser_id;
         $app_url = env('APP_URL');
 
-        
+
         if ($request->image) {
             // unlink($case_study->com_image);
             $fileName = time() . '.' . $request->image->getClientOriginalExtension();
@@ -351,7 +342,7 @@ class CaseStudyController extends Controller
     public function destroy($id, CaseStudy $caseStudy)
     {
         $caseStudy = CaseStudy::find($id);
-        
+
         $delete = $caseStudy->delete();
         // unlink($caseStudy->agency);
         // unlink($caseStudy->group_images);

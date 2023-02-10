@@ -56,9 +56,8 @@ class ServiceController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'slug' => 'required|unique:services',
             'service_name' => 'required|unique:services',
-            'service_title' => 'required',
+            // 'file' => 'required',
         ]);
         $app_url = env('APP_URL');
         $service = new Service();

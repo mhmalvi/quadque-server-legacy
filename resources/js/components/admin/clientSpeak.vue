@@ -48,6 +48,7 @@
                   class="form-control"
                   v-model="name"
                   placeholder="Enter client name"
+                  required
                 />
                 <div class="text-danger" v-if="this.nameError">
                   {{ this.nameError }}
@@ -71,6 +72,7 @@
                   class="form-control"
                   v-model="designation"
                   placeholder="Enter designation"
+                  required
                 />
                 <div class="text-danger" v-if="this.designationError">
                   {{ this.designationError }}
@@ -83,6 +85,7 @@
                   class="form-control"
                   id="thumbnail"
                   @change="uploadfile"
+                  required
                 />
                 <div class="text-danger" v-if="this.fileError">
                   {{ this.fileError }}
@@ -309,8 +312,17 @@ export default {
           }, 5000);
         })
         .catch((error) => {
+          this.loader=false
+          
           console.log(error.response);
           if (error.response.data.errors.name) {
+            this.$swal.fire({
+              // position: "top-end",
+              // icon: "success",
+              title: error.response.data.errors.name,
+              showConfirmButton: true,
+              // timer: 1500,
+            });
             console.log("here");
             console.log(error.response.data.errors.name);
             this.nameError = error.response.data.errors.name[0];
@@ -319,17 +331,38 @@ export default {
           }
 
           if (error.response.data.errors.description) {
+            this.$swal.fire({
+              // position: "top-end",
+              // icon: "success",
+              title: error.response.data.errors.description,
+              showConfirmButton: true,
+              // timer: 1500,
+            });
             this.descriptionError = error.response.data.errors.description[0];
           } else {
             this.descriptionError = "";
           }
 
           if (error.response.data.errors.designation) {
+            this.$swal.fire({
+              // position: "top-end",
+              // icon: "success",
+              title: error.response.data.errors.designation,
+              showConfirmButton: true,
+              // timer: 1500,
+            });
             this.designationError = error.response.data.errors.designation[0];
           } else {
             this.designationError = "";
           }
           if (error.response.data.errors.image) {
+            this.$swal.fire({
+              // position: "top-end",
+              // icon: "success",
+              title: error.response.data.errors.image,
+              showConfirmButton: true,
+              // timer: 1500,
+            });
             this.fileError = error.response.data.errors.image[0];
           } else {
             this.fileError = "";

@@ -1,17 +1,10 @@
 <template>
   <div>
-    <lottie-vue-player
-      v-if="loader"
-      :src="`./9582-liquid-4-dot-loader.json`"
-      style="top: 40%; position: sticky; background: transparent; z-index: 100"
-    >
+    <lottie-vue-player v-if="loader" :src="`./9582-liquid-4-dot-loader.json`"
+      style="top: 40%; position: sticky; background: transparent; z-index: 100">
     </lottie-vue-player>
     <div class="row d-flex justify-content-center">
-      <div
-        v-if="this.is_editing == true"
-        @click="disable_button()"
-        class="mt-3"
-      >
+      <div v-if="this.is_editing == true" @click="disable_button()" class="mt-3">
         <button class="btn btn-primary">Create Services</button>
       </div>
       <div class="col-md-12 mt-4">
@@ -19,84 +12,49 @@
           {{ this.success }}
         </div> -->
         <div class="card">
-          <div
-            class="card-header text-center"
-            style="
+          <div class="card-header text-center" style="
               height: 47px;
               background-image: linear-gradient(
                 to right,
                 rgb(242, 112, 156),
                 rgb(255, 148, 114)
               );
-            "
-          >
-            <h4
-              class="card-title text-white text-center"
-              style="margin-top: 1%"
-            >
+            ">
+            <h4 class="card-title text-white text-center" style="margin-top: 1%">
               {{ this.is_editing ? "Update Service" : "Create Service" }}
             </h4>
           </div>
           <div class="card-body">
             <form>
               <div class="form-group">
-                <label for="title">Service Name</label>
-                <input
-                  type="text"
-                  class="form-control"
-                  v-model="service_name"
-                  @change="get_slug"
-                  placeholder="Enter service name"
-                  required
-                />
+                <label for="title">Service Name </label><span
+                  style="margin-left:5px; red;font-size: 2rem;position: absolute;color:red; top: 57px;">*</span>
+                <input type="text" class="form-control" v-model="service_name" @change="get_slug"
+                  placeholder="Enter service name" required />
                 <div class="text-danger" v-if="this.service_nameError">
                   {{ this.service_nameError }}
                 </div>
               </div>
               <div class="form-group">
                 <label for="title">Service Short Description</label>
-                <textarea
-                  type="text"
-                  class="form-control"
-                  v-model="service_short_description"
-                  placeholder="Enter service short description"
-                  required
-                ></textarea>
-                <div class="text-danger" v-if="this.service_nameError">
+                <textarea type="text" class="form-control" v-model="service_short_description"
+                  placeholder="Enter service short description"></textarea>
+                <!-- <div class="text-danger" v-if="this.service_nameError">
                   {{ this.service_nameError }}
-                </div>
+                </div> -->
               </div>
               <div class="form-group">
                 <label for="title">Service Title</label>
-                <input
-                  type="text"
-                  class="form-control"
-                  v-model="service_title"
-                  placeholder="Enter service title"
-                  required
-                />
+                <input type="text" class="form-control" v-model="service_title" placeholder="Enter service title" />
                 <!-- <div class="text-danger" v-if="this.service_titleError">
                   {{ this.service_titleError }}
                 </div> -->
               </div>
               <div class="form-group">
-                <label for="title">Slug</label
-                ><input
-                  @click="get_slug"
-                  class="ml-4"
-                  type="checkbox"
-                  v-model="checked"
-                />
-                <label style="color: blue"
-                  >select to get based on service name</label
-                >
-                <input
-                  type="string"
-                  class="form-control"
-                  v-model="slug"
-                  placeholder="Enter slug"
-                  required
-                />
+                <label for="title">Slug</label><input @click="get_slug" class="ml-4" type="checkbox"
+                  v-model="checked" />
+                <label style="color: blue">select to get based on service name</label>
+                <input type="string" class="form-control" v-model="slug" placeholder="Enter slug" />
                 <!-- <div class="text-danger" v-if="this.service_nameError">
                   {{ this.service_nameError }}
                 </div> -->
@@ -104,32 +62,17 @@
 
               <div class="form-group">
                 <label for="thumbnail">Service File</label>
-                <input
-                  type="file"
-                  class="form-control"
-                  id="thumbnail"
-                  required
-                  @change="uploadfile"
-                />
-                <div class="text-danger" v-if="this.fileError">
+                <input type="file" class="form-control" id="thumbnail" @change="uploadfile"  />
+                <!-- <div class="text-danger" v-if="this.fileError">
                   {{ this.fileError }}
-                </div>
+                </div> -->
                 <p class="my-2 text-center" v-if="this.temp_thumbnail_url">
-                  <img
-                    :src="$base + this.temp_thumbnail_url"
-                    width="150"
-                    height="150"
-                  />
+                  <img :src="$base + this.temp_thumbnail_url" width="150" height="150" />
                 </p>
               </div>
               <div class="form-group">
                 <label for="title">Service Description</label><br />
-                <textarea
-                  v-model="description"
-                  class="form-control"
-                  rows="4"
-                  required
-                ></textarea>
+                <textarea v-model="description" class="form-control" rows="4"></textarea>
                 <!-- <froala :tag="'textarea'" v-model="description"></froala> -->
 
                 <div class="text-danger" v-if="this.descriptionError">
@@ -138,12 +81,7 @@
               </div>
               <div class="form-group">
                 <label for="title">Identity Design Description </label>
-                <textarea
-                  v-model="identity_design_des"
-                  class="form-control"
-                  cols="30"
-                  rows="10"
-                ></textarea>
+                <textarea v-model="identity_design_des" class="form-control" cols="30" rows="10"></textarea>
                 <!-- <el-tiptap
                   v-model="identity_design_des"
                   :extensions="extensions"
@@ -155,26 +93,14 @@
               <!-- <a class="btn btn-primary" style="height: 40px;" @click="addIdentityMenu">Add (+)</a> -->
               <div class="form-group mt-4">
                 <label for="title">Project Count</label>
-                <input
-                  type="number"
-                  class="form-control"
-                  v-model="project_count"
-                  placeholder="Enter project count"
-                  required
-                />
+                <input type="number" class="form-control" v-model="project_count" placeholder="Enter project count" />
                 <div class="text-danger" v-if="this.project_countError">
                   {{ this.project_countError }}
                 </div>
               </div>
               <div class="form-group">
                 <label for="title">Happy Clients Count</label>
-                <input
-                  type="number"
-                  class="form-control"
-                  v-model="happy_clients"
-                  placeholder="Enter count"
-                  required
-                />
+                <input type="number" class="form-control" v-model="happy_clients" placeholder="Enter count" />
                 <div class="text-danger" v-if="this.happy_clientsError">
                   {{ this.happy_clientsError }}
                 </div>
@@ -199,39 +125,21 @@
               <!-- <h4>Service capabilities Menus</h4> -->
               <div class="form-group">
                 <!-- <div v-for="(data, index) in service_capability_menus" :key="index"> -->
-                <label for="title"
-                  >Service capabilities Menus
-                  <span style="color: red"
-                    >(use comma (,) separated names)</span
-                  ></label
-                >
-                <textarea
-                  type="text"
-                  class="form-control"
-                  v-model="service_capability_menu"
-                  placeholder="Enter menu name"
-                  required
-                ></textarea>
+                <label for="title">Service capabilities Menus
+                  <span style="color: red">(use comma (,) separated names)</span></label>
+                <textarea type="text" class="form-control" v-model="service_capability_menu"
+                  placeholder="Enter menu name"></textarea>
                 <!-- <a style="cursor:pointer;height: 40px;color:red;" @click="removeServiceCapabilityMenu(index)">Remove
                     menu</a> -->
                 <!-- </div> -->
-                <div
-                  class="text-danger"
-                  v-if="this.service_capability_menuError"
-                >
+                <div class="text-danger" v-if="this.service_capability_menuError">
                   {{ this.service_capability_menuError }}
                 </div>
               </div>
               <!-- <a class="btn btn-primary" style="height: 40px;" @click="addServiceCapabilityMenu">Add menu</a> -->
               <div class="form-group mt-4">
                 <label for="title">Service Deliver Title </label>
-                <input
-                  type="text"
-                  class="form-control"
-                  v-model="service_deliver_title"
-                  placeholder="Enter title"
-                  required
-                />
+                <input type="text" class="form-control" v-model="service_deliver_title" placeholder="Enter title" />
                 <div class="text-danger" v-if="this.service_deliver_titleError">
                   {{ this.service_deliver_titleError }}
                 </div>
@@ -239,38 +147,21 @@
 
               <div class="form-group">
                 <label for="title">Service Deliver Description</label>
-                <textarea
-                  v-model="service_deliver_description"
-                  class="form-control"
-                  rows="4"
-                  required
-                ></textarea>
-                <div
-                  class="text-danger"
-                  v-if="this.service_deliver_descriptionError"
-                >
+                <textarea v-model="service_deliver_description" class="form-control" rows="4"></textarea>
+                <div class="text-danger" v-if="this.service_deliver_descriptionError">
                   {{ this.service_deliver_descriptionError }}
                 </div>
               </div>
               <div class="form-group">
                 <label for="company_name">Meta Keyword</label>
-                <textarea
-                  type="text"
-                  class="form-control"
-                  id="description"
-                  v-model="meta_keyword"
-                ></textarea>
+                <textarea type="text" class="form-control" id="description" v-model="meta_keyword"></textarea>
                 <!-- <div class="text-danger" v-if="this.nameError">
                   {{ this.nameError }}
                 </div> -->
               </div>
 
               <div>
-                <button
-                  type="button"
-                  class="btn btn-block btn-save text-white"
-                  @click="save"
-                >
+                <button type="button" class="btn btn-block btn-save text-white" @click="save">
                   {{ this.is_editing ? "Update" : "Save" }}
                 </button>
               </div>
@@ -287,7 +178,7 @@
             <tr>
               <th>No.</th>
               <th>Name</th>
-              <th>Thumbnail</th>
+              <!-- <th>Thumbnail</th> -->
               <!-- <th>identity description</th>
               <th style="width: 36%">Description</th> -->
 
@@ -303,25 +194,16 @@
                 {{ list.service_name }}
               </td>
 
-              <td style="vertical-align: middle">
+              <!-- <td style="vertical-align: middle">
                 <img :src="$base + list.file" width="100" height="100" />
-              </td>
+              </td> -->
               <!-- <td v-html="list.identity_design_des"></td>
               <td v-html="list.content"></td> -->
 
               <td style="vertical-align: middle; width: 15%; color: white">
-                <button
-                  type="button"
-                  id="edit"
-                  class="btn btn-primary text-white"
-                  @click="editList(list.id), topFunction()"
-                >
-                  Edit</button
-                ><button
-                  type="button"
-                  class="btn btn-danger ml-1"
-                  @click="destroyList(list.id)"
-                >
+                <button type="button" id="edit" class="btn btn-primary text-white"
+                  @click="editList(list.id), topFunction()">
+                  Edit</button><button type="button" class="btn btn-danger ml-1" @click="destroyList(list.id)">
                   Delete
                 </button>
               </td>
@@ -443,6 +325,7 @@ export default {
       $(".summernote").summernote("code", "");
     },
     get_slug() {
+      this.service_nameError=""
       console.log(this.checked);
       if (this.is_editing == true && this.checked == true) {
         this.slug = localStorage.getItem("slug_tmp");
@@ -463,7 +346,7 @@ export default {
           console.log(this.lists);
           this.loader = false;
         })
-        .catch((error) => {});
+        .catch((error) => { });
     },
     uploadfile(e) {
       this.file = e.target.files[0];
@@ -560,8 +443,18 @@ export default {
           }, 5000);
         })
         .catch((error) => {
+
+          this.loader = false
           console.log(error.response);
           if (error.response.data.errors.service_name) {
+            this.$swal.fire({
+              // position: "top-end",
+              // icon: "success",
+              title: error.response.data.errors.service_name,
+              showConfirmButton: true,
+              // timer: 1500,
+            });
+            this.loader = false
             console.log("here");
             console.log(error.response.data.errors.service_name);
             this.service_nameError = error.response.data.errors.service_name[0];
@@ -570,19 +463,33 @@ export default {
           }
           if (error.response.data.errors.slug) {
             this.loader = false;
-            alert("Slug already exists");
+            // alert("Slug already exists");
+            this.$swal.fire({
+              // position: "top-end",
+              // icon: "success",
+              title: error.response.data.errors.slug,
+              showConfirmButton: true,
+              // timer: 1500,
+            });
           }
 
-          if (error.response.data.errors.title) {
-            this.descriptionError = error.response.data.errors.title[0];
-          } else {
-            this.descriptionError = "";
-          }
-          if (error.response.data.errors.file) {
-            this.fileError = error.response.data.errors.file[0];
-          } else {
-            this.fileError = "";
-          }
+          // if (error.response.data.errors.title) {
+          //   this.descriptionError = error.response.data.errors.title[0];
+          // } else {
+          //   this.descriptionError = "";
+          // }
+          // if (error.response.data.errors.file) {
+          //   this.$swal.fire({
+          //     // position: "top-end",
+          //     // icon: "success",
+          //     title: "Please select service file ",
+          //     showConfirmButton: true,
+          //     // timer: 1500,
+          //   });
+          //   this.fileError = error.response.data.errors.file[0];
+          // } else {
+          //   this.fileError = "";
+          // }
         });
     },
 
@@ -630,7 +537,7 @@ export default {
           // this.get_slug = localStorage.getItem('slug_tmp')
           // console.log(this.get_slug)
         })
-        .catch((error) => {});
+        .catch((error) => { });
     },
     destroyList(list_id) {
       this.loader = true;
@@ -703,11 +610,9 @@ div {
 }
 
 .card-header {
-  background-image: linear-gradient(
-    to right,
-    rgb(242, 112, 156),
-    rgb(255, 148, 114)
-  );
+  background-image: linear-gradient(to right,
+      rgb(242, 112, 156),
+      rgb(255, 148, 114));
 }
 
 thead {
@@ -740,7 +645,7 @@ thead {
   transition: 2s ease;
 }
 
-.table-striped > tbody > tr:nth-of-type(odd) > * {
+.table-striped>tbody>tr:nth-of-type(odd)>* {
   --bs-table-accent-bg: rgb(229 231 255);
   color: var(--bs-table-striped-color);
   border: none;
