@@ -1,17 +1,10 @@
 <template>
   <div>
-    <lottie-vue-player
-      v-if="loader"
-      :src="`./9582-liquid-4-dot-loader.json`"
-      style="top: 40%; position: sticky; background: transparent; z-index: 100"
-    >
+    <lottie-vue-player v-if="loader" :src="`./9582-liquid-4-dot-loader.json`"
+      style="top: 40%; position: sticky; background: transparent; z-index: 100; margin-left: -5%;">
     </lottie-vue-player>
     <div class="row d-flex justify-content-center">
-      <div
-        v-if="this.is_editing == true"
-        @click="disable_button()"
-        class="mt-3"
-      >
+      <div v-if="this.is_editing == true" @click="disable_button()" class="mt-3">
         <button class="btn btn-primary">Add about us</button>
       </div>
       <div class="col-md-6 mt-4">
@@ -19,21 +12,15 @@
           {{ this.success }}
         </div> -->
         <div class="card">
-          <div
-            class="card-header text-center"
-            style="
+          <div class="card-header text-center" style="
               height: 47px;
               background-image: linear-gradient(
                 to right,
                 rgb(242, 112, 156),
                 rgb(255, 148, 114)
               );
-            "
-          >
-            <h4
-              class="card-title text-white text-center"
-              style="margin-top: 1%"
-            >
+            ">
+            <h4 class="card-title text-white text-center" style="margin-top: 1%">
               {{ this.is_editing ? "Update About Us" : "Create About Us" }}
             </h4>
           </div>
@@ -46,94 +33,55 @@
               </div> -->
               <div class="form-group">
                 <label for="title">Our Vision</label><br />
-                <textarea
-                  v-model="our_vision"
-                  class="form-control"
-                  rows="4"
-                  required
-                ></textarea>
+                <textarea v-model="our_vision" class="form-control" rows="4" required></textarea>
                 <div class="text-danger" v-if="this.our_visionError">
                   {{ this.our_visionError }}
                 </div>
               </div>
               <div class="form-group">
                 <label for="title">Our Mission</label><br />
-                <textarea
-                  v-model="our_mission"
-                  class="form-control"
-                  rows="4"
-                  required
-                ></textarea>
+                <textarea v-model="our_mission" class="form-control" rows="4" required></textarea>
                 <div class="text-danger" v-if="this.our_missionError">
                   {{ this.our_missionError }}
                 </div>
               </div>
               <div class="form-group">
                 <label for="title">Our Goal</label><br />
-                <textarea
-                  v-model="our_goal"
-                  class="form-control"
-                  rows="4"
-                  required
-                ></textarea>
+                <textarea v-model="our_goal" class="form-control" rows="4" required></textarea>
                 <div class="text-danger" v-if="this.our_goalError">
                   {{ this.our_goalError }}
                 </div>
               </div>
               <div class="form-group">
                 <label for="title">Our Objective</label><br />
-                <textarea
-                  v-model="our_objective"
-                  class="form-control"
-                  rows="4"
-                  required
-                ></textarea>
+                <textarea v-model="our_objective" class="form-control" rows="4" required></textarea>
                 <div class="text-danger" v-if="this.our_objectiveError">
                   {{ this.our_objectiveError }}
                 </div>
               </div>
               <div class="form-group">
                 <label for="title">Who we are</label><br />
-                <textarea
-                  v-model="who_we_are"
-                  class="form-control"
-                  rows="4"
-                  required
-                ></textarea>
+                <textarea v-model="who_we_are" class="form-control" rows="4" required></textarea>
                 <div class="text-danger" v-if="this.who_we_areError">
                   {{ this.who_we_areError }}
                 </div>
               </div>
               <div class="form-group">
                 <label for="title">Why choose us</label><br />
-                <textarea
-                  v-model="why_choose_us"
-                  class="form-control"
-                  rows="4"
-                  required
-                ></textarea>
+                <textarea v-model="why_choose_us" class="form-control" rows="4" required></textarea>
                 <div class="text-danger" v-if="this.why_choose_usError">
                   {{ this.why_choose_usError }}
                 </div>
               </div>
               <div class="form-group">
                 <label for="company_name">Meta Keyword</label>
-                <textarea
-                  type="text"
-                  class="form-control"
-                  id="description"
-                  v-model="meta_keyword"
-                ></textarea>
+                <textarea type="text" class="form-control" id="description" v-model="meta_keyword"></textarea>
                 <!-- <div class="text-danger" v-if="this.nameError">
                   {{ this.nameError }}
                 </div> -->
               </div>
               <div>
-                <button
-                  type="button"
-                  class="btn btn-block btn-save text-white"
-                  @click="save"
-                >
+                <button type="button" class="btn btn-block btn-save text-white" @click="save">
                   {{ this.is_editing ? "Update" : "Save" }}
                 </button>
               </div>
@@ -163,10 +111,7 @@
               <td style="vertical-align: middle; font-weight: 500">
                 {{ index + 1 }}.
               </td>
-              <td
-                style="vertical-align: middle; font-weight: 500"
-                v-html="list.our_vision"
-              >
+              <td style="vertical-align: middle; font-weight: 500" v-html="list.our_vision">
                 <!-- {{ list.our_vision }} -->
               </td>
               <td style="vertical-align: middle; font-weight: 500">
@@ -190,17 +135,8 @@
               </td>
 
               <td style="vertical-align: middle; width: 15%; color: white">
-                <button
-                  type="button"
-                  class="btn btn-primary text-white"
-                  @click="editList(list.id)"
-                >
-                  Edit</button
-                ><button
-                  type="button"
-                  class="btn btn-danger ml-1"
-                  @click="destroyList(list.id)"
-                >
+                <button type="button" class="btn btn-primary text-white" @click="editList(list.id)">
+                  Edit</button><button type="button" class="btn btn-danger ml-1" @click="destroyList(list.id)">
                   Delete
                 </button>
               </td>
@@ -224,7 +160,7 @@ export default {
   // name:"service-component",
   data() {
     return {
-      loader:false,
+      loader: false,
       lists: [],
       our_vision: "",
       our_mission: "",
@@ -243,7 +179,7 @@ export default {
       temporary_id: "",
       is_editing: false,
       temp_thumbnail_url: "",
-      add_aboutus:""
+      add_aboutus: ""
       // blog_no: 1,
     };
   },
@@ -271,19 +207,21 @@ export default {
       // this.temp_thumbnail_url = "";
     },
     fetchAll() {
-      this.loader=true
+      this.loader = true
       axios
         .get("/admin/about-us/get")
         .then((response) => {
-          this.loader=false
+          this.loader = false
           this.lists = response.data.data;
           console.log(this.lists);
         })
-        .catch((error) => {});
+        .catch((error) => { 
+          this.loader = false
+        });
     },
 
     save() {
-      this.loader=true
+      this.loader = true
       let url;
       if (this.is_editing) {
         url = `/admin/about-us/update`;
@@ -303,7 +241,7 @@ export default {
           id: this.temporary_id,
         })
         .then((response) => {
-          this.loader=false
+          this.loader = false
           this.success = response.data.success;
           this.fetchAll();
           if (this.success == "created") {
@@ -341,7 +279,9 @@ export default {
           }, 5000);
         })
         .catch((error) => {
+          this.loader = false
           console.log(error.response.data.data);
+          
           if (error.response.data.data == 'exist') {
             this.$swal.fire({
               // position: "top-end",
@@ -391,14 +331,14 @@ export default {
     },
 
     editList(list_id) {
-      this.loader=true
+      this.loader = true
       this.is_editing = true;
       this.temporary_id = list_id;
 
       axios
         .get(`/admin/about-us/edit/${this.temporary_id}`)
         .then((response) => {
-          this.loader=false
+          this.loader = false
           this.our_vision = response.data.our_vision;
           this.our_mission = response.data.our_mission;
           this.our_goal = response.data.our_goal;
@@ -407,12 +347,12 @@ export default {
           this.why_choose_us = response.data.why_choose_us;
           this.meta_keyword = response.data.meta_keyword;
         })
-        .catch((error) => {});
+        .catch((error) => { });
     },
     destroyList(list_id) {
-      this.loader=true
+      this.loader = true
       axios.get(`/admin/about-us/delete/${list_id}`).then((response) => {
-        this.loader=false
+        this.loader = false
         this.is_editing = false;
         this.fetchAll();
         this.$swal.fire({
@@ -420,12 +360,12 @@ export default {
           text: "Deleted",
         });
         this.our_vision = "";
-      this.our_mission = "";
-      this.our_goal = "";
-      this.our_objective = "";
-      this.who_we_are = "";
-      this.why_choose_us = "";
-      this.meta_keyword = "";
+        this.our_mission = "";
+        this.our_goal = "";
+        this.our_objective = "";
+        this.who_we_are = "";
+        this.why_choose_us = "";
+        this.meta_keyword = "";
       });
     },
   },
@@ -439,38 +379,48 @@ div {
   letter-spacing: 1px;
   font-family: sans-serif;
 }
+
 .btn-edit {
   background: #0093e9;
 }
+
 .card-header {
-  background-image: linear-gradient(
-    to right,
-    rgb(242, 112, 156),
-    rgb(255, 148, 114)
-  );
+  background-image: linear-gradient(to right,
+      rgb(242, 112, 156),
+      rgb(255, 148, 114));
 }
+
 thead {
   /* background: #84a4ff; */
   background-image: linear-gradient(to right, #0093e9, #80d0c7);
   color: white;
   border: none;
 }
+
 .card {
   border-top: none;
 }
+
 .card-header {
   border: none;
 }
+
 .btn-save {
   background: #5a67ff;
 }
+
 .btn-save:hover {
   background: #0093e9;
   transition: 2s ease;
 }
-.table-striped > tbody > tr:nth-of-type(odd) > * {
+
+.table-striped>tbody>tr:nth-of-type(odd)>* {
   --bs-table-accent-bg: rgb(229 231 255);
   color: var(--bs-table-striped-color);
   border: none;
+}
+
+.animation{
+  margin-left: -24%;
 }
 </style>

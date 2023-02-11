@@ -1,7 +1,7 @@
 <template>
   <div>
     <lottie-vue-player v-if="loader" :src="`./9582-liquid-4-dot-loader.json`"
-      style="top: 40%; position: sticky; background: transparent; z-index: 100">
+      style="top: 40%; position: sticky; background: transparent; z-index: 100; margin-left: -5%;">
     </lottie-vue-player>
     <div class="row d-flex justify-content-center">
       <div v-if="this.is_editing == true" @click="disable_button()" class="mt-3">
@@ -101,7 +101,7 @@
           <tbody v-else>
             <tr>
               <td colspan="8">
-                <h3 class="text-center">There have nothing about us...!</h3>
+                <h3 class="text-center">Gallery is empty...!</h3>
               </td>
             </tr>
           </tbody>
