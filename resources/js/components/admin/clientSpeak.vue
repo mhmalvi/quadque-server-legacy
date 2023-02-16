@@ -32,7 +32,7 @@
           >
             <h4
               class="card-title text-white text-center"
-              style="margin-top: 1%"
+              style="margin:auto;"
             >
               {{
                 this.is_editing ? "Update Client Speak" : "Create Client Speak"

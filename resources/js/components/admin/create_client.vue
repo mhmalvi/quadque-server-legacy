@@ -31,7 +31,7 @@
             "
           >
             <h4
-              style="margin-top: 1%"
+              style="margin:auto;"
               class="card-title text-white text-center"
             >
               {{

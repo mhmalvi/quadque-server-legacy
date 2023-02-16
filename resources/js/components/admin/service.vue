@@ -20,7 +20,7 @@
                 rgb(255, 148, 114)
               );
             ">
-            <h4 class="card-title text-white text-center" style="margin-top: 1%">
+            <h4 class="card-title text-white text-center" style="margin:auto;">
               {{ this.is_editing ? "Update Service" : "Create Service" }}
             </h4>
           </div>
@@ -108,7 +108,7 @@
 
               <!-- <h1>Why Choose Us</h1> -->
               <div class="form-group">
-                <label for="title">Content </label>
+                <label for="title">Content   <span style="font-weight:800;"><a target="_blank" href="https://docs.google.com/document/d/1URIvTzR961eMYoU_T6gn5INLL1CQvApAlPvlqlWhjio/edit?usp=sharing">      (Please click on this link </a>and create content in google docs and then copy and paste in the editor)</span></label>
                 <select class="summernote" v-model="content"></select>
                 <!-- <textarea
                   v-model="content"

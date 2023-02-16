@@ -35,7 +35,7 @@
 
 
 
-                        <a  class="nav-link text-white" href="{{ route('admin.dashboard') }}">Dashboard</a>
+                        <a class="nav-link text-white" href="{{ route('admin.dashboard') }}">Dashboard</a>
 
 
                     </li>
@@ -131,6 +131,22 @@
             color: white;
         }
 
+        .note-editable {
+            height: 390px;
+            background: black;
+            color: white;
+        }
+
+        .card {
+            width: 110%;
+            margin-left: -5%;
+        }
+
+        div lottie-player #animation-container #animation .error {
+            display: none !important;
+            margin-left: -40%;
+        }
+
     </style>
 
     <script src="{{ mix('js/app.js') }}" type="text/javascript"></script>
@@ -149,8 +165,22 @@
     <script>
         $(document).ready(function() {
             $('.summernote').summernote({
-                height: 250,
-            });   
+                toolbar: [
+                    ['style', ['style']]
+                    , ['font', ['bold', 'underline', 'clear', 'fontsize', 'fontname', 'forecolor', 'backcolor', 'strikethrough', 'superscript', 'subscript', 'clear']]
+                    , ['fontname', ['fontname']]
+                    , ['color', ['color']]
+                    , ['para', ['ul', 'ol', 'paragraph', 'height']]
+
+
+                    , ['table', ['table']]
+                    , ['insert', ['link', 'picture', 'video']]
+
+                    , ['view', ['codeview', 'help']]
+                    , ['misc', ['undo', 'redo']]
+                , ],
+
+            });
 
         });
 

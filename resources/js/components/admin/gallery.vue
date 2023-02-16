@@ -17,7 +17,7 @@
                 rgb(255, 148, 114)
               );
             ">
-            <h4 class="card-title text-white text-center" style="margin-top: 1%">
+            <h4 class="card-title text-white text-center" style="margin:auto;">
               {{ this.is_editing ? "Update Gallery" : "Create Gallery" }}
             </h4>
           </div>

@@ -20,7 +20,7 @@
                 rgb(255, 148, 114)
               );
             ">
-            <h4 class="card-title text-white text-center" style="margin-top: 1%">
+            <h4 class="card-title text-white text-center" style="margin:auto;">
               {{ this.is_editing ? "Update About Us" : "Create About Us" }}
             </h4>
           </div>

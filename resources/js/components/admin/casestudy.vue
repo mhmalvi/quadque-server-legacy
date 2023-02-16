@@ -1,9 +1,12 @@
 <template>
   <div>
-    <lottie-vue-player
-      v-if="loader"
+    <!-- v-if="loader" -->
+    <lottie-vue-player v-if="loader" 
       :src="`./9582-liquid-4-dot-loader.json`"
       style="top: 40%; position: sticky; background: transparent; z-index: 100"
+      :theme="options.theme"
+      :player-size="options.playerSize"
+      :player-controls="true"
     >
     </lottie-vue-player>
     <div class="row d-flex justify-content-center">
@@ -14,8 +17,8 @@
       >
         <button class="btn btn-primary">Create Case Study</button>
       </div>
-      <div class="col-md-12 mt-4">
-        <div class="card">
+      <div class="mt-4">
+        <div class="card" style="">
           <div
             class="card-header"
             style="
@@ -27,10 +30,7 @@
               );
             "
           >
-            <h4
-              style="margin-top: 1%"
-              class="card-title text-white text-center"
-            >
+            <h4 style="margin: auto" class="card-title text-white text-center">
               {{ this.is_editing ? "Update Case Study" : "Create Case Study" }}
             </h4>
           </div>
@@ -74,7 +74,7 @@
 
               <div class="form-group">
                 <label for="company_image">Create Case Icon</label>
-                <input type="file" class="form-control" @change="uploadfile" required />
+                <input type="file" class="form-control" @change="uploadfile" />
                 <div class="text-danger" v-if="this.imageError">
                   {{ this.imageError }}
                 </div>
@@ -156,7 +156,18 @@
               </div> -->
               <!-- <h1>Content</h1> -->
               <div class="form-group">
-                <label for="company_name">Content</label>
+                <label for="company_name"
+                  >Content
+                  <span style="font-weight: 800"
+                    ><a
+                      target="_blank"
+                      href="https://docs.google.com/document/d/1URIvTzR961eMYoU_T6gn5INLL1CQvApAlPvlqlWhjio/edit?usp=sharing"
+                    >
+                      (Please click on this link </a
+                    >and create content in google docs and then copy and paste
+                    in the editor)</span
+                  ></label
+                >
                 <select class="summernote" v-model="content"></select>
                 <!-- <textarea type="string" class="form-control summernote1" v-model="content" id="summernote">
                 </textarea> -->
@@ -356,10 +367,13 @@
             <tr v-for="(list, index) in lists" :key="index">
               <td>{{ list.com_name }}</td>
               <!-- <td v-html="list.content"></td> -->
-              <td>
+              <td v-if="list.com_image != ''">
                 <img :src="$base + list.com_image" width="100" height="100" />
               </td>
-              <td>
+              <td v-else>
+                <p>No image</p>
+              </td>
+              <td v-if="list.agency != ''">
                 <!-- {{ image[index] }} -->
                 <!-- {{ $base }} -->
                 <img
@@ -368,6 +382,11 @@
                   :src="$base + list.agency"
                   alt=""
                 />
+              </td>
+              <td v-else>
+                <!-- {{ image[index] }} -->
+                <!-- {{ $base }} -->
+                <p>No image</p>
               </td>
               <td>
                 <button
@@ -540,7 +559,7 @@ export default {
     disable_button() {
       $(".summernote").summernote("code", "");
       this.is_editing = false;
-      this.checked = false
+      this.checked = false;
       this.name = "";
       this.image = "";
       this.summary1 = "";
@@ -653,7 +672,7 @@ export default {
           $(".summernote").summernote("code", this.content);
           // document.getElementById("thumbnail").value = "";
           if (response.data.success == "created") {
-            this.checked = false
+            this.checked = false;
             this.is_editing = false;
             this.name = "";
             this.image = "";
@@ -674,6 +693,7 @@ export default {
               (this.image_3 = ""),
               (this.description_3 = ""),
               (this.temp_image_url = "");
+            this.meta_keyword = "";
             this.$swal.fire({
               // position: "top-end",
               icon: "success",
@@ -766,11 +786,11 @@ export default {
         .catch((error) => {});
     },
     destroyList(list_id) {
-      this.loader=true
+      this.loader = true;
       axios.get(`/admin/case-study/delete/${list_id}`).then((response) => {
         // this.success = response.data.success;
         this.fetchAll();
-        this.loader=false
+        this.loader = false;
         this.$swal.fire({
           icon: "error",
           text: "Deleted",
@@ -803,6 +823,10 @@ export default {
 };
 </script>
 <style scoped>
+/* div lottie-player #animation-container #animation .error {
+  display: none !important;
+  margin-left: -40%;
+} */
 /* @import "../../../css/summernote.css"; */
 #my-strictly-unique-vue-upload-multiple-image {
   font-family: "Avenir", Helvetica, Arial, sans-serif;

@@ -2,15 +2,12 @@
   <div>
     <!-- <div style="position: relative;height: 100%; "> -->
 
-      <lottie-vue-player v-if="loader"
-        :src="`./9582-liquid-4-dot-loader.json`"
-        style="
-          top: 40%;position: sticky;
-          background: transparent;
-          z-index: 100;
-        "
-      >
-      </lottie-vue-player>
+    <lottie-vue-player
+      v-if="loader"
+      :src="`./9582-liquid-4-dot-loader.json`"
+      style="top: 40%; position: sticky; background: transparent; z-index: 100"
+    >
+    </lottie-vue-player>
     <!-- </div> -->
     <div class="row d-flex justify-content-center">
       <div
@@ -37,7 +34,7 @@
             "
           >
             <h4
-              style="margin-top: 1%"
+              style="margin:auto;"
               class="card-title text-white text-center"
             >
               {{ this.is_editing ? "Update Blog" : "Create Blog" }}
@@ -98,7 +95,17 @@
                 </p>
               </div>
               <div class="form-group" style="">
-                <label for="text">Blog Text</label>
+                <label for="text"
+                  >Blog Text
+                  <span style="font-weight: 800"
+                    ><a target="_blank"
+                      href="https://docs.google.com/document/d/1URIvTzR961eMYoU_T6gn5INLL1CQvApAlPvlqlWhjio/edit?usp=sharing"
+                    >
+                      (Please click on this link </a
+                    >and create content in google docs and then copy and paste
+                    in the editor)</span
+                  ></label
+                >
                 <select v-model="text" id="" class="summernote"></select>
                 <!-- <textarea
                   v-model="text"
@@ -124,6 +131,16 @@
                 <label for="title">Blog Short Description</label>
                 <textarea
                   v-model="short_description"
+                  class="form-control"
+                ></textarea>
+                <!-- <div class="text-danger" v-if="this.titleError">
+                  {{ this.titleError }}
+                </div> -->
+              </div>
+              <div class="form-group">
+                <label for="title">Meta Description</label>
+                <textarea
+                  v-model="meta_description"
                   class="form-control"
                 ></textarea>
                 <!-- <div class="text-danger" v-if="this.titleError">
@@ -204,7 +221,7 @@ import axios from "axios";
 export default {
   data() {
     return {
-      loader:false,
+      loader: false,
       lists: [],
       title: "",
       thumbnail: "",
@@ -216,6 +233,7 @@ export default {
       thumbnailError: "",
       success: "",
       temporary_id: "",
+      meta_description:"",
       is_editing: false,
       temp_thumbnail_url: "",
       blog_no: 1,
@@ -247,14 +265,15 @@ export default {
   methods: {
     disable_button() {
       this.is_editing = false;
-      this.slug=""
-      this.checked = false
+      this.slug = "";
+      this.checked = false;
       this.title = "";
       this.text = "";
       this.thumbnail = "";
       this.temp_thumbnail_url = "";
       this.author = "";
       this.meta_keyword = "";
+      this.meta_description=""
       this.short_description = "";
 
       $(".summernote").summernote("code", "");
@@ -269,11 +288,11 @@ export default {
       }
     },
     fetchAll() {
-      this.loader=true
+      this.loader = true;
       axios
         .get("/admin/blog/get")
         .then((response) => {
-          this.loader=false
+          this.loader = false;
           console.log(response);
           this.lists = response.data;
         })
@@ -286,7 +305,7 @@ export default {
 
     save() {
       let url;
-      this.loader=true
+      this.loader = true;
       if (this.is_editing) {
         url = `/admin/blog/update`;
       } else {
@@ -300,6 +319,7 @@ export default {
       fd.append("thumbnail", this.thumbnail);
       fd.append("id", this.temporary_id);
       fd.append("slug", this.slug);
+      fd.append('meta_description', this.meta_description);
       fd.append("meta_keyword", this.meta_keyword);
       fd.append("short_description", this.short_description);
       fd.append("author", this.author);
@@ -308,12 +328,14 @@ export default {
         .post(url, fd)
         .then((response) => {
           this.success = response.data.success;
-          this.loader=false
+          this.loader = false;
           if (this.success == "created") {
+            this.thumbnail = "";
             this.title = "";
             this.text = "";
-            this.checked = false
-            this.slug=""
+            this.checked = false;
+            this.slug = "";
+            this.meta_description=""
             $(".summernote").summernote("code", this.text);
             // document.getElementById("thumbnail").value = "";
             this.temporary_id = "";
@@ -326,6 +348,7 @@ export default {
               // timer: 1500,
             });
           } else if (this.success == "updated") {
+            this.thumbnail = "";
             this.is_editing = true;
             this.$swal.fire({
               // position: "top-end",
@@ -349,8 +372,8 @@ export default {
           }
 
           if (error.response.data.errors.slug) {
-            alert('Slug already exists')
-            this.loader=false
+            alert("Slug already exists");
+            this.loader = false;
           } else {
             this.titleError = "";
           }
@@ -369,7 +392,7 @@ export default {
     },
 
     editList(list_id) {
-      this.loader=true
+      this.loader = true;
       this.is_editing = true;
       this.titleError = "";
       this.thumbnailError = "";
@@ -378,12 +401,13 @@ export default {
       axios
         .get(`/admin/blog/edit/${this.temporary_id}`)
         .then((response) => {
-          this.loader=false
+          this.loader = false;
           this.title = response.data.title;
           this.text = response.data.text;
           this.author = response.data.author;
           this.short_description = response.data.short_description;
           this.meta_keyword = response.data.meta_keyword;
+          this.meta_description = response.data.meta_description;
           this.slug = response.data.slug;
           // this.thumbnail = response.data.thumbnail;
           // this.slug=response.data.slug
@@ -395,23 +419,23 @@ export default {
         .catch((error) => {});
     },
     destroyList(list_id) {
-      this.loader=true
+      this.loader = true;
       axios.get(`/admin/blog/delete/${list_id}`).then((response) => {
-        this.loader=false
+        this.loader = false;
         this.$swal.fire({
           icon: "error",
           text: "Deleted",
         });
         this.is_editing = false;
-      this.slug=""
-      this.checked = false
-      this.title = "";
-      this.text = "";
-      this.thumbnail = "";
-      this.temp_thumbnail_url = "";
-      this.author = "";
-      this.meta_keyword = "";
-      this.short_description = "";
+        this.slug = "";
+        this.checked = false;
+        this.title = "";
+        this.text = "";
+        this.thumbnail = "";
+        this.temp_thumbnail_url = "";
+        this.author = "";
+        this.meta_keyword = "";
+        this.short_description = "";
         this.fetchAll();
       });
     },
@@ -457,18 +481,18 @@ thead {
 }
 
 #animation-container #animation {
-    width: 100%;
-    height: 100%;
-    display: none !important;
+  width: 100%;
+  height: 100%;
+  display: none !important;
 }
 .animation {
-    width: 100%;
-    height: 100%;
-    display: none !important;
+  width: 100%;
+  height: 100%;
+  display: none !important;
 }
 
-.error{
-  display:none !important;
+.error {
+  display: none !important;
 }
 .btn-save {
   background: #5a67ff;

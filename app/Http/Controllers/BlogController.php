@@ -128,6 +128,7 @@ class BlogController extends Controller
             'thumbnail' => $file_path,
             'slug' => $slug,
             'meta_keyword' => $request->meta_keyword,
+            'meta_description' => $request->meta_description,
             'short_description' => $request->short_description,
             'author' => $request->author
 
@@ -189,6 +190,7 @@ class BlogController extends Controller
         $blog->text = $request->text;
         $blog->slug = $request->slug;
         $blog->meta_keyword = $request->meta_keyword;
+        $blog->meta_description = $request->meta_description;
         $blog->short_description = $request->short_description;
         $blog->author = $request->author;
         $app_url = env('APP_URL');
