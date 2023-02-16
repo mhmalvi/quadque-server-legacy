@@ -1,7 +1,8 @@
 <template>
   <div>
     <!-- v-if="loader" -->
-    <lottie-vue-player v-if="loader" 
+    <lottie-vue-player
+      v-if="loader"
       :src="`./9582-liquid-4-dot-loader.json`"
       style="top: 40%; position: sticky; background: transparent; z-index: 100"
       :theme="options.theme"
@@ -183,7 +184,7 @@
                 />
               </div>
               <div class="form-group">
-                <label for="company_name">Our Content First Title</label>
+                <label for="company_name">Testimonial</label>
                 <input
                   type="string"
                   class="form-control"
@@ -194,7 +195,7 @@
                   {{ this.title_1_Error }}
                 </div>
               </div>
-              <div class="form-group">
+              <!-- <div class="form-group">
                 <label for="upload_first_image">Our Content First Image</label>
                 <input
                   type="file"
@@ -208,9 +209,9 @@
                     height="150"
                   />
                 </p>
-              </div>
+              </div> -->
               <div class="form-group">
-                <label for="company_name">First Description</label>
+                <label for="company_name">Testimonial Description</label>
                 <textarea
                   type="text"
                   class="form-control"
@@ -223,7 +224,7 @@
               </div>
 
               <div class="form-group">
-                <label for="company_name">Our Content Second Title </label>
+                <label for="company_name">Key Takeaways </label>
                 <input
                   type="string"
                   class="form-control"
@@ -231,7 +232,7 @@
                   v-model="title_2"
                 />
               </div>
-              <div class="form-group">
+              <!-- <div class="form-group">
                 <label for="upload_second_image"
                   >Our Content Second Image</label
                 >
@@ -247,9 +248,9 @@
                     height="150"
                   />
                 </p>
-              </div>
+              </div> -->
               <div class="form-group">
-                <label for="company_name">Second Description</label>
+                <label for="company_name">Key Takeaways Description</label>
                 <textarea
                   type="text"
                   class="form-control"
@@ -273,7 +274,7 @@
                 </div> -->
               </div>
               <div class="form-group">
-                <label for="company_name">Our Content Third Title </label>
+                <label for="company_name">What we have Learnt </label>
                 <input
                   type="string"
                   class="form-control"
@@ -281,7 +282,7 @@
                   v-model="title_3"
                 />
               </div>
-              <div class="form-group">
+              <!-- <div class="form-group">
                 <label for="upload_third_image">Our Content Third Image</label>
                 <input
                   type="file"
@@ -295,9 +296,9 @@
                     height="150"
                   />
                 </p>
-              </div>
+              </div> -->
               <div class="form-group">
-                <label for="company_name">Third Description</label>
+                <label for="company_name">What we have Learnt Description</label>
                 <textarea
                   type="text"
                   class="form-control"
@@ -359,7 +360,6 @@
               <th>Company Name</th>
               <!-- <th>Company Description</th> -->
               <th>Company Icon</th>
-              <th>Agency Images</th>
               <th>Action</th>
             </tr>
           </thead>
@@ -373,9 +373,7 @@
               <td v-else>
                 <p>No image</p>
               </td>
-              <td v-if="list.agency != ''">
-                <!-- {{ image[index] }} -->
-                <!-- {{ $base }} -->
+              <!-- <td v-if="list.agency != ''">
                 <img
                   width="150"
                   height="150"
@@ -384,10 +382,8 @@
                 />
               </td>
               <td v-else>
-                <!-- {{ image[index] }} -->
-                <!-- {{ $base }} -->
                 <p>No image</p>
-              </td>
+              </td>-->
               <td>
                 <button
                   type="button"
@@ -701,8 +697,8 @@ export default {
               showConfirmButton: true,
               // timer: 1500,
             });
-            document.getElementById("image").value = "";
-            document.getElementById("group_images").value = "";
+            // document.getElementById("image").value = "";
+            // document.getElementById("group_images").value = "";
             $(".summernote").summernote("code", "");
             this.temp_image_url = "";
             this.temporary_id = "";
