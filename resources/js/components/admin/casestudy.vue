@@ -75,7 +75,12 @@
 
               <div class="form-group">
                 <label for="company_image">Create Case Icon</label>
-                <input type="file" class="form-control" id="case_icon" @change="uploadfile" />
+                <input
+                  type="file"
+                  class="form-control"
+                  id="case_icon"
+                  @change="uploadfile"
+                />
                 <div class="text-danger" v-if="this.imageError">
                   {{ this.imageError }}
                 </div>
@@ -195,8 +200,10 @@
                   {{ this.title_1_Error }}
                 </div>
               </div>
-              <!-- <div class="form-group">
-                <label for="upload_first_image">Our Content First Image</label>
+              <div class="form-group">
+                <label for="upload_first_image"
+                  >Our Content First Image(Only for mobile)</label
+                >
                 <input
                   type="file"
                   class="form-control"
@@ -209,7 +216,7 @@
                     height="150"
                   />
                 </p>
-              </div> -->
+              </div>
               <div class="form-group">
                 <label for="company_name">Testimonial Description</label>
                 <textarea
@@ -232,9 +239,9 @@
                   v-model="title_2"
                 />
               </div>
-              <!-- <div class="form-group">
+              <div class="form-group">
                 <label for="upload_second_image"
-                  >Our Content Second Image</label
+                  >Our Content Second Image(Only for mobile)</label
                 >
                 <input
                   type="file"
@@ -248,7 +255,7 @@
                     height="150"
                   />
                 </p>
-              </div> -->
+              </div>
               <div class="form-group">
                 <label for="company_name">Key Takeaways Description</label>
                 <textarea
@@ -282,8 +289,10 @@
                   v-model="title_3"
                 />
               </div>
-              <!-- <div class="form-group">
-                <label for="upload_third_image">Our Content Third Image</label>
+              <div class="form-group">
+                <label for="upload_third_image"
+                  >Our Content Third Image (Only for mobile)</label
+                >
                 <input
                   type="file"
                   class="form-control"
@@ -296,9 +305,11 @@
                     height="150"
                   />
                 </p>
-              </div> -->
+              </div>
               <div class="form-group">
-                <label for="company_name">What we have Learnt Description</label>
+                <label for="company_name"
+                  >What we have Learnt Description</label
+                >
                 <textarea
                   type="text"
                   class="form-control"
@@ -325,7 +336,7 @@
                   />
                 </p>
               </div>
-              <!-- <div class="form-group">
+              <div class="form-group">
                 <label for="company_image">Agency Images</label>
                 <input
                   type="file"
@@ -339,7 +350,7 @@
                 <p class="my-2 text-center" v-if="this.temp_image_url">
                   <img :src="this.temp_image_url" width="150" height="150" />
                 </p>
-              </div> -->
+              </div>
               <div>
                 <!-- <ckeditor :editor="editor" v-model="editorData" :config="editorConfig"></ckeditor> -->
                 <button type="submit" class="btn btn-block btn-save text-white">
@@ -373,7 +384,7 @@
               <td v-else>
                 <p>No image</p>
               </td>
-              <!-- <td v-if="list.agency != ''">
+              <td v-if="list.agency != ''">
                 <img
                   width="150"
                   height="150"
@@ -383,7 +394,7 @@
               </td>
               <td v-else>
                 <p>No image</p>
-              </td>-->
+              </td>
               <td>
                 <button
                   type="button"
@@ -662,32 +673,31 @@ export default {
       axios
         .post(url, fd)
         .then((response) => {
-
           this.fetchAll();
           this.loader = false;
 
           // this.success = response.data.success;
           $(".summernote").summernote("code", this.content);
           this.name = "";
-            this.image = "";
-            this.summary1 = "";
-            this.summary2 = "";
-            this.content = "";
-            this.group_images = "";
-            (this.long_banner = ""),
-              (this.short_banner_img = ""),
-              (this.our_content_header = ""),
-              (this.title_1 = ""),
-              (this.image_1 = ""),
-              (this.description_1 = ""),
-              (this.title_2 = ""),
-              (this.image_2 = ""),
-              (this.description_2 = ""),
-              (this.title_3 = ""),
-              (this.image_3 = ""),
-              (this.description_3 = ""),
-              (this.temp_image_url = "");
-            this.meta_keyword = "";
+          this.image = "";
+          this.summary1 = "";
+          this.summary2 = "";
+          this.content = "";
+          this.group_images = "";
+          (this.long_banner = ""),
+            (this.short_banner_img = ""),
+            (this.our_content_header = ""),
+            (this.title_1 = ""),
+            (this.image_1 = ""),
+            (this.description_1 = ""),
+            (this.title_2 = ""),
+            (this.image_2 = ""),
+            (this.description_2 = ""),
+            (this.title_3 = ""),
+            (this.image_3 = ""),
+            (this.description_3 = ""),
+            (this.temp_image_url = "");
+          this.meta_keyword = "";
           // document.getElementById("thumbnail").value = "";
           if (response.data.success == "created") {
             this.checked = false;
@@ -730,7 +740,7 @@ export default {
           } else if (response.data.success == "updated") {
             this.is_editing = true;
             this.isLoading = false;
-            
+
             // this.isLoading = false;
             this.$swal.fire({
               // position: "top-end",
