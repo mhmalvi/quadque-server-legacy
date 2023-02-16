@@ -75,7 +75,7 @@
 
               <div class="form-group">
                 <label for="company_image">Create Case Icon</label>
-                <input type="file" class="form-control" @change="uploadfile" />
+                <input type="file" class="form-control" id="case_icon" @change="uploadfile" />
                 <div class="text-danger" v-if="this.imageError">
                   {{ this.imageError }}
                 </div>
@@ -662,10 +662,32 @@ export default {
       axios
         .post(url, fd)
         .then((response) => {
+
           this.fetchAll();
           this.loader = false;
+
           // this.success = response.data.success;
           $(".summernote").summernote("code", this.content);
+          this.name = "";
+            this.image = "";
+            this.summary1 = "";
+            this.summary2 = "";
+            this.content = "";
+            this.group_images = "";
+            (this.long_banner = ""),
+              (this.short_banner_img = ""),
+              (this.our_content_header = ""),
+              (this.title_1 = ""),
+              (this.image_1 = ""),
+              (this.description_1 = ""),
+              (this.title_2 = ""),
+              (this.image_2 = ""),
+              (this.description_2 = ""),
+              (this.title_3 = ""),
+              (this.image_3 = ""),
+              (this.description_3 = ""),
+              (this.temp_image_url = "");
+            this.meta_keyword = "";
           // document.getElementById("thumbnail").value = "";
           if (response.data.success == "created") {
             this.checked = false;
@@ -708,6 +730,7 @@ export default {
           } else if (response.data.success == "updated") {
             this.is_editing = true;
             this.isLoading = false;
+            
             // this.isLoading = false;
             this.$swal.fire({
               // position: "top-end",
