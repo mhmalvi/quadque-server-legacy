@@ -336,7 +336,7 @@
                   />
                 </p>
               </div>
-              <div class="form-group">
+              <!-- <div class="form-group">
                 <label for="company_image">Agency Images</label>
                 <input
                   type="file"
@@ -350,7 +350,7 @@
                 <p class="my-2 text-center" v-if="this.temp_image_url">
                   <img :src="this.temp_image_url" width="150" height="150" />
                 </p>
-              </div>
+              </div> -->
               <div>
                 <!-- <ckeditor :editor="editor" v-model="editorData" :config="editorConfig"></ckeditor> -->
                 <button type="submit" class="btn btn-block btn-save text-white">
@@ -371,6 +371,7 @@
               <th>Company Name</th>
               <!-- <th>Company Description</th> -->
               <th>Company Icon</th>
+              <th>Agency</th>
               <th>Action</th>
             </tr>
           </thead>
