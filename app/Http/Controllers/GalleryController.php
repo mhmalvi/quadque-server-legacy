@@ -48,8 +48,8 @@ class GalleryController extends Controller
     {
         $request->validate([
             'title' => 'required',
-            'album_caption'=>'required',
-            'images'=>'required'
+            'album_caption' => 'required',
+            'images' => 'required'
         ]);
         $gallery = new Gallery();
         $gallery->album_title = $request->title;
@@ -62,6 +62,7 @@ class GalleryController extends Controller
         $data = array();
         foreach ($request->images as $image) {
             $data[] = $image;
+            $image = [];
         }
         // dd($data);
         if (isset($gallery->id)) {
@@ -76,6 +77,7 @@ class GalleryController extends Controller
                         'gallery_id' => $gallery->id,
                         'created_at' => Carbon::now()
                     ]);
+                    $path = "";
                 }
 
                 // die;
@@ -97,6 +99,7 @@ class GalleryController extends Controller
                 'status' => 424
             ], 424);
         }
+        $data = [];
         // if()
     }
 
@@ -152,6 +155,7 @@ class GalleryController extends Controller
                 return response()->json([
                     'message' => 'updated'
                 ]);
+                $path = "";
             }
         }
     }
@@ -181,9 +185,11 @@ class GalleryController extends Controller
                         'gallery_id' => $request->id,
                         'created_at' => Carbon::now()
                     ]);
+                    $path = "";
                 }
             }
         }
+        $data = [];
         if ($save) {
             return response()->json([
                 'message' => 'updated',

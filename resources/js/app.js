@@ -106,8 +106,12 @@ Vue.component(
 if (location.hostname == "localhost" || location.hostname == "127.0.0.1") {
     Vue.prototype.$base = "http://127.0.0.1:8000/";
     // Vue.prototype.$assetbase = "http://127.0.0.1:8000/";
-} else if (location.hostname == "latest-server.quadque.tech") {
-    Vue.prototype.$base = "http://latest-server.quadque.tech/public/";
+//     } else if (location.hostname == "latest-server.quadque.tech") {
+//     Vue.prototype.$base = "http://latest-server.quadque.tech/public/";
+// } else {
+// }
+} else if (location.hostname == "server-quadquetech.quadque.digital") {
+    Vue.prototype.$base = "https://server-quadquetech.quadque.digital/public/";
 } else {
 }
 
