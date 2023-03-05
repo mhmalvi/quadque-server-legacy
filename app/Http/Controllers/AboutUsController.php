@@ -36,29 +36,29 @@ class AboutUsController extends Controller
     public function store(Request $request)
     {
         $about_us = AboutUs::all();
-        
-            $request->validate([
-                'our_vision' => 'required',
-                'our_mission' => 'required',
-                'our_goal' => 'required',
-                'our_objective' => 'required',
-                'who_we_are' => 'required',
-                'why_choose_us' => 'required'
-            ]);
 
-            // if ($request->thumbnail) {
+        $request->validate([
+            'our_vision' => 'required',
+            'our_mission' => 'required',
+            'our_goal' => 'required',
+            'our_objective' => 'required',
+            'who_we_are' => 'required',
+            'why_choose_us' => 'required'
+        ]);
 
-            //     $fileName = time() . '.' . $request->thumbnail->getClientOriginalExtension();
-            //     $request->thumbnail->move(public_path('assets/img/blogs'), $fileName);
-            // }
-            $save = new AboutUs();
-            $save->our_vision = $request->our_vision;
-            $save->our_mission = $request->our_mission;
-            $save->our_goal = $request->our_goal;
-            $save->our_objective = $request->our_objective;
-            $save->who_we_are = $request->who_we_are;
-            $save->why_choose_us = $request->why_choose_us;
-            $save->meta_keyword = $request->meta_keyword;
+        // if ($request->thumbnail) {
+
+        //     $fileName = time() . '.' . $request->thumbnail->getClientOriginalExtension();
+        //     $request->thumbnail->move(public_path('assets/img/blogs'), $fileName);
+        // }
+        $save = new AboutUs();
+        $save->our_vision = $request->our_vision;
+        $save->our_mission = $request->our_mission;
+        $save->our_goal = $request->our_goal;
+        $save->our_objective = $request->our_objective;
+        $save->who_we_are = $request->who_we_are;
+        $save->why_choose_us = $request->why_choose_us;
+        $save->meta_keyword = $request->meta_keyword;
         if ($about_us->isEmpty()) {
             $save = $save->save();
         } else {
@@ -69,20 +69,19 @@ class AboutUsController extends Controller
             ], 424);
         }
 
-            if ($save) {
-                return response()->json([
+        if ($save) {
+            return response()->json([
 
-                    'success' => 'created'
+                'success' => 'created'
 
-                ], 200);
-            } else {
-                return response()->json([
+            ], 200);
+        } else {
+            return response()->json([
 
-                    'message' => 'failed'
+                'message' => 'failed'
 
-                ], 424);
-            }
-        
+            ], 424);
+        }
     }
 
     /**
