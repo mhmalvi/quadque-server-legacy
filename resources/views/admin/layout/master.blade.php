@@ -391,8 +391,8 @@
                                 , textToDisplay: "Text to display"
                                 , url: "To what URL should this link go?"
                                 , openInNewWindow: "Open in new window"
+                                , useNoFollow: "use no follow link"
                                 , useProtocol: "Use default protocol"
-                                , useNofollow: "No follow link"
                             }
                             , table: {
                                 table: "Table"
@@ -2547,7 +2547,11 @@
                                     });
                                     i.a.each(u, (function(t, n) {
                                         i()(n).attr("href", e), r ? i()(n).attr("target", "_blank") : i()(n).removeAttr("target")
+                                    })),
+                                    i.a.each(u, (function(t, n) {
+                                    i()(n).attr("href", e), z ? i()(n).attr("rel", "nofollow") : i()(n).removeAttr("rel")
                                     })), n.setLastRange(n.createRangeFromList(u).select())
+
                                 }
                             })), this.color = this.wrapCommand((function(t) {
                                 var e = t.foreColor
@@ -2855,7 +2859,7 @@
                                         , url: e.length ? e.attr("href") : ""
                                     };
                                 return e.length && (n.isNewWindow = "_blank" === e.attr("target")), n
-                                // return e.length && (n.nofollow = "nofollow" === e.attr('rel')),n
+                                return e.length && (n.nofollow = "nofollow" === e.attr('rel')),n
                             }
                         }, {
                             key: "addRow"
@@ -3405,7 +3409,11 @@
                                             var n = e[1] ? t : "http://" + t
                                                 , o = this.options.showDomainOnlyForAutolink ? t.replace(/^(?:https?:\/\/)?(?:tel?:?)?(?:mailto?:?)?(?:www\.)?/i, "").split("/")[0] : t
                                                 , r = i()("<a />").html(o).attr("href", n)[0];
-                                            this.context.options.linkTargetBlank && i()(r).attr("target", "_blank"), this.lastWordRange.insertNode(r), this.lastWordRange = null, this.context.invoke("editor.focus")
+                                            this.context.options.linkTargetBlank && i()(r).attr("target", "_blank"),
+                                            this.context.options.dontFollow && i()(r).attr("rel", "nofollow"),
+
+
+                                             this.lastWordRange.insertNode(r), this.lastWordRange = null, this.context.invoke("editor.focus")
                                         }
                                     }
                                 }
@@ -4353,11 +4361,13 @@
                                         className: "sn-checkbox-use-protocol"
                                         , text: this.lang.link.useProtocol
                                         , checked: !0
-                                    }).render()).html(), i()("<div/>").append(this.ui.checkbox({
-                                        className: "sn-checkbox-use-nofollow"
-                                        , text: this.lang.link.useNofollow
-                                        , checked: !0
+                                    }).render()).html(), i()("                                 <div />").append(this.ui.checkbox({
+                                    className: "sn-checkbox-use-nofollow"
+                                    , text: this.lang.link.useNoFollow
+                                    , checked: !0
                                     }).render()).html()].join("")
+
+
                                     , n = '<input type="button" href="#" class="'.concat("btn btn-primary note-btn note-btn-primary note-link-btn", '" value="').concat(this.lang.link.insert, '" disabled>');
                                 this.$dialog = this.ui.dialog({
                                     className: "link-dialog"
@@ -4392,7 +4402,9 @@
                                     var o = e.$dialog.find(".note-link-text")
                                         , i = e.$dialog.find(".note-link-url")
                                         , r = e.$dialog.find(".note-link-btn")
-                                        , a = e.$dialog.find(".sn-checkbox-open-in-new-window input[type=checkbox]")
+                                        , a = e.$dialog.find(".sn-checkbox-open-in-new-window input[type=checkbox]"),
+                                        z = e.$dialog.find(".sn-checkbox-use-nofollow input[type=checkbox]")
+
                                         , s = e.$dialog.find(".sn-checkbox-use-protocol input[type=checkbox]");
                                     e.ui.onDialogShown(e.$dialog, (function() {
                                         e.context.triggerEvent("dialog.shown"), !t.url && g.isValidUrl(t.text) && (t.url = t.text), o.on("input paste propertychange", (function() {
@@ -4402,6 +4414,11 @@
                                         })).val(t.url), m.isSupportTouch || i.trigger("focus"), e.toggleLinkBtn(r, o, i), e.bindEnterKey(i, r), e.bindEnterKey(o, r);
                                         var l = void 0 !== t.isNewWindow ? t.isNewWindow : e.context.options.linkTargetBlank;
                                         a.prop("checked", l);
+                                        var no = void 0 !== t.nofollow ? t.nofollow : e.context.options.dontFollow;
+
+
+                                        z.prop("checked", no);
+
                                         var c = !t.url && e.context.options.useProtocol;
                                         s.prop("checked", c), r.one("click", (function(r) {
                                             r.preventDefault(), n.resolve({
@@ -4410,6 +4427,7 @@
                                                 , text: o.val()
                                                 , isNewWindow: a.is(":checked")
                                                 , checkProtocol: s.is(":checked")
+                                                , nofollow: z.is(":checked")
                                             }), e.ui.hideDialog(e.$dialog)
                                         }))
                                     })), e.ui.onDialogHidden(e.$dialog, (function() {
@@ -5231,6 +5249,7 @@
                             , width: null
                             , height: null
                             , linkTargetBlank: !0
+                            , dontFollow: !0
                             , useProtocol: !0
                             , defaultProtocol: "http://"
                             , focus: !1
