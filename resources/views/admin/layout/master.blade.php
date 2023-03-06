@@ -161,6 +161,24 @@
             margin-left: -40%;
         }
 
+        .note-editor .note-editing-area .note-editable a {
+        background-color: inherit;
+        text-decoration: inherit;
+        font-family: inherit;
+        font-weight: inherit;
+        color: #8857ff !important;
+        }
+
+        .note-editor .note-editing-area .note-editable a:hover {
+        background-color: inherit;
+        text-decoration: inherit;
+        font-family: inherit;
+        font-weight: inherit;
+        color: #8857ff !important;
+        cursor:pointer;
+        }
+
+
     </style>
 
     <script src="{{ mix('js/app.js') }}" type="text/javascript"></script>
@@ -191,7 +209,6 @@
                 toolbar: [
                     ['style', ['style']]
                     , ['font', ['bold', 'underline', 'clear', 'fontsize', 'fontname', 'forecolor', 'backcolor', 'strikethrough', 'superscript', 'subscript', 'clear']]
-                    , ['fontname', ['fontname']]
                     , ['color', ['color']]
                     , ['para', ['ul', 'ol', 'paragraph', 'height']]
 
