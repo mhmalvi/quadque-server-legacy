@@ -4394,7 +4394,6 @@
                                         , r = e.$dialog.find(".note-link-btn")
                                         , a = e.$dialog.find(".sn-checkbox-open-in-new-window input[type=checkbox]")
                                         , s = e.$dialog.find(".sn-checkbox-use-protocol input[type=checkbox]");
-                                    z = e.$dialog.find(".sn-checkbox-use-nofollow input[type=checkbox]");
                                     e.ui.onDialogShown(e.$dialog, (function() {
                                         e.context.triggerEvent("dialog.shown"), !t.url && g.isValidUrl(t.text) && (t.url = t.text), o.on("input paste propertychange", (function() {
                                             t.text = o.val(), e.toggleLinkBtn(r, o, i)
@@ -4411,7 +4410,6 @@
                                                 , text: o.val()
                                                 , isNewWindow: a.is(":checked")
                                                 , checkProtocol: s.is(":checked")
-                                                , nofollow: z.is(":checked")
                                             }), e.ui.hideDialog(e.$dialog)
                                         }))
                                     })), e.ui.onDialogHidden(e.$dialog, (function() {
