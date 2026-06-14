@@ -1,3 +1,6 @@
+<!-- repo-card -->
+![quadque-server-legacy](docs/assets/social-card.png)
+
 # Quadque Server Legacy
 
 The original backend server for the **Quadque Technologies** digital platform. This Laravel 8 application served as the first-generation API and web backend before the platform rewrite. It remains available as a reference implementation and for legacy service support.
